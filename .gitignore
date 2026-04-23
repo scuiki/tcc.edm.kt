@@ -1,0 +1,38 @@
+PLAN_TCC1.md
+
+# Dataset (grande demais para versionar)
+data/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# IDEs
+.idea/
+.vscode/
+
+# Variáveis de ambiente
+.env
+
+# Resultados/outputs intermediários
+results/*.csv
+results/*.pkl
+*.h5
+*.pt
+*.pth
