@@ -15,12 +15,14 @@
 - Distribuição de estudantes por assignment (todos participaram de todos os 5?)
 - Verificar consistência entre splits: `Release/Train/` vs `Release/Test/` vs `All/`
 
-### 1.2 Qualidade dos dados
+### 1.2 Qualidade dos dados e anatomia dos splits
+- **Anatomia dos splits:** `All/`, `Train/`, `Test/` compartilham a mesma população de estudantes; `Release/` é uma população separada (diferentes SubjectIDs, diferente cobertura de assignments). Identificar qual split foi usado no paper Code-DKT comparando metadados e tamanhos.
 - Valores ausentes por coluna (especialmente `Score`, `CodeStateID`)
 - Eventos sem `CodeStateID` associado — qual fração e quais `EventType`s
+- Nota: não existe `EventType = Submit` neste dataset — submissões são `Run.Program` com `Score` não-nulo. Todos os filtros de pré-processamento devem usar `Run.Program` com `Score >= 0`.
 - Submissões com `Score` fora do intervalo [0, 1]
 - Registros duplicados (mesmo `SubjectID` + `ProblemID` + `ServerTimestamp`)
-- Cobertura temporal: período de coleta, outliers de timestamp
+- Cobertura temporal: período de coleta por split (comparar timestamps entre `All/` e `Release/`)
 
 ### 1.3 Consistência entre tabelas
 - `CodeStateID`s referenciados em `MainTable` mas ausentes em `CodeStates.csv`
@@ -89,9 +91,9 @@
 - Perguntas a responder: o estudante converge para o acerto? Há platôs? Em qual tentativa a maioria acerta pela primeira vez?
 
 ### 4.3 Distribuição de EventType
-- Proporção de `Submit` vs `Run.Program` vs `Compile.Error` no total de eventos
+- Proporção de `Run.Program` vs `Compile` vs `Compile.Error` no total de eventos (não existe `Submit` neste dataset — submissões são `Run.Program` com `Score` definido)
 - Taxa de erros de compilação por assignment — decresce ao longo do semestre? (indicador de aprendizagem)
-- Fração de eventos `Compile.Error` que antecedem um `Submit` correto
+- Fração de eventos `Compile.Error` que antecedem um `Run.Program` correto (`Score == 1.0`)
 
 ### 4.4 Análise early vs late labels
 - Comparar distribuição de `Label` em `early.csv` vs `late.csv` por problema
