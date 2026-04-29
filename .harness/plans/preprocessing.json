@@ -3,7 +3,7 @@
   "title": "Preprocessing \u2014 criar 02_preprocessing.ipynb do zero",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "planned",
+  "status": "in_progress",
   "verify_cmd": [
     "jupyter",
     "nbconvert",
@@ -34,7 +34,7 @@
     {
       "id": "2",
       "title": "Filtragem por modelo",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "filter_for_bkt_dkt() definida: usa apenas EventType == 'Run.Program', label correct = (Score == 1.0)",
         "filter_for_code_dkt() definida: inclui Run.Program (correct = Score == 1.0) E Compile.Error (correct = 0)",

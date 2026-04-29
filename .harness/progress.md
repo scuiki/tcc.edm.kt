@@ -207,3 +207,24 @@ Appended automatically after each task completes. Do not edit manually.
 - ServerTimestamp convertido para datetime64[UTC] no load_main_table — ordenação cronológica correta garantida
 
 **A trabalhar a seguir:** Task 2 — Filtragem por modelo (filter_for_bkt_dkt e filter_for_code_dkt).
+
+## 2026-04-29 - preprocessing: Task 2 - Filtragem por modelo
+
+- Adicionadas `filter_for_bkt_dkt(df)` e `filter_for_code_dkt(df)` a `src/data_loader.py` com docstrings e assertions internas de EventType
+- `filter_for_bkt_dkt`: filtra `EventType == 'Run.Program'`, cria `correct = (Score == 1.0).astype(int)`, assertiva garante que apenas `{'Run.Program'}` passou
+- `filter_for_code_dkt`: filtra `EventType in {'Run.Program', 'Compile.Error'}`, `correct = (Run.Program AND Score == 1.0).astype(int)`, ordena por (SubjectID, AssignmentID, ServerTimestamp), assertiva garante que apenas o conjunto permitido passou
+- Adicionada Seção 2 ao notebook (3 células: pré-código, código, pós-código) seguindo o template didático
+- Célula de código aplica os filtros nos 4 splits relevantes e executa 6 assertions inline + log de estatísticas
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`
+- Veredito: PASS na primeira tentativa
+
+**Achados principais:**
+- BKT/DKT — Release/Train: 46.825 eventos (apenas Run.Program), 23.70% corretos
+- BKT/DKT — Release/Test: 10.845 eventos, 21.18% corretos
+- Code-DKT — Release/Train: 87.683 eventos (46.825 Run.Program + 40.858 Compile.Error), 12.66% corretos
+- Code-DKT — Release/Test: 21.527 eventos (10.845 + 10.682), 10.67% corretos
+- Todas as 6 assertions passaram: EventType, binaridade de `correct`
+
+**Nota:** A taxa de corretos do Code-DKT (12.66%) é inferior à do BKT/DKT (23.70%) porque os 40.858 Compile.Error entram como `correct=0`, diluindo a proporção. A Hipótese original previa ~13.49% — o valor real é 12.66% (diferença de ~0.83pp). Não é bug: resulta da contagem exata de 40.858 Compile.Error vs estimativa da Seção 1.
+
+**A trabalhar a seguir:** Task 3 — Construção de sequências KT (build_sequences).
