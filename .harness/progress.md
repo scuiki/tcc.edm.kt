@@ -181,3 +181,13 @@ Appended automatically after each task completes. Do not edit manually.
 - Confirmação empírica: incluir Compile.Error na sequência KT (Pankiewicz et al., 2025) é justificado pelos dados
 
 **A trabalhar a seguir:** Todas as 8 tarefas do plano EDA estão completas. Próximo notebook: 02_preprocessing.ipynb.
+
+## 2026-04-29 - eda: Task 8 (fix) - Seção 8 — Correlação de features com Label (late Label adicionada)
+
+**Problema encontrado pelo evaluator:** Cell 91 carregava `late_rel` mas nunca calculava a correlação de Spearman para o Label late — apenas o Label early era analisado.
+
+**Correção aplicada:**
+- Adicionado bloco de código ao final de cell 91: merge de `late_rel` com `feats_df` (features de runs_rel8) para criar `late_feat`; cálculo de Spearman ρ para 5 features (`first_score`, `n_attempts`, `score_mean`, `score_max`, `n_compile_errors`) vs Label late; tabela impressa via `display()` e barplot exibido
+- Cell 92 (markdown Achado) atualizada para incluir seção "Achado — late Label" com magnitudes de correlação para o cenário late, além do "Achado — early Label" já existente
+- `late.csv` não contém coluna `Attempts` (apenas Label e IDs), então análise late usa as 5 features de runs em vez de 6 (sem `Attempts`)
+- Notebook re-executado sem erros via `jupyter nbconvert --execute --inplace`
