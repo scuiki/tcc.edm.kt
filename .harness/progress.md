@@ -51,3 +51,17 @@ Appended automatically after each task completes. Do not edit manually.
 **Bug/inconsistência anotada:** Splits `Test` e `Release/Test` contêm apenas A1–A3 (não os 5 assignments completos) — provável design intencional do dataset para avaliação temporal, mas diverge da documentação. Anotado na seção 1.2.1; sem impacto na modelagem (usar Release/Train/Test).
 
 **A trabalhar a seguir:** Task 2 — aplicar template didático na Seção 2 (Análise de Estudantes e Clustering): verificar SEED=42 explícito, adicionar Contexto/Hipótese/Referência e Achado/Implicação em 2.1–2.3.
+
+## 2026-04-29 - eda: Task 2 - Revisar Seção 2 — Desempenho de estudantes e clustering
+
+- **Cabeçalho "## 2"**: substituído texto descritivo por template completo (Contexto, Hipótese, Referência) — agora justifica explicitamente a necessidade de sequências individualizadas para KT
+- **Seção 2.1 (X-Grade)**: inserida célula markdown pré-código com Contexto/Hipótese/Referência; inserida célula pós-código com Achado (média 60.6 ±19.9, mediana 61.2; 72.1% ≥ 50; 4.2% < 25; CorrectEventually 91–98% por assignment) e Implicação para modelagem
+- **Seção 2.2 (Tentativas)**: substituída célula header minimalista por template completo; inserida célula pós-código com Achado (mediana 215 tentativas; 54.0% ≥ 200; 57.3% com ≥1 problema sem resolver; Spearman ρ = 0.296 positivo — contrariou hipótese de relação negativa) e Implicação
+- **Seção 2.3 (Clustering)**: atualizado o pre-code para template exato (Contexto, Hipótese, Referência); substituída a célula de interpretação post-hoc por Achado e Implicação estruturados. Tabela de perfis atualizada com valores reais calculados: Alto desempenho (N=139, grade 73.8, rate 94–99%, att 4.4–10.9), Médio (N=66, grade 64.9, rate 56–89%, att 5.1–9.7), Em risco (N=248, grade 55.9, rate 97–99% — inesperadamente alto, att 2.0–4.6 — muito baixo)
+- SEED=42 já estava explícito no código (`SEED = 42`; `KMeans(n_clusters=k, random_state=SEED, n_init=10)`) — não foi necessário alterar
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`
+- Veredito: PASS na primeira tentativa
+
+**Achado inesperado:** O cluster "Em risco" (grade ~55.9, 54.7% da turma) tem taxas de acerto eventual de 97–99% mas média de apenas 2–4.6 tentativas/assignment — perfil de baixo engajamento, não de dificuldade persistente. O cluster "Médio" (grade 64.9) é o que mostra dificuldade real (56–89% de acerto, mais tentativas). Correlação Spearman ρ=0.296 positiva (tentar mais → melhor nota) é coerente com este padrão. Documentado explicitamente no Achado para alertar notebooks subsequentes.
+
+**A trabalhar a seguir:** Task 3 — Seção 3 (Estrutura de assignments e dificuldade por problema).

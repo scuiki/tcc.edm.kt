@@ -3,7 +3,7 @@
   "title": "EDA \u2014 revisar se\u00e7\u00f5es 1-2 e completar se\u00e7\u00f5es 3-8",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "planned",
+  "status": "in_progress",
   "verify_cmd": [
     "jupyter",
     "nbconvert",
@@ -33,7 +33,7 @@
     {
       "id": "2",
       "title": "Revisar Se\u00e7\u00e3o 2 \u2014 Desempenho de estudantes e clustering",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "Template did\u00e1tico aplicado em cada subse\u00e7\u00e3o",
         "SEED=42 expl\u00edcito no c\u00f3digo de clustering (e.g., KMeans(random_state=42))",
