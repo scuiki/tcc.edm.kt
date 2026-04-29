@@ -107,7 +107,9 @@ def build_prompt(plan: dict, task: dict, plan_path: Path) -> str:
         ## Instructions — Read in order before implementing
 
         1. Read {CLAUDE_MD_PATH} for project rules (SEED=42, Release/ split, BKT/DKT/Code-DKT protocol).
-        2. Read docs/paper_references.md for citations to include in markdown cells (if the file exists).
+        2. Read docs/refs/INDEX.md for an index of available paper references and key facts.
+           For full details on a specific paper, read docs/refs/<author><year>_<topic>.md
+           (e.g., docs/refs/shi2022_code_dkt.md for Code-DKT, docs/refs/pankiewicz2025_srcml_dkt.md for srcML-DKT).
         3. Check `git log --oneline -10` to understand recent changes.
         4. Search in {source_dirs_str} before implementing — functions may already exist in src/.
         5. For REVISION of existing notebook sections: keep the correct analytical content, add or

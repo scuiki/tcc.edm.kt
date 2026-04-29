@@ -24,7 +24,7 @@ CRITERIA_DIR = ROOT / ".harness" / "validation_criteria"
 REPORTS_DIR = ROOT / "results" / "validation_reports"
 NOTEBOOKS_DIR = ROOT / "notebooks"
 CLAUDE_MD_PATH = ROOT / "CLAUDE.md"
-PAPER_REFS_PATH = ROOT / "docs" / "paper_references.md"
+PAPER_REFS_PATH = ROOT / "docs" / "refs" / "INDEX.md"
 
 
 # ---------------------------------------------------------------------------
@@ -87,9 +87,12 @@ def build_validator_prompt(notebook_path: Path, criteria_text: str) -> str:
     if paper_refs:
         paper_refs_section = textwrap.dedent(
             f"""\
-            ## Paper References
+            ## Paper References (docs/refs/INDEX.md)
 
             {paper_refs}
+
+            For full details on a specific paper, read docs/refs/<author><year>_<topic>.md
+            (e.g., docs/refs/shi2022_code_dkt.md, docs/refs/pankiewicz2025_srcml_dkt.md).
         """
         )
     else:
@@ -97,9 +100,8 @@ def build_validator_prompt(notebook_path: Path, criteria_text: str) -> str:
             """\
             ## Paper References
 
-            docs/paper_references.md is not yet available.
-            Evaluate based on CLAUDE.md context only; do not penalise for missing citations
-            to specific paper values when the file is absent.
+            docs/refs/INDEX.md is not available. Evaluate based on CLAUDE.md context only;
+            do not penalise for missing citations to specific paper values when the index is absent.
         """
         )
 
