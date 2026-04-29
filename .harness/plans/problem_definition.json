@@ -1,40 +1,51 @@
 {
   "slug": "problem_definition",
-  "title": "Problem Definition — padronizar e documentar decisões de modelagem",
+  "title": "Problem Definition \u2014 padronizar e documentar decis\u00f5es de modelagem",
   "type": "feature",
   "created": "2026-04-29",
   "status": "planned",
   "verify_cmd": [
-    "jupyter", "nbconvert", "--to", "notebook", "--execute", "--inplace",
+    "jupyter",
+    "nbconvert",
+    "--to",
+    "notebook",
+    "--execute",
+    "--inplace",
     "notebooks/00_problem_definition.ipynb",
     "--ExecutePreprocessor.timeout=600"
   ],
-  "context": "O notebook 00_problem_definition.ipynb existe mas foi escrito antes do harness. Precisa ser padronizado com o template didático (células markdown pré/pós código com campos Contexto, Hipótese, Referência / Achado, Implicação) e ter as decisões de modelagem documentadas explicitamente conforme o protocolo de Shi et al. (2022).",
+  "context": "O notebook 00_problem_definition.ipynb existe mas foi escrito antes do harness. Precisa ser padronizado com o template did\u00e1tico (c\u00e9lulas markdown pr\u00e9/p\u00f3s c\u00f3digo com campos Contexto, Hip\u00f3tese, Refer\u00eancia / Achado, Implica\u00e7\u00e3o) e ter as decis\u00f5es de modelagem documentadas explicitamente conforme o protocolo de Shi et al. (2022).",
   "tasks": [
     {
       "id": "1",
-      "title": "Aplicar template didático em todas as seções existentes",
-      "status": "pending",
+      "title": "Aplicar template did\u00e1tico em todas as se\u00e7\u00f5es existentes",
+      "status": "complete",
       "acceptance_criteria": [
-        "Cada seção analítica tem célula markdown pré-código com campos Contexto, Hipótese e Referência",
-        "Cada seção analítica tem célula markdown pós-código com campos Achado e Implicação para modelagem",
-        "Nenhuma seção analítica existente foi removida ou substancialmente alterada no conteúdo"
+        "Cada se\u00e7\u00e3o anal\u00edtica tem c\u00e9lula markdown pr\u00e9-c\u00f3digo com campos Contexto, Hip\u00f3tese e Refer\u00eancia",
+        "Cada se\u00e7\u00e3o anal\u00edtica tem c\u00e9lula markdown p\u00f3s-c\u00f3digo com campos Achado e Implica\u00e7\u00e3o para modelagem",
+        "Nenhuma se\u00e7\u00e3o anal\u00edtica existente foi removida ou substancialmente alterada no conte\u00fado"
       ],
-      "files": ["notebooks/00_problem_definition.ipynb"],
+      "files": [
+        "notebooks/00_problem_definition.ipynb"
+      ],
       "depends_on": []
     },
     {
       "id": "2",
-      "title": "Validar e documentar decisões de modelagem",
+      "title": "Validar e documentar decis\u00f5es de modelagem",
       "status": "pending",
       "acceptance_criteria": [
-        "Seção sobre KC=ProblemID presente com justificativa explícita: um modelo por assignment, mesmo protocolo de Shi et al. (2022)",
-        "Seção sobre métricas define first-attempt AUC como métrica primária com justificativa: evita autocorrelação temporal e é menos inflada por imbalance",
-        "Seção sobre métricas define all-attempts AUC como métrica secundária com papel complementar explicado (comparação com literatura DKT, mais estável estatisticamente)",
-        "Tabela summary de decisões de modelagem presente ao final do notebook com colunas Decisão, Valor e Justificativa"
+        "Se\u00e7\u00e3o sobre KC=ProblemID presente com justificativa expl\u00edcita: um modelo por assignment, mesmo protocolo de Shi et al. (2022)",
+        "Se\u00e7\u00e3o sobre m\u00e9tricas define first-attempt AUC como m\u00e9trica prim\u00e1ria com justificativa: evita autocorrela\u00e7\u00e3o temporal e \u00e9 menos inflada por imbalance",
+        "Se\u00e7\u00e3o sobre m\u00e9tricas define all-attempts AUC como m\u00e9trica secund\u00e1ria com papel complementar explicado (compara\u00e7\u00e3o com literatura DKT, mais est\u00e1vel estatisticamente)",
+        "Tabela summary de decis\u00f5es de modelagem presente ao final do notebook com colunas Decis\u00e3o, Valor e Justificativa"
       ],
-      "files": ["notebooks/00_problem_definition.ipynb"],
-      "depends_on": ["1"]
+      "files": [
+        "notebooks/00_problem_definition.ipynb"
+      ],
+      "depends_on": [
+        "1"
+      ]
     }
   ]
 }
