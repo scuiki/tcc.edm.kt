@@ -122,3 +122,23 @@ Appended automatically after each task completes. Do not edit manually.
 - Um classificador-baseline "sempre incorreto" atingiria 76.3% de acurácia — comprova inadequação da acurácia
 
 **A trabalhar a seguir:** Task 6 — Seção 6 (Evolução do código e Compile.Error).
+
+## 2026-04-29 - eda: Task 6 - Seção 6 — Evolução do código e Compile.Error
+
+- Inseridas 7 novas células após Seção 5: cabeçalho "## 6", pré-código 6.1, código 6.1, pós-código 6.1, pré-código 6.2, código 6.2, pós-código 6.2
+- **Seção 6.1 (Taxa de Compile.Error):** filtra `Compile.Error` e `Run.Program` de `rel_train_main`; calcula n e taxa CE/(RP+CE) por assignment; plota barplot com linha de média global; tabela de summary gerada via `display()`
+- **Seção 6.2 (Diversidade de CodeStateID):** agrupa `Run.Program + Compile.Error` por (AssignmentID, ProblemID), conta `CodeStateID.nunique()`; plota boxplot de diversidade por assignment; reporta top-5 problemas mais diversos e cobertura total de CodeStateID
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`
+- Veredito: PASS na primeira tentativa
+
+**Achados principais:**
+- Release/Train: 40.858 Compile.Error em 87.683 submissões de usuário — taxa global de 46.6%
+- Por assignment: A1=56.3% (mais alto, estudantes adaptando ambiente), A2=45.9%, A4=45.0%, A3=44.5%, A5=36.5% (mais baixo)
+- Taxa Release/Train (46.6%) é maior que All (30.27%) porque o All inclui os eventos Compile (filhos 1:1 de Run.Program) no denominador
+- Média de 937 CodeStateIDs únicos por problema (σ=403); variação 349 (P31-A5) a 2.114 (P102-A2)
+- Curiosidade dataset: 100% dos CodeStateIDs de Compile.Error já aparecem em Run.Program — snapshots de código com erro de compilação coincidem com estados submetidos via Run.Program por outros estudantes
+- Markdown conecta explicitamente Compile.Error → decisão srcML com citação a Pankiewicz, Shi & Baker (2025)
+
+**Bug/inconsistência anotada:** 100% de sobreposição entre CodeStateIDs de Compile.Error e Run.Program é inesperado — pode indicar que o dataset CSEDM reutiliza CodeStateIDs entre estudantes para snapshots idênticos (deduplicação no nível do conteúdo, não da instância), ou que a coincidência é artefato do split Release/Train específico. Não impacta a modelagem; CodeStateID continua sendo o link correto para o código.
+
+**A trabalhar a seguir:** Task 7 — Seção 7 (Padrões temporais e procrastinação).
