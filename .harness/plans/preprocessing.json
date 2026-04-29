@@ -1,0 +1,76 @@
+{
+  "slug": "preprocessing",
+  "title": "Preprocessing — criar 02_preprocessing.ipynb do zero",
+  "type": "feature",
+  "created": "2026-04-29",
+  "status": "planned",
+  "verify_cmd": [
+    "jupyter", "nbconvert", "--to", "notebook", "--execute", "--inplace",
+    "notebooks/02_preprocessing.ipynb",
+    "--ExecutePreprocessor.timeout=600"
+  ],
+  "context": "O notebook 02_preprocessing.ipynb ainda não existe. Este agente cria o notebook completo que transforma os dados brutos do CSEDM em sequências KT prontas para BKT/DKT e Code-DKT. As decisões críticas: filter_for_bkt_dkt usa apenas Run.Program; filter_for_code_dkt inclui Compile.Error com correct=0; truncagem nas últimas 50 tentativas conforme Shi et al. (2022); split Release/ para comparação reproduzível com o paper.",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Setup e carregamento dos dados",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Célula markdown explica os dois splits (All/ e Release/) e quando usar cada um para reproduzir resultados do paper",
+        "Funções de carregamento definidas com docstrings em src/data_loader.py ou no notebook",
+        "SEED = 42 definido no topo do notebook"
+      ],
+      "files": ["notebooks/02_preprocessing.ipynb", "src/data_loader.py"],
+      "depends_on": []
+    },
+    {
+      "id": "2",
+      "title": "Filtragem por modelo",
+      "status": "pending",
+      "acceptance_criteria": [
+        "filter_for_bkt_dkt() definida: usa apenas EventType == 'Run.Program', label correct = (Score == 1.0)",
+        "filter_for_code_dkt() definida: inclui Run.Program (correct = Score == 1.0) E Compile.Error (correct = 0)",
+        "Assertions ou logs inline verificam que nenhum outro EventType passou pelos filtros"
+      ],
+      "files": ["notebooks/02_preprocessing.ipynb", "src/data_loader.py"],
+      "depends_on": ["1"]
+    },
+    {
+      "id": "3",
+      "title": "Construção de sequências KT",
+      "status": "pending",
+      "acceptance_criteria": [
+        "build_sequences(df, assignment_id) definida: retorna sequências ordenadas por ServerTimestamp",
+        "Cada evento na sequência inclui flag is_first_attempt por (SubjectID, ProblemID) para cálculo de first-attempt AUC",
+        "Célula markdown explica a estrutura de dados das sequências (campos, tipos, exemplo)"
+      ],
+      "files": ["notebooks/02_preprocessing.ipynb", "src/data_loader.py"],
+      "depends_on": ["2"]
+    },
+    {
+      "id": "4",
+      "title": "Truncagem e validação",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Lógica de truncagem implementada: manter apenas as últimas 50 tentativas por sequência conforme Shi et al. (2022)",
+        "Assertion confirma que assert all(len(seq) <= 50 for seq in sequences) passa sem erro",
+        "Taxa de corretos do split processado calculada e reportada no markdown; se divergir do valor bruto, há explicação"
+      ],
+      "files": ["notebooks/02_preprocessing.ipynb"],
+      "depends_on": ["3"]
+    },
+    {
+      "id": "5",
+      "title": "Serialização dos artefatos",
+      "status": "pending",
+      "acceptance_criteria": [
+        "results/sequences_bkt_dkt.pkl existe após execução do notebook",
+        "results/sequences_code_dkt.pkl existe após execução do notebook",
+        "Schema dos artefatos documentado em markdown: chaves do dicionário, tipos, dimensões",
+        "Célula markdown final apresenta estatísticas dos artefatos: número de sequências, número de estudantes, distribuição de comprimentos (min, média, max)"
+      ],
+      "files": ["notebooks/02_preprocessing.ipynb"],
+      "depends_on": ["4"]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "slug": "eda",
+  "title": "EDA — revisar seções 1-2 e completar seções 3-8",
+  "type": "feature",
+  "created": "2026-04-29",
+  "status": "planned",
+  "verify_cmd": [
+    "jupyter", "nbconvert", "--to", "notebook", "--execute", "--inplace",
+    "notebooks/01_eda.ipynb",
+    "--ExecutePreprocessor.timeout=600"
+  ],
+  "context": "O notebook 01_eda.ipynb tem as seções 1-2 escritas antes do harness (sem template didático) e as seções 3-8 ainda não implementadas. Este agente revisa as seções existentes aplicando o template e completa as seções restantes, garantindo que cada achado seja calculado dos dados do split Release/ e referenciado nos papers correspondentes.",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Revisar Seção 1 — Estatísticas básicas e qualidade dos dados",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Template didático aplicado: cada subseção tem célula markdown pré-código (Contexto, Hipótese, Referência) e pós-código (Achado, Implicação)",
+        "Citação ao ProgSnap2 ou ao dataset CSEDM presente no markdown da seção",
+        "Duplicate rows (236.024 registros com mesmo SubjectID+ProblemID+ServerTimestamp) identificadas e explicadas como comportamento esperado: cada Run.Program gera evento filho Compile com mesmo timestamp"
+      ],
+      "files": ["notebooks/01_eda.ipynb"],
+      "depends_on": []
+    },
+    {
+      "id": "2",
+      "title": "Revisar Seção 2 — Desempenho de estudantes e clustering",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Template didático aplicado em cada subseção",
+        "SEED=42 explícito no código de clustering (e.g., KMeans(random_state=42))",
+        "Três perfis de estudante nomeados e interpretados no markdown pós-código"
+      ],
+      "files": ["notebooks/01_eda.ipynb"],
+      "depends_on": ["1"]
+    },
+    {
+      "id": "3",
+      "title": "Seção 3 — Estrutura de assignments e dificuldade",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Plot de taxa de acerto por problema por assignment presente e salvo em results/ ou exibido inline",
+        "Ranking de dificuldade por assignment calculado dos dados e discutido no markdown",
+        "Citação ao paper Code-DKT (Shi et al., 2022) no markdown da seção"
+      ],
+      "files": ["notebooks/01_eda.ipynb"],
+      "depends_on": ["2"]
+    },
+    {
+      "id": "4",
+      "title": "Seção 4 — Curvas de aprendizado e sequências",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Learning curve por assignment plotada e discutida no markdown (independente da direção da tendência)",
+        "Distribuição de tamanho de sequências por estudante calculada e plotada",
+        "Truncagem em 50 tentativas citada e justificada com referência a Shi et al. (2022)"
+      ],
+      "files": ["notebooks/01_eda.ipynb"],
+      "depends_on": ["3"]
+    },
+    {
+      "id": "5",
+      "title": "Seção 5 — Análise do Score e desbalanceamento",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Histograma do Score calculado dos dados (não hardcoded) e plotado",
+        "Proporção de scores parciais (0 < Score < 1) calculada dos dados e reportada no markdown",
+        "Imbalance ratio por assignment calculado e apresentado",
+        "Escolha de AUC como métrica primária justificada com base no imbalance observado"
+      ],
+      "files": ["notebooks/01_eda.ipynb"],
+      "depends_on": ["4"]
+    },
+    {
+      "id": "6",
+      "title": "Seção 6 — Evolução do código e Compile.Error",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Compile.Error rate por assignment calculada dos dados e reportada",
+        "Número de CodeStateIDs únicos por problema calculado",
+        "Markdown conecta eventos Compile.Error à decisão de usar srcML no Code-DKT, com citação a Pankiewicz et al. (2025)"
+      ],
+      "files": ["notebooks/01_eda.ipynb"],
+      "depends_on": ["5"]
+    },
+    {
+      "id": "7",
+      "title": "Seção 7 — Padrões temporais e procrastinação",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Distribuição de atividade por semana ou dia do semestre plotada",
+        "Correlação entre timing (e.g., proximidade de deadline) e desempenho calculada e discutida no markdown"
+      ],
+      "files": ["notebooks/01_eda.ipynb"],
+      "depends_on": ["6"]
+    },
+    {
+      "id": "8",
+      "title": "Seção 8 — Correlação de features com Label",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Correlação Spearman entre features numéricas e Label (early/late) calculada",
+        "Importância de features via Decision Tree calculada com SEED=42",
+        "Top-5 features identificadas e listadas no markdown com interpretação",
+        "Nota sobre avaliação first-attempt presente: apenas primeira tentativa por problema por estudante"
+      ],
+      "files": ["notebooks/01_eda.ipynb"],
+      "depends_on": ["7"]
+    }
+  ]
+}

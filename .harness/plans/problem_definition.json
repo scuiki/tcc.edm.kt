@@ -1,0 +1,40 @@
+{
+  "slug": "problem_definition",
+  "title": "Problem Definition — padronizar e documentar decisões de modelagem",
+  "type": "feature",
+  "created": "2026-04-29",
+  "status": "planned",
+  "verify_cmd": [
+    "jupyter", "nbconvert", "--to", "notebook", "--execute", "--inplace",
+    "notebooks/00_problem_definition.ipynb",
+    "--ExecutePreprocessor.timeout=600"
+  ],
+  "context": "O notebook 00_problem_definition.ipynb existe mas foi escrito antes do harness. Precisa ser padronizado com o template didático (células markdown pré/pós código com campos Contexto, Hipótese, Referência / Achado, Implicação) e ter as decisões de modelagem documentadas explicitamente conforme o protocolo de Shi et al. (2022).",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Aplicar template didático em todas as seções existentes",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Cada seção analítica tem célula markdown pré-código com campos Contexto, Hipótese e Referência",
+        "Cada seção analítica tem célula markdown pós-código com campos Achado e Implicação para modelagem",
+        "Nenhuma seção analítica existente foi removida ou substancialmente alterada no conteúdo"
+      ],
+      "files": ["notebooks/00_problem_definition.ipynb"],
+      "depends_on": []
+    },
+    {
+      "id": "2",
+      "title": "Validar e documentar decisões de modelagem",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Seção sobre KC=ProblemID presente com justificativa explícita: um modelo por assignment, mesmo protocolo de Shi et al. (2022)",
+        "Seção sobre métricas define first-attempt AUC como métrica primária com justificativa: evita autocorrelação temporal e é menos inflada por imbalance",
+        "Seção sobre métricas define all-attempts AUC como métrica secundária com papel complementar explicado (comparação com literatura DKT, mais estável estatisticamente)",
+        "Tabela summary de decisões de modelagem presente ao final do notebook com colunas Decisão, Valor e Justificativa"
+      ],
+      "files": ["notebooks/00_problem_definition.ipynb"],
+      "depends_on": ["1"]
+    }
+  ]
+}
