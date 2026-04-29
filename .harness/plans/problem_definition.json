@@ -3,7 +3,7 @@
   "title": "Problem Definition \u2014 padronizar e documentar decis\u00f5es de modelagem",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "planned",
+  "status": "in_progress",
   "verify_cmd": [
     "jupyter",
     "nbconvert",
@@ -33,7 +33,7 @@
     {
       "id": "2",
       "title": "Validar e documentar decis\u00f5es de modelagem",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "Se\u00e7\u00e3o sobre KC=ProblemID presente com justificativa expl\u00edcita: um modelo por assignment, mesmo protocolo de Shi et al. (2022)",
         "Se\u00e7\u00e3o sobre m\u00e9tricas define first-attempt AUC como m\u00e9trica prim\u00e1ria com justificativa: evita autocorrela\u00e7\u00e3o temporal e \u00e9 menos inflada por imbalance",
