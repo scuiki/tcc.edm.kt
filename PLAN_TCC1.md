@@ -49,13 +49,16 @@ diferida para o TCC 2.
 
 ## Fase 1 — Problem Definition
 
-1. **KCs (baseline):** `AssignmentID` como KC — cada assignment = conceitos ensinados
-   naquela semana (5 KCs)
+1. **KCs (baseline):** `ProblemID` como KC — 9–10 problemas por assignment; um modelo
+   treinado por assignment (mesmo protocolo de Shi et al., 2022)
 2. **KCs (gerados):** fine-grained, gerados via AST (srcML) + LLM — ver Fase 2d (03b)
 3. **Task de KT:** dado histórico `(problema, acerto/erro)` até `t`, prever resultado de `t+1`
-4. **Métricas:** AUC (primária), Precision/Recall, F1 (secundárias)
+4. **Métricas:**
+   - **First-attempt AUC** (primária) — predição na primeira tentativa de cada problema;
+     métrica principal do paper; menos inflada por autocorrelação temporal
+   - **All-attempts AUC** (secundária) — todas as tentativas; comparável com literatura DKT
 5. **Labels-alvo:** `early.csv` (predição antecipada) e `late.csv` (predição tardia)
-6. **Pergunta adicional:** KCs gerados por AST+LLM melhoram a predição vs KC=Assignment?
+6. **Pergunta adicional:** KCs gerados por AST+LLM melhoram a predição vs KC=Problem?
 
 ---
 
@@ -74,8 +77,9 @@ diferida para o TCC 2.
 - Filtrar `MainTable`: `EventType in {Run.Program, Compile.Error}` com `Score` definido
   (apenas `Run.Program` tem Score; `Compile.Error` → `correct = 0`)
 - Para BKT e DKT: usar apenas `Run.Program`, label `correct = (Score == 1.0)`
-- Construir sequências por `(SubjectID, AssignmentID)` — KC=Assignment
-- Construir sequências por `(SubjectID, ProblemID)` com Q-matrix — KC=gerado (ver 2d)
+- Construir sequências por `(SubjectID, AssignmentID)` — um modelo por assignment,
+  KC=Problem (ProblemID dentro do assignment); input `2 × n_problemas`
+- Construir Q-matrix `ProblemID × KC_id` para KC=gerado (ver 2d)
 - Truncar em 50 tentativas (últimas 50, conforme Shi et al., 2022)
 - Join com `CodeStates` via `CodeStateID`
 - Separar treino/teste usando `Release/Train` e `Release/Test`
@@ -153,37 +157,37 @@ Abordagem embasada em:
 ### 3a. BKT (baseline) — `notebooks/04_bkt.ipynb` / `src/models/bkt.py`
 - Biblioteca **`pyBKT`**
 - Parâmetros por KC: prior, learn, guess, slip (EM)
-- Variante A: KC=Assignment (5 KCs)
+- Variante A: KC=Problem (um modelo por assignment, ~10 KCs por assignment)
 - Variante B: KC=gerado (Q-matrix de 2d)
-- Avaliação: AUC no split de teste
+- Avaliação: first-attempt AUC (primária) e all-attempts AUC (secundária)
 
 ### 3b. DKT — `notebooks/05_dkt.ipynb` / `src/models/dkt.py`
 - **PyTorch**, LSTM
-- Input: one-hot `(ProblemID, correctness)` — dimensão `2 × n_problemas`
+- Input: one-hot `(ProblemID, correctness)` — dimensão `2 × n_problemas_por_assignment`
 - LSTM → Linear → Sigmoid, Binary Cross-Entropy, Adam (lr=0.0005)
 - 100 random samples para hyperparameter tuning, 10-fold cross-validation
-- Variante A: KC=Assignment | Variante B: KC=gerado
+- Variante A: KC=Problem | Variante B: KC=gerado
 
 ### 3c. Code-DKT (com srcML) — `notebooks/06_code_dkt.ipynb` / `src/models/code_dkt.py`
 - Estende DKT com embeddings de caminhos srcML (tamanho 300)
 - Mecanismo de atenção: `α = SoftMax(E · Wa)`, vetor de código `z = W0(Σ αᵢ eᵢ)`
 - Concatenar `z` com vetor de acerto/erro a cada passo LSTM
 - Inclui `Compile.Error`: srcML parseia e fornece features parciais → `correct = 0`
-- Variante A: KC=Assignment | Variante B: KC=gerado
+- Variante A: KC=Problem | Variante B: KC=gerado
 - Referência: Code-DKT (Shi et al., EDM 2022); srcML-DKT (Pankiewicz et al., EDM 2025)
 
 ### 3d. Comparação — `notebooks/07_comparison.ipynb`
-- **Tabela principal (3×2):** modelo × definição de KC, AUC por assignment
+- **Tabela principal (3×2):** modelo × definição de KC, por assignment
 
-  | Modelo        | KC=Assignment | KC=LLM+AST |
-  |---------------|---------------|------------|
-  | BKT           |               |            |
-  | DKT           |               |            |
-  | Code-DKT (srcML) |            |            |
+  | Modelo           | KC=Problem (first-att. AUC / all-att. AUC) | KC=LLM+AST (first-att. / all-att.) |
+  |------------------|--------------------------------------------|--------------------------------------|
+  | BKT              |                                            |                                      |
+  | DKT              |                                            |                                      |
+  | Code-DKT (srcML) |                                            |                                      |
 
-- Replicar Table 1 do Code-DKT paper (KC=Assignment, first-attempt predictions)
+- Replicar Table 1 do Code-DKT paper (KC=Problem por assignment, first-attempt AUC)
 - Curvas de aprendizagem por KC gerado (power law of practice)
-- Teste de significância Wilcoxon signed-rank (entre KC=Assignment e KC=LLM+AST)
+- Teste de significância Wilcoxon signed-rank (entre KC=Problem e KC=LLM+AST)
 - Análise qualitativa: 5–10 KCs gerados — são interpretáveis e consistentes com AST?
 
 ---
@@ -258,10 +262,10 @@ tcc.edm.kt/
 ## Critérios de Conclusão
 
 1. EDA completa (seções 1–8) com visualizações do CSEDM
-2. AUC do Code-DKT (srcML) ~74% para A1 com KC=Assignment (±2%, replicar Shi et al. 2022)
-3. Tabela 3×2: BKT vs DKT vs Code-DKT × KC=Assignment vs KC=LLM+AST
+2. First-attempt AUC do Code-DKT (srcML) ~74% para A1 (±2%, replicar Shi et al. 2022); KC=Problem por assignment
+3. Tabela 3×2: BKT vs DKT vs Code-DKT × KC=Problem vs KC=LLM+AST, reportando first-attempt AUC e all-attempts AUC
 4. Curvas de aprendizagem por KC gerado (power law of practice)
-5. Teste Wilcoxon signed-rank entre KC=Assignment e KC=LLM+AST no melhor modelo
+5. Teste Wilcoxon signed-rank entre KC=Problem e KC=LLM+AST no melhor modelo
 6. Inspeção qualitativa de 5–10 KCs: interpretáveis com constructs AST associados
 7. Todos os notebooks executáveis do zero com seed fixo
 

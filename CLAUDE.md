@@ -90,10 +90,12 @@ tcc.edm.kt/
 
 ## Definições de Modelagem
 
-- **Knowledge Component (KC):** `AssignmentID` (5 assignments = 5 KCs)
+- **Knowledge Component (KC):** `ProblemID` — 9–10 problemas por assignment; um modelo treinado por assignment (mesmo protocolo de Shi et al., 2022)
 - **Task de KT:** dado histórico `(ProblemID, acerto/erro)` até `t`, prever resultado em `t+1`
 - **Labels-alvo:** `early.csv` e `late.csv` — coluna `Label` (binária)
-- **Métrica primária:** AUC (dataset desbalanceado: ~23.7% corretos)
+- **Métricas:**
+  - **First-attempt AUC** (primária) — predição na primeira tentativa de cada problema por estudante; métrica principal do paper Shi et al. (2022); menos inflada por autocorrelação temporal
+  - **All-attempts AUC** (secundária) — todas as tentativas; comparável com literatura DKT (Piech et al., 2015); mais estável estatisticamente
 - **Sequências:** truncar em 50 tentativas (últimas 50, conforme Shi et al., 2022)
 - **Seed fixo obrigatório** em todos os notebooks (reprodutibilidade)
 
@@ -102,7 +104,7 @@ tcc.edm.kt/
 - Embeddings de caminhos AST (code2vec, tamanho 300): `pr = (nó_início, caminho_textual, nó_fim)`
 - Mecanismo de atenção: `α = SoftMax(E · Wa)`, vetor de código `z = W0(Σ αᵢ eᵢ)`
 - Concatenar `z` com vetor de acerto/erro a cada passo LSTM
-- Input DKT base: one-hot `(ProblemID, correctness)` — dimensão `2 × 50`
+- Input DKT base: one-hot `(ProblemID, correctness)` — dimensão `2 × n_problemas_por_assignment` (tipicamente `2 × 10`)
 - Otimizador: Adam (lr=0.0005), Binary Cross-Entropy
 - Hyperparameter tuning: 100 random samples, 10-fold cross-validation
 
@@ -116,7 +118,7 @@ tcc.edm.kt/
 
 ## Critérios de Conclusão do TCC 1
 
-1. AUC do Code-DKT ~74% para A1 (±2%), próximo ao paper (replicar Table 1 e Table 2)
-2. Tabela comparativa BKT vs DKT vs Code-DKT por assignment
+1. First-attempt AUC do Code-DKT ~74% para A1 (±2%), replicando Table 1 e Table 2 de Shi et al. (2022); KC=Problem por assignment
+2. Tabela comparativa BKT vs DKT vs Code-DKT por assignment, reportando first-attempt AUC e all-attempts AUC
 3. Teste de significância Wilcoxon signed-rank entre modelos
 4. Todos os notebooks executáveis do zero com seed fixo

@@ -55,7 +55,7 @@
 
 ## 3. Estrutura de Assignments e Problemas
 
-**Objetivo:** Entender a organização do dataset e validar a escolha de `AssignmentID` como Knowledge Component.
+**Objetivo:** Entender a organização do dataset e caracterizar os `ProblemID`s como Knowledge Components (um modelo por assignment, KC=Problem).
 
 ### 3.1 Distribuição por assignment
 - Número de problemas por assignment (confirmação: 10 por assignment?)
@@ -70,9 +70,9 @@
 - Correlação entre dificuldade do problema e posição no assignment (problemas finais são mais difíceis?)
 
 ### 3.3 Validação da granularidade de KC
-- Os problemas dentro do mesmo assignment têm padrões de dificuldade similares?
-- Comparar com os clusters estruturais (Etapa B do pipeline de KCs): os clusters AST respeitam os boundaries de assignment?
-- Referência: a escolha de `AssignmentID` como KC segue Shi et al. (2022) — *"each assignment focusing on a specific topic (e.g., conditionals, loops)"*
+- Os problemas dentro do mesmo assignment têm padrões de dificuldade heterogêneos? (justifica KC=Problem em vez de KC=Assignment)
+- Comparar com os clusters estruturais (Etapa B do pipeline de KCs): os clusters AST respeitam os boundaries de problema ou de assignment?
+- Referência: KC=Problem por assignment segue Shi et al. (2022) — cada problema como unidade de KC dentro do assignment; um modelo por assignment
 
 ---
 
