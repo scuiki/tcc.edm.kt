@@ -191,3 +191,19 @@ Appended automatically after each task completes. Do not edit manually.
 - Cell 92 (markdown Achado) atualizada para incluir seção "Achado — late Label" com magnitudes de correlação para o cenário late, além do "Achado — early Label" já existente
 - `late.csv` não contém coluna `Attempts` (apenas Label e IDs), então análise late usa as 5 features de runs em vez de 6 (sem `Attempts`)
 - Notebook re-executado sem erros via `jupyter nbconvert --execute --inplace`
+
+## 2026-04-29 - preprocessing: Task 1 - Setup e carregamento dos dados
+
+- Criado `src/data_loader.py` com `load_main_table(split, data_root)` e `load_labels(split, data_root, which)`, com docstrings e suporte aos 5 splits do CSEDM
+- Criado `notebooks/02_preprocessing.ipynb` com estrutura inicial: célula markdown de introdução explicando os dois splits (All/ vs Release/) e quando usar cada um, célula de setup (imports, SEED=42, paths, sys.path para src/), e 3 seções analíticas (1.1–1.3) seguindo o template didático (Contexto, Hipótese, Referência / Achado, Implicação)
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`
+- Benchmark de reprodutibilidade confirmado: Release/Train correto-rate = 23.70% vs 23.68% do paper (divergência < 0.02pp, apenas arredondamento)
+
+**Achados principais:**
+- All/Data: 360.176 eventos, 506 estudantes, 5 assignments
+- Release/Train: 134.508 eventos, 246 estudantes; correto-rate 23.70%
+- Release/Test: 32.372 eventos, 83 estudantes
+- Todas as colunas críticas presentes; Score nulo fora de Run.Program (0 eventos errôneos)
+- ServerTimestamp convertido para datetime64[UTC] no load_main_table — ordenação cronológica correta garantida
+
+**A trabalhar a seguir:** Task 2 — Filtragem por modelo (filter_for_bkt_dkt e filter_for_code_dkt).

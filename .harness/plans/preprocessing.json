@@ -1,26 +1,34 @@
 {
   "slug": "preprocessing",
-  "title": "Preprocessing — criar 02_preprocessing.ipynb do zero",
+  "title": "Preprocessing \u2014 criar 02_preprocessing.ipynb do zero",
   "type": "feature",
   "created": "2026-04-29",
   "status": "planned",
   "verify_cmd": [
-    "jupyter", "nbconvert", "--to", "notebook", "--execute", "--inplace",
+    "jupyter",
+    "nbconvert",
+    "--to",
+    "notebook",
+    "--execute",
+    "--inplace",
     "notebooks/02_preprocessing.ipynb",
     "--ExecutePreprocessor.timeout=600"
   ],
-  "context": "O notebook 02_preprocessing.ipynb ainda não existe. Este agente cria o notebook completo que transforma os dados brutos do CSEDM em sequências KT prontas para BKT/DKT e Code-DKT. As decisões críticas: filter_for_bkt_dkt usa apenas Run.Program; filter_for_code_dkt inclui Compile.Error com correct=0; truncagem nas últimas 50 tentativas conforme Shi et al. (2022); split Release/ para comparação reproduzível com o paper.",
+  "context": "O notebook 02_preprocessing.ipynb ainda n\u00e3o existe. Este agente cria o notebook completo que transforma os dados brutos do CSEDM em sequ\u00eancias KT prontas para BKT/DKT e Code-DKT. As decis\u00f5es cr\u00edticas: filter_for_bkt_dkt usa apenas Run.Program; filter_for_code_dkt inclui Compile.Error com correct=0; truncagem nas \u00faltimas 50 tentativas conforme Shi et al. (2022); split Release/ para compara\u00e7\u00e3o reproduz\u00edvel com o paper.",
   "tasks": [
     {
       "id": "1",
       "title": "Setup e carregamento dos dados",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
-        "Célula markdown explica os dois splits (All/ e Release/) e quando usar cada um para reproduzir resultados do paper",
-        "Funções de carregamento definidas com docstrings em src/data_loader.py ou no notebook",
+        "C\u00e9lula markdown explica os dois splits (All/ e Release/) e quando usar cada um para reproduzir resultados do paper",
+        "Fun\u00e7\u00f5es de carregamento definidas com docstrings em src/data_loader.py ou no notebook",
         "SEED = 42 definido no topo do notebook"
       ],
-      "files": ["notebooks/02_preprocessing.ipynb", "src/data_loader.py"],
+      "files": [
+        "notebooks/02_preprocessing.ipynb",
+        "src/data_loader.py"
+      ],
       "depends_on": []
     },
     {
@@ -32,45 +40,63 @@
         "filter_for_code_dkt() definida: inclui Run.Program (correct = Score == 1.0) E Compile.Error (correct = 0)",
         "Assertions ou logs inline verificam que nenhum outro EventType passou pelos filtros"
       ],
-      "files": ["notebooks/02_preprocessing.ipynb", "src/data_loader.py"],
-      "depends_on": ["1"]
+      "files": [
+        "notebooks/02_preprocessing.ipynb",
+        "src/data_loader.py"
+      ],
+      "depends_on": [
+        "1"
+      ]
     },
     {
       "id": "3",
-      "title": "Construção de sequências KT",
+      "title": "Constru\u00e7\u00e3o de sequ\u00eancias KT",
       "status": "pending",
       "acceptance_criteria": [
-        "build_sequences(df, assignment_id) definida: retorna sequências ordenadas por ServerTimestamp",
-        "Cada evento na sequência inclui flag is_first_attempt por (SubjectID, ProblemID) para cálculo de first-attempt AUC",
-        "Célula markdown explica a estrutura de dados das sequências (campos, tipos, exemplo)"
+        "build_sequences(df, assignment_id) definida: retorna sequ\u00eancias ordenadas por ServerTimestamp",
+        "Cada evento na sequ\u00eancia inclui flag is_first_attempt por (SubjectID, ProblemID) para c\u00e1lculo de first-attempt AUC",
+        "C\u00e9lula markdown explica a estrutura de dados das sequ\u00eancias (campos, tipos, exemplo)"
       ],
-      "files": ["notebooks/02_preprocessing.ipynb", "src/data_loader.py"],
-      "depends_on": ["2"]
+      "files": [
+        "notebooks/02_preprocessing.ipynb",
+        "src/data_loader.py"
+      ],
+      "depends_on": [
+        "2"
+      ]
     },
     {
       "id": "4",
-      "title": "Truncagem e validação",
+      "title": "Truncagem e valida\u00e7\u00e3o",
       "status": "pending",
       "acceptance_criteria": [
-        "Lógica de truncagem implementada: manter apenas as últimas 50 tentativas por sequência conforme Shi et al. (2022)",
+        "L\u00f3gica de truncagem implementada: manter apenas as \u00faltimas 50 tentativas por sequ\u00eancia conforme Shi et al. (2022)",
         "Assertion confirma que assert all(len(seq) <= 50 for seq in sequences) passa sem erro",
-        "Taxa de corretos do split processado calculada e reportada no markdown; se divergir do valor bruto, há explicação"
+        "Taxa de corretos do split processado calculada e reportada no markdown; se divergir do valor bruto, h\u00e1 explica\u00e7\u00e3o"
       ],
-      "files": ["notebooks/02_preprocessing.ipynb"],
-      "depends_on": ["3"]
+      "files": [
+        "notebooks/02_preprocessing.ipynb"
+      ],
+      "depends_on": [
+        "3"
+      ]
     },
     {
       "id": "5",
-      "title": "Serialização dos artefatos",
+      "title": "Serializa\u00e7\u00e3o dos artefatos",
       "status": "pending",
       "acceptance_criteria": [
-        "results/sequences_bkt_dkt.pkl existe após execução do notebook",
-        "results/sequences_code_dkt.pkl existe após execução do notebook",
-        "Schema dos artefatos documentado em markdown: chaves do dicionário, tipos, dimensões",
-        "Célula markdown final apresenta estatísticas dos artefatos: número de sequências, número de estudantes, distribuição de comprimentos (min, média, max)"
+        "results/sequences_bkt_dkt.pkl existe ap\u00f3s execu\u00e7\u00e3o do notebook",
+        "results/sequences_code_dkt.pkl existe ap\u00f3s execu\u00e7\u00e3o do notebook",
+        "Schema dos artefatos documentado em markdown: chaves do dicion\u00e1rio, tipos, dimens\u00f5es",
+        "C\u00e9lula markdown final apresenta estat\u00edsticas dos artefatos: n\u00famero de sequ\u00eancias, n\u00famero de estudantes, distribui\u00e7\u00e3o de comprimentos (min, m\u00e9dia, max)"
       ],
-      "files": ["notebooks/02_preprocessing.ipynb"],
-      "depends_on": ["4"]
+      "files": [
+        "notebooks/02_preprocessing.ipynb"
+      ],
+      "depends_on": [
+        "4"
+      ]
     }
   ]
 }
