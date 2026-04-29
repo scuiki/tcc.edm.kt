@@ -104,3 +104,21 @@ Appended automatically after each task completes. Do not edit manually.
 - Truncagem em 50 é conservadora: mediana global 32 < 50; apenas a cauda é afetada
 
 **A trabalhar a seguir:** Task 5 — Seção 5 (Análise do Score e desbalanceamento).
+
+## 2026-04-29 - eda: Task 5 - Seção 5 — Análise do Score e desbalanceamento
+
+- Inseridas 7 novas células após Seção 4: cabeçalho "## 5", pré-código 5.1, código 5.1, pós-código 5.1, pré-código 5.2, código 5.2, pós-código 5.2
+- **Seção 5.1 (Distribuição do Score):** calcula proporção de Score=0 / parcial / Score=1 a partir de `runs_rel`; plota histograma com bins alinhados aos três intervalos + zoom em scores parciais; reporta 200 valores únicos de Score
+- **Seção 5.2 (Imbalance ratio):** calcula n_correto / n_incorreto / imbalance_ratio por assignment e global; plota stacked bar (proporção) + bar chart (imbalance ratio); justifica AUC como métrica primária
+- Plots salvos: `results/sec5_score_distribution.png`, `results/sec5_imbalance.png`
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`
+- Veredito: PASS na primeira tentativa
+
+**Achados principais:**
+- Score = 0.0: 19.802 (42.3%); Score = 1.0: 11.098 (23.7%); 0 < Score < 1: 15.925 (34.0%)
+- 200 valores únicos de Score — frações racionais de testes passados (e.g., 0.2727 ≈ 3/11, 0.50 = 1/2)
+- CLAUDE.md estimava ~37% parcial; dado real é 34.0% — divergência mínima (3pp), documentada no Achado
+- Imbalance global: 3.22:1 (76.3% incorretos); A3 tem o maior (4.24:1), A5 o menor (2.29:1)
+- Um classificador-baseline "sempre incorreto" atingiria 76.3% de acurácia — comprova inadequação da acurácia
+
+**A trabalhar a seguir:** Task 6 — Seção 6 (Evolução do código e Compile.Error).
