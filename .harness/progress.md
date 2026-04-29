@@ -84,3 +84,23 @@ Appended automatically after each task completes. Do not edit manually.
 - Amplitudes intra-assignment: A1=41.2pp, A2=43.7pp, A3=20.7pp, A4=32.4pp, A5=43.5pp — todas ≥ 20pp confirmando sinal discriminativo
 
 **A trabalhar a seguir:** Task 4 — Seção 4 (Curvas de aprendizado e sequências).
+
+## 2026-04-29 - eda: Task 4 - Seção 4 — Curvas de aprendizado e sequências
+
+- Inseridas 7 novas células após a Seção 3: cabeçalho "## 4", pré-código 4.1, código 4.1, pós-código 4.1, pré-código 4.2, código 4.2, pós-código 4.2
+- **Seção 4.1 (Curvas de aprendizado):** calcula tentativa ordinal por estudante × assignment (sorted por ServerTimestamp), agrega taxa de acerto por tentativa ordinal, plota primeiras 30 tentativas de cada assignment; tabela de tendência (tentativas 1–5 vs 26–30) gerada automaticamente
+- **Seção 4.2 (Distribuição de sequências):** calcula tamanho de sequência (Run.Program) por estudante × assignment, plota histograma com linha de truncagem = 50 e boxplot por assignment; tabela com % de estudantes afetados por assignment
+- Plots salvos: `results/sec4_learning_curves.png`, `results/sec4_sequence_distribution.png`
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`; Achado cells atualizadas com valores reais calculados
+- Veredito: PASS na primeira tentativa
+
+**Achados principais:**
+- A1 é o único assignment com curva crescente (+6.6pp de tentativas 1–5 para 26–30): sinal de aprendizagem detectável
+- A2–A5 mostram curvas decrescentes (A4: −25.8pp, A5: −23.5pp): artefato de ordenação intra-assignment (problemas fáceis tentados primeiro), não regressão de aprendizagem
+- Distribuição de sequências: mediana = 32, P95 = 109.3, max = 272 tentativas por estudante × assignment
+- 28.3% dos pares (estudante, assignment) têm seq_len > 50; 58.1% dos estudantes têm ≥1 assignment afetado pela truncagem
+- A3 (assignment mais difícil) é o mais afetado: 39.3% dos estudantes com seq_len > 50 (mediana 38, max 272)
+- A5 (mais fácil) tem menor taxa de afetados: 17.1% (mediana 24)
+- Truncagem em 50 é conservadora: mediana global 32 < 50; apenas a cauda é afetada
+
+**A trabalhar a seguir:** Task 5 — Seção 5 (Análise do Score e desbalanceamento).

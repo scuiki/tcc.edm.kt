@@ -65,7 +65,7 @@
     {
       "id": "4",
       "title": "Se\u00e7\u00e3o 4 \u2014 Curvas de aprendizado e sequ\u00eancias",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "Learning curve por assignment plotada e discutida no markdown (independente da dire\u00e7\u00e3o da tend\u00eancia)",
         "Distribui\u00e7\u00e3o de tamanho de sequ\u00eancias por estudante calculada e plotada",
