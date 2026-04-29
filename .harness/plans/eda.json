@@ -1,6 +1,6 @@
 {
   "slug": "eda",
-  "title": "EDA \u2014 revisar se\u00e7\u00f5es 1-2 e completar se\u00e7\u00f5es 3-8",
+  "title": "EDA — revisar seções 1-2 e completar seções 3-8",
   "type": "feature",
   "created": "2026-04-29",
   "status": "in_progress",
@@ -14,15 +14,15 @@
     "notebooks/01_eda.ipynb",
     "--ExecutePreprocessor.timeout=600"
   ],
-  "context": "O notebook 01_eda.ipynb tem as se\u00e7\u00f5es 1-2 escritas antes do harness (sem template did\u00e1tico) e as se\u00e7\u00f5es 3-8 ainda n\u00e3o implementadas. Este agente revisa as se\u00e7\u00f5es existentes aplicando o template e completa as se\u00e7\u00f5es restantes, garantindo que cada achado seja calculado dos dados do split Release/ e referenciado nos papers correspondentes.",
+  "context": "O notebook 01_eda.ipynb tem as seções 1-2 escritas antes do harness (sem template didático) e as seções 3-8 ainda não implementadas. Este agente revisa as seções existentes aplicando o template e completa as seções restantes, garantindo que cada achado seja calculado dos dados do split Release/ e referenciado nos papers correspondentes.",
   "tasks": [
     {
       "id": "1",
-      "title": "Revisar Se\u00e7\u00e3o 1 \u2014 Estat\u00edsticas b\u00e1sicas e qualidade dos dados",
+      "title": "Revisar Seção 1 — Estatísticas básicas e qualidade dos dados",
       "status": "complete",
       "acceptance_criteria": [
-        "Template did\u00e1tico aplicado: cada subse\u00e7\u00e3o tem c\u00e9lula markdown pr\u00e9-c\u00f3digo (Contexto, Hip\u00f3tese, Refer\u00eancia) e p\u00f3s-c\u00f3digo (Achado, Implica\u00e7\u00e3o)",
-        "Cita\u00e7\u00e3o ao ProgSnap2 ou ao dataset CSEDM presente no markdown da se\u00e7\u00e3o",
+        "Template didático aplicado: cada subseção tem célula markdown pré-código (Contexto, Hipótese, Referência) e pós-código (Achado, Implicação)",
+        "Citação ao ProgSnap2 ou ao dataset CSEDM presente no markdown da seção",
         "Duplicate rows (236.024 registros com mesmo SubjectID+ProblemID+ServerTimestamp) identificadas e explicadas como comportamento esperado: cada Run.Program gera evento filho Compile com mesmo timestamp"
       ],
       "files": [
@@ -32,12 +32,12 @@
     },
     {
       "id": "2",
-      "title": "Revisar Se\u00e7\u00e3o 2 \u2014 Desempenho de estudantes e clustering",
+      "title": "Revisar Seção 2 — Desempenho de estudantes e clustering",
       "status": "complete",
       "acceptance_criteria": [
-        "Template did\u00e1tico aplicado em cada subse\u00e7\u00e3o",
-        "SEED=42 expl\u00edcito no c\u00f3digo de clustering (e.g., KMeans(random_state=42))",
-        "Tr\u00eas perfis de estudante nomeados e interpretados no markdown p\u00f3s-c\u00f3digo"
+        "Template didático aplicado em cada subseção",
+        "SEED=42 explícito no código de clustering (e.g., KMeans(random_state=42))",
+        "Três perfis de estudante nomeados e interpretados no markdown pós-código"
       ],
       "files": [
         "notebooks/01_eda.ipynb"
@@ -48,12 +48,12 @@
     },
     {
       "id": "3",
-      "title": "Se\u00e7\u00e3o 3 \u2014 Estrutura de assignments e dificuldade",
+      "title": "Seção 3 — Estrutura de assignments e dificuldade",
       "status": "complete",
       "acceptance_criteria": [
         "Plot de taxa de acerto por problema por assignment presente e salvo em results/ ou exibido inline",
         "Ranking de dificuldade por assignment calculado dos dados e discutido no markdown",
-        "Cita\u00e7\u00e3o ao paper Code-DKT (Shi et al., 2022) no markdown da se\u00e7\u00e3o"
+        "Citação ao paper Code-DKT (Shi et al., 2022) no markdown da seção"
       ],
       "files": [
         "notebooks/01_eda.ipynb"
@@ -64,12 +64,12 @@
     },
     {
       "id": "4",
-      "title": "Se\u00e7\u00e3o 4 \u2014 Curvas de aprendizado e sequ\u00eancias",
+      "title": "Seção 4 — Curvas de aprendizado e sequências",
       "status": "complete",
       "acceptance_criteria": [
-        "Learning curve por assignment plotada e discutida no markdown (independente da dire\u00e7\u00e3o da tend\u00eancia)",
-        "Distribui\u00e7\u00e3o de tamanho de sequ\u00eancias por estudante calculada e plotada",
-        "Truncagem em 50 tentativas citada e justificada com refer\u00eancia a Shi et al. (2022)"
+        "Learning curve por assignment plotada e discutida no markdown (independente da direção da tendência)",
+        "Distribuição de tamanho de sequências por estudante calculada e plotada",
+        "Truncagem em 50 tentativas citada e justificada com referência a Shi et al. (2022)"
       ],
       "files": [
         "notebooks/01_eda.ipynb"
@@ -80,13 +80,13 @@
     },
     {
       "id": "5",
-      "title": "Se\u00e7\u00e3o 5 \u2014 An\u00e1lise do Score e desbalanceamento",
+      "title": "Seção 5 — Análise do Score e desbalanceamento",
       "status": "complete",
       "acceptance_criteria": [
-        "Histograma do Score calculado dos dados (n\u00e3o hardcoded) e plotado",
-        "Propor\u00e7\u00e3o de scores parciais (0 < Score < 1) calculada dos dados e reportada no markdown",
+        "Histograma do Score calculado dos dados (não hardcoded) e plotado",
+        "Proporção de scores parciais (0 < Score < 1) calculada dos dados e reportada no markdown",
         "Imbalance ratio por assignment calculado e apresentado",
-        "Escolha de AUC como m\u00e9trica prim\u00e1ria justificada com base no imbalance observado"
+        "Escolha de AUC como métrica primária justificada com base no imbalance observado"
       ],
       "files": [
         "notebooks/01_eda.ipynb"
@@ -97,12 +97,12 @@
     },
     {
       "id": "6",
-      "title": "Se\u00e7\u00e3o 6 \u2014 Evolu\u00e7\u00e3o do c\u00f3digo e Compile.Error",
+      "title": "Seção 6 — Evolução do código e Compile.Error",
       "status": "complete",
       "acceptance_criteria": [
         "Compile.Error rate por assignment calculada dos dados e reportada",
-        "N\u00famero de CodeStateIDs \u00fanicos por problema calculado",
-        "Markdown conecta eventos Compile.Error \u00e0 decis\u00e3o de usar srcML no Code-DKT, com cita\u00e7\u00e3o a Pankiewicz et al. (2025)"
+        "Número de CodeStateIDs únicos por problema calculado",
+        "Markdown conecta eventos Compile.Error à decisão de usar srcML no Code-DKT, com citação a Pankiewicz et al. (2025)"
       ],
       "files": [
         "notebooks/01_eda.ipynb"
@@ -113,11 +113,11 @@
     },
     {
       "id": "7",
-      "title": "Se\u00e7\u00e3o 7 \u2014 Padr\u00f5es temporais e procrastina\u00e7\u00e3o",
-      "status": "pending",
+      "title": "Seção 7 — Padrões temporais e procrastinação",
+      "status": "complete",
       "acceptance_criteria": [
-        "Distribui\u00e7\u00e3o de atividade por semana ou dia do semestre plotada",
-        "Correla\u00e7\u00e3o entre timing (e.g., proximidade de deadline) e desempenho calculada e discutida no markdown"
+        "Distribuição de atividade por semana ou dia do semestre plotada",
+        "Correlação entre timing (e.g., proximidade de deadline) e desempenho calculada e discutida no markdown"
       ],
       "files": [
         "notebooks/01_eda.ipynb"
@@ -128,13 +128,13 @@
     },
     {
       "id": "8",
-      "title": "Se\u00e7\u00e3o 8 \u2014 Correla\u00e7\u00e3o de features com Label",
+      "title": "Seção 8 — Correlação de features com Label",
       "status": "pending",
       "acceptance_criteria": [
-        "Correla\u00e7\u00e3o Spearman entre features num\u00e9ricas e Label (early/late) calculada",
-        "Import\u00e2ncia de features via Decision Tree calculada com SEED=42",
-        "Top-5 features identificadas e listadas no markdown com interpreta\u00e7\u00e3o",
-        "Nota sobre avalia\u00e7\u00e3o first-attempt presente: apenas primeira tentativa por problema por estudante"
+        "Correlação Spearman entre features numéricas e Label (early/late) calculada",
+        "Importância de features via Decision Tree calculada com SEED=42",
+        "Top-5 features identificadas e listadas no markdown com interpretação",
+        "Nota sobre avaliação first-attempt presente: apenas primeira tentativa por problema por estudante"
       ],
       "files": [
         "notebooks/01_eda.ipynb"

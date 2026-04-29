@@ -142,3 +142,23 @@ Appended automatically after each task completes. Do not edit manually.
 **Bug/inconsistência anotada:** 100% de sobreposição entre CodeStateIDs de Compile.Error e Run.Program é inesperado — pode indicar que o dataset CSEDM reutiliza CodeStateIDs entre estudantes para snapshots idênticos (deduplicação no nível do conteúdo, não da instância), ou que a coincidência é artefato do split Release/Train específico. Não impacta a modelagem; CodeStateID continua sendo o link correto para o código.
 
 **A trabalhar a seguir:** Task 7 — Seção 7 (Padrões temporais e procrastinação).
+
+## 2026-04-29 - eda: Task 7 - Seção 7 — Padrões temporais e procrastinação
+
+- Inseridas 6 novas células após Seção 6: cabeçalho "## 7", pré-código 7.1, código 7.1, pré-código 7.2, código 7.2, pós-código unificado
+- **Seção 7.1 (Atividade semanal):** adiciona coluna `ts` (datetime) a `rel_train_main`, calcula semana relativa ao início do semestre, plota (a) eventos por semana com linhas de deadline por assignment e (b) eventos por dia da semana; reporta atividade noturna (0h–3h) e dia mais ativo
+- **Seção 7.2 (Procrastinação):** define deadline observada por assignment (último Run.Program), calcula `days_before_deadline` para cada Run.Program, agrega volume e taxa de acerto por dias de antecedência, plota barplot (volume) e lineplot (acurácia); calcula correlação de Spearman (ρ=-0.046) entre antecedência e acerto
+- Variável intermediária `runs_rel7` criada para evitar sobrescrever `runs_rel` usado em seções anteriores
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`
+- Veredito: PASS na primeira tentativa
+
+**Achados principais:**
+- Atividade em apenas 7 de 11 semanas do semestre — bursts de 5–6 dias por assignment, sem atividade entre assignments
+- Domingo mais ativo (23.8% dos eventos); atividade noturna 0h–3h responde por 33.4% dos eventos
+- 58.4% das tentativas de Run.Program ocorrem nos 2 últimos dias (D-0 + D-1): forte procrastinação
+- Taxa de acerto maior no dia do prazo (D-0: 27.6%) do que 3+ dias antes (22.1%) — contraintuitivo
+- Correlação Spearman ρ=-0.046 (p<10⁻²³): antecedência não melhora desempenho neste dataset
+
+**Implicação documentada no markdown:** A estrutura em janelas por assignment valida o protocolo treino-por-assignment do Code-DKT; a procrastinação favorece DKT/Code-DKT (modelagem sequencial) sobre BKT estacionário.
+
+**A trabalhar a seguir:** Task 8 — Seção 8 (Correlação de features com Label).
