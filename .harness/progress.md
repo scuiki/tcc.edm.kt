@@ -65,3 +65,22 @@ Appended automatically after each task completes. Do not edit manually.
 **Achado inesperado:** O cluster "Em risco" (grade ~55.9, 54.7% da turma) tem taxas de acerto eventual de 97–99% mas média de apenas 2–4.6 tentativas/assignment — perfil de baixo engajamento, não de dificuldade persistente. O cluster "Médio" (grade 64.9) é o que mostra dificuldade real (56–89% de acerto, mais tentativas). Correlação Spearman ρ=0.296 positiva (tentar mais → melhor nota) é coerente com este padrão. Documentado explicitamente no Achado para alertar notebooks subsequentes.
 
 **A trabalhar a seguir:** Task 3 — Seção 3 (Estrutura de assignments e dificuldade por problema).
+
+## 2026-04-29 - eda: Task 3 - Seção 3 — Estrutura de assignments e dificuldade
+
+- Seção 3 já estava escrita no notebook como trabalho em progresso (células 3365699b–08b3e673); o código não havia sido executado ainda
+- Executado notebook para verificar outputs reais; código funcionou sem erros
+- Corrigida a única divergência encontrada: A4 amplitude hardcoded como 31.8pp → corrigido para 32.4pp calculado (P107 17.5% → P44 49.9% = 32.4pp); todos os demais valores estavam corretos
+- Plot salvo em `results/sec3_correct_rate_by_problem.png` (137K, 5 subplots barplot por assignment)
+- Ranking de dificuldade por assignment computado e exibido na saída da célula; discutido no markdown pós-código
+- Citações a Shi et al. (2022) presentes em: header da Seção 3, pré-código de 3.1, pré-código de 3.2, pós-código de 3.2
+- Notebook re-executado sem erros após correção do markdown
+- Veredito: PASS (correção de 1 valor hardcoded incorreto)
+
+**Achados principais:**
+- Release/Train: exatamente 10 KCs por assignment × 5 assignments, 221–234 estudantes, 23.70% correto global (vs 23.68% no paper)
+- A3 é o assignment mais difícil (19.07% correto); A5 o mais fácil (30.40%)
+- Problema mais difícil: P102 em A2 (8.9%); mais fácil: P57 em A5 (62.5%)
+- Amplitudes intra-assignment: A1=41.2pp, A2=43.7pp, A3=20.7pp, A4=32.4pp, A5=43.5pp — todas ≥ 20pp confirmando sinal discriminativo
+
+**A trabalhar a seguir:** Task 4 — Seção 4 (Curvas de aprendizado e sequências).
