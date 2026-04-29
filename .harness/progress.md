@@ -162,3 +162,22 @@ Appended automatically after each task completes. Do not edit manually.
 **Implicação documentada no markdown:** A estrutura em janelas por assignment valida o protocolo treino-por-assignment do Code-DKT; a procrastinação favorece DKT/Code-DKT (modelagem sequencial) sobre BKT estacionário.
 
 **A trabalhar a seguir:** Task 8 — Seção 8 (Correlação de features com Label).
+
+## 2026-04-29 - eda: Task 8 - Seção 8 — Correlação de features com Label
+
+- Inseridas 7 novas células após Seção 7: cabeçalho "## 8", pré-código 8.1, código 8.1, pós-código 8.1, pré-código 8.2, código 8.2, pós-código 8.2
+- **Seção 8.1 (Spearman):** carrega `early.csv` de Release/Train, constrói features por (SubjectID, ProblemID): `first_score` (Score da 1ª tentativa), `n_attempts`, `score_mean`, `score_max`, `n_compile_errors`; merge com `Attempts` de early.csv; calcula Spearman ρ vs Label para 6 features; plota barplot de ρ e heatmap de correlação entre features
+- **Seção 8.2 (Decision Tree):** ajusta `DecisionTreeClassifier(max_depth=5, random_state=42)` com as mesmas 6 features; extrai Gini importances; plota barplot de importância e barplot de |ρ| Spearman lado a lado para comparação; imprime Top-5 features
+- Nota sobre First-attempt AUC presente em parágrafo introdutório da Seção 8
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`
+- Veredito: PASS na primeira tentativa
+
+**Achados principais:**
+- Top-5 por Spearman |ρ|: Attempts (−0.678), n_attempts (−0.668), score_mean (+0.587), n_compile_errors (−0.569), first_score (+0.462) — todas p < 10⁻¹⁰⁰
+- Top-5 por DT Gini: Attempts (0.792), score_max (0.192), n_attempts (0.007), score_mean (0.004), n_compile_errors (0.003)
+- `Attempts` domina ambos os rankings — principal proxy de dificuldade por problema no cenário early
+- Forte multicolinearidade entre `Attempts` e `n_attempts` (ρ > 0.99): medem o mesmo construct
+- `n_compile_errors` tem Spearman alto (0.569) mas Gini baixo (0.003) — sinal capturado por `Attempts` quando este está disponível; relevante como feature independente no Code-DKT onde Compile.Error são eventos separados
+- Confirmação empírica: incluir Compile.Error na sequência KT (Pankiewicz et al., 2025) é justificado pelos dados
+
+**A trabalhar a seguir:** Todas as 8 tarefas do plano EDA estão completas. Próximo notebook: 02_preprocessing.ipynb.
