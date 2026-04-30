@@ -245,3 +245,24 @@ Appended automatically after each task completes. Do not edit manually.
 **Nota:** AssignmentIDs não são sequenciais (439, 487, 492, 494, 502) — referência ao longo do projeto deve usar esses IDs inteiros, não posições 1–5.
 
 **A trabalhar a seguir:** Task 4 — Truncagem e validação (últimas 50 tentativas, Shi et al. 2022).
+
+## 2026-04-29 - preprocessing: Task 4 - Truncagem e validação
+
+- Adicionada `truncate_sequences(sequences, max_len=50)` a `src/data_loader.py` com docstring completa
+- Lógica: mantém os últimos `max_len` eventos (tail cronológico); recalcula `is_first_attempt` dentro da janela truncada via `duplicated(subset=['ProblemID'], keep='first')`; índice resetado
+- Adicionadas 3 células ao notebook (pré-código, código, pós-código) seguindo o template didático, formando a Seção 4.1
+- Célula de código: constrói sequências completas para todos os 5 assignments (BKT/DKT + Code-DKT), trunca, executa assertions `all(len(seq['events']) <= 50 ...)` para todos os modelos/assignments, e verifica `is_first_attempt` pós-truncagem
+- Estatísticas de truncagem reportadas: % de sequências afetadas, comprimento médio antes/depois
+- Taxa de corretos calculada antes e depois da truncagem; divergência explicada no Achado
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace`
+- Veredito: PASS na primeira tentativa
+
+**Achados principais:**
+- BKT/DKT: 17–39% das sequências truncadas por assignment (A5 menos afetado 17.1%, A3 mais afetado 39.3%)
+- Code-DKT: 35–67% das sequências truncadas (muito mais afetadas pela adição de Compile.Error que infla o comprimento)
+- Taxa de corretos BKT/DKT: 23.70% antes → 27.97% após truncagem (+4.27pp)
+- Taxa de corretos Code-DKT: 12.66% antes → 19.87% após truncagem (+7.21pp)
+- Divergência em relação ao valor bruto é esperada e explicada: os eventos mais recentes refletem o aprendizado acumulado (fase pós-familiarização), por isso têm maior taxa de acerto
+- is_first_attempt recalculado corretamente na janela truncada; assertions passam
+
+**A trabalhar a seguir:** Task 5 — Serialização dos artefatos.
