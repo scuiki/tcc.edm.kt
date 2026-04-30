@@ -228,3 +228,20 @@ Appended automatically after each task completes. Do not edit manually.
 **Nota:** A taxa de corretos do Code-DKT (12.66%) é inferior à do BKT/DKT (23.70%) porque os 40.858 Compile.Error entram como `correct=0`, diluindo a proporção. A Hipótese original previa ~13.49% — o valor real é 12.66% (diferença de ~0.83pp). Não é bug: resulta da contagem exata de 40.858 Compile.Error vs estimativa da Seção 1.
 
 **A trabalhar a seguir:** Task 3 — Construção de sequências KT (build_sequences).
+
+## 2026-04-29 - preprocessing: Task 3 - Construção de sequências KT
+
+- `build_sequences(df, assignment_id)` já estava implementada em `src/data_loader.py` (adicionada junto com as funções de filtragem na Task 2)
+- Seção 3 do notebook já continha célula pré-código (Contexto/Hipótese/Referência), célula de código com chamadas a `build_sequences`, e célula pós-código com esquema de dados completo
+- Notebook executado via `jupyter nbconvert --execute --inplace` — sem erros
+- Todos os assertions passaram: `is_first_attempt` cobre exatamente 1 True por (SubjectID, ProblemID), ordenação cronológica verificada em todas as sequências
+
+**Achados principais:**
+- AssignmentIDs reais em Release/Train: [439, 487, 492, 494, 502] (não são 1–5 sequenciais)
+- A1 (ID=439): 233 estudantes, comprimento médio 37.6, máximo 155
+- is_first_attempt cobre 2271 pares únicos (SubjectID, ProblemID) em A=439
+- Contagem de sequências BKT/DKT e Code-DKT coincide por assignment (as diferenças de filtragem não eliminam estudantes, apenas eventos)
+
+**Nota:** AssignmentIDs não são sequenciais (439, 487, 492, 494, 502) — referência ao longo do projeto deve usar esses IDs inteiros, não posições 1–5.
+
+**A trabalhar a seguir:** Task 4 — Truncagem e validação (últimas 50 tentativas, Shi et al. 2022).
