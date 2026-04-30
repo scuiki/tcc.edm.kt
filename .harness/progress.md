@@ -289,3 +289,12 @@ Appended automatically after each task completes. Do not edit manually.
 **Dataset inconsistency note:** A ausência de A494 e A502 em Release/Test é documentada no Achado. Os artefatos mantêm as listas vazias para esses assignments para preservar compatibilidade de indexação; os notebooks de modelagem devem filtrar `{aid: seqs for aid, seqs in artifact['test'].items() if seqs}` antes de avaliar.
 
 **A trabalhar a seguir:** pipeline preprocessing completo — todas as 5 tarefas concluídas.
+
+## 2026-04-29 - preprocessing: Task 5 (fix) - Serialização dos artefatos — adicionar número de estudantes
+
+**Problema apontado pelo evaluator:** A célula markdown final (bda503c4) apresentava apenas contagens de sequências (1.134 para train, 236 para test), que somam sequências por assignment e sobrestimam o número de estudantes únicos. A estatística "número de estudantes" estava ausente.
+
+**Correção aplicada:**
+- `artifact_stats()` (célula c154834c) atualizada para calcular `unique_students = len({seq['subject_id'] for seqs in seqs_by_aid.values() for seq in seqs})` e imprimir `Estudantes únicos: N` antes de `Sequências total`
+- Célula markdown final (bda503c4) atualizada: tabela de estatísticas consolidadas ganhou coluna "Estudantes" explicitando 246 estudantes no train e 83 no test para ambos os artefatos
+- Notebook re-executado sem erros via `jupyter nbconvert --execute --inplace`
