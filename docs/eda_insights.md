@@ -295,16 +295,142 @@ Calculado em: `01_eda.ipynb` — Seção 1.1.4 (consistência entre splits, cél
 
 ---
 
+## 5 — Recomendações para Notebooks 03–07
+
+### 5.1 — Sinalizações de Risco por Assignment
+
+**Contexto:** Antes de implementar os notebooks de modelagem (04–06), é essencial mapear os riscos operacionais por assignment: desequilíbrio extremo de classes, conjunto de treinamento reduzido, alta taxa de `Compile.Error` e disponibilidade de dados no split de avaliação. Esses fatores determinam configurações específicas de regularização, métricas prioritárias e o escopo de comparação com o paper de referência.
+
+**Hipótese:** A3 (492) deve concentrar os maiores riscos por imbalance; A2 (487) deve apresentar risco alto por imbalance combinado com alta taxa de truncagem no Code-DKT; A5 (502) deve ter menor risco global. A4 e A5 são invisíveis para comparação com Shi et al. (2022) por não terem dados em Release/Test.
+
+**Referência:** Shi et al. (2022); Pankiewicz, Shi & Baker (2025).
+
+Fontes: taxa de corretos e imbalance da Seção 1.1 (01_eda.ipynb); CE rate da Seção 6.1 (01_eda.ipynb, valores calculados); truncagem da Seção 2.2 (02_preprocessing.ipynb); disponibilidade de Release/Test da Seção 1.2 (01_eda.ipynb) e Seção 5 (02_preprocessing.ipynb).
+
+| Assignment | Estudantes (train) | Imbalance BKT/DKT | Taxa corretos | CE rate | Truncagem Code-DKT | Release/Test | Risco |
+|---|---|---|---|---|---|---|---|
+| **A1 (439)** | 233 | 2,67:1 | 27,3% | **56,3%** | 57,5% | ✓ Disponível | Moderado |
+| **A2 (487)** | 224 | **3,92:1** | 20,3% | 45,9% | **67,4%** | ✓ Disponível | **Alto** |
+| **A3 (492)** | 234 | **4,24:1** | **19,1%** | 44,5% | 59,8% | ✓ Disponível | **Alto** |
+| A4 (494) | **221** | 2,96:1 | 25,2% | 45,0% | 56,1% | ✗ Sem dados | Moderado |
+| A5 (502) | 222 | 2,29:1 | 30,4% | 36,5% | 35,1% | ✗ Sem dados | Baixo |
+
+**Achado:** Três sinalizações de risco principais emergem da análise combinada:
+
+1. **Imbalance extremo — A3 (492) e A2 (487):** A3 tem o maior desequilíbrio (4,24:1, apenas 19,1% de corretos) e A2 é o segundo pior (3,92:1, 20,3%). Em ambos, DKT e BKT podem colapsar para prever sempre `correct=0` sem nenhum poder discriminativo — AUC ≈ 0,5 indicaria colapso de classe.
+
+2. **Alta CE rate combinada com truncagem máxima — A1 (439) e A2 (487):** A1 tem a maior CE rate (56,3%), indicando que mais da metade das submissões de A1 são `Compile.Error`. A2 combina CE rate moderada (45,9%) com a maior taxa de truncagem no Code-DKT (67,4%) — a janela de 50 eventos captura menos de metade do histórico médio (87,0 eventos antes da truncagem), com potencial perda de contexto inicial relevante.
+
+3. **Ausência de Release/Test — A4 (494) e A5 (502):** Os dois assignments finais do semestre não têm sequências de avaliação no split de teste. Os modelos podem ser treinados e validados internamente (cross-validation no treino), mas os resultados não são comparáveis com Shi et al. (2022) Table 1 e Table 2.
+
+**Implicação para modelagem:** Os notebooks 04–06 devem: (a) reportar resultados separados por assignment com número de estudantes e taxa de corretos; (b) incluir verificação de colapso de classe antes de interpretar AUC < 0,60 em A2/A3; (c) limitar a comparação com o paper aos assignments A1, A2 e A3 (Release/Test disponível). A4 e A5 servem como validação interna via cross-validation apenas.
+
+---
+
+### 5.2 — Notebook 03: Code Features e Extração de ASTs (srcML)
+
+**Contexto:** O notebook 03 extrai features de código-fonte via srcML para alimentar o Code-DKT. Cada evento na sequência (tanto `Run.Program` quanto `Compile.Error`) precisa de um vetor de features extraído do `CodeState` associado. A arquitetura do Code-DKT usa embeddings de caminhos AST (code2vec): `pr = (nó_início, caminho_textual, nó_fim)`, dimensão 300, com mecanismo de atenção.
+
+**Hipótese:** A maior dificuldade operacional será o parsing de código não-compilável (eventos `Compile.Error`), especialmente em A1 (CE rate 56,3%) e A2 (45,9%), onde a proporção de submissões não-compiláveis é mais alta. O notebook deve implementar cache por `CodeStateID` para evitar re-parsear o mesmo estado de código (937 CodeStateIDs únicos por problema em média — Seção 6.2 do EDA).
+
+**Referência:** Shi et al. (2022) — code2vec embeddings, dimensão 300; Pankiewicz, Shi & Baker (2025) — srcML sobre código não-compilável, fallback para estados com parsing parcial.
+
+**Decisões de implementação ancoradas na EDA:**
+
+1. **Cache por `CodeStateID`:** A Seção 6.2 (`01_eda.ipynb`) reporta 100% de sobreposição entre os CodeStateIDs de `Compile.Error` e `Run.Program` — estados de código com erro de compilação coincidem com estados submetidos por outros estudantes. Um único dicionário `{CodeStateID: vetor_features}` serve para todos os eventos de todos os assignments. Artefato de saída: `results/code_features.pkl`.
+
+2. **Fallback para parsing incompleto:** srcML pode retornar XML com tags de erro para código muito incompleto ou com encoding inválido. Implementar fallback para vetor zero com flag `parsing_failed=True`; reportar taxa de fallback por assignment — se > 1% dos eventos de qualquer assignment, investigar antes de prosseguir.
+
+3. **Volume por assignment:** A3 (492) tem o maior volume de eventos Code-DKT antes da truncagem (média 92,3 eventos × 234 estudantes ≈ 21.600 eventos). Processar em lote por assignment para evitar pico de memória no srcML.
+
+4. **A4 e A5 incluídos:** Extrair features para todos os 5 assignments apesar de A4/A5 não terem Release/Test. Os artefatos de sequência (`sequences_code_dkt.pkl`) cobrem todos os assignments.
+
+---
+
+### 5.3 — Notebooks 04–05: BKT e DKT
+
+**Contexto:** BKT e DKT usam exclusivamente `sequences_bkt_dkt.pkl` (sem `Compile.Error`). O protocolo de Shi et al. (2022) treina um modelo por assignment com KC = ProblemID. A avaliação primária é first-attempt AUC; a secundária é all-attempts AUC. Com 10 KCs por assignment, o BKT tem 40 parâmetros por assignment (4 parâmetros × 10 KCs) — naturalmente regularizado. O DKT (LSTM hidden=200, como em Shi et al.) tem ordens de grandeza mais parâmetros.
+
+**Hipótese:** BKT deve ter performance inferior ao DKT em A2 e A3 (maior imbalance, padrões temporais mais complexos). Em A5 (mediana 24 tentativas, menor imbalance), o BKT pode ser competitivo por ser mais simples e menos suscetível a overfitting em sequências curtas.
+
+**Referência:** Shi et al. (2022) — Table 1 (first-attempt AUC): BKT A1≈0.714, DKT A1≈0.730; Abdelrahman et al. (2022) — parâmetros BKT e treinamento LSTM DKT.
+
+**Decisões de implementação por assignment:**
+
+| Assignment | Benchmarks esperados (Shi et al.) | Configuração específica | Justificativa (EDA) |
+|---|---|---|---|
+| **A1 (439)** | BKT ~0.714 / DKT ~0.730 | Benchmark primário; reportar AUC first-attempt vs paper | Release/Test disponível; imbalance moderado (2,67:1); 233 estudantes |
+| **A2 (487)** | A2 disponível em Release/Test | Monitorar colapso de classe; aplicar `pos_weight` no BCELoss | Imbalance 3,92:1; apenas 2.141 corretos em 10.539 tentativas |
+| **A3 (492)** | A3 disponível em Release/Test | Monitorar colapso; reportar IC do AUC (bootstrap) | Imbalance máximo 4,24:1; 19,07% corretos; maior % truncagem (39,3%) |
+| **A4 (494)** | Sem benchmark externo | Cross-validation interna apenas | Sem dados em Release/Test; menor número de estudantes (221) |
+| **A5 (502)** | Sem benchmark externo | Dropout mais agressivo no DKT (0,3–0,5) | Sem Release/Test; menor imbalance (2,29:1); mediana curta (24 tentativas); BKT pode ser competitivo |
+
+**Configurações técnicas obrigatórias:**
+- `SEED = 42` em todos os notebooks (reprodutibilidade)
+- `pos_weight = n_incorretos / n_corretos` por assignment no `nn.BCEWithLogitsLoss` do DKT — particularmente importante para A2 (3,92:1) e A3 (4,24:1)
+- 10-fold cross-validation sobre Release/Train para seleção de hiperparâmetros; reportar AUC por fold
+- Célula de verificação de colapso de classe antes do treinamento: se a loss converge para `−log(1−p)` com `p ≈ 0` (sempre prevendo incorreto), aplicar `pos_weight` e re-treinar
+- Avaliação final em Release/Test apenas para A1, A2, A3
+
+---
+
+### 5.4 — Notebook 06: Code-DKT (srcML-DKT)
+
+**Contexto:** O Code-DKT usa `sequences_code_dkt.pkl` (inclui `Compile.Error`) e `results/code_features.pkl`. O alvo de reprodutibilidade é first-attempt AUC ≈ 74% em A1 (±2%), replicando Table 1 de Shi et al. (2022) com o protocolo srcML (Pankiewicz et al., 2025).
+
+**Hipótese:** O Code-DKT deve superar o DKT em assignments onde o sinal do código-fonte é mais informativo. Dado que n_compile_errors tem Spearman ρ = −0,569 com Label (`01_eda.ipynb`, Seção 8.1), o ganho deve ser mais pronunciado em A1 (CE rate 56,3%) do que em A5 (CE rate 36,5%).
+
+**Referência:** Shi et al. (2022) — Code-DKT A1: AUC ~74,3%; arquitetura LSTM + atenção sobre embeddings de caminhos AST; Pankiewicz, Shi & Baker (2025) — srcML-DKT com Compile.Error incluso.
+
+**Decisões de implementação ancoradas na EDA:**
+
+1. **A2 (487) — truncagem máxima no Code-DKT (67,4%):** A janela de 50 eventos captura ~57% do histórico médio de A2 (87,0 eventos antes da truncagem). O mecanismo de atenção verá sequências mais curtas em proporção. Se AUC de A2 no Code-DKT divergir do esperado, investigar se o padding ou a janela truncada está distorcendo os pesos de atenção.
+
+2. **A1 (439) — CE rate mais alta (56,3%):** Apesar de ser o assignment mais fácil em termos de imbalance, A1 tem a maior proporção de Compile.Error. O Code-DKT deve se beneficiar mais desse sinal em A1 — o ganho sobre DKT padrão deve ser mais pronunciado em A1 do que em A5.
+
+3. **Imbalance no Code-DKT (19,87% corretos após truncagem):** O mecanismo de atenção opera sobre vetores de código, não sobre labels — o imbalance afeta a função de loss. Calcular `pos_weight` com os valores do protocolo Code-DKT (não do BKT/DKT), pois as taxas de corretos diferem (19,87% vs 27,97% após truncagem).
+
+4. **Alerta de reprodutibilidade:** O Code-DKT original (Shi et al., 2022) descartava `Compile.Error` (usava javalang). A versão srcML-DKT os inclui. Se o AUC em A1 ficar fora da faixa ±2% do target 74%, documentar a divergência e comparar com Pankiewicz et al. (2025), que usa o mesmo protocolo srcML.
+
+5. **Padding e máscara de atenção:** O dataloader deve usar `collate_fn` com padding de zeros para sequências com menos de 50 eventos. O mecanismo de atenção deve receber máscara de padding para ignorar posições artificiais. `SEED=42` no DataLoader (shuffle com generator fixo).
+
+---
+
+### 5.5 — Notebook 07: Comparação Final e Análise Estatística
+
+**Contexto:** O notebook 07 consolida os resultados de BKT, DKT e Code-DKT e responde à questão central do TCC 1: qual modelo é mais adequado como base para o TCC 2? A comparação deve ser ancorada em first-attempt AUC (métrica primária) e validada por teste de significância estatística.
+
+**Hipótese:** Code-DKT deve superar BKT e DKT em first-attempt AUC nos 3 assignments com Release/Test (A1, A2, A3), especialmente em A1 (~74% vs ~73% DKT vs ~71% BKT). O teste de Wilcoxon signed-rank deve confirmar a significância em pelo menos A1 considerando os 10 folds de cross-validation.
+
+**Referência:** Shi et al. (2022) — Table 1 (first-attempt AUC) e Table 2 (all-attempts AUC); Abdelrahman et al. (2022) — protocolo de comparação e métricas de KT.
+
+**Decisões de análise ancoradas na EDA:**
+
+1. **Escopo de comparação com o paper:** Reportar BKT vs DKT vs Code-DKT APENAS para A1 (439), A2 (487) e A3 (492). Para A4 e A5, reportar resultados de cross-validation interna sem comparação com benchmarks externos.
+
+2. **Interpretação de A3 (492) com cautela especial:** A3 tem o maior imbalance (4,24:1) e a faixa de AUC esperada é mais estreita. Reportar o intervalo de confiança de AUC (bootstrap 1000 iterações ou desvio-padrão dos 10 folds) para A3. AUC < 0,60 em A3 deve ser acompanhada de verificação de colapso de classe antes de ser interpretada como má performance do modelo.
+
+3. **Teste Wilcoxon signed-rank:** Usar os AUCs por fold (10 folds × 3 assignments comparáveis = 30 pares) ou por assignment como amostras pareadas. Com n=3 assignments comparáveis, o poder estatístico é limitado — reportar p-value sem afirmar conclusividade forte.
+
+4. **Engajamento seletivo vs aprendizado:** O cluster "Em risco" (54,7% dos estudantes, Seção 3.1) apresenta baixo engajamento (2,0–4,6 tentativas/assignment), não dificuldade persistente. Esses estudantes têm sequências mais curtas — um modelo KT com poucas observações por estudante tende a ser menos preciso. Considerar reportar AUC separadamente para sequências curtas (seq_len < 10) vs longas (seq_len ≥ 10) como análise complementar.
+
+5. **Justificativa final para TCC 2:** A escolha do modelo base deve ser baseada em: (a) first-attempt AUC mais alta nos assignments com Release/Test; (b) magnitude do gap entre modelos; (c) extensibilidade para TCC 2 — o Code-DKT com srcML é diretamente extensível para análise semântica de código e integra `Compile.Error`, o que representa a direção mais promissora para sistemas adaptativos de programação.
+
+---
+
 ## Resumo Executivo — Decisões para Notebooks 03–07
 
 | Achado | Valor | Impacto |
 |---|---|---|
 | Imbalance global BKT/DKT | 3,22:1 (23,70% corretos) | Usar AUC como métrica primária |
-| Imbalance máximo por assignment | 4,24:1 em A3 (19,07% corretos) | Cautela ao interpretar AUC de A3 |
+| Imbalance máximo por assignment | 4,24:1 em A3 (19,07% corretos) | Cautela ao interpretar AUC de A3; verificar colapso de classe |
 | Imbalance Code-DKT (pré-truncagem) | ~7:1 (12,66% corretos) | AUC indispensável; não usar acurácia |
 | Mediana de sequências (BKT/DKT) | 32 tentativas | Truncagem em 50 conservadora para maioria |
 | % pares afetados pela truncagem | 28,3% (BKT/DKT) / 35–67% (Code-DKT) | Code-DKT mais afetado por Compile.Error |
 | Taxa corretos após truncagem | 27,97% (BKT/DKT) / 19,87% (Code-DKT) | Divergência esperada — eventos recentes têm mais acertos |
 | Perfis de estudante (k=3) | 30,7% alto / 14,6% médio / 54,7% em risco | Modelar contínuo, não grupos discretos |
 | Dropout A1→A5 | ~4,7pp (89,9% completaram todos) | Não requer ajuste especial por dropout |
-| Compile.Error rate (Release/Train) | 46,6% das submissões Code-DKT | Sinal preditivo ρ=−0,569 com Label |
+| Compile.Error rate global (Release/Train) | 46,6% das submissões Code-DKT | Sinal preditivo ρ=−0,569 com Label |
+| CE rate A1 / A2 / A3 / A4 / A5 | 56,3% / 45,9% / 44,5% / 45,0% / 36,5% | A1 tem mais CE que qualquer outro assignment; ver Seção 5.1 |
+| Assignments sem Release/Test | A4 (494) e A5 (502) | Cross-validation interna apenas; não comparar com Shi et al. (2022) |
+| Risco alto por assignment | A2 (3,92:1 + 67,4% truncagem Code-DKT) e A3 (4,24:1) | pos_weight obrigatório no BCELoss; ver Seção 5.3 e 5.4 |

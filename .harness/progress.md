@@ -357,3 +357,37 @@ Appended automatically after each task completes. Do not edit manually.
 **Verificação:** `python3 -c "... p.stat().st_size > 500 ..."` — PASS (26.573 bytes)
 
 **A trabalhar a seguir:** Task 3 — Recomendações para notebooks 03-07 (sinalização de risco por assignment).
+
+## 2026-04-30 - insights_extraction: Task 3 - Recomendações para notebooks 03-07
+
+- Adicionada Seção 5 em `docs/eda_insights.md` com 5 subseções cobrindo os dois critérios de aceitação
+- Atualizado o Resumo Executivo com 3 linhas adicionais: CE rate por assignment, ausência de Release/Test em A4/A5, risco alto por assignment
+
+**Seção 5.1 — Sinalizações de risco por assignment:**
+- Tabela consolidada com 7 dimensões por assignment: estudantes, imbalance, taxa corretos, CE rate, truncagem Code-DKT, Release/Test, nível de risco
+- CE rates por assignment extraídas diretamente de `01_eda.ipynb` Seção 6.1 (valores calculados): A1=56,3%, A2=45,9%, A3=44,5%, A4=45,0%, A5=36,5%
+- Três sinalizações principais: (1) imbalance extremo A3 (4,24:1) e A2 (3,92:1); (2) CE rate alta + truncagem máxima em A1 e A2; (3) ausência de Release/Test em A4 e A5
+
+**Seção 5.2 — Notebook 03 (srcML/AST):**
+- Cache por `CodeStateID` justificado pela sobreposição 100% CE↔Run.Program (Seção 6.2 EDA)
+- Fallback para parsing incompleto com flag `parsing_failed=True` e threshold de alerta > 1%
+- A3 tem maior volume (92,3 eventos × 234 estudantes ≈ 21.600 eventos) — processar em lote
+
+**Seção 5.3 — Notebooks 04–05 (BKT e DKT):**
+- Tabela de configuração por assignment com benchmarks esperados (Shi et al. 2022), configuração específica e justificativa EDA
+- `pos_weight = n_incorretos / n_corretos` no BCELoss obrigatório para A2 e A3
+- Dropout mais agressivo em A5 (seq curtas, menor dataset)
+
+**Seção 5.4 — Notebook 06 (Code-DKT):**
+- A2 tem truncagem máxima (67,4%) — monitorar distorção nos pesos de atenção
+- `pos_weight` recalculado com taxas Code-DKT (19,87% corretos após truncagem, não 27,97%)
+- Alerta de reprodutibilidade: divergência de AUC em A1 fora de ±2% deve ser comparada com Pankiewicz et al. (2025)
+
+**Seção 5.5 — Notebook 07 (Comparação final):**
+- Escopo restrito: A1, A2, A3 para comparação com paper; A4, A5 apenas cross-validation interna
+- A3: reportar IC do AUC (bootstrap) dada a escassez de sinal positivo
+- Justificativa Code-DKT para TCC 2: extensibilidade para análise semântica e integração de Compile.Error
+
+**Verificação:** `python3 -c "... p.stat().st_size > 500 ..."` — PASS (40.325 bytes)
+
+**A trabalhar a seguir:** Todos os 3 tasks do plano insights_extraction estão completos. Próximo: notebook 03_code_features.ipynb.

@@ -3,7 +3,7 @@
   "title": "Insights Extraction \u2014 s\u00edntese p\u00f3s-EDA e pr\u00e9-processamento",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "in_progress",
+  "status": "complete",
   "verify_cmd": [
     "python3",
     "-c",
@@ -43,7 +43,7 @@
     {
       "id": "3",
       "title": "Recomenda\u00e7\u00f5es para notebooks 03-07",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "Lista de decis\u00f5es de modelagem ancoradas nos achados da EDA (e.g., qual assignment tem menos dados e pode precisar de regulariza\u00e7\u00e3o extra)",
         "Sinaliza\u00e7\u00f5es de risco por assignment presentes: assignments com imbalance extremo, poucos estudantes ou alta taxa de Compile.Error"
