@@ -1,48 +1,59 @@
 {
   "slug": "insights_extraction",
-  "title": "Insights Extraction — síntese pós-EDA e pré-processamento",
+  "title": "Insights Extraction \u2014 s\u00edntese p\u00f3s-EDA e pr\u00e9-processamento",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "planned",
+  "status": "in_progress",
   "verify_cmd": [
-    "python3", "-c",
+    "python3",
+    "-c",
     "from pathlib import Path; p = Path('docs/eda_insights.md'); assert p.exists() and p.stat().st_size > 500, f'eda_insights.md missing or too small ({p.stat().st_size if p.exists() else 0} bytes)'"
   ],
-  "context": "O Insights Agent é um agente de LEITURA: lê os notebooks executados (01_eda.ipynb e 02_preprocessing.ipynb) e os artefatos em results/, e produz docs/eda_insights.md com síntese dos achados críticos, implicações das decisões de pré-processamento e recomendações para os notebooks 03-07. Não modifica notebooks nem src/. Depende de eda.json e preprocessing.json estarem completos.",
+  "context": "O Insights Agent \u00e9 um agente de LEITURA: l\u00ea os notebooks executados (01_eda.ipynb e 02_preprocessing.ipynb) e os artefatos em results/, e produz docs/eda_insights.md com s\u00edntese dos achados cr\u00edticos, implica\u00e7\u00f5es das decis\u00f5es de pr\u00e9-processamento e recomenda\u00e7\u00f5es para os notebooks 03-07. N\u00e3o modifica notebooks nem src/. Depende de eda.json e preprocessing.json estarem completos.",
   "tasks": [
     {
       "id": "1",
-      "title": "Síntese: imbalance, sequências e perfis de estudante",
-      "status": "pending",
+      "title": "S\u00edntese: imbalance, sequ\u00eancias e perfis de estudante",
+      "status": "complete",
       "acceptance_criteria": [
-        "Seção no docs/eda_insights.md para cada achado EDA crítico: imbalance ratio, distribuição de sequências, perfis de estudante",
-        "Cada achado quantificado com o valor calculado (não hardcoded) e ancorado em célula específica do notebook com referência explícita (e.g., 'Seção 5, célula X')"
+        "Se\u00e7\u00e3o no docs/eda_insights.md para cada achado EDA cr\u00edtico: imbalance ratio, distribui\u00e7\u00e3o de sequ\u00eancias, perfis de estudante",
+        "Cada achado quantificado com o valor calculado (n\u00e3o hardcoded) e ancorado em c\u00e9lula espec\u00edfica do notebook com refer\u00eancia expl\u00edcita (e.g., 'Se\u00e7\u00e3o 5, c\u00e9lula X')"
       ],
-      "files": ["docs/eda_insights.md"],
+      "files": [
+        "docs/eda_insights.md"
+      ],
       "depends_on": []
     },
     {
       "id": "2",
-      "title": "Implicações das decisões de pré-processamento",
+      "title": "Implica\u00e7\u00f5es das decis\u00f5es de pr\u00e9-processamento",
       "status": "pending",
       "acceptance_criteria": [
-        "Seção explica por que Compile.Error entra no Code-DKT (com correct=0) mas não em BKT nem DKT padrão, com referência a Pankiewicz et al. (2025)",
-        "Justificativa do threshold Score==1.0 documentada com raciocínio analítico",
-        "Rationale para usar Release/ em vez de All/ para comparação com o paper documentado"
+        "Se\u00e7\u00e3o explica por que Compile.Error entra no Code-DKT (com correct=0) mas n\u00e3o em BKT nem DKT padr\u00e3o, com refer\u00eancia a Pankiewicz et al. (2025)",
+        "Justificativa do threshold Score==1.0 documentada com racioc\u00ednio anal\u00edtico",
+        "Rationale para usar Release/ em vez de All/ para compara\u00e7\u00e3o com o paper documentado"
       ],
-      "files": ["docs/eda_insights.md"],
-      "depends_on": ["1"]
+      "files": [
+        "docs/eda_insights.md"
+      ],
+      "depends_on": [
+        "1"
+      ]
     },
     {
       "id": "3",
-      "title": "Recomendações para notebooks 03-07",
+      "title": "Recomenda\u00e7\u00f5es para notebooks 03-07",
       "status": "pending",
       "acceptance_criteria": [
-        "Lista de decisões de modelagem ancoradas nos achados da EDA (e.g., qual assignment tem menos dados e pode precisar de regularização extra)",
-        "Sinalizações de risco por assignment presentes: assignments com imbalance extremo, poucos estudantes ou alta taxa de Compile.Error"
+        "Lista de decis\u00f5es de modelagem ancoradas nos achados da EDA (e.g., qual assignment tem menos dados e pode precisar de regulariza\u00e7\u00e3o extra)",
+        "Sinaliza\u00e7\u00f5es de risco por assignment presentes: assignments com imbalance extremo, poucos estudantes ou alta taxa de Compile.Error"
       ],
-      "files": ["docs/eda_insights.md"],
-      "depends_on": ["2"]
+      "files": [
+        "docs/eda_insights.md"
+      ],
+      "depends_on": [
+        "2"
+      ]
     }
   ]
 }

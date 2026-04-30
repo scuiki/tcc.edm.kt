@@ -298,3 +298,36 @@ Appended automatically after each task completes. Do not edit manually.
 - `artifact_stats()` (célula c154834c) atualizada para calcular `unique_students = len({seq['subject_id'] for seqs in seqs_by_aid.values() for seq in seqs})` e imprimir `Estudantes únicos: N` antes de `Sequências total`
 - Célula markdown final (bda503c4) atualizada: tabela de estatísticas consolidadas ganhou coluna "Estudantes" explicitando 246 estudantes no train e 83 no test para ambos os artefatos
 - Notebook re-executado sem erros via `jupyter nbconvert --execute --inplace`
+
+## 2026-04-29 - insights_extraction: Task 1 - Síntese: imbalance, sequências e perfis de estudante
+
+- Criado `docs/eda_insights.md` (15.949 bytes) com 3 seções analíticas cobrindo os achados críticos da EDA
+- Cada achado referenciado à célula específica do notebook (e.g., "01_eda.ipynb — Seção 5.2, célula de código")
+- Valores extraídos das saídas das células dos notebooks executados (não hardcoded)
+
+**Achados documentados:**
+
+**Seção 1 — Imbalance:**
+- Global BKT/DKT: 3,22:1 (76,3% incorretos, 23,7% corretos) — Release/Train
+- Por assignment: A3 (492) pior (4,24:1, 19,07% corretos), A5 (502) melhor (2,29:1, 30,40%)
+- Code-DKT (com Compile.Error): 12,66% corretos antes da truncagem → 19,87% após
+- Compile.Error rate: 46,6% das submissões (40.858 de 87.683 eventos Code-DKT)
+- Justificativa para AUC como métrica primária: acurácia trivial de 76,3% seria alcançada por classificador "sempre incorreto"
+
+**Seção 2 — Sequências:**
+- Distribuição BKT/DKT (1.134 pares estudante × assignment): mediana=32, média=41,3 (±32,9), P95=109,3, máx=272
+- 28,3% dos pares afetados pela truncagem em 50 (58,1% dos estudantes em ao menos 1 assignment)
+- A3 mais afetado (39,3%), A5 menos (17,1%)
+- Code-DKT: 35–67% das sequências truncadas (vs 17–39% no BKT/DKT) — Compile.Error infla comprimento médio para 70–92 eventos
+- Taxa de corretos aumenta após truncagem: BKT/DKT +4,27pp (→27,97%), Code-DKT +7,21pp (→19,87%)
+- is_first_attempt recalculado corretamente na janela truncada (assertion confirmada em 02_preprocessing.ipynb)
+
+**Seção 3 — Perfis de estudante:**
+- K-Means k=3 (SEED=42), 453 estudantes com features completas
+- Silhouette k=2=0,285 (máximo) vs k=3=0,237 (escolhido por interpretabilidade)
+- Perfis: Alto desempenho (139, 30,7%, X-Grade 73,8), Médio (66, 14,6%, X-Grade 64,9), Em risco (248, 54,7%, X-Grade 55,9)
+- Achado inesperado: "Em risco" tem acerto eventual 97–99% mas apenas 2,0–4,6 tentativas/assignment — indica baixo engajamento, não dificuldade
+- Dropout A1→A5: ~4,7pp (89,9% completaram todos os 5 assignments)
+- Release/Test: apenas 3 assignments com dados (A439, A487, A492); A494 e A502 sem sequências de teste
+
+**Verificação:** `python3 -c "... p.stat().st_size > 500 ..."` — PASS (15.949 bytes)
