@@ -3,7 +3,7 @@
   "title": "Preprocessing \u2014 criar 02_preprocessing.ipynb do zero",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "in_progress",
+  "status": "complete",
   "verify_cmd": [
     "jupyter",
     "nbconvert",
@@ -84,7 +84,7 @@
     {
       "id": "5",
       "title": "Serializa\u00e7\u00e3o dos artefatos",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "results/sequences_bkt_dkt.pkl existe ap\u00f3s execu\u00e7\u00e3o do notebook",
         "results/sequences_code_dkt.pkl existe ap\u00f3s execu\u00e7\u00e3o do notebook",

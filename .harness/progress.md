@@ -266,3 +266,26 @@ Appended automatically after each task completes. Do not edit manually.
 - is_first_attempt recalculado corretamente na janela truncada; assertions passam
 
 **A trabalhar a seguir:** Task 5 — Serialização dos artefatos.
+
+## 2026-04-29 - preprocessing: Task 5 - Serialização dos artefatos
+
+- Adicionadas 3 células ao notebook (pré-código, código, pós-código) formando a Seção 5.1
+- Construção e truncagem das sequências de teste para todos os 5 assignments (BKT/DKT + Code-DKT)
+- Artefatos serializados: `results/sequences_bkt_dkt.pkl` (9.4 MB) e `results/sequences_code_dkt.pkl` (10.4 MB) via `pickle.dump`
+- Célula de código imprime estatísticas detalhadas: número de sequências, comprimento (min/média/max), eventos total, taxa de corretos — para train e test, por assignment
+- Markdown Achado documenta: tabela de estatísticas consolidadas, nota sobre Release/Test ter apenas 3 assignments com dados, schema completo dos artefatos (chaves, tipos, descrição), colunas do events DataFrame
+- Bug identificado e corrigido: `Release/Test` tem apenas 3 assignments (A439, A487, A492) — A494 e A502 retornam listas vazias; a função `artifact_stats` foi ajustada para pular listas vazias com `if not seqs: continue`
+- Notebook executado 2× sem erros via `jupyter nbconvert --execute --inplace`
+- Veredito: PASS na segunda tentativa (primeira falhou por `ValueError: min() iterable argument is empty`)
+
+**Achados principais:**
+- BKT/DKT train: 1.134 sequências (5 assignments), len médio 32.2, máx 50, taxa corretos 27.97%
+- BKT/DKT test:  236 sequências (apenas A439, A487, A492), len médio 33.3, taxa corretos 26.70%
+- Code-DKT train: 1.134 sequências (5 assignments), len médio 39.2, taxa corretos 19.87%
+- Code-DKT test:  236 sequências (apenas A439, A487, A492), len médio 41.5, taxa corretos 18.94%
+- Comprimento médio Code-DKT > BKT/DKT (39.2 vs 32.2) confirma que Compile.Error inflam o comprimento das sequências
+- Release/Test sem A494 e A502: comportamento esperado — o split de avaliação do paper Shi et al. (2022) cobre apenas os primeiros 3 assignments
+
+**Dataset inconsistency note:** A ausência de A494 e A502 em Release/Test é documentada no Achado. Os artefatos mantêm as listas vazias para esses assignments para preservar compatibilidade de indexação; os notebooks de modelagem devem filtrar `{aid: seqs for aid, seqs in artifact['test'].items() if seqs}` antes de avaliar.
+
+**A trabalhar a seguir:** pipeline preprocessing completo — todas as 5 tarefas concluídas.
