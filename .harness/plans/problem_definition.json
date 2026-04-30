@@ -3,7 +3,7 @@
   "title": "Problem Definition \u2014 padronizar e documentar decis\u00f5es de modelagem",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "in_progress",
+  "status": "complete",
   "verify_cmd": [
     "jupyter",
     "nbconvert",

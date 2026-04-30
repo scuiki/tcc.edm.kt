@@ -1,0 +1,10 @@
+{
+  "overall": "PASS",
+  "notebook_executes": "PASS",
+  "acceptance_criteria": "PASS",
+  "template_compliance": "FAIL",
+  "no_placeholders": "PASS",
+  "issues": [
+    "template_compliance FAIL: Section 7.1 (cell 85) has no post-code markdown with **Achado** and **Implica\u00e7\u00e3o para modelagem**; the findings for 7.1 are folded into cell 88 which follows cell 87 (7.2), leaving 7.1 without its own post-code summary block (50% of analytical sections missing post-code elements, exceeding the 30% threshold)."
+  ]
+}

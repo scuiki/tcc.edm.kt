@@ -1,0 +1,10 @@
+{
+  "overall": "PASS",
+  "notebook_executes": "PASS",
+  "acceptance_criteria": "PASS",
+  "template_compliance": "PASS",
+  "no_placeholders": "PASS",
+  "issues": [
+    "Cell 62 (section header markdown) contains Contexto and Refer\u00eancia but no Hip\u00f3tese \u2014 however this cell precedes a sub-section header (cell 63), not a code cell directly, so the template is satisfied at the subsection level"
+  ]
+}

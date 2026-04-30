@@ -3,7 +3,7 @@
   "title": "EDA \u2014 revisar se\u00e7\u00f5es 1-2 e completar se\u00e7\u00f5es 3-8",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "in_progress",
+  "status": "complete",
   "verify_cmd": [
     "jupyter",
     "nbconvert",

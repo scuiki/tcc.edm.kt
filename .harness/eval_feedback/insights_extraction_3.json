@@ -1,0 +1,10 @@
+{
+  "overall": "PASS",
+  "notebook_executes": "PASS",
+  "acceptance_criteria": "PASS",
+  "template_compliance": "FAIL",
+  "no_placeholders": "PASS",
+  "issues": [
+    "Sections 5.2, 5.3, 5.4, 5.5 are missing **Achado:** and **Implica\u00e7\u00e3o para modelagem:** markers (4/5 sub-sections, 80% \u2014 above the 30% FAIL threshold). These recommendation sections contain Contexto/Hip\u00f3tese/Refer\u00eancia but close with \"Decis\u00f5es de implementa\u00e7\u00e3o\" bullet lists instead of the required post-analysis markers."
+  ]
+}

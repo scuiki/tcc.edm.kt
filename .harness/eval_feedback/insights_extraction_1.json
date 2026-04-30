@@ -1,0 +1,12 @@
+{
+  "overall": "PASS",
+  "notebook_executes": "PASS",
+  "acceptance_criteria": "PASS",
+  "template_compliance": "WARN",
+  "no_placeholders": "PASS",
+  "issues": [
+    "Section 7.1 (01_eda.ipynb cell 84): no dedicated Achado/Implica\u00e7\u00e3o after its code cell; the Achado at cell 88 is shared with Section 7.2, leaving Section 7.1 without a standalone closing markdown",
+    "Section 8.1 (01_eda.ipynb cell 90): closing markdown uses variant \"**Achado \u2014 early Label:**\" instead of exact \"**Achado:**\", causing strict string-match failure",
+    "Introductory section (cell 0 in 01_eda.ipynb): imports/setup code cell has no closing Achado/Implica\u00e7\u00e3o \u2014 minor since it is a setup cell, not analytical"
+  ]
+}

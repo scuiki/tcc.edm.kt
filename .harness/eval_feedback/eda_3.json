@@ -1,0 +1,8 @@
+{
+  "overall": "PASS",
+  "notebook_executes": "PASS",
+  "acceptance_criteria": "PASS",
+  "template_compliance": "PASS",
+  "no_placeholders": "PASS",
+  "issues": []
+}
