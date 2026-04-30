@@ -331,3 +331,29 @@ Appended automatically after each task completes. Do not edit manually.
 - Release/Test: apenas 3 assignments com dados (A439, A487, A492); A494 e A502 sem sequências de teste
 
 **Verificação:** `python3 -c "... p.stat().st_size > 500 ..."` — PASS (15.949 bytes)
+
+## 2026-04-29 - insights_extraction: Task 2 - Implicações das decisões de pré-processamento
+
+- Adicionada Seção 4 em `docs/eda_insights.md` com 3 subseções cobrindo os três critérios de aceitação
+
+**Seção 4.1 — Por que Compile.Error entra no Code-DKT (mas não em BKT/DKT):**
+- Justificativa arquitetural: BKT/DKT recebem apenas (ProblemID, correct) — sem mecanismo para processar código não-compilável; Code-DKT extrai features via srcML a cada passo do LSTM, inclusive de Compile.Error
+- Citação a Pankiewicz, Shi & Baker (2025): srcML-DKT inclui Compile.Error com correct=0 e features srcML; arquitetura LSTM+atenção idêntica ao Code-DKT original
+- Citação a Shi et al. (2022): Code-DKT original requeria código compilável (javalang), descartava Compile.Error
+- Impacto quantitativo documentado: 40.858 Compile.Error / 87.683 total Code-DKT = 46,6%; taxa corretos 23,70% → 12,66%
+- Justificativa empírica: Spearman ρ=−0,569 entre n_compile_errors e Label (Seção 8.1 do EDA)
+- Implicação: artefatos separados (sequences_bkt_dkt.pkl vs sequences_code_dkt.pkl); notebooks 04–06 não devem misturá-los
+
+**Seção 4.2 — Justificativa do threshold Score == 1.0:**
+- Dados quantitativos de Release/Train (01_eda.ipynb, Seção 5.1): Score=0.0 → 42,3%; Score=1.0 → 23,7%; parcial → 34,0%; 200 valores únicos
+- Raciocínio analítico em 4 pontos: separação natural de classes, consistência com conceito de maestria, reprodutibilidade (benchmark 23,70% vs 23,68% do paper), binarização necessária para Bernoulli (BKT/DKT/Code-DKT)
+- Partial scores explicados como frações racionais de testes automatizados
+
+**Seção 4.3 — Rationale para usar Release/ em vez de All/:**
+- Tabela comparativa: Fall 2019 vs Spring 2019; 506 vs 329 estudantes; taxa corretos 19,65% vs 23,70%
+- 0 sobreposição de SubjectIDs confirmada (01_eda.ipynb, Seção 1.1.4)
+- Três razões: reprodutibilidade (23,70% vs 23,68%), separação de populações (0 overlap), protocolo de avaliação (Release/Test tem os 3 assignments do paper)
+
+**Verificação:** `python3 -c "... p.stat().st_size > 500 ..."` — PASS (26.573 bytes)
+
+**A trabalhar a seguir:** Task 3 — Recomendações para notebooks 03-07 (sinalização de risco por assignment).

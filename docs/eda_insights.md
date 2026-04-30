@@ -191,6 +191,110 @@ Calculado em: `01_eda.ipynb` — Seção 1.1.3, célula de código (participaç�
 
 ---
 
+## 4 — Implicações das Decisões de Pré-processamento
+
+### 4.1 — Por que Compile.Error entra no Code-DKT (mas não em BKT nem DKT)
+
+**Contexto:** O pipeline de pré-processamento mantém dois protocolos de filtragem distintos: `filter_for_bkt_dkt` retém apenas eventos `Run.Program`; `filter_for_code_dkt` adiciona `Compile.Error` com `correct=0`. A justificativa para essa assimetria é arquitetural: o Code-DKT incorpora features do código-fonte a cada passo da sequência LSTM. BKT e DKT padrão recebem apenas pares `(ProblemID, correct)` — sem acesso ao código — e portanto não têm mecanismo para processar o estado sintático de uma submissão não-compilável.
+
+**Hipótese:** A inclusão de `Compile.Error` deve aumentar o sinal preditivo do Code-DKT em relação ao DKT padrão, pois esses eventos carregam informação sobre o processo de depuração do estudante (estado intermediário do código antes da execução bem-sucedida). O custo é o aumento do imbalance: `Compile.Error` contribui exclusivamente com `correct=0`.
+
+**Referência:** Shi et al. (2022) — Code-DKT original exige código compilável, descarta `Compile.Error`; Pankiewicz, Shi & Baker (2025) — srcML-DKT inclui `Compile.Error` com `correct=0` e features srcML.
+
+Calculado em: `02_preprocessing.ipynb` — Seção 2.1, célula `filter_for_bkt_dkt` / `filter_for_code_dkt` (assertions de EventType e contagem por tipo).
+
+**Por que srcML habilita a inclusão de Compile.Error:**
+O Code-DKT original (Shi et al., 2022) extraía features de código via `javalang`, que requer código **sintaticamente válido** — submissões com erro de compilação não são parseáveis e eram descartadas. O srcML-DKT (Pankiewicz et al., 2025) demonstrou que o parser srcML consegue extrair estrutura parcial de código Java não-compilável, representando-o como XML com marcações de erro. Com srcML, a mesma arquitetura LSTM + atenção do Code-DKT recebe features mesmo dos `Compile.Error`, viabilizando sua inclusão na sequência.
+
+**Impacto quantitativo no CSEDM Release/Train:**
+
+| Protocolo | Eventos totais | Run.Program | Compile.Error | Taxa corretos |
+|-----------|---------------|-------------|---------------|---------------|
+| BKT/DKT (apenas Run.Program) | 46.825 | 46.825 (100%) | 0 | **23,70%** |
+| Code-DKT (Run.Program + Compile.Error) | 87.683 | 46.825 (53,4%) | 40.858 (46,6%) | **12,66%** |
+
+Os 40.858 eventos `Compile.Error` (46,6% do total Code-DKT) contribuem **exclusivamente** com `correct=0`, reduzindo a taxa de corretos de 23,70% para 12,66%.
+
+**Achado:** O imbalance no Code-DKT (~7:1 antes da truncagem, ~4:1 após) é consideravelmente maior que no BKT/DKT (~3:1). A justificativa empírica para aceitar esse custo é a correlação de Spearman ρ = −0,569 entre `n_compile_errors` e Label (`01_eda.ipynb`, Seção 8.1) — os eventos de compilação com erro carregam sinal preditivo relevante sobre o desempenho final do estudante. A justificativa teórica é que o processo de depuração (sequência de Compile.Error → eventual Run.Program correto) reflete a trajetória de aprendizado, e o srcML consegue capturar essa evolução sintática mesmo em código inválido.
+
+**Implicação para modelagem:** BKT e DKT usam `sequences_bkt_dkt.pkl` (artefato sem `Compile.Error`); Code-DKT usa `sequences_code_dkt.pkl` (inclui `Compile.Error`). Os notebooks 04–06 **não devem** misturar esses artefatos. A first-attempt AUC permanece comparável entre modelos porque é calculada sobre `is_first_attempt` (primeira tentativa de `Run.Program` por problema) — os `Compile.Error` afetam o contexto histórico do LSTM mas não entram diretamente no conjunto de avaliação.
+
+---
+
+### 4.2 — Justificativa do Threshold Score == 1.0
+
+**Contexto:** O Score do CSEDM não é puramente binário — cada `Run.Program` produz um Score contínuo em [0, 1] correspondente à fração de testes automatizados que passaram. A escolha do threshold para converter em label binário (`correct = 1` ou `correct = 0`) afeta diretamente a definição de "acerto" no problema de KT.
+
+**Hipótese:** A distribuição do Score deve ser trimodal (concentrada em 0, em 1 e com pico em scores parciais de alto valor), com ~34–37% de scores parciais. O threshold `Score == 1.0` deve capturar apenas execuções onde o estudante passou em **todos** os testes — um critério claro de maestria do problema.
+
+**Referência:** Shi et al. (2022) — Section 3.1, "`correct=1` when all tests pass"; Price et al. (2020) — ProgSnap2 v6, definição de Score como fração de testes passados.
+
+Calculado em: `01_eda.ipynb` — Seção 5.1, célula de código (distribuição de Score em Release/Train) e célula markdown seguinte (célula 72).
+
+**Distribuição do Score (Release/Train, 46.825 Run.Program):**
+
+| Categoria | Contagem | % total |
+|-----------|----------|---------|
+| Score = 0.0 (falhou todos os testes) | 19.802 | **42,3%** |
+| 0 < Score < 1 (acerto parcial) | 15.925 | **34,0%** |
+| Score = 1.0 (passou todos os testes) | 11.098 | **23,7%** |
+| **Total** | **46.825** | **100%** |
+
+Valores únicos de Score: 200 — todos correspondem a frações racionais discretas (e.g., 3/11 ≈ 0,273; 1/2 = 0,500; 6/7 ≈ 0,857), confirmando que o Score reflete contagem de testes com resolução por assignment.
+
+**Raciocínio analítico para Score == 1.0:**
+
+1. **Separação natural de classes:** A distribuição é trimodal com massa clara em 0 e 1. Não há threshold intermediário óbvio entre 0 e 1 que seja justificável sem conhecimento das rúbricas de cada assignment.
+
+2. **Consistência com o conceito de maestria:** KT modela a probabilidade de o estudante *dominar* o conhecimento (KC). Passar 6/7 testes pode refletir um detalhe específico não dominado — usar Score < 1.0 como `correct=1` introduziria ruído em vez de sinal de maestria.
+
+3. **Reprodutibilidade:** Shi et al. (2022) adotam explicitamente `Score == 1.0` como `correct = 1`. Usar o mesmo threshold garante que os 23,70% de corretos em Release/Train correspondam exatamente ao benchmark de 23,68% do paper (divergência < 0,02pp).
+
+4. **Impacto dos parciais:** Os 34,0% de scores parciais são classificados como `correct=0`. Essa perda de granularidade é o custo da binarização — mas é necessária porque BKT, DKT e Code-DKT modelam distribuições Bernoulli.
+
+**Achado:** A distribuição do Score em Release/Train é trimodal: 42,3% em 0,0; 23,7% em 1,0; 34,0% parciais (200 valores únicos). O threshold `Score == 1.0` é o único ponto naturalmente justificado pela semântica dos testes automatizados (passou/falhou todos). Scores parciais representam execuções onde subconjuntos de casos de teste passaram — tratados como `correct=0` por ausência de maestria completa.
+
+**Implicação para modelagem:** O threshold `Score == 1.0` é aplicado uniformemente nos três modelos (BKT, DKT e Code-DKT). Para o Code-DKT, os eventos `Compile.Error` são sempre `correct=0` por definição (código não executou), sem necessidade de threshold. A coluna `correct` nos artefatos serializados já incorpora essa decisão — notebooks 04–06 não precisam re-implementar o threshold.
+
+---
+
+### 4.3 — Rationale para Usar Release/ em vez de All/
+
+**Contexto:** O CSEDM oferece dois semestres distintos: `All/` (Fall 2019, set–dez, 506 estudantes) e `Release/` (Spring 2019, fev–mai, 246 train + 83 test = 329 estudantes). Para TCC 1, o objetivo é **replicar** os resultados de Shi et al. (2022) (Table 1 e Table 2); a escolha do split é crítica para que a comparação seja válida.
+
+**Hipótese:** O split `Release/` deve reproduzir o benchmark de 23,68% de corretos do paper. As populações de `All/` e `Release/` não se sobrepõem — usar `All/` produziria resultados não comparáveis com a literatura.
+
+**Referência:** Shi et al. (2022) — "We use the CSEDM dataset (Spring 2019)"; Price et al. (2020) — ProgSnap2 v6, documentação dos splits.
+
+Calculado em: `01_eda.ipynb` — Seção 1.1.4 (consistência entre splits, células 16–18) e Seção 1.2.3 (benchmark de reprodutibilidade); `02_preprocessing.ipynb` — Seção 1.2 (benchmark, células `a41fa13b`).
+
+**Comparação direta entre splits:**
+
+| Característica | All/ (Fall 2019) | Release/ (Spring 2019) |
+|----------------|------------------|------------------------|
+| Semestre | set–dez 2019 | fev–mai 2019 |
+| Estudantes (train) | — | **246** |
+| Estudantes (test) | — | **83** |
+| Estudantes totais | **506** | **329** |
+| Sobreposição de SubjectIDs | 0 (populações distintas) | 0 (populações distintas) |
+| Taxa corretos (Run.Program) | 19,65% | **23,70%** |
+| Benchmark paper Shi et al. (2022) | — | **23,68%** (divergência < 0,02pp) |
+| Assignments com dados em test | — | **3 de 5** (A439, A487, A492) |
+
+**Três razões para usar Release/ em vez de All/:**
+
+1. **Reprodutibilidade:** A taxa de 23,70% de corretos em `Release/Train` reproduz o benchmark de 23,68% de Shi et al. (2022) com divergência < 0,02pp (arredondamento). Usar `All/` produziria 19,65% — diferença de 4,05pp que evidencia populações distintas.
+
+2. **Separação de populações:** Os 506 SubjectIDs de `All/` e os 329 de `Release/` são completamente distintos (0 sobreposição, confirmado em `01_eda.ipynb`, Seção 1.1.4). Não há como misturar os splits sem violar a integridade do protocolo experimental.
+
+3. **Protocolo de avaliação:** O paper avalia nos assignments presentes em `Release/Test` (A439, A487, A492). O split `All/Test` não contém as mesmas divisões de estudantes e assignments — um modelo treinado em `All/Train` e avaliado em `All/Test` não é comparável com os resultados de Table 1 do paper.
+
+**Achado:** `Release/` e `All/` têm populações completamente distintas (0 sobreposição de SubjectIDs) e taxas de corretos significativamente diferentes (23,70% vs 19,65%). O benchmark de reprodutibilidade do paper (23,68%) é replicado em `Release/Train` com divergência < 0,02pp — confirmando que Shi et al. (2022) usaram exatamente este split. Usar `All/` produziria resultados não comparáveis com a literatura.
+
+**Implicação para modelagem:** Todos os notebooks de modelagem (04–06) carregam os artefatos `sequences_bkt_dkt.pkl` e `sequences_code_dkt.pkl`, que já usam exclusivamente `Release/Train` (treino) e `Release/Test` (avaliação). O split `All/` é mantido disponível no `data_loader.py` apenas para EDA exploratória. A comparação de performance com Shi et al. (2022) Table 1 e Table 2 é válida apenas nos 3 assignments com dados em `Release/Test` (A439, A487, A492).
+
+---
+
 ## Resumo Executivo — Decisões para Notebooks 03–07
 
 | Achado | Valor | Impacto |
