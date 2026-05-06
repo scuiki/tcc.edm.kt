@@ -1,0 +1,77 @@
+[
+  {
+    "kc_id": 0,
+    "name": "Loop bounds and counter control",
+    "reasoning": "This label captures the common theme of managing loop iteration through boundary specification, counter manipulation, and parameter-driven control across all five KCs."
+  },
+  {
+    "kc_id": 1,
+    "name": "Accumulator pattern for aggregating values",
+    "reasoning": "This label captures the core concept that unites all variants: using a variable to aggregate or track values (sum, count, maximum) through iteration or conditionals."
+  },
+  {
+    "kc_id": 2,
+    "name": "Comparing adjacent array elements",
+    "reasoning": "This label directly captures the core concept of examining and comparing neighboring elements within an array, which encompasses all three related KCs."
+  },
+  {
+    "kc_id": 3,
+    "name": "Finding elements by property with constraints",
+    "reasoning": "This KC already precisely captures the concept of locating and filtering elements based on specific properties and conditional requirements."
+  },
+  {
+    "kc_id": 4,
+    "name": "Array length and boundary operations",
+    "reasoning": "This label captures the common theme of using array length information for bounds checking, validation, slicing, and safe element access across all cluster members."
+  },
+  {
+    "kc_id": 5,
+    "name": "Array manipulation using indexed access",
+    "reasoning": "This label captures the common theme of using array indices to access, traverse, modify, and search array elements across various patterns and loop structures."
+  },
+  {
+    "kc_id": 6,
+    "name": "Dual pointer indexing strategy",
+    "reasoning": "This is the only KC in the cluster, so it already represents the group well as a specific technique for traversing or manipulating data structures with two independent position markers."
+  },
+  {
+    "kc_id": 7,
+    "name": "Modulo operator for numeric property testing",
+    "reasoning": "This label captures the common concept of using the modulo operator to test numeric properties (divisibility, parity), which is the underlying technique shared by both KCs in the cluster."
+  },
+  {
+    "kc_id": 8,
+    "name": "Arithmetic expression evaluation and chaining",
+    "reasoning": "This label captures both the direct evaluation of arithmetic expressions and the specific case of chaining multiple arithmetic operations together."
+  },
+  {
+    "kc_id": 9,
+    "name": "Method return types and values",
+    "reasoning": "This label encompasses the cluster's focus on various return type declarations (array, boolean, integer) and the concept of returning computed values from methods."
+  },
+  {
+    "kc_id": 10,
+    "name": "Early exit with conditional return",
+    "reasoning": "This label captures both the mechanism (return statement) and the conditional triggering that distinguishes early exit patterns from regular returns."
+  },
+  {
+    "kc_id": 11,
+    "name": "Conditional logic and logical operators",
+    "reasoning": "This label captures the cluster's core focus on using logical operators (AND, OR, NOT) and conditional statements to implement multi-criteria decision-making and pattern matching."
+  },
+  {
+    "kc_id": 12,
+    "name": "Boolean negation in control flow",
+    "reasoning": "This label captures the shared concept of using negation logic with booleans across early returns, violation detection, state machines, and complex expressions."
+  },
+  {
+    "kc_id": 13,
+    "name": "Helper method extraction for logic",
+    "reasoning": "This KC already precisely captures the concept of decomposing code logic into separate helper methods for improved organization and reusability."
+  },
+  {
+    "kc_id": 14,
+    "name": "Clump transition detection logic",
+    "reasoning": "This KC is the only item in the cluster and already represents the concept at an appropriate level of specificity for an introductory Java course."
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "kc_id": 0,
+    "name": "String building with StringBuilder",
+    "reasoning": "This label captures the core concept of efficient string assembly that unifies all cluster items, from iterative concatenation to explicit StringBuilder usage and conversion."
+  },
+  {
+    "kc_id": 1,
+    "name": "String character access with charAt",
+    "reasoning": "This label is already present in the cluster and clearly captures the core concept of accessing individual characters in a string using the charAt() method."
+  },
+  {
+    "kc_id": 2,
+    "name": "String comparison methods and techniques",
+    "reasoning": "This label captures both specific comparison approaches (case-insensitive, equality) and the broader concept of different string comparison methods available in Java."
+  },
+  {
+    "kc_id": 3,
+    "name": "Index-based string manipulation and traversal",
+    "reasoning": "This label captures the dominant theme of using indices to access, extract, traverse, and match substrings and characters in strings, which encompasses most KCs in the cluster."
+  },
+  {
+    "kc_id": 4,
+    "name": "Conjunctive boolean conditions with AND",
+    "reasoning": "This label directly references the AND operator while maintaining the specificity of multiple conditions, accurately capturing all three KCs' focus on combining conditions with logical AND."
+  },
+  {
+    "kc_id": 5,
+    "name": "Conditional branching for data validation",
+    "reasoning": "Both KCs involve using conditionals to check specific properties (edge cases, length) before proceeding, which are forms of input or data validation logic."
+  },
+  {
+    "kc_id": 6,
+    "name": "Edge case handling for duplicate positions",
+    "reasoning": "This single KC already adequately describes the specific edge case concept and requires no synthesis or generalization."
+  },
+  {
+    "kc_id": 7,
+    "name": "Pattern-based loop boundary adjustment",
+    "reasoning": "This label captures the core concept of adjusting loop limits based on pattern length, which encompasses both calculating boundaries and making adjustments for patterns."
+  },
+  {
+    "kc_id": 8,
+    "name": "Index manipulation within loops",
+    "reasoning": "This label captures the common concept of modifying loop indices based on conditions or fixed offsets, which is the unifying theme across all three KCs."
+  },
+  {
+    "kc_id": 9,
+    "name": "Bounds checking before indexed access",
+    "reasoning": "This single KC already precisely captures the defensive programming practice of validating array/collection indices before access to prevent out-of-bounds errors."
+  },
+  {
+    "kc_id": 10,
+    "name": "Accumulator counter variable",
+    "reasoning": "This single KC already captures the complete concept of using variables to track and accumulate values in loops or iterative processes."
+  },
+  {
+    "kc_id": 11,
+    "name": "Sentinel value pattern for search results",
+    "reasoning": "This is the only KC in the cluster, so it already represents the group well without modification."
+  },
+  {
+    "kc_id": 12,
+    "name": "Early exit and return patterns",
+    "reasoning": "This label captures the common concept of using return statements and early exits to control loop flow and function termination across all three KCs."
+  },
+  {
+    "kc_id": 13,
+    "name": "Method return types and statements",
+    "reasoning": "This label captures the common theme of understanding how methods return values, including their typing, boolean logic, early exits, and default cases."
+  },
+  {
+    "kc_id": 14,
+    "name": "Negative constraint enforcement",
+    "reasoning": "This single KC already adequately describes the concept of enforcing constraints that specify what should NOT occur in a program."
+  }
+]

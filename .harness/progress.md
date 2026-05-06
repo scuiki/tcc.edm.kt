@@ -468,3 +468,28 @@ Appended automatically after each task completes. Do not edit manually.
 - Silhouette score com `metric='cosine'` é consistente com a distância usada no clustering
 
 **A trabalhar a seguir:** Task 4 — Rotulagem de clusters via LLM (Etapa 4): implementar `label_cluster`, prompt baseado em Duan et al. (2025) Table 9, cache em `results/kc_descriptions_A{aid}.json`.
+
+## 2026-05-06 - kc_generation: Task 4 - Rotulagem de clusters via LLM (Etapa 4)
+
+- Adicionadas 4 células ao `notebooks/03b_kc_generation.ipynb` após a Seção 3 (task 3): pré-código didático (4.1), código de rotulagem, célula de display formatado (A439), pós-código didático
+- `label_cluster(cluster_kcs, client, cluster_id)`: recebe lista de nomes de KCs do cluster; retorna `{kc_id: int, name: str, reasoning: str}`
+- Prompt baseado em Duan et al. (2025) Table 9 — instrução de decisão explícita: "selecionar KC existente vs. sintetizar novo rótulo"; citação no comentário do código e no markdown pré-código
+- Sistema: `_CLUSTER_LABEL_SYSTEM` constante com instrução de expertise em CS educator e granularidade esperada (3-8 palavras)
+- Cache: verifica `results/kc_descriptions_A{aid}.json` antes de qualquer chamada LLM; salva após processar cada assignment (não por cluster); notebook re-executável sem novas chamadas API
+- Célula de display: usa `IPython.display.Markdown` para renderizar tabela formatada de KCs canônicos de A439 (KC ID | Nome canônico | Raciocínio)
+- Notebook executado duas vezes: 1ª gerou os cache files (chamou API), 2ª carregou 100% do cache — ambas PASS
+
+**Achados:**
+- A439: 15 KCs canônicos (n_clusters=15)
+- A487: 15 KCs canônicos (n_clusters=15)
+- A492: 15 KCs canônicos (n_clusters=15)
+- A494: 15 KCs canônicos (n_clusters=15)
+- A502: 12 KCs canônicos (n_clusters=12)
+- Custo estimado de task 4: ~$0.01–0.02 (~60–75 chamadas Haiku, prompts curtos)
+
+**Decisões e ressalvas:**
+- `cluster_id` é forçado no resultado após parse do JSON (`result["kc_id"] = cluster_id`) para garantir consistência caso o LLM retorne id diferente
+- Stripping de code fences idêntico ao padrão de tasks 2 e 3 (```json e ```)
+- `rfind("}")` para capturar o JSON mais externo caso o LLM adicione texto de raciocínio antes do JSON
+
+**A trabalhar a seguir:** Task 5 — Q-matrix per-assignment (Etapa 5): `build_qmatrix(problem_ids, kc_raw, kc_clusters)` → `results/qmatrix_A{aid}.csv`.

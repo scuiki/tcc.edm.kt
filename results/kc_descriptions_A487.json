@@ -1,0 +1,77 @@
+[
+  {
+    "kc_id": 0,
+    "name": "String indexing and substring extraction",
+    "reasoning": "This label captures the core concept of accessing and extracting portions of strings using index-based operations, which encompasses all three KCs in the cluster."
+  },
+  {
+    "kc_id": 1,
+    "name": "String length validation and edge cases",
+    "reasoning": "This label captures the common focus on checking string length for safety and correctness across operations and boundary conditions."
+  },
+  {
+    "kc_id": 2,
+    "name": "Helper methods for code organization",
+    "reasoning": "This label captures both the structural pattern and functional purpose of using helper methods to decompose problems and enable code reuse."
+  },
+  {
+    "kc_id": 3,
+    "name": "Method return types and values",
+    "reasoning": "This label encompasses the core concept that all KCs share: understanding how methods return different data types (integers, booleans) and how return statements work across various method contexts."
+  },
+  {
+    "kc_id": 4,
+    "name": "Order independence in logic and data",
+    "reasoning": "All three KCs share the concept that certain operations or results are independent of the order in which elements are arranged or conditions are evaluated."
+  },
+  {
+    "kc_id": 5,
+    "name": "Conditional logic for return values",
+    "reasoning": "This label encompasses the common concept of using conditional statements and case handling to determine which value to return based on different program states or inputs."
+  },
+  {
+    "kc_id": 6,
+    "name": "Multi-branch conditional logic patterns",
+    "reasoning": "This label captures the shared concept of using multiple conditional branches (if/elif, nested, chained) for various decision-making patterns including case analysis, early returns, and value/string transformations."
+  },
+  {
+    "kc_id": 7,
+    "name": "Validating multiple constraints with logical operators",
+    "reasoning": "All three KCs involve checking multiple conditions or boundaries sequentially using logical operators (AND) to ensure data meets feasibility requirements."
+  },
+  {
+    "kc_id": 8,
+    "name": "Bust condition detection and validation",
+    "reasoning": "This single KC already comprehensively captures the concept of identifying and verifying when bust conditions occur, making it an adequate label for this cluster."
+  },
+  {
+    "kc_id": 9,
+    "name": "Conditional logic based on threshold values",
+    "reasoning": "Both KCs involve making decisions or taking actions based on whether values meet or exceed a specified threshold, which is the unifying concept."
+  },
+  {
+    "kc_id": 10,
+    "name": "Combining multiple comparison operators",
+    "reasoning": "This label captures the core concept of using multiple equality, inequality, and comparison operations together with logical operators (AND/NOT) across various data types and patterns."
+  },
+  {
+    "kc_id": 11,
+    "name": "Accumulating values through arithmetic operations",
+    "reasoning": "All KCs involve building up results through repeated arithmetic operations or aggregations, whether summing multiple values, testing arithmetic properties, or composing expressions."
+  },
+  {
+    "kc_id": 12,
+    "name": "Integer division and modulo arithmetic",
+    "reasoning": "This label encompasses both the modulo operator for remainder extraction and integer division, capturing the broader concept of arithmetic operations on integers."
+  },
+  {
+    "kc_id": 13,
+    "name": "Using return values for resource management",
+    "reasoning": "This label captures the common thread of leveraging method outputs to manage, allocate, and track resource consumption across all three KCs."
+  },
+  {
+    "kc_id": 14,
+    "name": "Distance calculation for optimal selection",
+    "reasoning": "This single KC already precisely captures the concept of using distance metrics to identify optimal choices, which is the core idea of the cluster."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "kc_id": 0,
+    "name": "Modulo operator applications and uses",
+    "reasoning": "This label captures both the divisibility testing and index wraparound uses of the modulo operator as practical applications of a single mathematical operation."
+  },
+  {
+    "kc_id": 1,
+    "name": "Accumulator patterns for aggregate computation",
+    "reasoning": "This label captures the common concept of using accumulator variables to compute aggregate values (sums, averages, extremes) across multiple iterations."
+  },
+  {
+    "kc_id": 2,
+    "name": "String conversion of integers",
+    "reasoning": "The existing KC already concisely captures the concept of converting between string and integer data types."
+  },
+  {
+    "kc_id": 3,
+    "name": "Tracking state with indices and comparisons",
+    "reasoning": "Both KCs involve monitoring algorithmic state through index manipulation and equality checks to solve problems like balanced bracket detection."
+  },
+  {
+    "kc_id": 4,
+    "name": "Min/max value tracking with conditionals",
+    "reasoning": "This KC encompasses the core concept of identifying and maintaining extreme values using conditional logic, which subsumes both initialization strategies and priority ordering comparisons."
+  },
+  {
+    "kc_id": 5,
+    "name": "Parity check optimization for filtering",
+    "reasoning": "This single KC already represents the cluster well as it specifically captures the concept of using parity checks as an optimization technique for filtering operations."
+  },
+  {
+    "kc_id": 6,
+    "name": "Adjacent element neighbor access",
+    "reasoning": "This is a single KC that already clearly represents the specific concept of accessing neighboring elements in data structures."
+  },
+  {
+    "kc_id": 7,
+    "name": "Boundary and edge case handling",
+    "reasoning": "This label unifies all three KCs by capturing the common concept of validating and managing special input conditions (empty states, array bounds, length constraints) across different contexts."
+  },
+  {
+    "kc_id": 8,
+    "name": "Boolean logic for control flow",
+    "reasoning": "All KCs involve using boolean values and conditional logic to direct program execution paths, whether through flags, nested conditions, early exits, or default cases."
+  },
+  {
+    "kc_id": 9,
+    "name": "Variable initialization for computational patterns",
+    "reasoning": "Both KCs involve strategically initializing variables (accumulators or temporaries) to support specific programming patterns like aggregation or value swapping."
+  },
+  {
+    "kc_id": 10,
+    "name": "Index-based array traversal and manipulation",
+    "reasoning": "This label captures the core concept that unites all KCs: using loop indices to access, iterate through, and modify array elements with explicit boundary control."
+  },
+  {
+    "kc_id": 11,
+    "name": "Array creation and manipulation techniques",
+    "reasoning": "This label captures the cluster's focus on array instantiation, initialization, modification, and return patterns across various creation and usage contexts."
+  }
+]
