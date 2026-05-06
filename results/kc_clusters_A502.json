@@ -1,0 +1,155 @@
+{
+  "assignment_id": "A502",
+  "n_clusters_selected": 12,
+  "silhouette_scores": {
+    "10": 0.166204,
+    "12": 0.179088,
+    "15": 0.15461
+  },
+  "kc_to_cluster": {
+    "Array traversal with index-based loop": 10,
+    "State machine with boolean flag": 8,
+    "Nested loop for forward skipping": 10,
+    "Conditional accumulation in loops": 10,
+    "Loop counter modification in body": 10,
+    "Empty or edge case handling": 7,
+    "Conditional filtering within array iteration": 10,
+    "Two-pointer index tracking technique": 3,
+    "Array creation and initialization": 11,
+    "Padding array remainder with default values": 11,
+    "Multiple sequential loop execution": 10,
+    "Method return of modified array reference": 11,
+    "Modulo operator for divisibility testing": 0,
+    "State tracking across loop iterations": 10,
+    "Conditional element replacement in arrays": 10,
+    "Array in-place or copy mutation": 11,
+    "Loop control with array bounds": 10,
+    "Non-void array return from method": 11,
+    "Array traversal with single/multiple loops": 10,
+    "Min/max value tracking with conditionals": 4,
+    "Accumulator pattern for summation": 1,
+    "Initialize min/max with first element": 4,
+    "Integer division for average computation": 1,
+    "Subtract extremes from sum algebraically": 1,
+    "Array instantiation with size parameter": 11,
+    "Index-based loop iteration with bounds": 10,
+    "Array element assignment by index": 10,
+    "Loop counter as sequential value": 10,
+    "Array return from method": 11,
+    "Array instantiation with computed size": 11,
+    "Loop index to array offset mapping": 10,
+    "Conditional priority ordering": 4,
+    "String conversion of integers": 2,
+    "Array element assignment in loops": 10,
+    "Array boundary edge case handling": 7,
+    "Adjacent element neighbor access": 6,
+    "Nested conditional logic for case separation": 8,
+    "Early return pattern in loops": 10,
+    "Boolean default case logic": 8,
+    "Loop index with boundary checking": 10,
+    "Array traversal with index-based loops": 10,
+    "Two-accumulator pattern for sums": 1,
+    "Accumulator variable initialization and update": 9,
+    "Equality comparison for balance detection": 3,
+    "Boolean return with early exit": 8,
+    "Array boundary management in loop conditions": 10,
+    "Parity check optimization for filtering": 5,
+    "Nested loop iteration patterns": 10,
+    "Triangular number array sizing": 11,
+    "Array index tracking across loops": 10,
+    "Loop counter increment mechanisms": 10,
+    "Populate array with computed values": 11,
+    "Method return of array reference": 11,
+    "Circular array rotation algorithm": 11,
+    "Temporary variable for element preservation": 9,
+    "Loop boundary management with length": 10,
+    "Modular arithmetic for index wraparound": 0,
+    "Array length validation and edge cases": 7,
+    "Array instantiation and element copying": 11
+  },
+  "clusters": {
+    "0": [
+      "Modulo operator for divisibility testing",
+      "Modular arithmetic for index wraparound"
+    ],
+    "1": [
+      "Accumulator pattern for summation",
+      "Integer division for average computation",
+      "Subtract extremes from sum algebraically",
+      "Two-accumulator pattern for sums"
+    ],
+    "2": [
+      "String conversion of integers"
+    ],
+    "3": [
+      "Two-pointer index tracking technique",
+      "Equality comparison for balance detection"
+    ],
+    "4": [
+      "Min/max value tracking with conditionals",
+      "Initialize min/max with first element",
+      "Conditional priority ordering"
+    ],
+    "5": [
+      "Parity check optimization for filtering"
+    ],
+    "6": [
+      "Adjacent element neighbor access"
+    ],
+    "7": [
+      "Empty or edge case handling",
+      "Array boundary edge case handling",
+      "Array length validation and edge cases"
+    ],
+    "8": [
+      "State machine with boolean flag",
+      "Nested conditional logic for case separation",
+      "Boolean default case logic",
+      "Boolean return with early exit"
+    ],
+    "9": [
+      "Accumulator variable initialization and update",
+      "Temporary variable for element preservation"
+    ],
+    "10": [
+      "Array traversal with index-based loop",
+      "Nested loop for forward skipping",
+      "Conditional accumulation in loops",
+      "Loop counter modification in body",
+      "Conditional filtering within array iteration",
+      "Multiple sequential loop execution",
+      "State tracking across loop iterations",
+      "Conditional element replacement in arrays",
+      "Loop control with array bounds",
+      "Array traversal with single/multiple loops",
+      "Index-based loop iteration with bounds",
+      "Array element assignment by index",
+      "Loop counter as sequential value",
+      "Loop index to array offset mapping",
+      "Array element assignment in loops",
+      "Early return pattern in loops",
+      "Loop index with boundary checking",
+      "Array traversal with index-based loops",
+      "Array boundary management in loop conditions",
+      "Nested loop iteration patterns",
+      "Array index tracking across loops",
+      "Loop counter increment mechanisms",
+      "Loop boundary management with length"
+    ],
+    "11": [
+      "Array creation and initialization",
+      "Padding array remainder with default values",
+      "Method return of modified array reference",
+      "Array in-place or copy mutation",
+      "Non-void array return from method",
+      "Array instantiation with size parameter",
+      "Array return from method",
+      "Array instantiation with computed size",
+      "Triangular number array sizing",
+      "Populate array with computed values",
+      "Method return of array reference",
+      "Circular array rotation algorithm",
+      "Array instantiation and element copying"
+    ]
+  }
+}

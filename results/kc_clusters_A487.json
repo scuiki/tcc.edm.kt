@@ -1,0 +1,153 @@
+{
+  "assignment_id": "A487",
+  "n_clusters_selected": 15,
+  "silhouette_scores": {
+    "10": 0.196762,
+    "12": 0.2043,
+    "15": 0.262111
+  },
+  "kc_to_cluster": {
+    "Multiple equality comparisons with AND": 10,
+    "Transitive equality pattern for identical values": 10,
+    "Inequality conditions with AND operator": 10,
+    "Multi-branch conditional with exhaustive cases": 6,
+    "Conditional reordering with logical equivalence": 4,
+    "Integer return type and assignment": 3,
+    "Pairwise equality comparison of parameters": 10,
+    "Multi-branch conditional logic with elif": 6,
+    "Compound boolean conditions with AND operator": 10,
+    "Return value selection by case": 5,
+    "Default case handling without explicit condition": 5,
+    "Equality comparison with literal values": 10,
+    "Early return for conditional termination": 6,
+    "Sequential parameter checking logic": 7,
+    "Conditional sum computation": 11,
+    "Nested and chained conditionals": 6,
+    "Helper method decomposition pattern": 2,
+    "Range boundary testing with AND logic": 7,
+    "Negation with NOT-equal in conditions": 10,
+    "Conditional return value selection": 5,
+    "Method parameter passing with integers": 3,
+    "Multiple value summation": 11,
+    "Bust condition detection and validation": 8,
+    "Multi-branch conditional logic with nested checks": 6,
+    "Comparison of two values against threshold": 9,
+    "Distance calculation for optimal selection": 14,
+    "Special case return value for invalid state": 5,
+    "Conditional return statement in method": 3,
+    "Boolean method return type": 3,
+    "Comparison operators with arithmetic": 10,
+    "Combining multiple logical conditions": 10,
+    "Variable swapping for sorting": 4,
+    "Handling input order independence": 4,
+    "Arithmetic progression equality test": 11,
+    "String length checking via method": 1,
+    "Multi-branch length-based conditionals": 6,
+    "Substring extraction with indices": 0,
+    "Character extraction and concatenation": 0,
+    "String return from conditional branches": 6,
+    "Helper method for code reuse": 2,
+    "Modulo operator for remainder extraction": 12,
+    "Conditional rounding with threshold": 9,
+    "Arithmetic expression composition": 11,
+    "Method return value utilization": 13,
+    "Integer division and modulo arithmetic": 12,
+    "Greedy resource allocation strategy": 13,
+    "Remainder calculation after resource use": 13,
+    "Feasibility constraint validation": 7,
+    "Conditional branching for case analysis": 6,
+    "Method return with integer outcomes": 3,
+    "String length validation for safe operations": 1,
+    "String substring extraction by indices": 0,
+    "String equality comparison with equals method": 10,
+    "Conditional branching for string modification": 6,
+    "Edge case handling for short strings": 1
+  },
+  "clusters": {
+    "0": [
+      "Substring extraction with indices",
+      "Character extraction and concatenation",
+      "String substring extraction by indices"
+    ],
+    "1": [
+      "String length checking via method",
+      "String length validation for safe operations",
+      "Edge case handling for short strings"
+    ],
+    "2": [
+      "Helper method decomposition pattern",
+      "Helper method for code reuse"
+    ],
+    "3": [
+      "Integer return type and assignment",
+      "Method parameter passing with integers",
+      "Conditional return statement in method",
+      "Boolean method return type",
+      "Method return with integer outcomes"
+    ],
+    "4": [
+      "Conditional reordering with logical equivalence",
+      "Variable swapping for sorting",
+      "Handling input order independence"
+    ],
+    "5": [
+      "Return value selection by case",
+      "Default case handling without explicit condition",
+      "Conditional return value selection",
+      "Special case return value for invalid state"
+    ],
+    "6": [
+      "Multi-branch conditional with exhaustive cases",
+      "Multi-branch conditional logic with elif",
+      "Early return for conditional termination",
+      "Nested and chained conditionals",
+      "Multi-branch conditional logic with nested checks",
+      "Multi-branch length-based conditionals",
+      "String return from conditional branches",
+      "Conditional branching for case analysis",
+      "Conditional branching for string modification"
+    ],
+    "7": [
+      "Sequential parameter checking logic",
+      "Range boundary testing with AND logic",
+      "Feasibility constraint validation"
+    ],
+    "8": [
+      "Bust condition detection and validation"
+    ],
+    "9": [
+      "Comparison of two values against threshold",
+      "Conditional rounding with threshold"
+    ],
+    "10": [
+      "Multiple equality comparisons with AND",
+      "Transitive equality pattern for identical values",
+      "Inequality conditions with AND operator",
+      "Pairwise equality comparison of parameters",
+      "Compound boolean conditions with AND operator",
+      "Equality comparison with literal values",
+      "Negation with NOT-equal in conditions",
+      "Comparison operators with arithmetic",
+      "Combining multiple logical conditions",
+      "String equality comparison with equals method"
+    ],
+    "11": [
+      "Conditional sum computation",
+      "Multiple value summation",
+      "Arithmetic progression equality test",
+      "Arithmetic expression composition"
+    ],
+    "12": [
+      "Modulo operator for remainder extraction",
+      "Integer division and modulo arithmetic"
+    ],
+    "13": [
+      "Method return value utilization",
+      "Greedy resource allocation strategy",
+      "Remainder calculation after resource use"
+    ],
+    "14": [
+      "Distance calculation for optimal selection"
+    ]
+  }
+}

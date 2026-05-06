@@ -1,0 +1,159 @@
+{
+  "assignment_id": "A492",
+  "n_clusters_selected": 15,
+  "silhouette_scores": {
+    "10": 0.193745,
+    "12": 0.225509,
+    "15": 0.228313
+  },
+  "kc_to_cluster": {
+    "String substring extraction with index": 3,
+    "Loop-based string repetition pattern": 3,
+    "String concatenation in iteration": 0,
+    "Index calculation for string length": 3,
+    "Method parameter and return typing": 13,
+    "Character-by-character string traversal with index": 3,
+    "Substring extraction and comparison at position": 3,
+    "Boundary condition for substring access": 3,
+    "Conditional index advancement logic": 8,
+    "StringBuilder/StringBuffer for efficient string building": 0,
+    "String type conversion from buffer": 0,
+    "String character access with charAt": 1,
+    "Index-based loop traversal of strings": 3,
+    "String length comparison for control flow": 3,
+    "String concatenation or StringBuilder append": 0,
+    "Substring extraction for tail handling": 3,
+    "Conditional branching for edge cases": 5,
+    "String character access via charAt()": 1,
+    "Loop-based string traversal with index": 3,
+    "Multi-condition pattern detection with AND": 4,
+    "Bounds checking before indexed access": 9,
+    "Conditional index increment in loops": 8,
+    "String building with StringBuilder or concatenation": 0,
+    "String traversal with index-based loop": 3,
+    "Loop boundary calculation with pattern length": 7,
+    "Character-by-character pattern matching": 3,
+    "Wildcard position in pattern matching": 3,
+    "Accumulator counter variable": 10,
+    "Conjunctive boolean conditions": 4,
+    "Case-insensitive string comparison": 2,
+    "String length retrieval and calculation": 3,
+    "Substring extraction for suffix matching": 3,
+    "String equality comparison methods": 2,
+    "Conditional branching on length comparison": 5,
+    "Boolean return from method logic": 13,
+    "String search with indexOf method": 3,
+    "Substring extraction and comparison": 3,
+    "Loop bounds with string length": 3,
+    "Character inspection with charAt": 1,
+    "Negative constraint enforcement": 14,
+    "Recursion with string subdivision": 3,
+    "Backward iteration through string indices": 3,
+    "Early return from method with boolean": 13,
+    "String position search methods": 3,
+    "Substring and contains string methods": 3,
+    "Default case return statement": 13,
+    "String indexOf and lastIndexOf methods": 3,
+    "Sentinel value pattern for search results": 11,
+    "Substring extraction with index calculation": 3,
+    "Edge case handling for duplicate positions": 6,
+    "Loop-based string pattern matching": 3,
+    "Early exit from loop patterns": 12,
+    "String character access with charAt()": 1,
+    "Loop boundary adjustment for patterns": 7,
+    "Multi-condition AND logic in conditionals": 4,
+    "Early exit with return statement": 12,
+    "Fixed offset indexing in loops": 8,
+    "Default false return after loop": 12
+  },
+  "clusters": {
+    "0": [
+      "String concatenation in iteration",
+      "StringBuilder/StringBuffer for efficient string building",
+      "String type conversion from buffer",
+      "String concatenation or StringBuilder append",
+      "String building with StringBuilder or concatenation"
+    ],
+    "1": [
+      "String character access with charAt",
+      "String character access via charAt()",
+      "Character inspection with charAt",
+      "String character access with charAt()"
+    ],
+    "2": [
+      "Case-insensitive string comparison",
+      "String equality comparison methods"
+    ],
+    "3": [
+      "String substring extraction with index",
+      "Loop-based string repetition pattern",
+      "Index calculation for string length",
+      "Character-by-character string traversal with index",
+      "Substring extraction and comparison at position",
+      "Boundary condition for substring access",
+      "Index-based loop traversal of strings",
+      "String length comparison for control flow",
+      "Substring extraction for tail handling",
+      "Loop-based string traversal with index",
+      "String traversal with index-based loop",
+      "Character-by-character pattern matching",
+      "Wildcard position in pattern matching",
+      "String length retrieval and calculation",
+      "Substring extraction for suffix matching",
+      "String search with indexOf method",
+      "Substring extraction and comparison",
+      "Loop bounds with string length",
+      "Recursion with string subdivision",
+      "Backward iteration through string indices",
+      "String position search methods",
+      "Substring and contains string methods",
+      "String indexOf and lastIndexOf methods",
+      "Substring extraction with index calculation",
+      "Loop-based string pattern matching"
+    ],
+    "4": [
+      "Multi-condition pattern detection with AND",
+      "Conjunctive boolean conditions",
+      "Multi-condition AND logic in conditionals"
+    ],
+    "5": [
+      "Conditional branching for edge cases",
+      "Conditional branching on length comparison"
+    ],
+    "6": [
+      "Edge case handling for duplicate positions"
+    ],
+    "7": [
+      "Loop boundary calculation with pattern length",
+      "Loop boundary adjustment for patterns"
+    ],
+    "8": [
+      "Conditional index advancement logic",
+      "Conditional index increment in loops",
+      "Fixed offset indexing in loops"
+    ],
+    "9": [
+      "Bounds checking before indexed access"
+    ],
+    "10": [
+      "Accumulator counter variable"
+    ],
+    "11": [
+      "Sentinel value pattern for search results"
+    ],
+    "12": [
+      "Early exit from loop patterns",
+      "Early exit with return statement",
+      "Default false return after loop"
+    ],
+    "13": [
+      "Method parameter and return typing",
+      "Boolean return from method logic",
+      "Early return from method with boolean",
+      "Default case return statement"
+    ],
+    "14": [
+      "Negative constraint enforcement"
+    ]
+  }
+}

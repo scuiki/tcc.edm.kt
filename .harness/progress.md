@@ -441,3 +441,30 @@ Appended automatically after each task completes. Do not edit manually.
 - Custo estimado de task 2: ~$0.02–0.05 (50 chamadas Haiku, prompts longos por incluir soluções de código)
 
 **A trabalhar a seguir:** Task 3 — Clustering Sentence-BERT + HAC dos KCs brutos por assignment.
+
+## 2026-05-06 - kc_generation: Task 3 - Clustering Sentence-BERT + HAC (Etapa 3)
+
+- Adicionadas 3 células ao `notebooks/03b_kc_generation.ipynb` após a Seção 2 (task 2): pré-código didático (3.1), código de clustering, pós-código didático
+- `_cluster_with_n(embeddings, n_clusters)`: HAC com `pdist(metric='cosine')` + `linkage(method='average')` + `fcluster(criterion='maxclust')`; clipa distâncias levemente negativas (floating-point); retorna labels 0-indexed
+- `select_best_n_clusters(embeddings, candidates)`: itera n_clusters ∈ {10, 12, 15}; calcula silhouette score (Rousseeuw, 1987) com `metric='cosine'`; retorna `(best_n, scores_dict)`; pula candidatos onde n ≥ n_unique_kcs
+- Embedding: `SentenceTransformer("all-MiniLM-L6-v2")` com `normalize_embeddings=True`; `np.random.seed(SEED)` antes do encode para reprodutibilidade
+- Deduplicação order-preserving dos nomes de KCs por assignment antes do embedding (sobreposição nominal mínima: 52–59 únicos de 55–60 brutos)
+- Output JSON por assignment: `assignment_id`, `n_clusters_selected`, `silhouette_scores` (dict), `kc_to_cluster` (name→id), `clusters` (id→[names])
+- Cache: `results/kc_clusters_A{aid}.json`; notebook re-executável sem recalcular embeddings
+- Notebook executado via `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600` — PASS na primeira tentativa
+
+**Achados:**
+- A439: 52 únicos → 15 clusters (silhouette: 10=0.298, 12=0.308, 15=0.323)
+- A487: 55 únicos → 15 clusters (silhouette: 10=0.197, 12=0.204, 15=0.262)
+- A492: 58 únicos → 15 clusters (silhouette: 10=0.194, 12=0.226, 15=0.228)
+- A494: 59 únicos → 15 clusters (silhouette: 10=0.199, 12=0.202, 15=0.222)
+- A502: 59 únicos → **12 clusters** (silhouette: 10=0.166, 12=0.179, 15=0.155) ← único assignment onde n=15 é pior
+- Scores na faixa 0.15–0.32: tipicamente baixos para embeddings semânticos com fronteiras difusas entre conceitos próximos — esperado dado que os KCs são intencionalmente específicos e interdependentes
+- 4/5 assignments selecionaram n=15; A502 selecionou n=12 (KCs mais compactos)
+
+**Decisões e ressalvas:**
+- Linkage `average` (não `ward`): ward exige espaço Euclidiano com variância minimizável; cosine distance não satisfaz essa premissa. `average` funciona com qualquer matriz de distância positiva.
+- `normalize_embeddings=True` + `pdist(metric='cosine')` é explicitamente cosine; alternativa (L2-norm + Euclidean) seria equivalente mas menos legível
+- Silhouette score com `metric='cosine'` é consistente com a distância usada no clustering
+
+**A trabalhar a seguir:** Task 4 — Rotulagem de clusters via LLM (Etapa 4): implementar `label_cluster`, prompt baseado em Duan et al. (2025) Table 9, cache em `results/kc_descriptions_A{aid}.json`.

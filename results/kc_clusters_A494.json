@@ -1,0 +1,161 @@
+{
+  "assignment_id": "A494",
+  "n_clusters_selected": 15,
+  "silhouette_scores": {
+    "10": 0.199154,
+    "12": 0.201797,
+    "15": 0.222199
+  },
+  "kc_to_cluster": {
+    "Array element access by index": 5,
+    "Fixed-count loop iteration": 0,
+    "Accumulator variable for summation": 1,
+    "Direct arithmetic expression evaluation": 8,
+    "Integer addition operator chaining": 8,
+    "Method return with computed value": 9,
+    "Conditional logic based on array length": 4,
+    "Array instantiation with specified size": 4,
+    "Array element access and assignment": 5,
+    "Array length property usage": 4,
+    "Method return type array declaration": 9,
+    "Boundary-aware array slicing": 4,
+    "Array traversal with index or iterator": 5,
+    "Modulo operator for divisibility testing": 7,
+    "Conditional counter increment pattern": 1,
+    "If statement for selective execution": 11,
+    "Method return of computed integer": 9,
+    "Array traversal with consecutive pair indexing": 5,
+    "Logical AND operator in conditionals": 11,
+    "Loop boundary with length adjustment": 0,
+    "Early return for boolean negation": 12,
+    "Boolean method return type": 9,
+    "Negation logic in violation detection": 12,
+    "Array element filtering with conditions": 4,
+    "Loop counter manipulation in iteration": 0,
+    "Accumulator variable pattern": 1,
+    "Checking adjacent array elements": 2,
+    "Logical operators for compound conditions": 11,
+    "Array length boundary validation": 4,
+    "Array traversal with controlled loop bounds": 5,
+    "Nested conditional logic for pattern matching": 11,
+    "Array index offset access patterns": 5,
+    "Early exit with return statement": 10,
+    "Logical operators in compound conditions": 11,
+    "Array traversal with conditional modification": 5,
+    "Nested loop bounded search pattern": 5,
+    "Modulo operator for odd/even detection": 7,
+    "Maximum accumulator with comparison": 1,
+    "In-place array mutation and return": 5,
+    "Helper method extraction for logic": 13,
+    "Dual pointer indexing strategy": 6,
+    "Array bounds calculation for suffix": 4,
+    "Element-by-element equality comparison": 2,
+    "Early exit pattern on condition failure": 10,
+    "Loop iteration with parameter-driven bounds": 0,
+    "Boolean predicate method return": 9,
+    "State machine with boolean flag": 12,
+    "Adjacent element comparison in loop": 2,
+    "Loop boundary adjustment for pairs": 0,
+    "Accumulator counter pattern": 1,
+    "Clump transition detection logic": 14,
+    "Array traversal with indexed access": 5,
+    "Nested loop array search pattern": 5,
+    "Compound conditional with multiple criteria": 11,
+    "Finding elements by property with constraints": 3,
+    "Array element swapping via reassignment": 5,
+    "Index variable independence in nested loops": 5,
+    "Negation of complex boolean expressions": 12,
+    "Boundary checking for array access safety": 4
+  },
+  "clusters": {
+    "0": [
+      "Fixed-count loop iteration",
+      "Loop boundary with length adjustment",
+      "Loop counter manipulation in iteration",
+      "Loop iteration with parameter-driven bounds",
+      "Loop boundary adjustment for pairs"
+    ],
+    "1": [
+      "Accumulator variable for summation",
+      "Conditional counter increment pattern",
+      "Accumulator variable pattern",
+      "Maximum accumulator with comparison",
+      "Accumulator counter pattern"
+    ],
+    "2": [
+      "Checking adjacent array elements",
+      "Element-by-element equality comparison",
+      "Adjacent element comparison in loop"
+    ],
+    "3": [
+      "Finding elements by property with constraints"
+    ],
+    "4": [
+      "Conditional logic based on array length",
+      "Array instantiation with specified size",
+      "Array length property usage",
+      "Boundary-aware array slicing",
+      "Array element filtering with conditions",
+      "Array length boundary validation",
+      "Array bounds calculation for suffix",
+      "Boundary checking for array access safety"
+    ],
+    "5": [
+      "Array element access by index",
+      "Array element access and assignment",
+      "Array traversal with index or iterator",
+      "Array traversal with consecutive pair indexing",
+      "Array traversal with controlled loop bounds",
+      "Array index offset access patterns",
+      "Array traversal with conditional modification",
+      "Nested loop bounded search pattern",
+      "In-place array mutation and return",
+      "Array traversal with indexed access",
+      "Nested loop array search pattern",
+      "Array element swapping via reassignment",
+      "Index variable independence in nested loops"
+    ],
+    "6": [
+      "Dual pointer indexing strategy"
+    ],
+    "7": [
+      "Modulo operator for divisibility testing",
+      "Modulo operator for odd/even detection"
+    ],
+    "8": [
+      "Direct arithmetic expression evaluation",
+      "Integer addition operator chaining"
+    ],
+    "9": [
+      "Method return with computed value",
+      "Method return type array declaration",
+      "Method return of computed integer",
+      "Boolean method return type",
+      "Boolean predicate method return"
+    ],
+    "10": [
+      "Early exit with return statement",
+      "Early exit pattern on condition failure"
+    ],
+    "11": [
+      "If statement for selective execution",
+      "Logical AND operator in conditionals",
+      "Logical operators for compound conditions",
+      "Nested conditional logic for pattern matching",
+      "Logical operators in compound conditions",
+      "Compound conditional with multiple criteria"
+    ],
+    "12": [
+      "Early return for boolean negation",
+      "Negation logic in violation detection",
+      "State machine with boolean flag",
+      "Negation of complex boolean expressions"
+    ],
+    "13": [
+      "Helper method extraction for logic"
+    ],
+    "14": [
+      "Clump transition detection logic"
+    ]
+  }
+}
