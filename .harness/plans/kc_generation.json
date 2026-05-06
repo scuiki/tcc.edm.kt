@@ -89,7 +89,7 @@
     {
       "id": "5",
       "title": "Q-matrix \u2014 Etapa 5",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "build_qmatrix(problem_ids, kc_raw, kc_clusters) definida: retorna DataFrame com ProblemID como indice e colunas kc_0, kc_1, ..., kc_N (valores 0 ou 1)",
         "results/qmatrix_A439.csv, ..., results/qmatrix_A502.csv existem apos execucao; formato: primeira coluna ProblemID, demais colunas kc_0...kc_N",

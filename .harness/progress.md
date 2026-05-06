@@ -493,3 +493,24 @@ Appended automatically after each task completes. Do not edit manually.
 - `rfind("}")` para capturar o JSON mais externo caso o LLM adicione texto de raciocínio antes do JSON
 
 **A trabalhar a seguir:** Task 5 — Q-matrix per-assignment (Etapa 5): `build_qmatrix(problem_ids, kc_raw, kc_clusters)` → `results/qmatrix_A{aid}.csv`.
+
+## 2026-05-06 - kc_generation: Task 5 - Q-matrix (Etapa 5)
+
+- Adicionadas 3 células ao `notebooks/03b_kc_generation.ipynb` após a Seção 4 (task 4): pré-código didático (5.1), código, pós-código didático
+- `build_qmatrix(problem_ids, kc_raw, kc_clusters)`: itera sobre `problem_ids`; para cada problema, percorre seus KCs brutos (`kc_raw[pid]["kcs"]`), busca o cluster_id correspondente em `kc_clusters["kc_to_cluster"]`, e seta `row[cluster_id] = 1`; retorna `pd.DataFrame` com index=ProblemID e colunas `kc_0...kc_N`
+- Determinística a partir dos caches de tasks 2 e 3 — sem chamadas LLM; sempre recomputa do JSON cached
+- Validação inline: `assert not (qmat.sum(axis=1) == 0).any()` para cada assignment — todos os 50 problemas têm ≥1 KC associado
+- 5 arquivos CSV gerados: `results/qmatrix_A{aid}.csv` com ProblemID como primeira coluna e kc_0...kc_N como demais colunas
+- Markdown reporta estatísticas calculadas: n_KCs, n_problems, density, max_KCs_per_problem
+- Notebook executado via `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600` — PASS na primeira tentativa
+
+**Achados:**
+- A439: 10 × 15, density=0.320, max_kcs=6 (problem 233)
+- A487: 10 × 15, density=0.293, max_kcs=6 (problem 22)
+- A492: 10 × 15, density=0.260, max_kcs=6 (problem 34)
+- A494: 10 × 15, density=0.320, max_kcs=6 (problem 106)
+- A502: 10 × 12, density=0.300, max_kcs=6 (problem 71)
+- Densidade média: 29–32% — cada problema exige ~3–5 KCs de um vocabulário de 12–15
+- Todos os 50 problemas validados com ≥1 KC — assertion passed para todos os 5 assignments
+
+**A trabalhar a seguir:** Task 6 — KC Correctness Labeling via LLM (Etapa 6): `label_kc_correctness`, prompt baseado em Duan et al. (2025) Table 10, cache em `results/kc_correctness_A{aid}.json`.
