@@ -1,0 +1,143 @@
+{
+  "slug": "kc_generation",
+  "title": "KC Generation \u2014 criar notebooks/03b_kc_generation.ipynb",
+  "type": "feature",
+  "created": "2026-05-06",
+  "status": "planned",
+  "verify_cmd": [
+    "jupyter",
+    "nbconvert",
+    "--to",
+    "notebook",
+    "--execute",
+    "--inplace",
+    "notebooks/03b_kc_generation.ipynb",
+    "--ExecutePreprocessor.timeout=600"
+  ],
+  "context": "O notebook 03b_kc_generation.ipynb ainda nao existe. Este agente implementa o pipeline KCGen-KT (Duan et al., 2025) para geracao automatica de KCs a partir de submissoes corretas do CSEDM. ANTES de implementar qualquer celula, leia PLAN_KC_GENERATION.md \u2014 ele contem todas as decisoes de design, estrutura dos prompts e custo estimado (~$39-40 Haiku). Decisoes criticas: (1) LLM recebe codigo bruto \u2014 NAO AST (ablacao Duan et al. 2025, Table 4: AST piora AUC de 0.812 para 0.784); (2) 5 submissoes por problema via stratified sampling por tentativas (Table 5); (3) Q-matrix per-assignment com 10-15 KCs; (4) Cache OBRIGATORIO em todas as etapas LLM \u2014 notebook deve ser re-executavel sem re-chamar APIs. Use apenas Release/Train (results/sequences_bkt_dkt.pkl + data/CSEDM/Release/Train/Data/CodeStates/CodeStates.csv). Assignments: A439, A487, A492, A494, A502. Modelo: claude-haiku-4-5-20251001. Biblioteca Python: anthropic. Cada tarefa deve gerar seus artefatos de cache antes de encerrar \u2014 o verify_cmd roda o notebook completo e precisa encontrar os caches para passar sem re-chamar APIs.",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Setup, carregamento e diversity sampling",
+      "status": "complete",
+      "acceptance_criteria": [
+        "SEED = 42 definido no topo do notebook; imports incluem anthropic, pickle, json, sentence_transformers, sklearn, scipy",
+        "load_correct_samples(sequences_path, code_states_path) definida: carrega results/sequences_bkt_dkt.pkl e faz join com data/CSEDM/Release/Train/Data/CodeStates/CodeStates.csv para obter codigo Java das submissoes corretas",
+        "diversity_sample(correct_events, n=5) definida: estratifica por numero de tentativas antes do acerto em 5 buckets (1, 2-3, 4-6, 7-10, >10); retorna ate 1 submissao por bucket disponivel, max n=5",
+        "Dict sampled_codes gerado com estrutura {assignment_id: {problem_id: [code_1, ..., code_k]}} e estatisticas reportadas no markdown (n_problems cobertos, media de amostras por problema)",
+        "Markdown cita Duan et al. (2025) Table 5 como fundamento para n=5 e estratificacao por tentativas"
+      ],
+      "files": [
+        "notebooks/03b_kc_generation.ipynb"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "2",
+      "title": "Geracao de KCs via LLM \u2014 Etapa 2",
+      "status": "pending",
+      "acceptance_criteria": [
+        "generate_kcs_for_problem(problem_id, code_samples, client) definida: retorna dict {problem_description: str, kcs: [{name: str, reasoning: str}]}",
+        "Prompt chain-of-thought inclui in-context examples baseados em Duan et al. (2025) Appendix B (Table 8); citacao explicita no markdown",
+        "Codigo verifica se results/kc_raw_{assignment_id}.json existe antes de chamar API; se existir, carrega do cache sem nova chamada LLM",
+        "results/kc_raw_A439.json, results/kc_raw_A487.json, results/kc_raw_A492.json, results/kc_raw_A494.json e results/kc_raw_A502.json existem apos execucao",
+        "Markdown afirma explicitamente que LLM recebe codigo bruto (nao AST) e cita ablacao de Duan et al. (2025, Table 4)"
+      ],
+      "files": [
+        "notebooks/03b_kc_generation.ipynb"
+      ],
+      "depends_on": [
+        "1"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Clustering Sentence-BERT + HAC \u2014 Etapa 3",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Embeddings calculados com sentence-transformers (modelo all-MiniLM-L6-v2 ou similar) sobre nomes dos KCs brutos de cada assignment",
+        "HAC clustering com cosine distance implementado via scipy.cluster.hierarchy; linkage ward ou average",
+        "Codigo itera sobre n_clusters em {10, 12, 15} por assignment; criterio de selecao documentado no markdown",
+        "SEED = 42 usado onde aplicavel (numpy random state para reproducibilidade)",
+        "results/kc_clusters_A439.json, ..., results/kc_clusters_A502.json existem apos execucao; cada arquivo contem mapeamento kc_name -> cluster_id e lista de KCs por cluster"
+      ],
+      "files": [
+        "notebooks/03b_kc_generation.ipynb"
+      ],
+      "depends_on": [
+        "2"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Rotulagem de clusters via LLM \u2014 Etapa 4",
+      "status": "pending",
+      "acceptance_criteria": [
+        "label_cluster(cluster_kcs, client) definida: recebe lista de KCs do cluster e retorna {kc_id: int, name: str, reasoning: str}",
+        "Prompt baseado em Duan et al. (2025) Table 9; citacao explicita no markdown",
+        "Codigo verifica se results/kc_descriptions_{assignment_id}.json existe antes de chamar API; re-executavel sem re-chamar LLM",
+        "results/kc_descriptions_A439.json, ..., results/kc_descriptions_A502.json existem apos execucao",
+        "Markdown lista os KCs finais de pelo menos um assignment (tabela ou lista formatada)"
+      ],
+      "files": [
+        "notebooks/03b_kc_generation.ipynb"
+      ],
+      "depends_on": [
+        "3"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Q-matrix \u2014 Etapa 5",
+      "status": "pending",
+      "acceptance_criteria": [
+        "build_qmatrix(problem_ids, kc_raw, kc_clusters) definida: retorna DataFrame com ProblemID como indice e colunas kc_0, kc_1, ..., kc_N (valores 0 ou 1)",
+        "results/qmatrix_A439.csv, ..., results/qmatrix_A502.csv existem apos execucao; formato: primeira coluna ProblemID, demais colunas kc_0...kc_N",
+        "Markdown reporta estatisticas da Q-matrix: numero de KCs por assignment, densidade media (proporcao de 1s), problema com mais KCs associados",
+        "Cada problema no Release/Train tem ao menos 1 KC associado na Q-matrix (sem problema sem KC)"
+      ],
+      "files": [
+        "notebooks/03b_kc_generation.ipynb"
+      ],
+      "depends_on": [
+        "4"
+      ]
+    },
+    {
+      "id": "6",
+      "title": "KC Correctness Labeling via LLM \u2014 Etapa 6",
+      "status": "pending",
+      "acceptance_criteria": [
+        "label_kc_correctness(code, problem_description, kcs, client) definida: retorna {error_reasoning: [str], kc_errors: {kc_name: 0|1}}",
+        "Prompt baseado em Duan et al. (2025) Table 10; citacao explicita no markdown",
+        "Codigo verifica se results/kc_correctness_{assignment_id}.json existe antes de chamar API; processa apenas submissoes incorretas de Run.Program do Release/Train",
+        "results/kc_correctness_A439.json, ..., results/kc_correctness_A502.json existem apos execucao",
+        "Markdown documenta: numero total de submissoes processadas (~26.289), custo estimado (~$39 Claude Haiku), e declara que apenas eventos incorretos do Release/Train sao incluidos"
+      ],
+      "files": [
+        "notebooks/03b_kc_generation.ipynb"
+      ],
+      "depends_on": [
+        "5"
+      ]
+    },
+    {
+      "id": "7",
+      "title": "AST signatures e sumario final \u2014 Etapa 7",
+      "status": "pending",
+      "acceptance_criteria": [
+        "extract_ast_signature(java_code) definida: chama srcml via subprocess e conta frequencia de tags AST (ForStatement, IfStatement, ArrayAccess, etc.); retorna dict {node_type: count}",
+        "results/ast_signatures_A439.json, ..., results/ast_signatures_A502.json existem apos execucao; chave do JSON e problem_id, valor e dict de frequencias de nos",
+        "Celula de validacao final verifica que todos os artefatos obrigatorios existem em results/ (qmatrix_*.csv e ast_signatures_*.json para todos os 5 assignments)",
+        "Markdown compara ao menos 2 KCs gerados com suas assinaturas AST: ex. 'KC iteracao sobre array -> ForStatement presente em X% das submissoes corretas do problema'",
+        "Markdown final lista todos os artefatos gerados com schema resumido (campos e tipos)"
+      ],
+      "files": [
+        "notebooks/03b_kc_generation.ipynb"
+      ],
+      "depends_on": [
+        "6"
+      ]
+    }
+  ]
+}

@@ -391,3 +391,27 @@ Appended automatically after each task completes. Do not edit manually.
 **Verificação:** `python3 -c "... p.stat().st_size > 500 ..."` — PASS (40.325 bytes)
 
 **A trabalhar a seguir:** Todos os 3 tasks do plano insights_extraction estão completos. Próximo: notebook 03_code_features.ipynb.
+
+## 2026-05-06 - kc_generation: Task 1 - Setup, carregamento e diversity sampling
+
+- Criado `notebooks/03b_kc_generation.ipynb` com 5 células: introdução geral do pipeline KCGen-KT, setup (imports + SEED=42), pré-código didático da Seção 1.1, código (funções + execução), pós-código (Achado/Implicação)
+- Imports: `anthropic`, `pickle`, `json`, `sentence_transformers`, `sklearn`, `scipy` (todos validados na célula de setup); SEED=42 propagado para `random` e `numpy`
+- `load_correct_samples(sequences_path, code_states_path)` carrega `results/sequences_bkt_dkt.pkl` e faz join com `data/CSEDM/Release/Train/Data/CodeStates/CodeStates.csv` via dict CodeStateID→Code; identifica a primeira submissão correta cronológica por (estudante, problema), conta `n_attempts_before` e retorna estrutura `{aid: {pid: [{subject_id, codestate_id, n_attempts_before, total_attempts, code}]}}`
+- `_bucket_for(total_attempts)` mapeia em buckets (1=1ª tentativa; 2=2-3; 3=4-6; 4=7-10; 5=>10); `diversity_sample(correct_events, n=5, rng)` itera os buckets em ordem e amostra 1 evento por bucket disponível, retornando até n=5
+- `sampled_codes` construído para todos os 5 assignments (439, 487, 492, 494, 502) com RNG semeado para reproduzibilidade
+- Markdown pré-código cita Duan et al. (2025) Table 5 (n=5 ótimo: AUC 0.812 vs 0.798 para n=1, 0.811 para n=7); pós-código discute saturação acima de n=5 e justifica estratificação como decisão local de qualidade
+- Notebook executado sem erros via `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600`
+
+**Achados principais:**
+- Cobertura completa: **50/50 problemas** (10 por assignment × 5 assignments) têm pelo menos 1 amostra
+- Média global: **4.94 amostras/problema** — apenas 3 problemas (de 50) ficaram com 4 amostras; 47 com os 5 ideais
+- Pool de submissões corretas por (assignment, problema): mean 177–217 → buckets superiores frequentemente populados (esperado dado N=233 estudantes em A439)
+- A492 e A494 atingiram 5/5 amostras em 100% dos problemas; A439, A487 e A502 ficaram com 1 problema cada com 4 amostras (provavelmente bucket 5 = >10 tentativas vazio nesses problemas)
+
+**Decisões e ressalvas:**
+- Sistema tem dois Pythons: o kernel Jupyter (`python3` default) usa `/usr/bin/python3` com pacotes em `~/.local/lib/python3.12/site-packages/`; o `.venv/` tem Python independente. Instalei `anthropic` e `sentence-transformers` no `~/.local` via `pip install --user --break-system-packages` para que o kernel padrão usado pelos notebooks anteriores continue funcionando — não alterei o kernel do notebook 03b. Documentado aqui caso seja necessário re-executar em outra máquina.
+- `n_attempts_before` é calculado dentro do `groupby(ProblemID)` da sequência do estudante: posição do primeiro evento `correct==1` na lista cronológica de eventos do estudante para aquele problema. Para `Run.Program`-only (sequences_bkt_dkt.pkl), corresponde a `total_attempts = n_attempts_before + 1`.
+- A divergência mínima na contagem de amostras (4 vs 5) é esperada: alguns problemas, mesmo com pool grande, não têm representantes em todos os 5 buckets (e.g., bucket 5 vazio em problemas onde ninguém precisou de >10 tentativas para acertar). O Achado documenta esta distribuição explicitamente.
+- Verify_cmd PASS: notebook executável end-to-end (apenas Task 1 implementada por enquanto; tasks 2–7 adicionarão células subsequentes).
+
+**A trabalhar a seguir:** Task 2 — Geração de KCs via LLM (Etapa 2): implementar `generate_kcs_for_problem`, prompt chain-of-thought baseado em Duan et al. (2025) Table 8, cache em `results/kc_raw_{aid}.json`.
