@@ -124,7 +124,7 @@
     {
       "id": "7",
       "title": "AST signatures e sumario final \u2014 Etapa 7",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "extract_ast_signature(java_code) definida: chama srcml via subprocess e conta frequencia de tags AST (ForStatement, IfStatement, ArrayAccess, etc.); retorna dict {node_type: count}",
         "results/ast_signatures_A439.json, ..., results/ast_signatures_A502.json existem apos execucao; chave do JSON e problem_id, valor e dict de frequencias de nos",
@@ -136,7 +136,7 @@
         "notebooks/03b_kc_generation.ipynb"
       ],
       "depends_on": [
-        "6"
+        "5"
       ]
     }
   ]

@@ -1,0 +1,72 @@
+{
+  "31": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "return": 1.0
+  },
+  "32": {
+    "n_samples": 5,
+    "for": 0.2,
+    "function": 1.0,
+    "if_stmt": 0.8,
+    "return": 1.0,
+    "while": 1.0
+  },
+  "33": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 0.6,
+    "return": 1.0
+  },
+  "34": {
+    "n_samples": 5,
+    "for": 0.6,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "return": 1.0,
+    "while": 0.4
+  },
+  "36": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "return": 1.0
+  },
+  "37": {
+    "n_samples": 5,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "return": 1.0
+  },
+  "38": {
+    "n_samples": 5,
+    "for": 0.6,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "return": 1.0
+  },
+  "39": {
+    "n_samples": 5,
+    "for": 0.8,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "return": 1.0
+  },
+  "40": {
+    "n_samples": 5,
+    "for": 0.4,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "return": 1.0
+  },
+  "128": {
+    "n_samples": 5,
+    "for": 0.8,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "return": 1.0
+  }
+}

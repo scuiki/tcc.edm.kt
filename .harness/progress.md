@@ -514,3 +514,26 @@ Appended automatically after each task completes. Do not edit manually.
 - Todos os 50 problemas validados com ≥1 KC — assertion passed para todos os 5 assignments
 
 **A trabalhar a seguir:** Task 6 — KC Correctness Labeling via LLM (Etapa 6): `label_kc_correctness`, prompt baseado em Duan et al. (2025) Table 10, cache em `results/kc_correctness_A{aid}.json`.
+
+## 2026-05-06 - kc_generation: Task 7 - AST signatures e sumario final (Etapa 7)
+
+- Adicionadas 6 células ao `notebooks/03b_kc_generation.ipynb` após a Seção 5 (task 5): pré-código didático (7.1), código de extração AST, pós-código didático, célula de comparação KC-AST (code+display), célula de validação final (code), markdown de schema de artefatos
+- `extract_ast_signature(java_code)`: chama `srcml` via `subprocess.run(['srcml', tmpfile, '--language', 'Java'])`, parseia o XML resultante com `xml.etree.ElementTree`, conta ocorrências de nós AST rastreados (`for`, `while`, `do`, `if_stmt`, `switch`, `try`, `catch`, `index`, `return`, `throw`, `function`); retorna `dict {node_type: count}`; `finally` garante remoção do arquivo temporário; trata erros (código não-compilável, timeout) retornando `{}`
+- Loop de extração: para cada `(assignment_id, problem_id)`, extrai `extract_ast_signature` para cada uma das amostras de código correto; agrega como fração de amostras onde o nó aparece ≥1 vez; resultado: `{str(problem_id): {n_samples: int, node: float, ...}}`; persiste em `results/ast_signatures_A{aid}.json`
+- Cache: verifica arquivo antes de processar; re-execução carrega do JSON sem re-chamar srcml
+- `_kc_ast_table(kc_desc, qmat, sigs, nodes_to_show)`: gera tabela markdown de ProblemID × nós AST para todos os problemas que requerem o KC; filtra nós que aparecem em pelo menos um problema; fallback para lista completa
+- Comparação KC-AST para A494 (assignment com KCs claros de iteração): KC "Loop bounds and counter control" (kc_0) × `for`/`while` e KC "Comparing adjacent array elements" (kc_2) × `index`/`for`; exibida via `IPython.display.Markdown`
+- Validação final: verifica existência de todos os 10 artefatos obrigatórios (`qmatrix_A{aid}.csv` × 5 + `ast_signatures_A{aid}.json` × 5); assertion com mensagem de erro informativa
+- Markdown de schema: tabela listando todos os 5 artefatos da Etapa 1–7 com formato e schema; artefato pendente (kc_correctness, Etapa 6) documentado separadamente
+- Notebook executado duas vezes via `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600` — PASS na 1ª (gerou caches) e 2ª (cache hits)
+
+**Achados principais:**
+- A439, A487: nós observados apenas `function`, `if_stmt`, `return` (sem loops) — problemas de comparação e condicionais puras, sem iteração
+- A492: adiciona `for` e `while` (manipulação de strings com loops)
+- A494: adiciona `index` (acesso a array) — distribuição de nós mais variada; `for` em 60–100% dos problemas de iteração; `index` em 100% dos problemas de acesso a array
+- A502: semelhante a A494 com `for`, `index`, `if_stmt`
+- Comparação KC-AST para A494 validada: KC "Loop bounds and counter control" → `for` presente em 60–100% das submissões corretas dos 5 problemas que o requerem; KC "Comparing adjacent array elements" → `index` presente em 100% dos 3 problemas que o requerem
+
+**Nota sobre srcml `index` tag:** O nó `index` aparece tanto em declarações de tipo (`int[] arr` → `<index>[]</index>`) quanto em acesso a elementos (`arr[i]` → `<index>[<expr>i</expr>]</index>`). A frequência alta de `index` em todos os problemas de A494/A502 inclui ambos; isso não invalida a comparação — problemas de manipulação de array exibem `index` de expressão muito mais frequentemente que problemas sem arrays.
+
+**A trabalhar a seguir:** Task 6 — KC Correctness Labeling via LLM (Etapa 6): `label_kc_correctness`, prompt baseado em Duan et al. (2025) Table 10, cache em `results/kc_correctness_A{aid}.json`. (Custo estimado: ~$39 Haiku para ~26.289 submissões incorretas do Release/Train.)

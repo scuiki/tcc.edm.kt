@@ -1,0 +1,82 @@
+{
+  "41": {
+    "n_samples": 5,
+    "for": 0.6,
+    "function": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  },
+  "43": {
+    "n_samples": 5,
+    "for": 0.2,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  },
+  "44": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  },
+  "46": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  },
+  "49": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  },
+  "67": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  },
+  "104": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  },
+  "106": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  },
+  "107": {
+    "n_samples": 5,
+    "for": 0.6,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0,
+    "while": 0.4
+  },
+  "108": {
+    "n_samples": 5,
+    "for": 1.0,
+    "function": 1.0,
+    "if_stmt": 1.0,
+    "index": 1.0,
+    "return": 1.0
+  }
+}
