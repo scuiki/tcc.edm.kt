@@ -1,0 +1,292 @@
+{
+  "45": {
+    "problem_description": "Sum all integers in an array, but exclude any contiguous sequences that start with 6 and end with 7 (inclusive). Return the computed sum.",
+    "kcs": [
+      {
+        "name": "Array traversal with index-based loop",
+        "reasoning": "All solutions iterate through the array using a for loop with index counter and array.length boundary."
+      },
+      {
+        "name": "State machine with boolean flag",
+        "reasoning": "Solutions 1, 3, and 4 use a boolean flag to toggle between 'in skip mode' and 'normal mode' when encountering 6 and 7."
+      },
+      {
+        "name": "Nested loop for forward skipping",
+        "reasoning": "Solutions 2 and 5 use an inner while loop to advance the array index past the closing 7 when a 6 is encountered."
+      },
+      {
+        "name": "Conditional accumulation in loops",
+        "reasoning": "All solutions selectively add array elements to sum only when outside a 6-7 block, combining loop logic with aggregation."
+      },
+      {
+        "name": "Loop counter modification in body",
+        "reasoning": "Solutions 2 and 5 modify the for loop's index variable inside an inner while loop, requiring careful index boundary management."
+      },
+      {
+        "name": "Empty or edge case handling",
+        "reasoning": "Solution 5 explicitly checks array length; others rely on loop condition to handle empty arrays safely."
+      }
+    ]
+  },
+  "48": {
+    "problem_description": "Remove all instances of the value 10 from an array, compact non-10 elements to the front, and fill remaining positions with zeros while preserving array length.",
+    "kcs": [
+      {
+        "name": "Conditional filtering within array iteration",
+        "reasoning": "All solutions use if statements to test each element (nums[i] != 10 or nums[i] == 10) and selectively process only qualifying elements."
+      },
+      {
+        "name": "Two-pointer index tracking technique",
+        "reasoning": "Solutions maintain separate indices: one for iterating the input (i/j) and one for writing filtered output (place/x/j/c), enabling compact placement without array shift overhead."
+      },
+      {
+        "name": "Array creation and initialization",
+        "reasoning": "Solutions 2-5 explicitly create new arrays; Solution 1 reuses the input array; all demonstrate instantiating arrays with fixed size and accessing array object references."
+      },
+      {
+        "name": "Padding array remainder with default values",
+        "reasoning": "All solutions fill positions from the last filtered element to array.length with 0 using a second loop, maintaining correct array length."
+      },
+      {
+        "name": "Multiple sequential loop execution",
+        "reasoning": "Each solution uses at least two separate loops: one to filter and compact elements, and another to zero-pad the remainder, requiring careful loop sequencing."
+      },
+      {
+        "name": "Method return of modified array reference",
+        "reasoning": "All solutions return an int[] reference (either the modified input or a newly created array), demonstrating non-void return types for arrays."
+      }
+    ]
+  },
+  "51": {
+    "problem_description": "Modify an array so that after each number divisible by 10, all subsequent non-multiples of 10 are replaced with that divisible-by-10 value, until another multiple of 10 is encountered.",
+    "kcs": [
+      {
+        "name": "Modulo operator for divisibility testing",
+        "reasoning": "All solutions use % 10 == 0 or % 10 != 0 to identify multiples of 10, which is the primary condition controlling the replacement logic."
+      },
+      {
+        "name": "State tracking across loop iterations",
+        "reasoning": "Solutions maintain a variable (e.g., bhag, runNum, val, ten) that remembers the most recent multiple of 10 encountered, enabling replacements in subsequent iterations."
+      },
+      {
+        "name": "Conditional element replacement in arrays",
+        "reasoning": "Each solution uses if/else conditions to decide whether to replace the current element based on both the element value and tracked state."
+      },
+      {
+        "name": "Array in-place or copy mutation",
+        "reasoning": "Solutions modify array elements via index assignment (nums[i] = value) either directly on the input array or on a copy."
+      },
+      {
+        "name": "Loop control with array bounds",
+        "reasoning": "Solutions iterate through the entire array using i < nums.length or similar bounds, with some using nested loops to skip past multiples of 10."
+      },
+      {
+        "name": "Non-void array return from method",
+        "reasoning": "All solutions return the modified array, requiring correct method signature and return statement with array type."
+      }
+    ]
+  },
+  "56": {
+    "problem_description": "Calculate the average of array elements after removing the single largest and smallest values using integer division.",
+    "kcs": [
+      {
+        "name": "Array traversal with single/multiple loops",
+        "reasoning": "All solutions iterate through the array; Solution 5 uses two separate loops while others use one, demonstrating different traversal strategies."
+      },
+      {
+        "name": "Min/max value tracking with conditionals",
+        "reasoning": "Solutions 1-4 use if/else comparisons or Math.min/max to maintain running minimum and maximum; Solution 5 additionally tracks index positions."
+      },
+      {
+        "name": "Accumulator pattern for summation",
+        "reasoning": "All solutions maintain a running sum variable incremented by each array element throughout traversal."
+      },
+      {
+        "name": "Initialize min/max with first element",
+        "reasoning": "Solutions 1-4 initialize min and max with nums[0] before looping to avoid incorrect comparisons with default values."
+      },
+      {
+        "name": "Integer division for average computation",
+        "reasoning": "All solutions divide the adjusted sum by (length - 2) using integer division, which truncates toward zero."
+      },
+      {
+        "name": "Subtract extremes from sum algebraically",
+        "reasoning": "Solutions 1-4 compute average as (sum - min - max) / (length - 2), while Solution 5 filters elements by position instead."
+      }
+    ]
+  },
+  "57": {
+    "problem_description": "Create and populate an integer array of size n with sequential values from 0 to n-1, then return the array.",
+    "kcs": [
+      {
+        "name": "Array instantiation with size parameter",
+        "reasoning": "All solutions declare and initialize an array using new int[n], establishing the array's fixed size."
+      },
+      {
+        "name": "Index-based loop iteration with bounds",
+        "reasoning": "All solutions use for loops with i < n (or i < list.length) to iterate through each array index safely."
+      },
+      {
+        "name": "Array element assignment by index",
+        "reasoning": "Each solution assigns a value to array[i], demonstrating indexed access for element modification."
+      },
+      {
+        "name": "Loop counter as sequential value",
+        "reasoning": "Solutions leverage the loop variable i or an equivalent counter to generate and assign incrementing values 0 to n-1."
+      },
+      {
+        "name": "Array return from method",
+        "reasoning": "The method signature returns int[] and all solutions properly return the populated array, requiring non-void array return type understanding."
+      }
+    ]
+  },
+  "64": {
+    "problem_description": "Generate a String array for a range [start, end) where each element is 'Fizz' (divisible by 3), 'Buzz' (divisible by 5), 'FizzBuzz' (divisible by 15), or the number as a string.",
+    "kcs": [
+      {
+        "name": "Array instantiation with computed size",
+        "reasoning": "All solutions create a String array with size (end - start) to store results for the given range."
+      },
+      {
+        "name": "Loop index to array offset mapping",
+        "reasoning": "Solutions map loop variables to actual values using either (i - start) as index or (i + start) for divisibility checks, demonstrating index offset techniques."
+      },
+      {
+        "name": "Modulo operator for divisibility testing",
+        "reasoning": "All solutions use the % operator with 3, 5, and 15 to determine which FizzBuzz rule applies to each number."
+      },
+      {
+        "name": "Conditional priority ordering",
+        "reasoning": "All solutions test divisibility by 15 first, then 3, then 5 to ensure correct precedence (FizzBuzz before Fizz or Buzz alone)."
+      },
+      {
+        "name": "String conversion of integers",
+        "reasoning": "All solutions use String.valueOf() to convert numbers to strings for the default case when no divisibility rule applies."
+      },
+      {
+        "name": "Array element assignment in loops",
+        "reasoning": "Each iteration assigns a computed string value to the appropriate array index within the loop."
+      }
+    ]
+  },
+  "70": {
+    "problem_description": "Verify that every occurrence of the number 2 in an array is adjacent to at least one other 2 (no isolated 2s allowed).",
+    "kcs": [
+      {
+        "name": "Array boundary edge case handling",
+        "reasoning": "Solutions must distinguish between first element, last element, and middle positions to safely access neighbors without index-out-of-bounds errors."
+      },
+      {
+        "name": "Adjacent element neighbor access",
+        "reasoning": "All solutions check nums[i-1] and/or nums[i+1] to verify that any 2 found has at least one neighboring 2."
+      },
+      {
+        "name": "Nested conditional logic for case separation",
+        "reasoning": "Multiple if-else chains partition logic based on array position and value, handling first/last/middle elements differently."
+      },
+      {
+        "name": "Early return pattern in loops",
+        "reasoning": "Solutions immediately return false upon detecting an isolated 2, short-circuiting further iteration."
+      },
+      {
+        "name": "Boolean default case logic",
+        "reasoning": "The method returns true as the default (all 2s properly paired) and only returns false when a violation is found."
+      },
+      {
+        "name": "Loop index with boundary checking",
+        "reasoning": "Solutions use array length to determine safe iteration bounds and prevent accessing out-of-range indices."
+      }
+    ]
+  },
+  "71": {
+    "problem_description": "Determine whether an array can be split at some index such that the sum of elements before the index equals the sum of elements after the index.",
+    "kcs": [
+      {
+        "name": "Array traversal with index-based loops",
+        "reasoning": "All solutions iterate through the array using for-loops with explicit index management to visit each element."
+      },
+      {
+        "name": "Two-accumulator pattern for sums",
+        "reasoning": "Each solution maintains two separate running totals representing opposite sides of a potential balance point."
+      },
+      {
+        "name": "Accumulator variable initialization and update",
+        "reasoning": "Solutions initialize sum variables to 0 and increment them as array elements are processed."
+      },
+      {
+        "name": "Equality comparison for balance detection",
+        "reasoning": "All solutions test the condition leftSum == rightSum to identify when the array is balanced."
+      },
+      {
+        "name": "Boolean return with early exit",
+        "reasoning": "Solutions return boolean and use early return statements when a balance point is found."
+      },
+      {
+        "name": "Array boundary management in loop conditions",
+        "reasoning": "Solutions carefully set loop bounds to avoid comparing invalid partition points (e.g., checking before last element only)."
+      },
+      {
+        "name": "Parity check optimization for filtering",
+        "reasoning": "Solution 2 demonstrates early termination by checking if total sum is odd, since odd-summed arrays cannot be balanced."
+      }
+    ]
+  },
+  "112": {
+    "problem_description": "Generate an array containing a triangular series pattern where each iteration k contains the sequence 1 through k, repeated for iterations 1 to n.",
+    "kcs": [
+      {
+        "name": "Nested loop iteration patterns",
+        "reasoning": "All solutions use nested loops where the outer loop runs n times and the inner loop runs i times, requiring understanding of how nested loops interact to generate specific patterns."
+      },
+      {
+        "name": "Triangular number array sizing",
+        "reasoning": "All solutions correctly calculate array length using the formula n*(n+1)/2, demonstrating knowledge that the total elements is the nth triangular number."
+      },
+      {
+        "name": "Array index tracking across loops",
+        "reasoning": "Each solution maintains a separate index variable (p, i, m, x, or count) that advances independently of loop counters to properly populate the flat array."
+      },
+      {
+        "name": "Loop counter increment mechanisms",
+        "reasoning": "Solutions demonstrate different increment strategies (post-increment in loop header vs. manual increment in loop body), both achieving the same traversal pattern."
+      },
+      {
+        "name": "Populate array with computed values",
+        "reasoning": "All solutions assign sequential integers to array elements based on nested loop logic, requiring proper use of array assignment syntax."
+      },
+      {
+        "name": "Method return of array reference",
+        "reasoning": "The method returns an integer array reference after population, requiring correct non-void return type and array handling."
+      }
+    ]
+  },
+  "118": {
+    "problem_description": "Perform a left circular shift on an integer array, where each element moves one position left and the first element wraps to the end.",
+    "kcs": [
+      {
+        "name": "Circular array rotation algorithm",
+        "reasoning": "All solutions implement left rotation by either in-place shifting or creating a new array with reordered elements."
+      },
+      {
+        "name": "Temporary variable for element preservation",
+        "reasoning": "Solutions 1, 3, 5 save the first element in a temporary variable to avoid losing it during the shift operation."
+      },
+      {
+        "name": "Loop boundary management with length",
+        "reasoning": "All solutions use careful loop bounds (typically i < nums.length - 1) to shift elements without causing index out-of-bounds errors."
+      },
+      {
+        "name": "Modular arithmetic for index wraparound",
+        "reasoning": "Solutions 2 and 4 use modulo operator or conditional logic to map indices circularly when wrapping the first element."
+      },
+      {
+        "name": "Array length validation and edge cases",
+        "reasoning": "Solutions 1, 3, 5 include conditional checks (length >= 2) to handle arrays too small to shift meaningfully."
+      },
+      {
+        "name": "Array instantiation and element copying",
+        "reasoning": "Solutions 2 and 4 create new arrays and populate them by copying shifted elements, requiring understanding of array creation syntax."
+      }
+    ]
+  }
+}

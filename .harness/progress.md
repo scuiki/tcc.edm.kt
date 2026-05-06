@@ -415,3 +415,29 @@ Appended automatically after each task completes. Do not edit manually.
 - Verify_cmd PASS: notebook executável end-to-end (apenas Task 1 implementada por enquanto; tasks 2–7 adicionarão células subsequentes).
 
 **A trabalhar a seguir:** Task 2 — Geração de KCs via LLM (Etapa 2): implementar `generate_kcs_for_problem`, prompt chain-of-thought baseado em Duan et al. (2025) Table 8, cache em `results/kc_raw_{aid}.json`.
+
+## 2026-05-06 - kc_generation: Task 2 - Geração de KCs via LLM (Etapa 2)
+
+- Adicionadas 4 células ao `notebooks/03b_kc_generation.ipynb` após a Seção 1 (task 1): pré-código didático (2.1), funções auxiliares (code), célula de orquestração (code), pós-código didático (markdown)
+- `_FEW_SHOT_EXAMPLES`: 2 exemplos in-context adaptados de Duan et al. (2025), Appendix B (Table 8) — Problem A (array sum, 4 KCs) e Problem B (grade mapping, 4 KCs); exemplos de granularidade Java introdutório compatível com CSEDM
+- `_SYSTEM_PROMPT`: instrui o modelo como educador CS especialista em Java introdutório; define restrições de KC (3–8 palavras, 3–7 por problema, específico e generalizável)
+- `_build_kc_prompt(problem_id, code_samples)`: constrói prompt chain-of-thought com exemplos in-context + separador "=== NOW ANALYZE THE FOLLOWING ===" + soluções corretas + instrução de resposta JSON
+- `generate_kcs_for_problem(problem_id, code_samples, client)`: chama `claude-haiku-4-5-20251001`; parse robusto do JSON (strip de markdown code fences, busca por `{...}` outermost); assertions de estrutura; retorna `{problem_description: str, kcs: [{name: str, reasoning: str}]}`
+- Célula de orquestração: check de cache `results/kc_raw_A{aid}.json` antes de qualquer chamada API; loop sobre 5 assignments; persistência imediata após cada assignment; assertions finais de existência dos 5 arquivos de cache
+- Markdown pré-código cita: Duan et al. (2025) Table 8 (in-context examples), Table 4 (ablação: código bruto AUC 0.812 vs AST 0.784), ablação sem in-context examples (AUC 0.782, −3pp); afirma explicitamente "LLM recebe código bruto (não AST)"
+- Notebook executado via `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600` — PASS na primeira tentativa
+
+**Achados:**
+- 5 cache files gerados: `kc_raw_A439.json` (15K), `kc_raw_A487.json` (15K), `kc_raw_A492.json` (15K), `kc_raw_A494.json` (15K), `kc_raw_A502.json` (15K)
+- Contagem de KCs por assignment: A439=58 (5.8/prob), A487=55 (5.5/prob), A492=59 (5.9/prob), A494=60 (6.0/prob), A502=60 (6.0/prob)
+- Total: 292 KCs brutos para 50 problemas (5.84 média global) — granularidade dentro do intervalo esperado 3–7
+- Exemplos de KCs gerados: "Compound boolean condition with AND operator" (A439-P1), "State machine with boolean flag" (A502-P45), "String substring extraction with index" (A492-P31) — nomes específicos e generalizáveis
+- Cache confirmado: re-execução do notebook carrega do JSON sem novas chamadas API
+
+**Decisões e ressalvas:**
+- Modelo: `claude-haiku-4-5-20251001` (conforme PLAN_KC_GENERATION.md e instrução de task)
+- Parse JSON robusto: `raw.find("{")` / `raw.rfind("}")` garante extração mesmo com texto prefixado pelo modelo; ````json` e ` ``` ` fences removidos antes
+- Problema com chaves inteiras × string no JSON: ao serializar, `problem_id` (int) vira string no JSON; ao deserializar do cache, converte de volta com `{int(k): v for k, v in json.load(f).items()}`
+- Custo estimado de task 2: ~$0.02–0.05 (50 chamadas Haiku, prompts longos por incluir soluções de código)
+
+**A trabalhar a seguir:** Task 3 — Clustering Sentence-BERT + HAC dos KCs brutos por assignment.

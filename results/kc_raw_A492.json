@@ -1,0 +1,288 @@
+{
+  "31": {
+    "problem_description": "Extract the last n characters from a string and repeat them n times, returning the concatenated result.",
+    "kcs": [
+      {
+        "name": "String substring extraction with index",
+        "reasoning": "All solutions use substring(str.length() - n) to extract the final n characters from the input string."
+      },
+      {
+        "name": "Loop-based string repetition pattern",
+        "reasoning": "Every solution uses a for-loop that iterates n times to repeat the extracted substring."
+      },
+      {
+        "name": "String concatenation in iteration",
+        "reasoning": "Solutions build the result by repeatedly concatenating the substring using += or + operators within the loop."
+      },
+      {
+        "name": "Index calculation for string length",
+        "reasoning": "All solutions compute str.length() - n to correctly identify the starting position for the last n characters."
+      },
+      {
+        "name": "Method parameter and return typing",
+        "reasoning": "The method accepts String and int parameters, requiring proper understanding of non-primitive and primitive type signatures."
+      }
+    ]
+  },
+  "32": {
+    "problem_description": "Replace all characters not part of occurrences of a target word with '+' symbols, preserving the word where it appears in the original string.",
+    "kcs": [
+      {
+        "name": "Character-by-character string traversal with index",
+        "reasoning": "All solutions iterate through the string using a while loop with an index variable that advances based on match conditions."
+      },
+      {
+        "name": "Substring extraction and comparison at position",
+        "reasoning": "Solutions check if a substring starting at the current index matches the target word using substring() and equals()."
+      },
+      {
+        "name": "Boundary condition for substring access",
+        "reasoning": "All solutions verify i <= str.length() - word.length() before extracting a substring to prevent index out-of-bounds errors."
+      },
+      {
+        "name": "Conditional index advancement logic",
+        "reasoning": "The index advances by word length when a match occurs, or by 1 otherwise, controlling the traversal behavior."
+      },
+      {
+        "name": "StringBuilder/StringBuffer for efficient string building",
+        "reasoning": "Solutions 1-4 use mutable string buffers to append characters incrementally rather than creating new string objects repeatedly."
+      },
+      {
+        "name": "String type conversion from buffer",
+        "reasoning": "Solutions using StringBuffer or StringBuilder must call toString() to convert the accumulated buffer back to a String type for return."
+      }
+    ]
+  },
+  "33": {
+    "problem_description": "Interleave characters from two strings alternately, then append any remaining characters from the longer string.",
+    "kcs": [
+      {
+        "name": "String character access with charAt",
+        "reasoning": "All solutions use charAt(index) to retrieve individual characters from strings for interleaving."
+      },
+      {
+        "name": "Index-based loop traversal of strings",
+        "reasoning": "All solutions use for loops with index variable to iterate through string positions simultaneously."
+      },
+      {
+        "name": "String length comparison for control flow",
+        "reasoning": "Solutions must compare string lengths (via length(), Math.min, or conditional branching) to handle unequal inputs correctly."
+      },
+      {
+        "name": "String concatenation or StringBuilder append",
+        "reasoning": "Solutions either concatenate strings directly or use StringBuilder to build the result incrementally."
+      },
+      {
+        "name": "Substring extraction for tail handling",
+        "reasoning": "All solutions extract and append the remaining characters from the longer string using substring() after the main loop."
+      },
+      {
+        "name": "Conditional branching for edge cases",
+        "reasoning": "Several solutions explicitly handle empty strings or equal/unequal length cases with if/else structures."
+      }
+    ]
+  },
+  "34": {
+    "problem_description": "Find all occurrences of 'z' followed by any character then 'p' in a string, and replace each three-character pattern with 'zp', effectively removing the middle character.",
+    "kcs": [
+      {
+        "name": "String character access via charAt()",
+        "reasoning": "Most solutions use charAt() to directly examine individual characters at specific indices for efficient pattern matching."
+      },
+      {
+        "name": "Loop-based string traversal with index",
+        "reasoning": "All solutions iterate through the string using for or while loops with manual index management to examine each position."
+      },
+      {
+        "name": "Multi-condition pattern detection with AND",
+        "reasoning": "Solutions check two independent conditions (z at position i, p at position i+2) combined with logical AND to identify the target pattern."
+      },
+      {
+        "name": "Bounds checking before indexed access",
+        "reasoning": "All solutions verify i < str.length() - 2 before accessing str.charAt(i+2) to prevent index out-of-bounds exceptions."
+      },
+      {
+        "name": "Conditional index increment in loops",
+        "reasoning": "When a pattern matches, index increments by 3 to skip the matched segment; otherwise it increments by 1, requiring selective loop control."
+      },
+      {
+        "name": "String building with StringBuilder or concatenation",
+        "reasoning": "Solutions construct the result by appending characters or substrings, using either StringBuilder (efficient) or string concatenation (simpler)."
+      }
+    ]
+  },
+  "36": {
+    "problem_description": "Count the number of occurrences of the pattern 'c', 'o', any character, 'e' (c_o_e) in a string.",
+    "kcs": [
+      {
+        "name": "String traversal with index-based loop",
+        "reasoning": "All solutions iterate through the string using a for loop with index i to examine substrings starting at each position."
+      },
+      {
+        "name": "Loop boundary calculation with pattern length",
+        "reasoning": "All solutions use str.length() - 3 as the upper bound to ensure i+3 remains within valid string indices for a 4-character pattern."
+      },
+      {
+        "name": "Character-by-character pattern matching",
+        "reasoning": "Solutions verify specific characters at fixed offsets (i, i+1, i+3) using charAt() or substring methods to identify the pattern."
+      },
+      {
+        "name": "Wildcard position in pattern matching",
+        "reasoning": "The pattern skips checking position i+2, allowing any character to match at that location within the overall 4-character sequence."
+      },
+      {
+        "name": "Accumulator counter variable",
+        "reasoning": "All solutions initialize an integer counter to zero and increment it each time the complete pattern is found, returning the total count."
+      },
+      {
+        "name": "Conjunctive boolean conditions",
+        "reasoning": "Multiple character/substring checks are combined with && operators to ensure all parts of the pattern must match simultaneously."
+      }
+    ]
+  },
+  "37": {
+    "problem_description": "Determine whether one string ends with another string (case-insensitive), returning true if either string is a suffix of the other.",
+    "kcs": [
+      {
+        "name": "Case-insensitive string comparison",
+        "reasoning": "All solutions normalize case using toLowerCase(), equalsIgnoreCase(), or compareTo() to handle mixed-case input correctly."
+      },
+      {
+        "name": "String length retrieval and calculation",
+        "reasoning": "Solutions 2-5 retrieve string lengths and compute substring boundaries to extract suffixes for comparison."
+      },
+      {
+        "name": "Substring extraction for suffix matching",
+        "reasoning": "Solutions 2-5 use substring() to extract the last N characters from the longer string to match against the shorter."
+      },
+      {
+        "name": "String equality comparison methods",
+        "reasoning": "Solutions use equals(), compareTo(), equalsIgnoreCase(), or endsWith() to test string equivalence with different approaches."
+      },
+      {
+        "name": "Conditional branching on length comparison",
+        "reasoning": "Solutions 2-5 branch logic based on which string is longer to determine the extraction source and comparison target."
+      },
+      {
+        "name": "Boolean return from method logic",
+        "reasoning": "All solutions return true or false based on the suffix-matching condition, requiring correct boolean type handling."
+      }
+    ]
+  },
+  "38": {
+    "problem_description": "Determine whether a string contains 'xyz' as a substring, but only if 'xyz' is NOT immediately preceded by a period character.",
+    "kcs": [
+      {
+        "name": "String search with indexOf method",
+        "reasoning": "Solutions use indexOf() to locate target substring 'xyz' and '.xyz' patterns within the string, often with position offsets."
+      },
+      {
+        "name": "Substring extraction and comparison",
+        "reasoning": "Solutions extract 3-character windows using substring(i, i+3) and compare with equals() to verify exact matches."
+      },
+      {
+        "name": "Loop bounds with string length",
+        "reasoning": "Iterative solutions carefully set loop limits (length - 2 or length - 3) to safely access 3-character substrings without index bounds errors."
+      },
+      {
+        "name": "Character inspection with charAt",
+        "reasoning": "Solutions check the character immediately before 'xyz' using charAt() to verify it is not a period."
+      },
+      {
+        "name": "Negative constraint enforcement",
+        "reasoning": "Solutions combine presence checks ('xyz' found) with negation checks (not preceded by '.') using conditional logic and boolean operators."
+      },
+      {
+        "name": "Recursion with string subdivision",
+        "reasoning": "Some solutions use recursive calls on substring parts to handle the forbidden pattern by splitting and rechecking subproblems."
+      }
+    ]
+  },
+  "39": {
+    "problem_description": "Determine if a string is x-y balanced, where balance means no 'x' appears after the last 'y' (or neither character exists).",
+    "kcs": [
+      {
+        "name": "String character access with charAt",
+        "reasoning": "Most solutions use charAt(index) to examine individual characters at specific positions in the string."
+      },
+      {
+        "name": "Backward iteration through string indices",
+        "reasoning": "Solutions 1, 2, 5 traverse the string from end to beginning using decremented loop counter to find the rightmost character match."
+      },
+      {
+        "name": "Early return from method with boolean",
+        "reasoning": "All solutions return immediately upon finding a decisive character ('x' or 'y'), avoiding unnecessary remaining iterations."
+      },
+      {
+        "name": "String position search methods",
+        "reasoning": "Solution 3 uses indexOf() and lastIndexOf() to locate character positions and compare them for balance logic."
+      },
+      {
+        "name": "Substring and contains string methods",
+        "reasoning": "Solution 4 uses substring() to extract remaining string portion and contains() to search for 'y' after 'x'."
+      },
+      {
+        "name": "Default case return statement",
+        "reasoning": "All solutions return true as the implicit default when the loop completes without encountering a problematic 'x' character."
+      }
+    ]
+  },
+  "40": {
+    "problem_description": "Extract the substring between the first and last occurrences of 'bread' in a string, returning an empty string if 'bread' appears fewer than two times.",
+    "kcs": [
+      {
+        "name": "String indexOf and lastIndexOf methods",
+        "reasoning": "Solutions 1, 2, 4 use indexOf() to find first occurrence and lastIndexOf() to find last occurrence of the target substring."
+      },
+      {
+        "name": "Sentinel value pattern for search results",
+        "reasoning": "All solutions recognize that indexOf returns -1 when not found and validate against this to handle missing or single occurrences."
+      },
+      {
+        "name": "Substring extraction with index calculation",
+        "reasoning": "All solutions use substring(start, end) with adjusted indices (first+5 to skip 'bread') to extract the middle content."
+      },
+      {
+        "name": "Edge case handling for duplicate positions",
+        "reasoning": "All solutions check if first and last occurrence indices are equal to detect insufficient 'bread' instances and return empty string."
+      },
+      {
+        "name": "Loop-based string pattern matching",
+        "reasoning": "Solutions 3, 5 use loops with substring comparison to manually locate 'bread' instead of built-in search methods."
+      },
+      {
+        "name": "Early exit from loop patterns",
+        "reasoning": "Solutions 3, 5 use break or loop variable manipulation to exit loops once the target substring is found."
+      }
+    ]
+  },
+  "128": {
+    "problem_description": "Detect whether a string contains the pattern 'bob' (letter 'b', any character, letter 'b') and return true if found, false otherwise.",
+    "kcs": [
+      {
+        "name": "String character access with charAt()",
+        "reasoning": "Solutions 1-4 require indexing into strings to compare individual characters at specific positions."
+      },
+      {
+        "name": "Loop boundary adjustment for patterns",
+        "reasoning": "All solutions must iterate only up to str.length() - 2 to ensure a 3-character window exists without index overflow."
+      },
+      {
+        "name": "Multi-condition AND logic in conditionals",
+        "reasoning": "The pattern detection requires both charAt(i) == 'b' AND charAt(i+2) == 'b', combining two independent character checks."
+      },
+      {
+        "name": "Early exit with return statement",
+        "reasoning": "Solutions immediately return true upon finding the first 'bob' occurrence, avoiding unnecessary continued iteration."
+      },
+      {
+        "name": "Fixed offset indexing in loops",
+        "reasoning": "Solutions use index arithmetic (i+2) to check characters at fixed distances, treating strings as fixed-width pattern matching."
+      },
+      {
+        "name": "Default false return after loop",
+        "reasoning": "All solutions return false if the loop completes without finding a match, handling the negative case."
+      }
+    ]
+  }
+}

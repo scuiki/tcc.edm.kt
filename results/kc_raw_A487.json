@@ -1,0 +1,272 @@
+{
+  "17": {
+    "problem_description": "Determine a lottery ticket score by checking relationships between three integers: 10 if all are 2, 5 if all are equal, 1 if values differ, else 0.",
+    "kcs": [
+      {
+        "name": "Multiple equality comparisons with AND",
+        "reasoning": "Solutions check a == 2 && b == 2 && c == 2 to test if all three parameters equal a specific value using chained AND operators."
+      },
+      {
+        "name": "Transitive equality pattern for identical values",
+        "reasoning": "Solutions use a == b && b == c to verify all three parameters are equal without specifying the exact value."
+      },
+      {
+        "name": "Inequality conditions with AND operator",
+        "reasoning": "Solutions test a != b && a != c to determine if one value differs from the other two using chained inequality checks."
+      },
+      {
+        "name": "Multi-branch conditional with exhaustive cases",
+        "reasoning": "All solutions use if/else-if chains or sequential ifs to partition three parameters into four mutually-exclusive scoring outcomes."
+      },
+      {
+        "name": "Conditional reordering with logical equivalence",
+        "reasoning": "Solutions demonstrate equivalent logic can be achieved by reordering condition checks (e.g., checking difference before equality), provided all cases remain exhaustive."
+      },
+      {
+        "name": "Integer return type and assignment",
+        "reasoning": "All solutions return an integer score from a non-void method, either via direct return or through intermediate result variables."
+      }
+    ]
+  },
+  "20": {
+    "problem_description": "Given three integers, return their sum if all different, the lone value if exactly two match, or zero if all three are equal.",
+    "kcs": [
+      {
+        "name": "Pairwise equality comparison of parameters",
+        "reasoning": "All solutions compare a==b, b==c, and a==c to identify which values are equal, requiring systematic equality testing."
+      },
+      {
+        "name": "Multi-branch conditional logic with elif",
+        "reasoning": "Every solution uses if/else-if chains (or sequential ifs with early returns) to partition cases based on duplicate patterns."
+      },
+      {
+        "name": "Compound boolean conditions with AND operator",
+        "reasoning": "Solutions 2, 4, and 5 use && to combine multiple equality/inequality tests (e.g., a==b && b!=c) to identify specific duplicate patterns."
+      },
+      {
+        "name": "Return value selection by case",
+        "reasoning": "Each conditional branch returns a different output (0, individual value, or sum) depending on which equality case is detected."
+      },
+      {
+        "name": "Default case handling without explicit condition",
+        "reasoning": "Most solutions use a final else or unconditional return to handle the all-different case without explicitly testing all three inequality conditions."
+      }
+    ]
+  },
+  "21": {
+    "problem_description": "Given three integers, return their sum but exclude any parameter that equals 13 and all parameters after it from the sum.",
+    "kcs": [
+      {
+        "name": "Equality comparison with literal values",
+        "reasoning": "All solutions repeatedly test if each parameter equals 13 using the == operator to determine inclusion in the sum."
+      },
+      {
+        "name": "Early return for conditional termination",
+        "reasoning": "Solutions use return statements at multiple points to exit immediately upon detecting a 13, rather than always reaching the end of the method."
+      },
+      {
+        "name": "Sequential parameter checking logic",
+        "reasoning": "The problem requires checking parameters in order (a, then b, then c) where later parameters are only evaluated if earlier ones are not 13."
+      },
+      {
+        "name": "Conditional sum computation",
+        "reasoning": "Different branches compute different sums (0, a, a+b, a+b+c) based on which parameter equals 13, requiring conditional arithmetic."
+      },
+      {
+        "name": "Nested and chained conditionals",
+        "reasoning": "Solutions employ either nested if-else blocks (Solutions 2, 4) or if-else-if chains (Solutions 1, 3) to partition the three-parameter input space into mutually exclusive cases."
+      }
+    ]
+  },
+  "22": {
+    "problem_description": "Sum three integers while zeroing out 'teen' numbers (13-19, except 15-16) using a helper method that filters each value before addition.",
+    "kcs": [
+      {
+        "name": "Helper method decomposition pattern",
+        "reasoning": "Solutions 1-4 extract the teen-filtering logic into a reusable fixTeen() method called three times, demonstrating code reuse and separation of concerns."
+      },
+      {
+        "name": "Range boundary testing with AND logic",
+        "reasoning": "All solutions test if a number falls in [13, 19] using compound conditions like (n >= 13 && n <= 19) to check inclusive range membership."
+      },
+      {
+        "name": "Negation with NOT-equal in conditions",
+        "reasoning": "Solutions use (n != 15 && n != 16) to exclude specific values from the teen range, combining negation with AND for exception handling."
+      },
+      {
+        "name": "Conditional return value selection",
+        "reasoning": "The fixTeen() method returns either 0 or the original number based on range membership, implementing value filtering through if/else branches."
+      },
+      {
+        "name": "Method parameter passing with integers",
+        "reasoning": "All solutions define methods that accept int parameters and return int values, requiring correct method signature syntax and parameter handling."
+      },
+      {
+        "name": "Multiple value summation",
+        "reasoning": "All solutions sum three independently filtered values, either directly in the return or via intermediate variable accumulation before returning the total."
+      }
+    ]
+  },
+  "24": {
+    "problem_description": "Determine which of two blackjack hands is better by returning the hand closest to 21 without exceeding it, or 0 if both bust.",
+    "kcs": [
+      {
+        "name": "Bust condition detection and validation",
+        "reasoning": "All solutions must detect when a hand exceeds 21 and treat it as invalid, requiring comparison against the threshold value 21."
+      },
+      {
+        "name": "Multi-branch conditional logic with nested checks",
+        "reasoning": "Solutions partition the input space using if/else-if chains to handle multiple exclusive cases: mutual bust, single bust, and valid hand comparisons."
+      },
+      {
+        "name": "Comparison of two values against threshold",
+        "reasoning": "Solutions must evaluate whether each hand is valid (≤21) and invalid (>21) independently before making hand-to-hand comparisons."
+      },
+      {
+        "name": "Distance calculation for optimal selection",
+        "reasoning": "When both hands are valid, solutions compare either directly (a > b) or by computing distance from 21 (21 - a) to find the closest valid hand."
+      },
+      {
+        "name": "Special case return value for invalid state",
+        "reasoning": "All solutions return 0 as a sentinel value when both hands bust, distinguishing this case from returning a valid hand score."
+      },
+      {
+        "name": "Conditional return statement in method",
+        "reasoning": "Solutions use return statements at multiple branches of conditionals to exit early with different integer values based on the game state."
+      }
+    ]
+  },
+  "25": {
+    "problem_description": "Determine whether three integers form an evenly spaced sequence (arithmetic progression) regardless of their input order.",
+    "kcs": [
+      {
+        "name": "Boolean method return type",
+        "reasoning": "The method must return a boolean value, requiring correct non-void return type declaration and boolean literal returns."
+      },
+      {
+        "name": "Comparison operators with arithmetic",
+        "reasoning": "Solutions test equality of differences using == operator combined with subtraction to verify equal spacing (e.g., b - a == c - b)."
+      },
+      {
+        "name": "Combining multiple logical conditions",
+        "reasoning": "Solutions use && (AND) for chaining order checks and || (OR) to test alternative orderings or spacing patterns."
+      },
+      {
+        "name": "Variable swapping for sorting",
+        "reasoning": "Solutions 1, 3, and 4 use temporary variables to swap and sort three values into ascending order before testing spacing."
+      },
+      {
+        "name": "Handling input order independence",
+        "reasoning": "The problem requires correct results regardless of input order, solved via sorting (Solutions 1,3), exhaustive cases (Solution 4), or mathematical equivalence (Solution 5)."
+      },
+      {
+        "name": "Arithmetic progression equality test",
+        "reasoning": "Core logic tests if consecutive differences are equal in some permutation, the mathematical definition of even spacing."
+      }
+    ]
+  },
+  "28": {
+    "problem_description": "Transform a string by returning its first 2 characters if available, or padding with '@' symbols to form a 2-character result based on the input length.",
+    "kcs": [
+      {
+        "name": "String length checking via method",
+        "reasoning": "All solutions call str.length() to determine the input string size, which drives all subsequent conditional branches."
+      },
+      {
+        "name": "Multi-branch length-based conditionals",
+        "reasoning": "Each solution uses if/else-if chains to partition behavior into three cases: length >= 2, length == 1, and length == 0."
+      },
+      {
+        "name": "Substring extraction with indices",
+        "reasoning": "All solutions use str.substring(0, 2) to extract the first two characters when the string is long enough."
+      },
+      {
+        "name": "Character extraction and concatenation",
+        "reasoning": "All solutions use str.charAt(0) combined with string concatenation (+ operator) to pad single-character strings with '@'."
+      },
+      {
+        "name": "String return from conditional branches",
+        "reasoning": "Each branch returns a String literal or constructed value, requiring correct String return type declaration and handling."
+      }
+    ]
+  },
+  "100": {
+    "problem_description": "Round three integers to the nearest ten and return their sum using a helper method that implements rounding logic based on the ones digit.",
+    "kcs": [
+      {
+        "name": "Helper method for code reuse",
+        "reasoning": "All solutions define a separate round10() method to encapsulate rounding logic, then call it three times from roundSum() to avoid duplication."
+      },
+      {
+        "name": "Modulo operator for remainder extraction",
+        "reasoning": "All solutions use num % 10 to isolate the ones digit, which determines the rounding direction."
+      },
+      {
+        "name": "Conditional rounding with threshold",
+        "reasoning": "Each solution uses if(remainder >= 5) to decide between rounding up by (10 - remainder) or down by remainder."
+      },
+      {
+        "name": "Arithmetic expression composition",
+        "reasoning": "The main method chains multiple method calls together in a single arithmetic expression: round10(a) + round10(b) + round10(c)."
+      },
+      {
+        "name": "Method return value utilization",
+        "reasoning": "Solutions capture or directly use return values from round10() calls in arithmetic operations to compute the final sum."
+      }
+    ]
+  },
+  "101": {
+    "problem_description": "Determine the minimum number of small (1-unit) chocolate bars needed to reach a goal weight, given a limited supply of big (5-unit) bars and small bars, or return -1 if the goal is unachievable.",
+    "kcs": [
+      {
+        "name": "Integer division and modulo arithmetic",
+        "reasoning": "All solutions use goal/5 or goal%5 to decompose the target into 5-unit multiples and remainders."
+      },
+      {
+        "name": "Greedy resource allocation strategy",
+        "reasoning": "Solutions maximize consumption of the larger denomination (big bars) first, then use small bars for the remainder."
+      },
+      {
+        "name": "Remainder calculation after resource use",
+        "reasoning": "After consuming big bars (5 units each), solutions compute the leftover goal that must be satisfied by small bars."
+      },
+      {
+        "name": "Feasibility constraint validation",
+        "reasoning": "All solutions check whether the required small bar count stays within the available supply; if not, return -1."
+      },
+      {
+        "name": "Conditional branching for case analysis",
+        "reasoning": "Solutions use if/else chains to handle three cases: sufficient capacity, feasible remainder, and impossible scenarios."
+      },
+      {
+        "name": "Method return with integer outcomes",
+        "reasoning": "The method returns either a non-negative integer (small bars used) or -1 to signal failure, exercising return type discipline."
+      }
+    ]
+  },
+  "102": {
+    "problem_description": "Determine if the first 2 characters of a string match the last 2 characters; if so, return the string without the first 2 characters; otherwise return the original string.",
+    "kcs": [
+      {
+        "name": "String length validation for safe operations",
+        "reasoning": "All solutions check length >= 2 before accessing substrings to avoid index out-of-bounds exceptions."
+      },
+      {
+        "name": "String substring extraction by indices",
+        "reasoning": "All solutions use substring(startIndex, endIndex) to isolate the first 2 and last 2 characters for comparison."
+      },
+      {
+        "name": "String equality comparison with equals method",
+        "reasoning": "Solutions compare extracted substrings using .equals() or individual charAt() comparisons to determine if first and last 2 characters match."
+      },
+      {
+        "name": "Conditional branching for string modification",
+        "reasoning": "All solutions use if/else to decide whether to return substring(2) or the original string based on the equality test."
+      },
+      {
+        "name": "Edge case handling for short strings",
+        "reasoning": "All solutions correctly return the original string unchanged when length < 2, preventing invalid substring operations."
+      }
+    ]
+  }
+}

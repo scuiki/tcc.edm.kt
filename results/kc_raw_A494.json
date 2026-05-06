@@ -1,0 +1,292 @@
+{
+  "41": {
+    "problem_description": "Compute the sum of the first three elements in an integer array and return the total.",
+    "kcs": [
+      {
+        "name": "Array element access by index",
+        "reasoning": "Solutions directly access array elements using indices (nums[0], nums[1], nums[2]) to retrieve specific values."
+      },
+      {
+        "name": "Fixed-count loop iteration",
+        "reasoning": "Index-based solutions use a loop boundary of i < 3 to iterate exactly 3 times regardless of array length."
+      },
+      {
+        "name": "Accumulator variable for summation",
+        "reasoning": "Multiple solutions initialize a sum variable and incrementally add each element to compute the total."
+      },
+      {
+        "name": "Direct arithmetic expression evaluation",
+        "reasoning": "Some solutions avoid loops entirely, instead using chained addition operators to compute the sum in a single expression."
+      },
+      {
+        "name": "Integer addition operator chaining",
+        "reasoning": "Solutions combine multiple addition operations sequentially to sum three separate values into one result."
+      },
+      {
+        "name": "Method return with computed value",
+        "reasoning": "All solutions return the computed integer sum, requiring proper non-void return type and return statement."
+      }
+    ]
+  },
+  "43": {
+    "problem_description": "Extract and return a front piece of an array: the first two elements if available, otherwise the entire array (or empty array if input is empty).",
+    "kcs": [
+      {
+        "name": "Conditional logic based on array length",
+        "reasoning": "All solutions use if/else chains to branch on nums.length, checking thresholds of 0, 1, and 2 to determine output size."
+      },
+      {
+        "name": "Array instantiation with specified size",
+        "reasoning": "Solutions create new arrays using 'new int[size]' with dynamically determined size (0, 1, or 2) based on input length."
+      },
+      {
+        "name": "Array element access and assignment",
+        "reasoning": "Solutions populate new arrays by reading from input using nums[i] and writing to output using newArray[i] = nums[i]."
+      },
+      {
+        "name": "Array length property usage",
+        "reasoning": "All solutions access the .length property to determine input array size for conditional branching and loop bounds."
+      },
+      {
+        "name": "Method return type array declaration",
+        "reasoning": "The method signature declares int[] return type, requiring proper construction and return of an array object."
+      },
+      {
+        "name": "Boundary-aware array slicing",
+        "reasoning": "Solutions correctly handle edge cases (empty, single-element, multi-element) to extract the appropriate front portion without index out-of-bounds errors."
+      }
+    ]
+  },
+  "44": {
+    "problem_description": "Count how many elements in an integer array are even numbers and return the total count.",
+    "kcs": [
+      {
+        "name": "Array traversal with index or iterator",
+        "reasoning": "All solutions iterate through every element using either index-based for loops or enhanced for-each loops to examine all array elements."
+      },
+      {
+        "name": "Modulo operator for divisibility testing",
+        "reasoning": "All solutions use the % 2 == 0 pattern to determine whether each number is divisible by 2, identifying even integers."
+      },
+      {
+        "name": "Conditional counter increment pattern",
+        "reasoning": "Each solution initializes a counter to zero and increments it only when the evenness condition is true, accumulating the count."
+      },
+      {
+        "name": "If statement for selective execution",
+        "reasoning": "All solutions wrap the counter increment in an if block to execute the increment only for even numbers."
+      },
+      {
+        "name": "Method return of computed integer",
+        "reasoning": "The method must return the final count as an int, requiring proper return statement and type consistency."
+      }
+    ]
+  },
+  "46": {
+    "problem_description": "Determine whether a given value appears in every consecutive pair of elements in an array (i.e., no two adjacent elements can both differ from the target value).",
+    "kcs": [
+      {
+        "name": "Array traversal with consecutive pair indexing",
+        "reasoning": "All solutions iterate from 0 to length-2, accessing both nums[i] and nums[i+1] to examine adjacent element pairs."
+      },
+      {
+        "name": "Logical AND operator in conditionals",
+        "reasoning": "The core logic uses && to combine two inequality checks, requiring both nums[i] != val AND nums[i+1] != val to trigger the violation case."
+      },
+      {
+        "name": "Loop boundary with length adjustment",
+        "reasoning": "All solutions use i < nums.length - 1 to prevent array index out-of-bounds when accessing the next element at position i+1."
+      },
+      {
+        "name": "Early return for boolean negation",
+        "reasoning": "Solutions immediately return false upon detecting a violation, then return true after loop completion if no violation was found."
+      },
+      {
+        "name": "Boolean method return type",
+        "reasoning": "The method must declare a boolean return type and return true or false based on whether the property holds for the entire array."
+      },
+      {
+        "name": "Negation logic in violation detection",
+        "reasoning": "Solutions recognize that the violation occurs when NEITHER element equals val (both are not equal), rather than checking for the positive case."
+      }
+    ]
+  },
+  "49": {
+    "problem_description": "Sum all elements in an array, but skip any element that is 13 and also skip the element immediately following a 13.",
+    "kcs": [
+      {
+        "name": "Array element filtering with conditions",
+        "reasoning": "All solutions selectively include/exclude elements based on whether they equal 13, requiring conditional logic within the loop."
+      },
+      {
+        "name": "Loop counter manipulation in iteration",
+        "reasoning": "Solutions 2, 4, and 5 increment the loop counter (i++) when encountering 13 to skip the next element automatically."
+      },
+      {
+        "name": "Accumulator variable pattern",
+        "reasoning": "Every solution initializes and incrementally updates a sum variable to compute the total."
+      },
+      {
+        "name": "Checking adjacent array elements",
+        "reasoning": "Solutions 1 and 3 access nums[i-1] to examine the previous element, requiring careful index boundary management."
+      },
+      {
+        "name": "Logical operators for compound conditions",
+        "reasoning": "Solutions use || and && to combine multiple element checks (current element is 13, previous element is 13) into single conditional expressions."
+      },
+      {
+        "name": "Array length boundary validation",
+        "reasoning": "Solutions properly handle edge cases like empty arrays or the first element by checking array length or loop index bounds."
+      }
+    ]
+  },
+  "67": {
+    "problem_description": "Search an array for two consecutive or nearby 7s and return true if found, false otherwise.",
+    "kcs": [
+      {
+        "name": "Array traversal with controlled loop bounds",
+        "reasoning": "All solutions use for-loops with length adjustments (nums.length - 1 or nums.length - 2) to prevent index out-of-bounds when accessing ahead elements."
+      },
+      {
+        "name": "Nested conditional logic for pattern matching",
+        "reasoning": "All solutions use nested if statements to first detect a 7, then check if adjacent or nearby positions contain another 7."
+      },
+      {
+        "name": "Array index offset access patterns",
+        "reasoning": "Solutions check positions at i+1 and i+2 relative to current index, requiring safe boundary validation before accessing."
+      },
+      {
+        "name": "Early exit with return statement",
+        "reasoning": "Solutions 1-4 use early return when pattern is found to immediately exit; Solution 5 uses break with a boolean flag, both demonstrating control flow optimization."
+      },
+      {
+        "name": "Boolean method return type",
+        "reasoning": "The method signature returns boolean, requiring correct return statements with true/false literals."
+      },
+      {
+        "name": "Logical operators in compound conditions",
+        "reasoning": "Boundary checks use logical AND (&&) to combine range validation with element access, avoiding index errors."
+      }
+    ]
+  },
+  "104": {
+    "problem_description": "Replace each zero in an array with the largest odd number found at or after that position, returning the modified array.",
+    "kcs": [
+      {
+        "name": "Array traversal with conditional modification",
+        "reasoning": "All solutions iterate through the array and selectively modify elements when a zero is found."
+      },
+      {
+        "name": "Nested loop bounded search pattern",
+        "reasoning": "Solutions use inner loops to search within a restricted range (from current or specific position to end) for matching elements."
+      },
+      {
+        "name": "Modulo operator for odd/even detection",
+        "reasoning": "All solutions use the modulo operator (% 2 == 1) to identify odd numbers, or delegate this check to a helper method."
+      },
+      {
+        "name": "Maximum accumulator with comparison",
+        "reasoning": "Each solution initializes an accumulator variable and updates it only when finding a larger odd number using a comparison operator."
+      },
+      {
+        "name": "In-place array mutation and return",
+        "reasoning": "Solutions modify array elements directly and return the reference to the modified array without creating a copy."
+      },
+      {
+        "name": "Helper method extraction for logic",
+        "reasoning": "Solutions 4 and 5 demonstrate extracting search or comparison logic into separate methods to improve readability and reusability."
+      }
+    ]
+  },
+  "106": {
+    "problem_description": "Determine if the first n elements of an array match the last n elements in order.",
+    "kcs": [
+      {
+        "name": "Dual pointer indexing strategy",
+        "reasoning": "Solutions establish correspondence between prefix and suffix positions using two independently-managed indices starting from opposite array ends."
+      },
+      {
+        "name": "Array bounds calculation for suffix",
+        "reasoning": "All solutions correctly compute the starting position of the suffix section as nums.length - n to avoid index out-of-bounds errors."
+      },
+      {
+        "name": "Element-by-element equality comparison",
+        "reasoning": "Each solution compares pairs of elements from prefix and suffix positions using == or != operators within the loop."
+      },
+      {
+        "name": "Early exit pattern on condition failure",
+        "reasoning": "Solutions use return false immediately upon detecting a mismatch, or accumulate results for later comparison."
+      },
+      {
+        "name": "Loop iteration with parameter-driven bounds",
+        "reasoning": "The loop executes exactly n times, controlled by the parameter, to compare exactly n pairs from each end."
+      },
+      {
+        "name": "Boolean predicate method return",
+        "reasoning": "The method returns a boolean value indicating whether the entire condition (matching ends) is satisfied."
+      }
+    ]
+  },
+  "107": {
+    "problem_description": "Count the number of distinct clumps (runs of consecutive equal elements with length > 1) in an integer array.",
+    "kcs": [
+      {
+        "name": "State machine with boolean flag",
+        "reasoning": "Solutions 2, 4, 5 use a boolean flag to track whether currently inside a clump, preventing duplicate counts of the same run."
+      },
+      {
+        "name": "Adjacent element comparison in loop",
+        "reasoning": "All solutions compare consecutive array elements using nums[i] == nums[i+1] to detect when equal values occur consecutively."
+      },
+      {
+        "name": "Loop boundary adjustment for pairs",
+        "reasoning": "All solutions use i < nums.length - 1 to safely access both nums[i] and nums[i+1] without index out-of-bounds errors."
+      },
+      {
+        "name": "Accumulator counter pattern",
+        "reasoning": "Each solution initializes a counter variable and increments it exactly once per clump detected."
+      },
+      {
+        "name": "Clump transition detection logic",
+        "reasoning": "Solutions must identify the start of a clump (first consecutive pair) while skipping interior elements, requiring conditional logic to detect transitions."
+      },
+      {
+        "name": "Array traversal with indexed access",
+        "reasoning": "All solutions use for or while loops with explicit index variables to iterate through the array."
+      }
+    ]
+  },
+  "108": {
+    "problem_description": "Fix an array so that every 4 is immediately followed by a 5 by finding orphan 5s (not preceded by 4) and swapping them into correct positions.",
+    "kcs": [
+      {
+        "name": "Nested loop array search pattern",
+        "reasoning": "Solutions use an outer loop to scan for problematic 4s and an inner loop to locate matching orphan 5s, requiring careful index management across nested scopes."
+      },
+      {
+        "name": "Compound conditional with multiple criteria",
+        "reasoning": "All solutions check both that a 4 exists (nums[i] == 4) and that it lacks a following 5 (nums[i+1] != 5) in a single if condition."
+      },
+      {
+        "name": "Finding elements by property with constraints",
+        "reasoning": "The inner loop searches for a 5 that satisfies a constraint: either at index 0 or not preceded by a 4, requiring logical AND/OR combination of conditions."
+      },
+      {
+        "name": "Array element swapping via reassignment",
+        "reasoning": "Solutions swap values by assigning the misplaced element to the orphan position and placing 5 after the 4, modifying the array in-place."
+      },
+      {
+        "name": "Index variable independence in nested loops",
+        "reasoning": "Outer and inner loop indices must operate independently; the inner index must reset or continue across multiple outer iterations without interfering with outer control flow."
+      },
+      {
+        "name": "Negation of complex boolean expressions",
+        "reasoning": "The loop condition negates a compound boolean (!(A && B)) requiring correct operator precedence and De Morgan's law understanding."
+      },
+      {
+        "name": "Boundary checking for array access safety",
+        "reasoning": "Solutions prevent index out-of-bounds by using loop conditions like i < nums.length - 1 and checking j-1 existence before accessing nums[j-1]."
+      }
+    ]
+  }
+}

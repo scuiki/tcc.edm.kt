@@ -3,7 +3,7 @@
   "title": "KC Generation \u2014 criar notebooks/03b_kc_generation.ipynb",
   "type": "feature",
   "created": "2026-05-06",
-  "status": "planned",
+  "status": "in_progress",
   "verify_cmd": [
     "jupyter",
     "nbconvert",
@@ -35,7 +35,7 @@
     {
       "id": "2",
       "title": "Geracao de KCs via LLM \u2014 Etapa 2",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "generate_kcs_for_problem(problem_id, code_samples, client) definida: retorna dict {problem_description: str, kcs: [{name: str, reasoning: str}]}",
         "Prompt chain-of-thought inclui in-context examples baseados em Duan et al. (2025) Appendix B (Table 8); citacao explicita no markdown",
