@@ -241,6 +241,7 @@ def run_validation(notebook_path: Path, dry_run: bool = False) -> tuple[str, int
             "claude",
             "-p",
             prompt,
+            "--model", "claude-sonnet-4-6",
             "--allowedTools",
             "Read,Glob,Grep",
             "--output-format",

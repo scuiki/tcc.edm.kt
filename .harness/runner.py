@@ -287,6 +287,7 @@ def run_claude_session(prompt: str) -> int:
     result = subprocess.run(
         [
             "claude", "-p", prompt,
+            "--model", "claude-sonnet-4-6",
             "--allowedTools", "Bash,Read,Edit,Write,Glob,Grep,NotebookEdit",
         ],
         cwd=ROOT,

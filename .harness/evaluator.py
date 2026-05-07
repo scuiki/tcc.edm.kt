@@ -277,6 +277,7 @@ def main():
             "claude",
             "-p",
             prompt,
+            "--model", "claude-sonnet-4-6",
             "--allowedTools",
             "Bash,Read,Glob,Grep",
             "--output-format",

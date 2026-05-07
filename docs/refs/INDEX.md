@@ -22,7 +22,7 @@ Leia o arquivo específico antes de escrever células markdown que citem o paper
 
 | Arquivo | cite_as | Fato principal |
 |---------|---------|----------------|
-| [duan2025_automatedkc.md](duan2025_automatedkc.md) | Duan et al. (2025) | KCGen-KT: geração automática de KCs por LLM (GPT-4o) para programação; supera KCs humanos |
+| [duan2025_automatedkc.md](duan2025_automatedkc.md) | Duan et al. (2025) | KCGen-KT: LLM recebe código bruto (NÃO AST — ablação Table 4 piora AUC); 5 amostras/problema (Table 5); prompts Tables 8, 9, 10; **referência primária do 03b_kc_generation.ipynb** |
 | [pan2026_edm_ars.md](pan2026_edm_ars.md) | Pan et al. (2026) | EDM-ARS: sistema multi-agente para pesquisa EDM automatizada — referência arquitetural para harness |
 | [yagci2022_edm_prediction.md](yagci2022_edm_prediction.md) | Yağcı (2022) | Performance prediction (≠KT): RF/LR com 70–75% acurácia em notas finais universitárias |
 | [lopezmeneses2025_ai_edm.md](lopezmeneses2025_ai_edm.md) | López-Meneses et al. (2025) | Revisão AI+EDM+HITL-ML; 370 artigos 2006–2024; ética e equidade em algoritmos educacionais |

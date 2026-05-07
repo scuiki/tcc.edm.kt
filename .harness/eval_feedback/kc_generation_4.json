@@ -1,0 +1,10 @@
+{
+  "overall": "PASS",
+  "notebook_executes": "PASS",
+  "acceptance_criteria": "PASS",
+  "template_compliance": "PASS",
+  "no_placeholders": "PASS",
+  "issues": [
+    "label_cluster signature has extra cluster_id parameter not specified in AC (label_cluster(cluster_kcs, client, cluster_id) vs AC's label_cluster(cluster_kcs, client)); return structure is correct"
+  ]
+}

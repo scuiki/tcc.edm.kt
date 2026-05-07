@@ -101,54 +101,34 @@ não-compilável, preservando estrutura parcial em XML).
 > de árvore é trocado para suportar código não-compilável. srcML-DKT IS Code-DKT com
 > suporte a unparsable code.
 
-### 2d. Geração de KCs via AST + LLM — `notebooks/03b_kc_generation.ipynb`
+### 2d. Geração de KCs via LLM — `notebooks/03b_kc_generation.ipynb`
 
-Pipeline híbrido: srcML fornece sinal estrutural objetivo; LLM interpreta semanticamente.
+> Plano detalhado com todas as decisões de design em `PLAN_KC_GENERATION.md`.
 
-**Motivação:** o CSEDM não possui enunciados textuais dos problemas — apenas códigos
-dos alunos. O AST serve como substituto: se 80% das submissões corretas de um ProblemID
-usam `ForStatement` + `ArrayAccess`, o problema requer iteração sobre arrays,
-independente do enunciado textual.
+Pipeline baseado em KCGen-KT (Duan et al., 2025): LLM recebe código bruto das submissões
+corretas → gera KCs. srcML é usado apenas para validação post-hoc (artefato de inspeção),
+**não** como input ao LLM.
 
-Abordagem embasada em:
-- Rivers et al. (ICER 2016): "AST node types (for, if) como KCs" — citado pelo Code-DKT paper
-- KCGen-KT (Duan et al., 2025): pipeline LLM para KC generation em problemas de programação
-  usando submissões corretas como sinal principal
+**Escopo:** todos os 5 assignments; Q-matrix per-assignment (vocabulários independentes).
 
-**Etapas:**
+**Etapas resumidas:**
 
-1. **Coleta:** filtrar `Run.Program` com `Score == 1.0` por `ProblemID`
+1. **Diversity sampling** — 5 submissões corretas por `ProblemID`, estratificadas por
+   número de tentativas antes do acerto (via `sequences_bkt_dkt.pkl`)
+2. **KC generation** (~50 LLM calls) — prompt chain-of-thought: descrição do problema +
+   KCs em único output JSON; in-context examples de Duan et al. (2025, Table 8)
+3. **Clustering** — Sentence-BERT + HAC; alvo 10–15 KCs finais por assignment
+4. **Cluster labeling** (~60–75 LLM calls) — rótulo por cluster (Duan et al., Table 9)
+5. **Q-matrix** — `ProblemID × KC_id` binário → `results/qmatrix_{aid}.csv`
+6. **KC Correctness Labeling** (~26.289 LLM calls, ~$39 Haiku) — label KC-level por
+   submissão incorreta no train; usado para curvas de aprendizagem e análise interpretativa
+   (Duan et al., Table 10)
+7. **AST signatures** (sem LLM) — frequência de nós srcML por problema → validação manual
 
-2. **AST signature (srcML):** para cada `ProblemID`:
-   - Parsear submissões corretas com srcML
-   - Calcular frequência de tipos de nó (`ForStatement`, `IfStatement`, `ArrayAccess`, etc.)
-   - Identificar constructs em >50% das corretas (required) e 20–50% (optional)
-   - Output: `results/ast_signatures.json`
+**Custo total estimado: ~$39–40 (Claude Haiku)**
 
-3. **Stage 1 — Inferência do problema (LLM + AST):**
-   - Prompt: 5 submissões corretas representativas + resumo AST
-   - LLM infere em 1–2 frases o que o problema provavelmente pede
-   - Output: `results/problem_descriptions.json`
-
-4. **Stage 2 — Geração de KCs ancorados em AST (LLM):**
-   - Prompt: descrição inferida + constructs AST + código bruto
-   - Restrição no prompt: cada KC deve corresponder a ≥1 construct AST (anti-alucinação)
-   - Gera 3–8 KCs por problema → ~300–500 KCs brutos totais
-   - Output: KCs brutos com constructs associados
-
-5. **Clustering (Sentence-BERT + HAC):**
-   - Embeddings Sentence-BERT dos textos de KC
-   - Hierarchical Agglomerative Clustering com cosine distance
-   - Experimentar 20, 30, 50 clusters
-   - Output: `results/kc_clusters.json`
-
-6. **Rotulagem de clusters (LLM):**
-   - Um rótulo por cluster → KC final com constructs AST associados
-   - Output: `results/kc_descriptions.json`
-
-7. **Q-matrix:** `ProblemID × KC_id` (binário) → `results/qmatrix.csv`
-
-**Custo estimado:** ~150 calls Claude Sonnet ≈ $1–3 USD
+**Outputs:** `results/kc_raw_{aid}.json`, `kc_descriptions_{aid}.json`,
+`qmatrix_{aid}.csv`, `kc_correctness_{aid}.json`, `ast_signatures_{aid}.json`
 
 ---
 
