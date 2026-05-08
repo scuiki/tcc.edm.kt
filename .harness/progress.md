@@ -544,3 +544,9 @@ Appended automatically after each task completes. Do not edit manually.
 - **template_compliance fix:** Substituído "**Conexão ao CLAUDE.md:**" por "**Implicação para modelagem:**" na célula pós-código da Seção 5 (cell d0d2a45f)
 - **template_compliance fix + AC5 fix:** Na célula sumário final (cell 86d0239b): substituído "### Posicionamento do BKT no TCC 1" por "**Implicação para modelagem:**"; adicionada limitação 2 explícita "**Sem modelagem de sequências longas:**" (HMM de primeira ordem); numeração das limitações ajustada (1. independência KCs, 2. sem modelagem de sequências longas, 3. sem personalização por aluno, 4. motivação DKT/Code-DKT)
 - Notebook executado sem erros via `.venv/bin/jupyter nbconvert --execute --inplace`
+
+## 2026-05-08 - bkt: Task 6 re-verify - Confirmação das correções
+
+- Verificado que as correções do commit 88d93cb já estão em vigor: Seções 1, 5 e 6 têm "**Implicação para modelagem:**" exato; limitação "**Sem modelagem de sequências longas:**" presente como item 2 na célula de sumário (cell 25)
+- Notebook re-executado sem erros via `.venv/bin/jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600`
+- Eval feedback em `.harness/eval_feedback/bkt_6.json` reflete estado pré-fix (antes do commit 88d93cb); estado atual do notebook passa os critérios AC5 e template_compliance

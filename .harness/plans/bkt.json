@@ -1,0 +1,128 @@
+{
+  "slug": "bkt",
+  "title": "BKT — criar notebooks/04_bkt.ipynb e src/models/bkt.py",
+  "type": "feature",
+  "created": "2026-05-08",
+  "status": "pending",
+  "verify_cmd": [
+    ".venv/bin/jupyter",
+    "nbconvert",
+    "--to",
+    "notebook",
+    "--execute",
+    "--inplace",
+    "notebooks/04_bkt.ipynb",
+    "--ExecutePreprocessor.timeout=600"
+  ],
+  "context": "O notebook 04_bkt.ipynb ainda nao existe. Este agente implementa o BKT (Corbett & Anderson, 1995) como baseline de Knowledge Tracing no CSEDM usando pyBKT 1.4.1. ANTES de implementar qualquer celula, leia CLAUDE.md e docs/refs/corbett1995_bkt.md e docs/refs/shi2022_code_dkt.md. Decisoes criticas: (1) KC = ProblemID — 4 parametros BKT por problema por assignment (P(L0), P(T), P(G), P(S)); (2) um modelo pyBKT por assignment, treinado em Release/Train, avaliado em Release/Test; (3) Release/Test contem apenas A439/A487/A492 — A494/A502 ausentes por corte de data (NAO eh bug); Shi et al. (2022) reportam 5 assignments na Table 1, possivelmente usando split diferente ou cross-validation — documente essa divergencia no notebook; (4) metricas: First-attempt AUC (primaria) e All-attempts AUC (secundaria); (5) src/models/bkt.py ja implementado com as funcoes sequences_to_pyBKT_df, train_bkt, predict_bkt, compute_auc e train_and_evaluate — leia o modulo antes de usar; (6) targets de referencia (Shi et al. 2022 Table 2, A1=A439): all-attempts AUC=63.78% +/-4.68%, first-attempt AUC=50.22% +/-2.86%. O notebook usa o padrao didatico do harness: celula markdown antes (Contexto/Hipotese/Referencia) e depois de cada celula de codigo (Achado/Implicacao para modelagem). SEED=42 obrigatorio. Dados: results/sequences_bkt_dkt.pkl (ja gerado).",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Investigacao do split A494/A502 + setup",
+      "status": "pending",
+      "acceptance_criteria": [
+        "SEED = 42 definido no topo do notebook; imports incluem pyBKT (Model), sklearn.metrics (roc_auc_score), pickle, pandas, numpy, matplotlib, seaborn",
+        "Celula carrega results/sequences_bkt_dkt.pkl e imprime tabela: assignment x split (train/test) com contagem de estudantes; confirma A439=233/78, A487=224/77, A492=234/81, A494=221/0, A502=222/0",
+        "Celula le data/CSEDM/Release/Test/Data/MainTable.csv e imprime os AssignmentIDs unicos presentes; confirma empiricamente que apenas 439, 487, 492 aparecem",
+        "Markdown documenta: (a) Release/Test cobre apenas A439/A487/A492 — A494/A502 ausentes, provavel corte de data; (b) Shi et al. (2022) reportam 5 assignments na Table 1 para DKT/Code-DKT — possivel divergencia de split; (c) BKT sera treinado em todos os 5 assignments mas AUC de teste reportada apenas para 3",
+        "Markdown cita Shi et al. (2022) Table 2 como fonte dos targets: A439 all-attempts AUC=63.78%, first-attempt AUC=50.22%"
+      ],
+      "files": [
+        "notebooks/04_bkt.ipynb"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "2",
+      "title": "Smoke test de src/models/bkt.py",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Celula executa: from src.models.bkt import sequences_to_pyBKT_df, train_bkt, predict_bkt, compute_auc, train_and_evaluate — sem ImportError",
+        "Celula chama train_and_evaluate com sequencias de A439 (train + test) e imprime result dict com keys: all_auc, first_auc, n_train, n_test, params",
+        "Markdown documenta por que skill_name = str(ProblemID): pyBKT agrupa por (user_id, skill_name) e aprende parametros independentes por KC — KC = ProblemID segue o protocolo Corbett & Anderson (1995)",
+        "Markdown documenta por que is_first_attempt e mantido como coluna extra: pyBKT ignora colunas desconhecidas; usamos apos predict para filtrar first-attempt AUC sem re-executar o modelo",
+        "Sem placeholder (TODO, pass, NotImplementedError, ...)"
+      ],
+      "files": [
+        "notebooks/04_bkt.ipynb",
+        "src/models/bkt.py"
+      ],
+      "depends_on": [
+        "1"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Treinamento BKT — todos os 5 assignments",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Loop treina um modelo pyBKT por assignment (A439, A487, A492, A494, A502) usando train_bkt(train_sequences, seed=42); dict bkt_models = {aid: Model} populado",
+        "model.params() exibido para cada assignment em tabela formatada: colunas ProblemID (skill_name), P(L0) (prior), P(T) (learns), P(G) (guesses), P(S) (slips)",
+        "Assertion verifica que todos os parametros nao-NaN estao em [0, 1]; assertion adicional: P(G) + P(S) < 1 para cada KC (condicao necessaria para o modelo ser discriminativo)",
+        "Markdown para A439 discute os parametros aprendidos: P(L0) esperado baixo (estudantes iniciam sem dominio), P(T) reflete velocidade de aprendizado, P(G) e P(S) interpretados no contexto de programacao Java com feedback automatico (cada Run.Program retorna Score)",
+        "Markdown cita Corbett & Anderson (1995) equacoes: P(C_is) = P(L_{n-1}|s)*(1-P(S)) + (1-P(L_{n-1}|s))*P(G)"
+      ],
+      "files": [
+        "notebooks/04_bkt.ipynb"
+      ],
+      "depends_on": [
+        "2"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Avaliacao — all-attempts AUC",
+      "status": "pending",
+      "acceptance_criteria": [
+        "predict_bkt chamado para A439, A487, A492 usando os modelos em bkt_models; resultados em dict bkt_preds = {aid: pred_df}",
+        "compute_auc(pred_df, first_attempt_only=False) calculado para cada um dos 3 assignments",
+        "Tabela exibe: assignment, n_test_students, n_test_events, all_attempts_AUC (formato percentual com 2 casas decimais)",
+        "A439 all-attempts AUC comparado com Shi et al. (2022) Table 2 (63.78% +/-4.68% STD); desvio comentado no markdown",
+        "Markdown explica por que all-attempts AUC eh inflado por autocorrelacao temporal no BKT: apos o primeiro acerto, o modelo aumenta P(L) e passa a prever corretamente as tentativas seguintes — o que eleva o AUC mas nao reflete predicao genuina"
+      ],
+      "files": [
+        "notebooks/04_bkt.ipynb"
+      ],
+      "depends_on": [
+        "3"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Avaliacao — first-attempt AUC + tabela comparativa",
+      "status": "pending",
+      "acceptance_criteria": [
+        "compute_auc(pred_df, first_attempt_only=True) calculado para A439, A487, A492",
+        "A439 first-attempt AUC comparado com Shi et al. (2022) Table 2 (50.22% +/-2.86%); desvio comentado no markdown",
+        "Tabela final exibe: assignment, all_attempts_AUC, first_attempt_AUC para os 3 assignments avaliados; nota explicita que A494/A502 nao possuem dados de teste",
+        "Markdown explica mecanicamente por que BKT tem first-attempt AUC proximo de 50%: na primeira tentativa por KC, a predicao e P(L0)*(1-S) + (1-L0)*G — constante por KC, sem informacao do aluno especifico — o modelo nao discrimina entre estudantes diferentes no mesmo problema novo",
+        "Markdown conecta ao CLAUDE.md: first-attempt AUC e a metrica primaria (menos inflada por autocorrelacao); all-attempts AUC como secundaria para comparacao com literatura DKT"
+      ],
+      "files": [
+        "notebooks/04_bkt.ipynb"
+      ],
+      "depends_on": [
+        "4"
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Serializacao, validacao e sumario final",
+      "status": "pending",
+      "acceptance_criteria": [
+        "results/bkt_results.pkl salvo como dict com schema: {assignment_id: {all_auc: float, first_auc: float, n_train: int, n_test: int, params: pd.DataFrame}}; A494/A502 incluidos com all_auc=None, first_auc=None, n_test=0",
+        "Celula de validacao carrega bkt_results.pkl e verifica: (a) 5 keys presentes; (b) A439/A487/A492 tem all_auc e first_auc como float; (c) A494/A502 tem n_test=0",
+        "Tabela markdown 'BKT vs Shi et al. (2022)': assignment, our_all_auc, paper_all_auc, our_first_auc, paper_first_auc; paper values: A439 63.78%/50.22%, A487-A492 sem referencia no paper",
+        "Markdown lista todos os artefatos gerados com schema resumido: results/bkt_results.pkl -> dict[int, dict]",
+        "Markdown final posiciona BKT no contexto do TCC 1: baseline probabilistico interpretavel, limitacoes (independencia entre KCs, sem modelagem de sequencias longas), motivacao para DKT e Code-DKT"
+      ],
+      "files": [
+        "notebooks/04_bkt.ipynb",
+        "results/bkt_results.pkl"
+      ],
+      "depends_on": [
+        "5"
+      ]
+    }
+  ]
+}

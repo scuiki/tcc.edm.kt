@@ -1,0 +1,11 @@
+{
+  "overall": "FAIL",
+  "notebook_executes": "PASS",
+  "acceptance_criteria": "FAIL",
+  "template_compliance": "FAIL",
+  "no_placeholders": "PASS",
+  "issues": [
+    "AC5: A segunda limitacao estrutural do BKT listada em \"Posicionamento do BKT no TCC 1\" e \"Sem personalizacao por aluno na primeira tentativa\" \u2014 o criterio exige explicitar \"sem modelagem de sequencias longas\" como limitacao. O texto menciona \"sequencia historica completa\" apenas como virtude do DKT, nao como limitacao explicita do BKT.",
+    "template_compliance: Secoes 1, 5 e 6 (50% do total) nao possuem o rotulo exato \"**Implicacao para modelagem:**\" na celula markdown pos-codigo: Secao 1 usa \"Escopo deste notebook\", Secao 5 usa \"**Conexao ao CLAUDE.md:**\", Secao 6 usa \"### Posicionamento do BKT\" no lugar do rotulo padrao."
+  ]
+}
