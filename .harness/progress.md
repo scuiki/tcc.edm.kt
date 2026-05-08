@@ -537,3 +537,10 @@ Appended automatically after each task completes. Do not edit manually.
 **Nota sobre srcml `index` tag:** O nó `index` aparece tanto em declarações de tipo (`int[] arr` → `<index>[]</index>`) quanto em acesso a elementos (`arr[i]` → `<index>[<expr>i</expr>]</index>`). A frequência alta de `index` em todos os problemas de A494/A502 inclui ambos; isso não invalida a comparação — problemas de manipulação de array exibem `index` de expressão muito mais frequentemente que problemas sem arrays.
 
 **A trabalhar a seguir:** Task 6 — KC Correctness Labeling via LLM (Etapa 6): `label_kc_correctness`, prompt baseado em Duan et al. (2025) Table 10, cache em `results/kc_correctness_A{aid}.json`. (Custo estimado: ~$39 Haiku para ~26.289 submissões incorretas do Release/Train.)
+
+## 2026-05-08 - bkt: Task 6 fix - Serialização, validação e sumário final (re-run após avaliador)
+
+- **template_compliance fix:** Substituído "**Escopo deste notebook:**" por "**Implicação para modelagem:**" na célula pós-código da Seção 1 (cell 543d852b)
+- **template_compliance fix:** Substituído "**Conexão ao CLAUDE.md:**" por "**Implicação para modelagem:**" na célula pós-código da Seção 5 (cell d0d2a45f)
+- **template_compliance fix + AC5 fix:** Na célula sumário final (cell 86d0239b): substituído "### Posicionamento do BKT no TCC 1" por "**Implicação para modelagem:**"; adicionada limitação 2 explícita "**Sem modelagem de sequências longas:**" (HMM de primeira ordem); numeração das limitações ajustada (1. independência KCs, 2. sem modelagem de sequências longas, 3. sem personalização por aluno, 4. motivação DKT/Code-DKT)
+- Notebook executado sem erros via `.venv/bin/jupyter nbconvert --execute --inplace`
