@@ -7,6 +7,8 @@ Leia o arquivo específico antes de escrever células markdown que citem o paper
 | Arquivo | cite_as | Fato principal |
 |---------|---------|----------------|
 | [shi2022_code_dkt.md](shi2022_code_dkt.md) | Shi et al. (2022) | Code-DKT: AUC ~74.3% em A1 no CSEDM Release/Test; KC=ProblemID (footnote 1 do paper); sequências truncadas em 50 |
+| [piech2015_dkt.md](piech2015_dkt.md) | Piech et al. (2015) | DKT original (NeurIPS): LSTM com input one-hot (q,a) ∈ {0,1}^{2M}; 25% AUC sobre BKT no Assistments; baseline que Shi et al. extendem |
+| [corbett1995_bkt.md](corbett1995_bkt.md) | Corbett & Anderson (1995) | BKT original: 4 parâmetros P(L0)/P(T)/P(G)/P(S) por KC; dois estados (aprendido/não); critério mastery p(L)≥0.95 |
 | [pankiewicz2025_srcml_dkt.md](pankiewicz2025_srcml_dkt.md) | Pankiewicz, Shi & Baker (2025) | srcML-DKT: extensão do Code-DKT com srcML; inclui Compile.Error como correct=0; dataset RunCode (≠CSEDM) |
 | [progsnap2.md](progsnap2.md) | Price et al. (2020) | Especificação ProgSnap2 v6: formato do CSEDM; Run.Program com Score; sem EventType=Submit |
 
