@@ -695,3 +695,15 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - Achado corrigido: texto anterior indicava "29-32%" — corrigido para "26-32%" com base nos dados reais
 - verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
 - Task 5 marcada como `complete` em `.harness/plans/kc_generation.json`
+
+## 2026-05-15 - kc_generation: Task 6 - KC Correctness Labeling via LLM — Etapa 6
+
+- `label_kc_correctness(code, problem_description, kcs, client)` definida em cell 22: retorna `{error_reasoning: [str], kc_errors: {kc_name: 0|1}}` conforme Duan et al. (2025) Table 10
+- Prompt inclui `error_reasoning` como array de strings de erros específicos encontrados + `kc_errors` com labels binários 0/1 por KC
+- Cell 22 mantém `_call_llm` otimizado com prompt caching (cache do contexto do problema = descrição + lista de KCs) para budget tracking; `label_kc_correctness` é a interface pública sem budget tracking
+- Cache-aware loop: verifica `results/kc_correctness_{aid}.json` antes de qualquer chamada API; todos os 5 assignments tinham cache hit na re-execução (sem novas chamadas LLM)
+- Cell 21 (pre-code markdown) atualizada: documenta ~26.289 submissões incorretas no dataset completo, custo estimado ~$39 com Claude Haiku, e declara que apenas eventos incorretos de Run.Program do Release/Train são incluídos
+- Cell 23 inserida (post-code markdown): Achado = 9.043 submissões rotuladas (A502=3.940, A439=5.103; A494/A492/A487 zerados por budget); Implicação = curvas de aprendizagem por KC, identificação de KCs de alta dificuldade para BKT, análise diferencial Code-DKT vs BKT
+- `results/kc_correctness_A{439,487,492,494,502}.json` todos presentes após execução (A487/A492/A494 como `{}` devido a budget constraint de $9.00)
+- verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
+- Task 6 marcada como `complete` em `.harness/plans/kc_generation.json`

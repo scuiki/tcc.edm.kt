@@ -1,6 +1,6 @@
 {
   "slug": "kc_generation",
-  "title": "KC Generation \u2014 criar notebooks/03b_kc_generation.ipynb",
+  "title": "KC Generation — criar notebooks/03b_kc_generation.ipynb",
   "type": "feature",
   "created": "2026-05-06",
   "status": "in_progress",
@@ -14,7 +14,7 @@
     "notebooks/03b_kc_generation.ipynb",
     "--ExecutePreprocessor.timeout=600"
   ],
-  "context": "O notebook 03b_kc_generation.ipynb ainda nao existe. Este agente implementa o pipeline KCGen-KT (Duan et al., 2025) para geracao automatica de KCs a partir de submissoes corretas do CSEDM. ANTES de implementar qualquer celula, leia PLAN_KC_GENERATION.md \u2014 ele contem todas as decisoes de design, estrutura dos prompts e custo estimado (~$39-40 Haiku). Decisoes criticas: (1) LLM recebe codigo bruto \u2014 NAO AST (ablacao Duan et al. 2025, Table 4: AST piora AUC de 0.812 para 0.784); (2) 5 submissoes por problema via stratified sampling por tentativas (Table 5); (3) Q-matrix per-assignment com 10-15 KCs; (4) Cache OBRIGATORIO em todas as etapas LLM \u2014 notebook deve ser re-executavel sem re-chamar APIs. Use apenas Release/Train (results/sequences_bkt_dkt.pkl + data/CSEDM/Release/Train/Data/CodeStates/CodeStates.csv). Assignments: A439, A487, A492, A494, A502. Modelo: claude-haiku-4-5-20251001. Biblioteca Python: anthropic. Cada tarefa deve gerar seus artefatos de cache antes de encerrar \u2014 o verify_cmd roda o notebook completo e precisa encontrar os caches para passar sem re-chamar APIs.",
+  "context": "O notebook 03b_kc_generation.ipynb ainda nao existe. Este agente implementa o pipeline KCGen-KT (Duan et al., 2025) para geracao automatica de KCs a partir de submissoes corretas do CSEDM. ANTES de implementar qualquer celula, leia PLAN_KC_GENERATION.md — ele contem todas as decisoes de design, estrutura dos prompts e custo estimado (~$39-40 Haiku). Decisoes criticas: (1) LLM recebe codigo bruto — NAO AST (ablacao Duan et al. 2025, Table 4: AST piora AUC de 0.812 para 0.784); (2) 5 submissoes por problema via stratified sampling por tentativas (Table 5); (3) Q-matrix per-assignment com 10-15 KCs; (4) Cache OBRIGATORIO em todas as etapas LLM — notebook deve ser re-executavel sem re-chamar APIs. Use apenas Release/Train (results/sequences_bkt_dkt.pkl + data/CSEDM/Release/Train/Data/CodeStates/CodeStates.csv). Assignments: A439, A487, A492, A494, A502. Modelo: claude-haiku-4-5-20251001. Biblioteca Python: anthropic. Cada tarefa deve gerar seus artefatos de cache antes de encerrar — o verify_cmd roda o notebook completo e precisa encontrar os caches para passar sem re-chamar APIs.",
   "tasks": [
     {
       "id": "1",
@@ -34,7 +34,7 @@
     },
     {
       "id": "2",
-      "title": "Geracao de KCs via LLM \u2014 Etapa 2",
+      "title": "Geracao de KCs via LLM — Etapa 2",
       "status": "complete",
       "acceptance_criteria": [
         "generate_kcs_for_problem(problem_id, code_samples, client) definida: retorna dict {problem_description: str, kcs: [{name: str, reasoning: str}]}",
@@ -52,7 +52,7 @@
     },
     {
       "id": "3",
-      "title": "Clustering Sentence-BERT + HAC \u2014 Etapa 3",
+      "title": "Clustering Sentence-BERT + HAC — Etapa 3",
       "status": "complete",
       "acceptance_criteria": [
         "Embeddings calculados com sentence-transformers (modelo all-MiniLM-L6-v2 ou similar) sobre nomes dos KCs brutos de cada assignment",
@@ -70,7 +70,7 @@
     },
     {
       "id": "4",
-      "title": "Rotulagem de clusters via LLM \u2014 Etapa 4",
+      "title": "Rotulagem de clusters via LLM — Etapa 4",
       "status": "complete",
       "acceptance_criteria": [
         "label_cluster(cluster_kcs, client) definida: recebe lista de KCs do cluster e retorna {kc_id: int, name: str, reasoning: str}",
@@ -88,7 +88,7 @@
     },
     {
       "id": "5",
-      "title": "Q-matrix \u2014 Etapa 5",
+      "title": "Q-matrix — Etapa 5",
       "status": "complete",
       "acceptance_criteria": [
         "build_qmatrix(problem_ids, kc_raw, kc_clusters) definida: retorna DataFrame com ProblemID como indice e colunas kc_0, kc_1, ..., kc_N (valores 0 ou 1)",
@@ -105,8 +105,8 @@
     },
     {
       "id": "6",
-      "title": "KC Correctness Labeling via LLM \u2014 Etapa 6",
-      "status": "pending",
+      "title": "KC Correctness Labeling via LLM — Etapa 6",
+      "status": "complete",
       "acceptance_criteria": [
         "label_kc_correctness(code, problem_description, kcs, client) definida: retorna {error_reasoning: [str], kc_errors: {kc_name: 0|1}}",
         "Prompt baseado em Duan et al. (2025) Table 10; citacao explicita no markdown",
@@ -123,7 +123,7 @@
     },
     {
       "id": "7",
-      "title": "AST signatures e sumario final \u2014 Etapa 7",
+      "title": "AST signatures e sumario final — Etapa 7",
       "status": "pending",
       "acceptance_criteria": [
         "extract_ast_signature(java_code) definida: chama srcml via subprocess e conta frequencia de tags AST (ForStatement, IfStatement, ArrayAccess, etc.); retorna dict {node_type: count}",
