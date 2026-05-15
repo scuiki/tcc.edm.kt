@@ -673,3 +673,14 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - Estatísticas de cache: A439 15 clusters (sil=0.323), A487 15 (0.262), A492 15 (0.228), A494 15 (0.222), A502 12 (0.179 > 0.155 para 15 — inversão de gradiente)
 - verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
 - Task 3 marcada como `complete` em `.harness/plans/kc_generation.json`
+
+## 2026-05-15 - kc_generation: Task 4 - Rotulagem de clusters via LLM — Etapa 4
+
+- `label_cluster(cluster_kcs, client, cluster_id)` definida: recebe lista de nomes de KCs do cluster, chama `claude-haiku-4-5-20251001` com prompt baseado em Duan et al. (2025) Table 9, retorna `{kc_id: int, name: str, reasoning: str}`
+- Prompt instrui o LLM a decidir entre: (a) selecionar KC existente mais representativo do cluster, ou (b) sintetizar novo rótulo que captura o conceito comum — chain-of-thought com decision point explícito
+- Cache-aware loop: verifica `results/kc_descriptions_{aid}.json` antes de qualquer chamada API; execuções subsequentes carregam do cache sem novas chamadas LLM
+- Célula de display exibe tabela Markdown formatada com KCs canônicos de A439 (colunas: KC ID, Nome canônico, Raciocínio)
+- `results/kc_descriptions_A{439,487,492,494,502}.json` todos presentes e válidos após execução
+- Achado: 12–15 KCs canônicos por assignment; cache hit para todos os 5 assignments na re-execução
+- verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
+- Task 4 marcada como `complete` em `.harness/plans/kc_generation.json`

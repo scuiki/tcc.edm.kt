@@ -71,7 +71,7 @@
     {
       "id": "4",
       "title": "Rotulagem de clusters via LLM \u2014 Etapa 4",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "label_cluster(cluster_kcs, client) definida: recebe lista de KCs do cluster e retorna {kc_id: int, name: str, reasoning: str}",
         "Prompt baseado em Duan et al. (2025) Table 9; citacao explicita no markdown",
