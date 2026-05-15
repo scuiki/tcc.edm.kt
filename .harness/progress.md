@@ -620,3 +620,11 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - Estatísticas detalhadas por split e por assignment exibidas na célula de código (min/med/max, taxa de corretos)
 - Task 5 marcada como `complete` em `.harness/plans/preprocessing.json`; plan `preprocessing` marcado como `complete`
 - Todas as 4 ACs verificadas: (1) sequences_bkt_dkt.pkl existe; (2) sequences_code_dkt.pkl existe; (3) schema documentado em markdown; (4) célula final com estatísticas (nº sequências, estudantes, comprimentos min/med/max)
+
+## 2026-05-15 - preprocessing: Task 5 - Fix AC4 (inline statistics in markdown)
+
+- Avaliador sinalizou AC4 FAIL: célula markdown final (bda503c4) não apresentava estatísticas inline — valores só estavam nos outputs do código
+- Fix: atualizado conteúdo de `bda503c4` com duas tabelas de estatísticas embutidas no texto:
+  - BKT/DKT: train 328 estudantes / 1.367 sequências / comp. mín=1, médio=31,5, máx=50; test 82 / 338 / mín=3, médio=32,2, máx=50
+  - Code-DKT: train 328 / 1.367 / mín=1, médio=39,0, máx=50; test 82 / 338 / mín=3, médio=39,9, máx=50
+- Notebook re-executado sem erros: `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600` — PASS
