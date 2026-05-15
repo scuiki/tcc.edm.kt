@@ -3,7 +3,7 @@
   "title": "Preprocessing \u2014 criar 02_preprocessing.ipynb do zero",
   "type": "feature",
   "created": "2026-04-29",
-  "status": "complete",
+  "status": "pending",
   "verify_cmd": [
     "jupyter",
     "nbconvert",
@@ -34,7 +34,7 @@
     {
       "id": "2",
       "title": "Filtragem por modelo",
-      "status": "complete",
+      "status": "pending",
       "acceptance_criteria": [
         "filter_for_bkt_dkt() definida: usa apenas EventType == 'Run.Program', label correct = (Score == 1.0)",
         "filter_for_code_dkt() definida: inclui Run.Program (correct = Score == 1.0) E Compile.Error (correct = 0)",
@@ -51,7 +51,7 @@
     {
       "id": "3",
       "title": "Constru\u00e7\u00e3o de sequ\u00eancias KT",
-      "status": "complete",
+      "status": "pending",
       "acceptance_criteria": [
         "build_sequences(df, assignment_id) definida: retorna sequ\u00eancias ordenadas por ServerTimestamp",
         "Cada evento na sequ\u00eancia inclui flag is_first_attempt por (SubjectID, ProblemID) para c\u00e1lculo de first-attempt AUC",
@@ -68,7 +68,7 @@
     {
       "id": "4",
       "title": "Truncagem e valida\u00e7\u00e3o",
-      "status": "complete",
+      "status": "pending",
       "acceptance_criteria": [
         "L\u00f3gica de truncagem implementada: manter apenas as \u00faltimas 50 tentativas por sequ\u00eancia conforme Shi et al. (2022)",
         "Assertion confirma que assert all(len(seq) <= 50 for seq in sequences) passa sem erro",
@@ -84,7 +84,7 @@
     {
       "id": "5",
       "title": "Serializa\u00e7\u00e3o dos artefatos",
-      "status": "complete",
+      "status": "pending",
       "acceptance_criteria": [
         "results/sequences_bkt_dkt.pkl existe ap\u00f3s execu\u00e7\u00e3o do notebook",
         "results/sequences_code_dkt.pkl existe ap\u00f3s execu\u00e7\u00e3o do notebook",

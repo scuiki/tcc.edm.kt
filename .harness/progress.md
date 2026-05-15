@@ -14,6 +14,23 @@ Appended automatically after each task completes. Do not edit manually.
 
 -->
 
+## 2026-05-15 - preprocessing: Task 1 - Setup e carregamento dos dados
+
+- Notebook 02_preprocessing.ipynb já existia com todas as seções (1–5) implementadas e data_loader.py com todas as funções (docstrings completas, SEED=42 no topo)
+- Gap encontrado: célula intro não explicava o split Release/ nem quando usar cada split para reproduzir o paper
+- Atualizada a célula markdown de abertura (id 564d59a7): adicionada seção "Dataset e Splits" com tabelas comparativas para o split Spring2019/All (protocolo Shi et al.) e para o Release/ (CSEDM Data Challenge 2021, deprecado)
+- Explicado claramente por que Release/ não pode ser usado para modelagem KT: ausência de A4–A5 no test set e critério de elegibilidade distinto
+- Notebook executado sem erros: `jupyter nbconvert --execute --inplace` → 56.890 bytes gravados
+- Veredito: PASS na primeira tentativa
+- Próximo: task 2 (Filtragem por modelo) — já implementada no notebook; verificar ACs de assertions inline
+
+## 2026-05-15 — MIGRAÇÃO: Release/ → Spring 2019 Full (Shi et al. protocol)
+
+data/CSEDM/ agora contém o Spring 2019 completo (era data/Data/).
+410 alunos com min_attempts>=3, 23.68% corretos. Split 80/20 random_state=1: 328+82 alunos.
+Todos os 5 assignments no test set. Comparação direta com Table 1/Table 2 do paper agora válida.
+Notebooks editados (código) e tasks resetadas para re-execução: preprocessing (02), kc_generation (03b Etapas 1–5,7), bkt (04), eda (01).
+
 ## 2026-04-29 - problem_definition: Task 1 - Aplicar template didático em todas as seções existentes
 
 - Adicionados campos **Contexto**, **Hipótese**, **Referência** às células markdown pré-código das seções 1 (KCs) e 3 (Splits do Dataset) — únicas seções com células de código
@@ -284,7 +301,7 @@ Appended automatically after each task completes. Do not edit manually.
 - Code-DKT train: 1.134 sequências (5 assignments), len médio 39.2, taxa corretos 19.87%
 - Code-DKT test:  236 sequências (apenas A439, A487, A492), len médio 41.5, taxa corretos 18.94%
 - Comprimento médio Code-DKT > BKT/DKT (39.2 vs 32.2) confirma que Compile.Error inflam o comprimento das sequências
-- Release/Test sem A494 e A502: comportamento esperado — o split de avaliação do paper Shi et al. (2022) cobre apenas os primeiros 3 assignments
+- Release/Test sem A494 e A502: irrelevante pós-migração — o test set agora contém todos os 5 assignments (A439–A502) conforme protocolo 80/20 de Shi et al. (2022). A ausência anterior de A4–A5 era design do CSEDM Data Challenge, não limitação do paper.
 
 **Dataset inconsistency note:** A ausência de A494 e A502 em Release/Test é documentada no Achado. Os artefatos mantêm as listas vazias para esses assignments para preservar compatibilidade de indexação; os notebooks de modelagem devem filtrar `{aid: seqs for aid, seqs in artifact['test'].items() if seqs}` antes de avaliar.
 
