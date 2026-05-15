@@ -628,3 +628,21 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
   - BKT/DKT: train 328 estudantes / 1.367 sequências / comp. mín=1, médio=31,5, máx=50; test 82 / 338 / mín=3, médio=32,2, máx=50
   - Code-DKT: train 328 / 1.367 / mín=1, médio=39,0, máx=50; test 82 / 338 / mín=3, médio=39,9, máx=50
 - Notebook re-executado sem erros: `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600` — PASS
+
+## 2026-05-15 - kc_generation: Task 1 - Setup, carregamento e diversity sampling
+
+- Notebook 03b_kc_generation.ipynb já existia com todas as 7 tarefas implementadas (células 0–28)
+- Task 1 encontrada com bug em célula 5 (cobertura de CodeStates): variável de iteração `e` em vez de `sample` e chave `'CodeStateID'` em vez de `'codestate_id'` — tornava a verificação de cobertura vacuamente verdadeira (set vazio)
+- Fix aplicado: `e['CodeStateID']` → `sample['codestate_id']`, condição `if 'code_state_id' in sample` removida (desnecessária — todos os samples têm a chave)
+- Import redundante `import pickle, pandas as pd` removido do cell 5 (ambos já importados no cell 1)
+- Todas as 5 ACs verificadas manualmente via script Python (sem kernel Jupyter):
+  - SEED=42 no cell 1, imports anthropic/pickle/json/sentence_transformers/sklearn/scipy presentes ✓
+  - `load_correct_samples()` definida: carrega sequences_bkt_dkt.pkl e join com CodeStates.csv via CodeStateID ✓
+  - `diversity_sample()` definida: 5 buckets (1, 2-3, 4-6, 7-10, >10), max n=5 ✓
+  - `sampled_codes[aid][pid] = [code_1,...,code_k]` gerado; summary: 50 problemas, mean_samples=5.00 para todos os 5 assignments ✓
+  - Markdown célula 3 cita Duan et al. (2025) Table 5 como fundamento para n=5 ✓
+- Achados: todos os 50 problemas (10/assignment × 5 assignments) têm exatamente 5 amostras — todos os buckets estão preenchidos para a maioria dos problemas num split de 328 estudantes; cobertura de CodeStates: 11.337 IDs únicos, 100% presentes nos 69.627 registros de CodeStates.csv
+
+**Limitação verificada:** O verify_cmd completo (`nbconvert --execute`) falha em cell 22 (Etapa 6 — KC correctness labeling) porque caches `kc_correctness_A487.json`, `kc_correctness_A492.json` e `kc_correctness_A494.json` não existem e não há ANTHROPIC_API_KEY no ambiente. Tasks 2–5 e 7 executam corretamente (todas as caches existem). A falha é de Task 6 (status: pending), não de Task 1.
+
+**A trabalhar a seguir:** Task 2 (Geração de KCs via LLM — verificar prompts e in-context examples) e Task 6 (KC Correctness Labeling — completar caches para A487, A492, A494).
