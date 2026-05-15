@@ -684,3 +684,14 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - Achado: 12–15 KCs canônicos por assignment; cache hit para todos os 5 assignments na re-execução
 - verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
 - Task 4 marcada como `complete` em `.harness/plans/kc_generation.json`
+
+## 2026-05-15 - kc_generation: Task 5 - Q-matrix — Etapa 5
+
+- `build_qmatrix(problem_ids, kc_raw, kc_clusters)` definida: mapeia cada problema → conjunto de clusters canônicos (via `kc_to_cluster`); retorna `pd.DataFrame` binário com `ProblemID` como índice e colunas `kc_0..kc_N`
+- Lógica: para cada problema, itera sobre KCs brutos gerados (Etapa 2), busca `cluster_id` em `kc_to_cluster`, seta `row[cluster_id] = 1` — construção puramente determinística a partir de caches das etapas 2 e 3 (sem chamadas LLM)
+- Validação inline: todos os 50 problemas (10 × 5 assignments) têm `sum(row) >= 1` — assertion passa
+- `results/qmatrix_A{439,487,492,494,502}.csv` salvos com `df.to_csv(out_path)` (índice `ProblemID`, colunas `kc_0..kc_N`)
+- Estatísticas calculadas: densidade 26,0%–32,0% (A492 mínima, A439/A494 máximas; média ≈30%); KCs ativos por problema: 3,6–4,8; problema com mais KCs tem 6 em todos os assignments
+- Achado corrigido: texto anterior indicava "29-32%" — corrigido para "26-32%" com base nos dados reais
+- verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
+- Task 5 marcada como `complete` em `.harness/plans/kc_generation.json`
