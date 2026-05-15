@@ -567,3 +567,13 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - Verificado que as correções do commit 88d93cb já estão em vigor: Seções 1, 5 e 6 têm "**Implicação para modelagem:**" exato; limitação "**Sem modelagem de sequências longas:**" presente como item 2 na célula de sumário (cell 25)
 - Notebook re-executado sem erros via `.venv/bin/jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600`
 - Eval feedback em `.harness/eval_feedback/bkt_6.json` reflete estado pré-fix (antes do commit 88d93cb); estado atual do notebook passa os critérios AC5 e template_compliance
+
+## 2026-05-15 - preprocessing: Task 2 - Filtragem por modelo
+
+- Ambas as funções `filter_for_bkt_dkt()` e `filter_for_code_dkt()` já estavam implementadas em `src/data_loader.py` com assertions internas de EventType
+- Células 12–14 do notebook (Section 2) já cobriam o template didático completo (Contexto/Hipótese/Referência → código → Achado/Implicação)
+- Notebook re-executado sem erros; output de cell 13 confirma:
+  - BKT/DKT train: 56.423 eventos, apenas `Run.Program`, taxa correto = 23.79%
+  - Code-DKT train: 107.761 eventos (`Run.Program` + `Compile.Error`), taxa correto = 12.46% (Compile.Error como correct=0 reduz a taxa)
+  - Todas as assertions de EventType e binaridade de `correct` passam
+- Task 2 marcada como `complete` em `.harness/plans/preprocessing.json`
