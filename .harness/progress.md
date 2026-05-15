@@ -577,3 +577,17 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
   - Code-DKT train: 107.761 eventos (`Run.Program` + `Compile.Error`), taxa correto = 12.46% (Compile.Error como correct=0 reduz a taxa)
   - Todas as assertions de EventType e binaridade de `correct` passam
 - Task 2 marcada como `complete` em `.harness/plans/preprocessing.json`
+
+## 2026-05-15 - preprocessing: Task 3 - Construção de sequências KT
+
+- `build_sequences(df, assignment_id)` já estava implementada em `src/data_loader.py` e a Seção 3 do notebook já continha template didático completo (Contexto/Hipótese/Referência → código → Achado/Implicação)
+- Notebook re-executado sem erros via `jupyter nbconvert --execute --inplace` com dataset Spring 2019 (80/20, random_state=1) — output de cell 552c6234 confirma:
+  - AssignmentIDs no train split: [439, 487, 492, 494, 502] (não sequenciais — usar IDs inteiros no pipeline)
+  - A1 (ID=439): 307 estudantes, comprimento médio 39.0, máximo 209
+  - `is_first_attempt` cobre exatamente 2949 pares únicos (SubjectID, ProblemID) em A=439 — assertion passou
+  - Ordenação cronológica verificada em todas as sequências — assertion passou
+  - Número de sequências BKT/DKT e Code-DKT coincide por assignment (filtragem não elimina estudantes, apenas eventos)
+- Todas as 3 ACs verificadas: (1) `build_sequences` definida e retorna sequências ordenadas por ServerTimestamp; (2) `is_first_attempt` presente e correto em todos os pares (SubjectID, ProblemID); (3) célula pós-código com tabela descrevendo campos, tipos e exemplo concreto
+- Task 3 marcada como `complete` em `.harness/plans/preprocessing.json`
+
+**Nota sobre Spring 2019 vs Release/ (migração 2026-05-15):** os valores de comprimento médio e contagem de estudantes diferem dos registros de 2026-04-29 porque o dataset foi migrado de Release/ (329 alunos) para Spring 2019 completo (410 alunos, filtro min_attempts>=3). A lógica de `build_sequences` permanece idêntica — apenas os dados de entrada mudaram.
