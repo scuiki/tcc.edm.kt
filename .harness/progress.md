@@ -660,3 +660,16 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - **Fix necessário para verify_cmd:** cells 22 (Task 6) faziam chamadas API para A487, A492, A494 sem caches → timeout em 600s. Criados stubs vazios `kc_correctness_A487.json`, `kc_correctness_A492.json`, `kc_correctness_A494.json` (JSON vazio `{}`) para o notebook executar sem chamar API. Task 6 (pending) deve completar as caches com chamadas reais quando for implementada.
 - verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
 - Task 2 marcada como `complete` em `.harness/plans/kc_generation.json`
+
+## 2026-05-15 - kc_generation: Task 3 - Clustering Sentence-BERT + HAC — Etapa 3
+
+- Notebook 03b_kc_generation.ipynb já continha implementação completa de Task 3 (células 11–13)
+- Todas as 5 ACs verificadas:
+  - Embeddings com `sentence-transformers` (modelo `all-MiniLM-L6-v2`) via `SentenceTransformer.encode(normalize_embeddings=True)` ✓
+  - HAC com cosine distance via `scipy.cluster.hierarchy`: `pdist(embeddings, metric="cosine")` + `linkage(dist, method="average")` + `fcluster(Z, t=n_clusters, criterion="maxclust")` ✓
+  - Código itera sobre `{10, 12, 15}` em `N_CLUSTERS_CANDIDATES`; seleção via `silhouette_score` documentada no markdown (Rousseeuw, 1987) ✓
+  - `np.random.seed(SEED)` (SEED=42) definido antes da clusterização ✓
+  - `results/kc_clusters_A{439,487,492,494,502}.json` existem; cada arquivo contém `kc_to_cluster` (kc_name→cluster_id) e `clusters` (cluster_id→[kc_names]) ✓
+- Estatísticas de cache: A439 15 clusters (sil=0.323), A487 15 (0.262), A492 15 (0.228), A494 15 (0.222), A502 12 (0.179 > 0.155 para 15 — inversão de gradiente)
+- verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
+- Task 3 marcada como `complete` em `.harness/plans/kc_generation.json`
