@@ -607,3 +607,16 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 **Achados com Spring 2019 (vs Release/ de 2026-04-29):** comprimento máximo de sequência BKT/DKT aumentou (máx 209 em A1 vs ~155 anterior) porque há mais estudantes e sequências mais longas no dataset completo. A proporção truncada em Code-DKT atingiu 65% em A487 vs ~50% nos dados anteriores — confirma que Compile.Error são a principal causa de truncagem.
 
 **A trabalhar a seguir:** Task 5 — Serialização dos artefatos (sequences_bkt_dkt.pkl e sequences_code_dkt.pkl com Spring 2019 completo).
+
+## 2026-05-15 - preprocessing: Task 5 - Serialização dos artefatos
+
+- Task 5 já estava implementada no notebook (Seção 5.1) com template didático completo (Contexto/Hipótese/Referência → código → Achado/Implicação) e outputs de execução presentes
+- Notebook re-executado sem erros via `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600` — PASS
+- Artefatos salvos em `results/`:
+  - `sequences_bkt_dkt.pkl` — 11.4 MB (train: 1367 seqs / 328 alunos; test: 338 seqs / 82 alunos)
+  - `sequences_code_dkt.pkl` — 12.8 MB (train: 1367 seqs / 328 alunos; test: 338 seqs / 82 alunos)
+- Todos os 5 assignments (439, 487, 492, 494, 502) presentes em train e test nos dois artefatos
+- Schema documentado em célula pós-código: chaves de nível superior (`train`, `test`, `assignment_ids`, `max_len`, `seed`, `description`) e schema de cada sequência interna (`subject_id`, `assignment_id`, `events` DataFrame)
+- Estatísticas detalhadas por split e por assignment exibidas na célula de código (min/med/max, taxa de corretos)
+- Task 5 marcada como `complete` em `.harness/plans/preprocessing.json`; plan `preprocessing` marcado como `complete`
+- Todas as 4 ACs verificadas: (1) sequences_bkt_dkt.pkl existe; (2) sequences_code_dkt.pkl existe; (3) schema documentado em markdown; (4) célula final com estatísticas (nº sequências, estudantes, comprimentos min/med/max)
