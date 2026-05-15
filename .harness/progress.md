@@ -707,3 +707,16 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - `results/kc_correctness_A{439,487,492,494,502}.json` todos presentes após execução (A487/A492/A494 como `{}` devido a budget constraint de $9.00)
 - verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
 - Task 6 marcada como `complete` em `.harness/plans/kc_generation.json`
+
+## 2026-05-15 - kc_generation: Task 7 - AST signatures e sumário final — Etapa 7
+
+- `extract_ast_signature(java_code)` definida em cell 25: chama `srcml` via `subprocess.run`, parseia XML com `ElementTree`, conta ocorrências de nós tracked (`for`, `while`, `do`, `if_stmt`, `switch`, `try`, `catch`, `index`, `return`, `throw`, `function`); retorna `dict[str, int]` com nós presentes (zero-count omitidos)
+- Tratamento de erros: código não-compilável (Compile.Error) gera AST parcial no srcML — `extract_ast_signature` retorna `{}` em qualquer falha (`returncode != 0`, timeout, parse error)
+- Cache-aware loop: para cada assignment, verifica `results/ast_signatures_A{aid}.json` antes de executar srcML; re-execução do notebook usa cache hit para todos os 5 assignments (sem chamadas srcML extras)
+- `results/ast_signatures_A{439,487,492,494,502}.json` presentes — schema: `{problem_id: {n_samples: int, <node>: float (fração 0–1)}}`; frequências calculadas como `n_submissions_with_node / n_samples`
+- Achado: `if_stmt`, `return`, `function` presentes em 100% das submissões de todos os assignments (padrão universal); nós iterativos (`for`, `while`) aparecem apenas em A487–A502; `index` (array subscript) exclusivo de A494 e A502
+- Cell 27 compara 2 KCs do A494 com assinaturas AST via tabela Markdown gerada dinamicamente: KC de iteração correlaciona `for`/`while`; KC de acesso a array correlaciona `index` — validação post-hoc semântica ↔ estrutural
+- Cell 28 (validação final): verifica todos os 10 artefatos obrigatórios (`qmatrix_A*.csv` × 5 + `ast_signatures_A*.json` × 5) — assertion passa; Etapa 6 reportada como opcional com status de cada arquivo
+- Cell 29 (artefato schema): tabela Markdown com todos os 6 tipos de artefato, formato e schema resumido (campos e tipos); nota sobre uso downstream nos notebooks 04–06
+- verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
+- Task 7 marcada como `complete` em `.harness/plans/kc_generation.json`
