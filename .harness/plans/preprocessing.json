@@ -68,7 +68,7 @@
     {
       "id": "4",
       "title": "Truncagem e valida\u00e7\u00e3o",
-      "status": "pending",
+      "status": "complete",
       "acceptance_criteria": [
         "L\u00f3gica de truncagem implementada: manter apenas as \u00faltimas 50 tentativas por sequ\u00eancia conforme Shi et al. (2022)",
         "Assertion confirma que assert all(len(seq) <= 50 for seq in sequences) passa sem erro",

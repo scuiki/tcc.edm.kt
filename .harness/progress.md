@@ -591,3 +591,19 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - Task 3 marcada como `complete` em `.harness/plans/preprocessing.json`
 
 **Nota sobre Spring 2019 vs Release/ (migração 2026-05-15):** os valores de comprimento médio e contagem de estudantes diferem dos registros de 2026-04-29 porque o dataset foi migrado de Release/ (329 alunos) para Spring 2019 completo (410 alunos, filtro min_attempts>=3). A lógica de `build_sequences` permanece idêntica — apenas os dados de entrada mudaram.
+
+## 2026-05-15 - preprocessing: Task 4 - Truncagem e validação (re-verificação)
+
+- `truncate_sequences(sequences, max_len=50)` já estava implementada em `src/data_loader.py` e a Seção 4.1 do notebook já continha template didático completo e outputs de execução anteriores
+- Notebook re-executado sem erros via `jupyter nbconvert --execute --inplace --ExecutePreprocessor.timeout=600` — PASS
+- Assertion `all(len(seq['events']) <= 50 ...)` passa em todos os 5 assignments × 2 modelos (BKT/DKT e Code-DKT)
+- `is_first_attempt` recalculado corretamente dentro da janela truncada para BKT/DKT — assertion passa
+- Estatísticas com Spring 2019 (410 alunos, 80/20):
+  - BKT/DKT: 17–34% de sequências truncadas por assignment; taxa corretos 23.79% → 28.68% (+4.89pp)
+  - Code-DKT: 34–65% de sequências truncadas (Compile.Error inflam comprimento); taxa corretos 12.46% → 20.27% (+7.81pp)
+- Divergência da taxa bruta documentada na célula pós-código: truncagem retém eventos recentes (pós-familiarização), onde taxa de acerto é maior — comportamento esperado e desejável
+- Task 4 marcada como `complete` em `.harness/plans/preprocessing.json`
+
+**Achados com Spring 2019 (vs Release/ de 2026-04-29):** comprimento máximo de sequência BKT/DKT aumentou (máx 209 em A1 vs ~155 anterior) porque há mais estudantes e sequências mais longas no dataset completo. A proporção truncada em Code-DKT atingiu 65% em A487 vs ~50% nos dados anteriores — confirma que Compile.Error são a principal causa de truncagem.
+
+**A trabalhar a seguir:** Task 5 — Serialização dos artefatos (sequences_bkt_dkt.pkl e sequences_code_dkt.pkl com Spring 2019 completo).
