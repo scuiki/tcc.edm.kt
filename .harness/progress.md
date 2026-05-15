@@ -720,3 +720,14 @@ Notebooks editados (código) e tasks resetadas para re-execução: preprocessing
 - Cell 29 (artefato schema): tabela Markdown com todos os 6 tipos de artefato, formato e schema resumido (campos e tipos); nota sobre uso downstream nos notebooks 04–06
 - verify_cmd PASS: `nbconvert --execute --inplace notebooks/03b_kc_generation.ipynb --timeout=600` → exit code 0
 - Task 7 marcada como `complete` em `.harness/plans/kc_generation.json`
+
+## 2026-05-15 - dkt: implementacao completa
+
+- `src/evaluation.py`: `build_problem_index` (scan global train+test → dict {pid: idx}) e `compute_auc` (AUC-ROC pooled, compartilhado entre DKT e Code-DKT)
+- `src/models/dkt.py`: `DKTModel` (LSTM + dropout + sigmoid, Piech et al. 2015), `build_input_tensor` (left-zero-padding, one-hot 2M, conforme readdata.py do Code-DKT), `dkt_loss` (BCE com delta(q_{t+1}), Eq. 3 do paper), `train_dkt` (Adam lr=0.0005, gradient clipping max_norm=10.0, 40 epocas), `predict_dkt` (retorna DataFrame com mesmo schema de predict_bkt), `train_and_evaluate`
+- `notebooks/05_dkt.ipynb`: 33 celulas, 9 secoes; executa sem erros em ~3 min
+- Decisoes-chave: left-zero-padding replica readdata.py oficial; dropout em h_t→y_t (nao na transicao LSTM); y_true extraido de X shifted-left; predict_dkt pula t_rel=0 (sem historico anterior)
+- Resultados: DKT all_auc A439=72.84% (paper: 71.24%), A487=73.16% (73.09%), A492=77.39% (76.84%), A494=72.64% (69.16%), A502=73.17% (75.14%); todos dentro de ±4pp
+- Ganho medio DKT sobre BKT: +11.05pp all_auc, +20.13pp first_auc; padrao Piech et al. (2015) confirmado no CSEDM com magnitude menor (dataset ~20x menor que Assistments)
+- `results/dkt_results.pkl` salvo com schema {aid: {all_auc, first_auc, n_train_events, n_test_events, model, config}}
+- Proximos passos: Code-DKT (06_code_dkt.ipynb) com embeddings srcML + code2vec; comparacao final em 07_comparison.ipynb
