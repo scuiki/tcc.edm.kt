@@ -2,9 +2,11 @@
   "overall": "PASS",
   "notebook_executes": "PASS",
   "acceptance_criteria": "PASS",
-  "template_compliance": "PASS",
+  "template_compliance": "WARN",
   "no_placeholders": "PASS",
   "issues": [
-    "label_cluster signature has extra cluster_id parameter not specified in AC (label_cluster(cluster_kcs, client, cluster_id) vs AC's label_cluster(cluster_kcs, client)); return structure is correct"
+    "Section 6.1 (KC Correctness Labeling, cell [21]): missing **Hip\u00f3tese:** in pre-section markdown (has Contexto and Refer\u00eancia but no Hip\u00f3tese)",
+    "Section 6.1 has no post-section markdown cell \u2014 **Achado:** and **Implica\u00e7\u00e3o para modelagem:** are absent for this section (cell [22] is immediately followed by the pre-section markdown of section 7.1)",
+    "Combined: 1/7 analytical sections (14.3%) fail template requirements \u2192 WARN threshold (\u226430%)"
   ]
 }

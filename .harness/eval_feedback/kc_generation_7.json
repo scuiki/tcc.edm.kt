@@ -5,6 +5,8 @@
   "template_compliance": "PASS",
   "no_placeholders": "PASS",
   "issues": [
-    "None"
+    "Minor: `...` on line 21 of cell 4 appears inside a triple-quoted docstring (not function body code); not a placeholder violation",
+    "Minor: `pass` on line 71 of cell 25 is inside `except OSError: pass` (legitimate exception handling); not a function-body placeholder violation",
+    "SEED=42 confirmed in cell 1 (SEED = 42, random.seed(SEED), np.random.seed(SEED))"
   ]
 }

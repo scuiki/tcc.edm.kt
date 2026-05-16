@@ -1,6 +1,6 @@
 """
 BKT (Bayesian Knowledge Tracing) — Corbett & Anderson (1995).
-KC = ProblemID, um modelo pyBKT por assignment, treinado no Release/Train.
+KC = ProblemID, um modelo pyBKT por assignment, treinado no Spring 2019 train split (80/20).
 """
 
 import numpy as np
@@ -40,7 +40,7 @@ def train_bkt(train_sequences: list[dict], seed: int = 42) -> Model:
     """Treina um Model pyBKT com EM nos train_sequences.
 
     Args:
-        train_sequences: output de data_loader.build_sequences (Release/Train).
+        train_sequences: output de data_loader.build_sequences (Spring 2019 train split).
         seed: semente para reprodutibilidade.
 
     Returns:
@@ -100,8 +100,8 @@ def train_and_evaluate(
     """Pipeline completo: treina, prediz e calcula ambas as métricas AUC.
 
     Args:
-        train_sequences: sequências Release/Train.
-        test_sequences: sequências Release/Test.
+        train_sequences: sequências do train split.
+        test_sequences: sequências do test split.
         seed: semente.
 
     Returns:

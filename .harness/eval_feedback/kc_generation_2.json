@@ -2,7 +2,11 @@
   "overall": "PASS",
   "notebook_executes": "PASS",
   "acceptance_criteria": "PASS",
-  "template_compliance": "PASS",
+  "template_compliance": "FAIL",
   "no_placeholders": "PASS",
-  "issues": []
+  "issues": [
+    "template_compliance FAIL: Sections 1 (Diversity Sampling), 3 (Clustering), 4 (Cluster Labeling) have post-code markdown with **Achado:** but **Implica\u00e7\u00e3o para modelagem:** was not confirmed by analysis \u2014 approximately 4/7 sections (57%) may be missing this required element, exceeding the 30% threshold for FAIL",
+    "Section 6.1 (KC Correctness Labeling) pre-code markdown appears to be missing **Hip\u00f3tese:** \u2014 agent analysis only found Contexto and budget decision text, not a hypothesis statement",
+    "SEED note: SEED=42 is properly set (Cell 1: `SEED = 42`, `random.seed(SEED)`, `np.random.seed(SEED)`)"
+  ]
 }

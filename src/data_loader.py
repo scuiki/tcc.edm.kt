@@ -1,24 +1,16 @@
 """
 data_loader.py — carregamento do dataset CSEDM (ProgSnap2 v6)
 
-Splits disponíveis:
-  - All/  : semestre Fall-2019 (set–dez 2019), 506 estudantes; usar para EDA completa
-  - Release/ : semestre Spring-2019 (fev–mai 2019), 329 estudantes; usar para comparação
-               reproduzível com Shi et al. (2022) e Pankiewicz et al. (2025)
-
-Cada split contém Train/ e Test/ com Data/MainTable.csv, early.csv, late.csv.
+Dataset principal: data/CSEDM/MainTable.csv (Spring 2019, protocolo Shi et al. 2022)
+  - 410 alunos após filtro min_attempts >= 3 (Run.Program globais); 23.68% corretos
+  - Split 80/20: train_test_split(students, test_size=0.2, random_state=1)
+  - Usar load_spring2019_split() para carregamento com split reproduzível.
 """
 
 from pathlib import Path
 import pandas as pd
 
-_SPLITS = {
-    "all":             ("All/Data/MainTable.csv", None),
-    "all_train":       ("Train/Data/MainTable.csv", "Train/early.csv"),
-    "all_test":        ("Test/Data/MainTable.csv",  "Test/early.csv"),
-    "release_train":   ("Release/Train/Data/MainTable.csv", "Release/Train/early.csv"),
-    "release_test":    ("Release/Test/Data/MainTable.csv",  "Release/Test/early.csv"),
-}
+_SPLITS = {}
 
 
 def load_main_table(split: str, data_root: Path | str) -> pd.DataFrame:
@@ -37,10 +29,6 @@ def load_main_table(split: str, data_root: Path | str) -> pd.DataFrame:
         MainTable com ServerTimestamp convertido para datetime e AssignmentID
         como inteiro (colunas extras de Release/ mantidas).
 
-    Notes
-    -----
-    Release/Train correto-rate ≈ 23.70% (Shi et al. (2022) reporta 23.68% — margem
-    de arredondamento esperada; benchmark de reprodutibilidade).
     """
     data_root = Path(data_root)
     if split not in _SPLITS:
@@ -250,3 +238,47 @@ def load_labels(split: str, data_root: Path | str, which: str = "early") -> pd.D
         raise FileNotFoundError(f"Arquivo de labels não encontrado: {label_path}")
 
     return pd.read_csv(label_path)
+
+
+def load_spring2019_split(
+    data_dir: "Path | str",
+    test_size: float = 0.2,
+    random_state: int = 1,
+    min_attempts: int = 3,
+) -> "tuple[pd.DataFrame, pd.DataFrame]":
+    """Carrega MainTable.csv, filtra min_attempts e split 80/20 por SubjectID.
+
+    Replica o protocolo de Shi et al. (2022): 410 alunos, split random_state=1.
+    min_attempts é contado em Run.Program globais (todos os assignments somados).
+
+    Retorna o DataFrame completo (todos os EventTypes) — usar filter_for_bkt_dkt()
+    ou filter_for_code_dkt() nas células subsequentes.
+
+    Taxa de corretos no train split ≈ 23.68% (tolerância ±0.5pp).
+
+    Parameters
+    ----------
+    data_dir : Path | str
+        data/CSEDM/ após reorganização — contém MainTable.csv diretamente.
+    """
+    from sklearn.model_selection import train_test_split as _split
+
+    data_dir = Path(data_dir)
+    df = pd.read_csv(data_dir / "MainTable.csv")
+    df["ServerTimestamp"] = pd.to_datetime(df["ServerTimestamp"], utc=True, errors="coerce")
+    if "AssignmentID" in df.columns:
+        df["AssignmentID"] = pd.to_numeric(df["AssignmentID"], errors="coerce").astype("Int64")
+    if "ProblemID" in df.columns:
+        df["ProblemID"] = pd.to_numeric(df["ProblemID"], errors="coerce").astype("Int64")
+
+    run = df[df["EventType"] == "Run.Program"]
+    attempts = run.groupby("SubjectID").size()
+    eligible = attempts[attempts >= min_attempts].index
+    df_filtered = df[df["SubjectID"].isin(eligible)]
+
+    students = df_filtered["SubjectID"].unique()
+    train_s, test_s = _split(students, test_size=test_size, random_state=random_state)
+
+    train_df = df_filtered[df_filtered["SubjectID"].isin(train_s)].reset_index(drop=True)
+    test_df  = df_filtered[df_filtered["SubjectID"].isin(test_s)].reset_index(drop=True)
+    return train_df, test_df

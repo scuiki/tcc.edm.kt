@@ -1,0 +1,303 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic:
+      - banner
+    - generic [ref=e5]:
+      - generic:
+        - generic:
+          - generic:
+            - button "Skip to main content":
+              - generic: Skip to main content
+          - generic:
+            - button "Skip to navigation":
+              - generic: Skip to navigation
+      - generic [ref=e8]:
+        - banner:
+          - generic [ref=e10]:
+            - link "CSEDM Data Challenge" [ref=e12] [cursor=pointer]:
+              - /url: /ncsu.edu/csedm-dc-2021/home
+              - generic [ref=e13]: CSEDM Data Challenge
+            - navigation [ref=e14]:
+              - list [ref=e15]:
+                - listitem [ref=e16]:
+                  - link "Home" [ref=e19] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/home
+                - listitem [ref=e21]:
+                  - link "Dataset" [ref=e24] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/dataset
+                - listitem [ref=e26]:
+                  - link "Tracks" [ref=e29] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/tracks
+                - listitem [ref=e31]:
+                  - link "Submission" [ref=e34] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/submission
+                - listitem [ref=e36]:
+                  - link "Organizers" [ref=e39] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/organizers
+                - listitem [ref=e41]:
+                  - link "Prizes" [ref=e44] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/prizes
+                - listitem [ref=e46]:
+                  - link "Winners" [ref=e49] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/winners
+                - listitem [ref=e51]:
+                  - link "CSEDM Workshops" [ref=e54] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/csedm-workshops
+            - button "Open search bar" [ref=e56] [cursor=pointer]:
+              - img [ref=e59]
+        - generic [ref=e63]:
+          - main [ref=e74]:
+            - heading "Dataset" [level=2] [ref=e75]
+          - generic [ref=e85]:
+            - 'heading "Dataset: CodeWorkout (Spring and Fall 2019)" [level=2]':
+              - generic [ref=e86]:
+                - generic:
+                  - generic:
+                    - button:
+                      - generic:
+                        - img
+                - text: "Dataset: CodeWorkout (Spring and Fall 2019)"
+            - paragraph [ref=e87]
+            - paragraph [ref=e88]: The CodeWorkout dataset is collected from a CS1 course in the Spring and Fall 2019 semesters at a public university in the U.S. It contains the code submissions from students for 50 coding problems, each requiring ~10-26 lines of code. In total, there are 329 and 490 students in the Spring and Fall semesters who completed the course. Each dataset contains 65K+ code submissions, including the submitted code. In addition to the code submissions, the scores of the submissions (% of unit tests passes) are also available, as well as the compiler message if the compilation is not successful. The final grades of students are also provided for this dataset.
+            - paragraph [ref=e89]
+            - paragraph [ref=e90]:
+              - text: To download the datasets, see the links under the
+              - link "Quickstart" [ref=e92] [cursor=pointer]:
+                - /url: /ncsu.edu/csedm-dc-2021/home
+              - text: .
+            - heading "Training/Test Split" [level=3]:
+              - generic [ref=e93]:
+                - generic:
+                  - generic:
+                    - button:
+                      - generic:
+                        - img
+                - text: Training/Test Split
+            - paragraph [ref=e94]:
+              - text: Each semester's data is split into training (75% of students) and testing (25%) datasets. Since the Data Challenge is an early prediction task, both
+              - emphasis [ref=e96]: Training and Test
+              - text: datasets contain data about the
+              - emphasis [ref=e98]: first 30 problems
+              - text: ", which should be used to make predictions on the"
+              - emphasis [ref=e100]: final 20 problems
+              - text: (Track 1) and students'
+              - emphasis [ref=e102]: final grades
+              - text: (Track 2).
+              - emphasis [ref=e104]
+              - text: The labels for these late problems are provided in the Training dataset, but not the Test dataset. Table below gives an overview of this data.
+          - img [ref=e116]
+          - generic [ref=e126]:
+            - 'heading "Data Format: ProgSnap2" [level=3]':
+              - generic [ref=e127]:
+                - generic:
+                  - generic:
+                    - button:
+                      - generic:
+                        - img
+                - text: "Data Format: ProgSnap2"
+            - paragraph [ref=e128]:
+              - text: Each dataset contains a Data folder, which contains students' trace data, stored in the ProgSnap2 format. Additional information on the format can be found in
+              - link "ProgSnap2 spec" [ref=e130] [cursor=pointer]:
+                - /url: https://www.google.com/url?q=https%3A%2F%2Fbit.ly%2FProgSnap2&sa=D&sntz=1&usg=AOvVaw2XJwH-J0mOnzBPcEKkgLq5
+              - text: and in [
+              - link "Price et al." [ref=e132] [cursor=pointer]:
+                - /url: https://www.google.com/url?q=https%3A%2F%2Fdl.acm.org%2Fdoi%2Fabs%2F10.1145%2F3341525.3387373&sa=D&sntz=1&usg=AOvVaw1o9u55X1GlJlRhXCKyvW5W
+              - text: "]."
+            - paragraph [ref=e133]
+            - paragraph [ref=e134]: "Each training and testing dataset is organized as follows:"
+            - paragraph [ref=e135]
+            - paragraph [ref=e136]: Root/
+            - paragraph [ref=e137]: early.csv
+            - paragraph [ref=e138]: late.csv
+            - paragraph [ref=e139]: Data/
+            - paragraph [ref=e140]: MainTable.csv
+            - paragraph [ref=e141]: Metadata.csv
+            - paragraph [ref=e142]: CodeStates/
+            - paragraph [ref=e143]: CodeState.csv
+            - paragraph [ref=e144]: LinkTables/
+            - paragraph [ref=e145]: Subject.csv
+            - paragraph [ref=e146]
+            - paragraph [ref=e147]:
+              - strong [ref=e149]: "Data/MainTable.csv:"
+              - text: "Contains all programming process event data. Each row of the table represents an event: e.g. one program submission , compilation result, and errors if any. The Run.Program events are initiated by one student submitting a given problem, while the Compile and Compile.Error events are generated by the grading system. The following attributes are defined for each row:"
+            - paragraph [ref=e150]
+            - paragraph [ref=e151]: "Primary Attributes:"
+            - list [ref=e152]:
+              - listitem [ref=e153]:
+                - paragraph [ref=e154]: "SubjectID: A unique ID for each participant in the study."
+              - listitem [ref=e155]:
+                - paragraph [ref=e156]: "AssignmentID: An ID for the assignment a student is working on. One assignment may include multiple problems."
+              - listitem [ref=e157]:
+                - paragraph [ref=e158]: "ProblemID: An ID for the problem being worked on by the student."
+              - listitem [ref=e159]:
+                - paragraph [ref=e160]: "CodeStateID: An ID for the students code at the time of the event. This corresponds to one row in the LinkTables/CodeState.csv file, which contains the text of the code."
+              - listitem [ref=e161]:
+                - paragraph [ref=e162]: "EventType:"
+                - list [ref=e163]:
+                  - listitem [ref=e164]:
+                    - paragraph [ref=e165]: Run.Program indicates that the students submitted the program and made an attempt to run the code, and get feedback from test cases. The finished percentage score of the run in the Score column.
+                  - listitem [ref=e166]:
+                    - paragraph [ref=e167]: Compile indicates the program is compiled, and a result of whether the compilation is a success or failure is shown on the Compile.Result column.
+                  - listitem [ref=e168]:
+                    - paragraph [ref=e169]: Compile.Error value indicates the compilation fails, and the error messages are available in CompileMessageType and CompileMessageData column.
+              - listitem [ref=e170]:
+                - paragraph [ref=e171]: "Score: The score the student got on"
+              - listitem [ref=e172]:
+                - paragraph [ref=e173]: "ServerTimestamp: The time of the event."
+              - listitem [ref=e174]:
+                - paragraph [ref=e175]: "ServerTimezone: The relative timezone of the server to US Eastern Time, or UTC. Here it is always 0 or UTC."
+            - paragraph [ref=e176]
+            - paragraph [ref=e177]: "Additional Attributes -- these columns may also be useful:"
+            - list [ref=e178]:
+              - listitem [ref=e179]:
+                - paragraph [ref=e180]: "Order: An integer indicating the chronological order of this event, relative to each other event in the table. This is necessary to order events that occurred at the same timestamp."
+                - list [ref=e181]:
+                  - listitem [ref=e182]:
+                    - paragraph [ref=e183]:
+                      - strong [ref=e185]: Note
+                      - text: ": For the CodeWorkout dataset Order is only defined"
+                      - emphasis [ref=e187]: for a given SubjectID and ProblemID
+                      - text: . In other words, you can compare events from the same SubjectID and ProblemID, but otherwise comparing Order is meaningless. Instead, you should use ServerTimestamp to compare the global order of events.
+              - listitem [ref=e188]:
+                - paragraph [ref=e189]: "ToolInstances: The tutoring system and programming language being used. In this case, it is always CodeWorkout [13] and Java 8."
+              - listitem [ref=e190]:
+                - paragraph [ref=e191]: "CourseID: The ID for the course participated by the student. Here it is all CS 1. One course is composed of multiple course sections"
+              - listitem [ref=e192]:
+                - paragraph [ref=e193]: "CourseSectionID: An ID for the section a student is working on. In one section, students are assigned with multiple assignments."
+              - listitem [ref=e194]:
+                - paragraph [ref=e195]: "Attempt: The chronological attempt order of the student on a problem."
+              - listitem [ref=e196]:
+                - paragraph [ref=e197]: "IsEventOrderingConsistent: Set as TRUE when the event ordering is consistent."
+              - listitem [ref=e198]:
+                - paragraph [ref=e199]: "EventID: The unique ID of the event."
+              - listitem [ref=e200]:
+                - paragraph [ref=e201]: "ParentEventID: If this event is a sub-event (caused by running or compilations), this field indicates the parent EventID of the current event."
+              - listitem [ref=e202]:
+                - paragraph [ref=e203]: "SourceLocation: Indicates the text line of the code that caused results."
+            - paragraph [ref=e204]
+            - paragraph [ref=e205]:
+              - strong [ref=e207]: "Data/DatasetMetadata.csv:"
+              - generic [ref=e208]:
+                - text: Contains metadata about this dataset, as defined in the
+                - link [ref=e209] [cursor=pointer]:
+                  - /url: https://www.google.com/url?q=https%3A%2F%2Fcssplice.github.io%2Fprogsnap2%2Findex.html&sa=D&sntz=1&usg=AOvVaw2Q_nKpeye7CZhSJ289T-vU
+              - link "ProgSnap2 spec" [ref=e211] [cursor=pointer]:
+                - /url: https://www.google.com/url?q=https%3A%2F%2Fcssplice.github.io%2Fprogsnap2%2Findex.html&sa=D&sntz=1&usg=AOvVaw2Q_nKpeye7CZhSJ289T-vU
+              - text: .
+            - paragraph [ref=e212]
+            - paragraph [ref=e213]:
+              - strong [ref=e215]: "Data/CodeStates/CodeState.csv:"
+              - text: This file contains a mapping from each CodeStateID in the MainTable to the source code it represents.
+            - paragraph [ref=e216]
+            - paragraph [ref=e217]:
+              - emphasis [ref=e219]: "Note: The following files are used for prediction in"
+              - emphasis [ref=e221]: Track 1
+              - emphasis [ref=e223]: and
+              - emphasis [ref=e225]: Track 2 (
+              - link "Tracks" [ref=e227] [cursor=pointer]:
+                - /url: /ncsu.edu/csedm-dc-2021/tracks
+                - emphasis [ref=e228]: Tracks
+              - emphasis [ref=e230]: )
+              - text: .
+              - emphasis [ref=e232]: Their descriptions will make more sense after reading about these tracks.
+            - paragraph [ref=e233]
+            - paragraph [ref=e234]:
+              - strong [ref=e236]: early.csv
+              - text: ": This table contains one row for each combination of SubjectID and ProblemID for the"
+              - emphasis [ref=e238]: first 30 problems (the first 3 assignments)
+              - text: ". Each row represents one student's combined attempts at one problem. These problems represent the \"early data,\" available to the model for the early prediction tracks for Tracks 1 and 2. Each row has the following attributes:"
+            - list [ref=e239]:
+              - listitem [ref=e240]:
+                - paragraph [ref=e241]: "SubjectID: The unique ID of the student attempting the problem."
+              - listitem [ref=e242]:
+                - paragraph [ref=e243]: "AssignmentID / ProblemID: The IDs of the assignment and problem being attempted."
+              - listitem [ref=e244]:
+                - paragraph [ref=e245]: "Attempts: The number of attempts the student made on the problem before either getting it right for the first time, or giving up without getting it right."
+              - listitem [ref=e246]:
+                - paragraph [ref=e247]: "CorrectEventually: This will be TRUE if the student eventually got the problem fully correct (Score = 1), and FALSE if they never submitted a correct solution."
+                - list [ref=e248]:
+                  - listitem [ref=e249]:
+                    - paragraph [ref=e250]:
+                      - strong [ref=e252]: Note
+                      - text: ": Attempts and CorrectEventually are provided for convenience and transparency, but these values can be calculated from the MainTable.csv."
+              - listitem [ref=e253]:
+                - paragraph [ref=e254]:
+                  - generic [ref=e255]:
+                    - text: "Label: Whether the student was successful (TRUE) or struggled (FALSE) on this problem, as"
+                    - link [ref=e256] [cursor=pointer]:
+                      - /url: /ncsu.edu/csedm-dc-2021/tracks
+                  - link "defined in Track 1" [ref=e258] [cursor=pointer]:
+                    - /url: /ncsu.edu/csedm-dc-2021/tracks
+                  - text: .
+                - list [ref=e259]:
+                  - listitem [ref=e260]:
+                    - paragraph [ref=e261]:
+                      - strong [ref=e263]: Note
+                      - text: ": This value is given in"
+                      - emphasis [ref=e265]: both
+                      - text: training and test datasets for the
+                      - emphasis [ref=e267]: early problems
+                      - text: ", but it must be predicted for the"
+                      - emphasis [ref=e269]: late problems
+                      - text: in the test dataset.
+            - paragraph [ref=e270]
+            - paragraph [ref=e271]:
+              - strong [ref=e273]: late.csv
+              - text: ": This table contains one row for each combination of SubjectID and ProblemID for the"
+              - emphasis [ref=e275]: final 20 problems (the last 2 assignments)
+              - text: . Each row represents one student's combined attempts at one problem. These problems represent the "later events," where we are trying to predict student outcomes (in Track 1). Each row has the same ID fields as early.csv, as well as a possible Label column.
+            - list [ref=e276]:
+              - listitem [ref=e277]:
+                - paragraph [ref=e278]:
+                  - strong [ref=e280]: Note
+                  - text: ": In training datasets, the Label value is given, but in test datasets, this value must be predicted (in Track 1)."
+            - paragraph [ref=e281]
+            - paragraph [ref=e282]:
+              - strong [ref=e284]: "Data/LinkTables/Subject.csv:"
+              - text: This file contains a mapping from each SubjectID in the MainTable to the final grade of students in this class (X-Grade).
+            - list [ref=e285]:
+              - listitem [ref=e286]:
+                - paragraph [ref=e287]:
+                  - strong [ref=e289]: Note
+                  - text: ": In training datasets, the X-Grade value is given, but in test datasets, this value must be predicted (in Track 2)."
+            - paragraph [ref=e290]
+            - heading "Problem Prompts and Programming Concepts Used" [level=3]:
+              - generic [ref=e291]:
+                - generic:
+                  - generic:
+                    - button:
+                      - generic:
+                        - img
+                - text: Problem Prompts and Programming Concepts Used
+            - paragraph [ref=e292]
+            - paragraph [ref=e293]:
+              - generic [ref=e294]:
+                - text: The CodeWorkout dataset contains 50 problems nested into 5 assignments. Students could attempt problems within a given assignment in any order. The prompts for each problem can be found in
+                - link [ref=e295] [cursor=pointer]:
+                  - /url: https://docs.google.com/spreadsheets/d/1-APxPAVP3PylM0fskzDNgpalj1DTuMqDLkgBC5QxJdg/edit#gid=0
+              - link "this spreadsheet" [ref=e297] [cursor=pointer]:
+                - /url: https://docs.google.com/spreadsheets/d/1-APxPAVP3PylM0fskzDNgpalj1DTuMqDLkgBC5QxJdg/edit#gid=0
+              - text: . The spreadsheet also contains estimates of which programming concepts are used in each problem; however, these are just one researcher's judgement and should not be taken as ground truth.
+            - paragraph [ref=e298]
+            - heading "Differences Between Semesters" [level=3]:
+              - generic [ref=e299]:
+                - generic:
+                  - generic:
+                    - button:
+                      - generic:
+                        - img
+                - text: Differences Between Semesters
+            - paragraph [ref=e300]: "The Spring and Fall 2019 semesters were similar; however, there were a few differences:"
+            - list [ref=e301]:
+              - listitem [ref=e302]:
+                - paragraph [ref=e303]: In F19 there was an additional assignment (between Assignment 4 and 5), which only ~70% of students completed, likely additional optional practice. We will not use this assignment for prediction, since it is abnormal and not in S19. Since it comes in between the two assignments we are using for prediction, we have simply ignored it.
+              - listitem [ref=e304]:
+                - paragraph [ref=e305]: In F19 some AssignmentIDs and ProblemIDs were renamed, so we have updated their IDs to match S19. This should therefore not affect prediction.
+            - paragraph [ref=e306]
+            - paragraph [ref=e307]: These differences are representative of real changes that happen from semester-to-semester, making cross-semester prediction an especially important task.
+            - paragraph [ref=e308]
+        - generic [ref=e309]:
+          - button [ref=e310] [cursor=pointer]:
+            - img [ref=e313]
+          - button "Report abuse" [ref=e316] [cursor=pointer]
+  - region

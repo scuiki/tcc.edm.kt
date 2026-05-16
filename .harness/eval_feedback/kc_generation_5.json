@@ -2,7 +2,11 @@
   "overall": "PASS",
   "notebook_executes": "PASS",
   "acceptance_criteria": "PASS",
-  "template_compliance": "PASS",
+  "template_compliance": "WARN",
   "no_placeholders": "PASS",
-  "issues": []
+  "issues": [
+    "Section 6.1 (KC Correctness Labeling, Cell 21) is missing **Hip\u00f3tese:** in the before-markdown",
+    "Section 6.1 has no after-markdown cell with **Achado:** and **Implica\u00e7\u00e3o para modelagem:** (Cell 23 immediately starts Section 7.1)",
+    "(WARN only \u2014 1/7 analytical sections affected, \u226430% threshold, does not trigger OVERALL FAIL)"
+  ]
 }

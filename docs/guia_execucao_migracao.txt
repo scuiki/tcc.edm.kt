@@ -1,0 +1,165 @@
+GUIA DE EXECUÇÃO — MIGRAÇÃO SPRING 2019
+=======================================
+
+Referência: docs/plano_migracao_spring2019.md
+
+
+VISÃO GERAL
+-----------
+
+O processo tem duas etapas distintas:
+
+  ETAPA A — Agente Claude Code (1 agente, ~10–20 min)
+    Faz todas as mudanças de código e organização de arquivos:
+    verificações, movimentação de dados, edição de .py e notebooks,
+    atualização de harness e documentação.
+    NÃO re-executa notebooks.
+
+  ETAPA B — Harness (você roda manualmente, ~1–2h por plan)
+    Re-executa cada notebook na ordem correta, regenerando
+    resultados e textos analíticos com os novos dados.
+
+
+1 AGENTE É O SUFICIENTE?
+------------------------
+
+Sim. Todas as mudanças do plano são edições de arquivo — Python,
+JSON de notebooks, Markdown e operações de filesystem. Um único
+agente consegue fazer tudo na sequência correta.
+
+A única exceção são as re-execuções de notebook (via harness), que
+precisam rodar fora do agente porque o harness chama o Claude Code
+internamente como subprocesso.
+
+
+ETAPA A — PROMPT DO AGENTE
+---------------------------
+
+Cole exatamente este prompt ao iniciar o agente:
+
+---
+
+Contexto: TCC EDM/KT, dataset CSEDM ProgSnap2 v6. Estou migrando
+o pipeline de Release/ (CSEDM Data Challenge, 329 alunos) para o
+dataset correto do paper Shi et al. 2022: data/Data/MainTable.csv
+(Spring 2019, 410 alunos, 80/20 random_state=1).
+
+O plano completo está em docs/plano_migracao_spring2019.md.
+Execute TODOS os passos do plano na ordem definida. O diretório
+de trabalho é a raiz do repositório.
+
+IMPORTANTE — o que fazer:
+- Verificações shell (grep, diff) dos Passos 0a e 0b
+- Deletar results/sequences_bkt_dkt.pkl, results/sequences_code_dkt.pkl,
+  results/bkt_results.pkl (Passo 0b)
+- Mover e remover diretórios de data/ conforme Passo 0c
+- Editar src/data_loader.py (limpar _SPLITS, novo docstring,
+  adicionar load_spring2019_split) — Passo 1a
+- Editar src/models/bkt.py (docstrings) — Passo 1b
+- Editar .harness/runner.py e .harness/HARNESS_PLAN.md (voz
+  estudante de EngComp + referência ao repo modelo Code-DKT
+  em /home/leokuntz/Documents/repositories/experiments/Code-DKT/src/)
+  — Passo 1c
+- Editar CLAUDE.md (seção Splits + nova seção Repositório Modelo)
+  — Passo 1d
+- Atualizar código de notebooks/02_preprocessing.ipynb,
+  notebooks/04_bkt.ipynb, notebooks/03b_kc_generation.ipynb,
+  notebooks/01_eda.ipynb conforme Passos 2, 3, 4 e 5
+- Atualizar docs/ajustes_split.md e .harness/progress.md — Passo 6
+- Resetar status das tasks do harness para "pending" nos plans
+  afetados (ver seção abaixo)
+
+IMPORTANTE — o que NÃO fazer:
+- NÃO executar os notebooks (nem via jupyter nbconvert nem via harness)
+- NÃO executar o harness runner.py
+
+Ao terminar, confirme quais arquivos foram alterados e se os
+asserts de verificação do plano foram incluídos nos notebooks.
+
+---
+
+
+RESET DE STATUS DO HARNESS (parte do Passo A)
+----------------------------------------------
+
+Após editar os notebooks, o agente deve também resetar as tasks
+do harness que precisam ser re-executadas com os novos dados.
+Diga ao agente para fazer isso, ou faça manualmente:
+
+  preprocessing.json  → tasks 1, 2, 3, 4, 5  → status: "pending"
+  kc_generation.json  → tasks 1, 2, 3, 4, 5, 7 → status: "pending"
+                        (task 6 = label_kc_correctness, manter "pending" — não rodar)
+  bkt.json            → tasks 1, 2, 3, 4, 5 já estão "pending" — nada a fazer
+  eda.json            → tasks 1, 2, 3, 4, 5, 6, 7, 8 → status: "pending"
+
+Os arquivos ficam em .harness/plans/
+
+
+ETAPA B — HARNESS (após o agente terminar)
+------------------------------------------
+
+Execute cada plan na ordem abaixo, a partir da raiz do repositório.
+O flag --loop faz o harness continuar até todas as tasks estarem
+completas ou até falhar.
+
+  1. Preprocessing (necessário primeiro — gera os pkl):
+
+       python .harness/runner.py --plan .harness/plans/preprocessing.json --loop
+
+  2. KC Generation (depende do pkl gerado acima):
+
+       python .harness/runner.py --plan .harness/plans/kc_generation.json --loop
+
+     Atenção: a task 6 (label_kc_correctness) está como "pending" por design
+     — ela custa ~$2-3 e só é necessária para o Code-DKT (notebook 06).
+     O harness vai parar nela se todas as dependências estiverem ok.
+     Se quiser rodar só a task 7 (validação srcML), use:
+
+       python .harness/runner.py --plan .harness/plans/kc_generation.json --task 7
+
+  3. BKT (depende do pkl gerado no step 1):
+
+       python .harness/runner.py --plan .harness/plans/bkt.json --loop
+
+  4. EDA (independente do pkl — pode rodar em qualquer ordem):
+
+       python .harness/runner.py --plan .harness/plans/eda.json --loop
+
+     O EDA demora ~30 min (análise completa do dataset).
+
+
+VERIFICAÇÃO RÁPIDA APÓS ETAPA B
+--------------------------------
+
+Após o harness terminar cada plan, confirme:
+
+  Preprocessing OK:
+    python3 -c "
+    import pickle
+    s = pickle.load(open('results/sequences_bkt_dkt.pkl','rb'))
+    print('train:', {aid: len(seqs) for aid, seqs in s['train'].items()})
+    print('test:', {aid: len(seqs) for aid, seqs in s['test'].items()})
+    "
+    Esperado: todos os 5 assignments (439, 487, 492, 494, 502) com n_test > 0
+
+  BKT OK:
+    python3 -c "
+    import pickle
+    r = pickle.load(open('results/bkt_results.pkl','rb'))
+    for aid, v in sorted(r.items()):
+        print(f'A{aid}: all={v[\"all_auc\"]}, first={v[\"first_auc\"]}')
+    "
+    Esperado: AUC não-None para todos os 5 assignments
+
+
+RESUMO DOS COMANDOS
+-------------------
+
+  # Etapa A — agente (cole o prompt acima no Claude Code)
+  claude
+
+  # Etapa B — harness (na raiz do repo)
+  python .harness/runner.py --plan .harness/plans/preprocessing.json --loop
+  python .harness/runner.py --plan .harness/plans/kc_generation.json --loop
+  python .harness/runner.py --plan .harness/plans/bkt.json --loop
+  python .harness/runner.py --plan .harness/plans/eda.json --loop

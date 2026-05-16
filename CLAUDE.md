@@ -8,6 +8,16 @@ TCC 1 de graduação: aplicar Educational Data Mining (EDM) ao dataset CSEDM (Pr
 
 Metodologia: EDM Process de 4 fases — Problem Definition → Data Preparation → Modelling & Evaluation → Deployment (diferido ao TCC 2, não implementar aqui).
 
+## Repositório Modelo (Code-DKT)
+
+Referência de implementação para o Code-DKT e DKT (Shi et al., 2022):
+- **Path:** `/home/leokuntz/Documents/repositories/experiments/Code-DKT/src/`
+- `c2vRNNModel.py` — arquitetura LSTM + mecanismo de atenção code2vec
+- `run.py` — protocolo de treinamento (10-fold CV, Adam lr=0.0005)
+- `config.py` — hiperparâmetros de referência (hidden=128, length=50, questions=10)
+- `path_extractor.py` — extração de caminhos AST (adaptar para srcML neste projeto)
+- **Atenção:** usa seed=0 e Python 2/3 misto — adaptar para SEED=42 e Python 3.10+
+
 ## Stack
 
 Python 3.10+, Jupyter Notebooks. Dependências principais:
@@ -67,9 +77,18 @@ tcc.edm.kt/
 ## Dataset CSEDM — Fatos Críticos
 
 **Splits:**
-- `All/`, `Train/`, `Test/` — semestre Fall-2019 (506 estudantes, set–dez 2019)
-- `Release/Train/`, `Release/Test/` — semestre diferente (329 estudantes, fev–mai 2019); **populações sem sobreposição com All**
-- **Usar `Release/` para comparação reproduzível com o paper Code-DKT** — `Release/Train` tem 23.70% de corretos vs 23.68% no paper
+
+**Dataset primário para modelagem (Shi et al. protocol):**
+- Arquivo: `data/CSEDM/MainTable.csv` (Spring 2019, 413 alunos brutos)
+- Filtro: `min_attempts >= 3` (Run.Program globais) → 410 alunos (23.68% corretos — match paper)
+- Split: `train_test_split(students, test_size=0.2, random_state=1)` → 328 treino + 82 teste
+- Todos os 5 assignments disponíveis no test set (A439, A487, A492, A494, A502)
+- CodeStates: `data/CSEDM/CodeStates/CodeStates.csv` (69.627 registros)
+
+**Release/ (removido — era CSEDM Data Challenge 2021):**
+- Spring 2019, 329 alunos (critério "completed course"), split 75/25
+- Release/Test tinha apenas A1–A3 por design (A4–A5 eram prediction targets do challenge)
+- Não usar para modelagem KT
 
 **EventType:**
 - Não existe `EventType = Submit` neste dataset
@@ -118,7 +137,7 @@ tcc.edm.kt/
 
 ## Critérios de Conclusão do TCC 1
 
-1. First-attempt AUC do Code-DKT ~74% para A1 (±2%), replicando Table 1 e Table 2 de Shi et al. (2022); KC=Problem por assignment
+1. First-attempt AUC do Code-DKT próximo a 74% para A1 (±3%), comparável com Table 1 de Shi et al.; data/CSEDM/ (410 alunos, 80/20, random_state=1)
 2. Tabela comparativa BKT vs DKT vs Code-DKT por assignment, reportando first-attempt AUC e all-attempts AUC
 3. Teste de significância Wilcoxon signed-rank entre modelos
 4. Todos os notebooks executáveis do zero com seed fixo

@@ -2,7 +2,10 @@
   "overall": "PASS",
   "notebook_executes": "PASS",
   "acceptance_criteria": "PASS",
-  "template_compliance": "PASS",
+  "template_compliance": "WARN",
   "no_placeholders": "PASS",
-  "issues": []
+  "issues": [
+    "Section 6.1 (Cell 21) before-markdown is missing **Hip\u00f3tese:** \u2014 has \"Decis\u00e3o de or\u00e7amento\" and \"Prompt caching\" blocks instead",
+    "Section 6.1 has no after-markdown cell: no **Achado:** or **Implica\u00e7\u00e3o para modelagem:** after Cell 22 (the next cell, 23, is the 7.1 section header)"
+  ]
 }

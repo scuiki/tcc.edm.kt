@@ -3,7 +3,7 @@
   "title": "KC Generation — criar notebooks/03b_kc_generation.ipynb",
   "type": "feature",
   "created": "2026-05-06",
-  "status": "in_progress",
+  "status": "complete",
   "verify_cmd": [
     ".venv/bin/jupyter",
     "nbconvert",
@@ -106,7 +106,7 @@
     {
       "id": "6",
       "title": "KC Correctness Labeling via LLM — Etapa 6",
-      "status": "complete",
+      "status": "pending",
       "acceptance_criteria": [
         "label_kc_correctness(code, problem_description, kcs, client) definida: retorna {error_reasoning: [str], kc_errors: {kc_name: 0|1}}",
         "Prompt baseado em Duan et al. (2025) Table 10; citacao explicita no markdown",

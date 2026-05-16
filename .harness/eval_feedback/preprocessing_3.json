@@ -4,5 +4,7 @@
   "acceptance_criteria": "PASS",
   "template_compliance": "PASS",
   "no_placeholders": "PASS",
-  "issues": []
+  "issues": [
+    "Minor cosmetic: output table in cell 552c6234 has spurious blank lines between assignments rows (visual artifact only, not a functional issue)"
+  ]
 }

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDM·KT — Ferramenta Docente (Protótipo)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .page { display: none; }
+  .page.active { display: block; }
+  .nav-btn { transition: background 0.15s; }
+  .nav-btn.active { background: rgba(255,255,255,0.18); }
+  .nav-btn:hover { background: rgba(255,255,255,0.1); }
+  .kc-tab { display: none; }
+  .kc-tab.active { display: block; }
+  .pipeline-step { cursor: pointer; transition: all 0.15s; }
+  .pipeline-step.active { background: #4f46e5; color: white; border-color: #4f46e5; }
+  .pipeline-step:not(.active):hover { border-color: #a5b4fc; }
+  .drag-zone { border: 2px dashed #cbd5e1; transition: all 0.2s; cursor: pointer; }
+  .drag-zone:hover { border-color: #6366f1; background: #eef2ff; }
+  .heat-cell { width: 36px; height: 36px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: white; cursor: default; transition: transform 0.1s; }
+  .heat-cell:hover { transform: scale(1.15); }
+  .model-btn { transition: all 0.15s; }
+  .model-btn.active { background: #4f46e5; color: white; border-color: #4f46e5; }
+  .chat-msg-user { background: #4f46e5; color: white; border-radius: 18px 18px 4px 18px; }
+  .chat-msg-ai { background: #f1f5f9; color: #1e293b; border-radius: 18px 18px 18px 4px; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .tag-emerged { background: #fef9c3; color: #854d0e; border: 1px solid #fde68a; }
+  .tag-intended { background: #ede9fe; color: #4f46e5; border: 1px solid #ddd6fe; }
+  .risk-high { background: #fef2f2; border-left: 3px solid #ef4444; }
+  .risk-med  { background: #fffbeb; border-left: 3px solid #f59e0b; }
+  .risk-low  { background: #f0fdf4; border-left: 3px solid #22c55e; }
+  .scrollbar-thin::-webkit-scrollbar { width: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 2px; }
+</style>
+</head>
+<body class="bg-gray-50">
+
+<div class="flex h-screen overflow-hidden">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="w-60 flex-shrink-0 bg-indigo-950 text-white flex flex-col fixed h-full z-20">
+    <div class="p-5 border-b border-indigo-800">
+      <div class="text-lg font-bold tracking-tight">EDM·KT</div>
+      <div class="text-xs text-indigo-400 mt-0.5">Ferramenta Docente · TCC 2</div>
+    </div>
+
+    <!-- Dataset badge -->
+    <div id="sidebar-badge" class="mx-3 mt-3 px-3 py-2 bg-indigo-900 rounded-lg hidden">
+      <div class="text-xs text-indigo-400 font-semibold uppercase tracking-wide">Dataset</div>
+      <div class="text-sm text-white font-medium mt-0.5">Spring 2019</div>
+      <div class="text-xs text-indigo-300">246 alunos · 5 assignments</div>
+    </div>
+
+    <nav class="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto scrollbar-thin">
+      <button onclick="showPage('upload')" id="nav-upload" class="nav-btn active w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-white">
+        <span class="text-base">📂</span><span>1. Upload Dataset</span>
+      </button>
+      <button onclick="showPage('kc')" id="nav-kc" class="nav-btn w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-indigo-200">
+        <span class="text-base">🧩</span><span>2. Gestão de KCs</span>
+      </button>
+      <button onclick="showPage('eda')" id="nav-eda" class="nav-btn w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-indigo-200">
+        <span class="text-base">📊</span><span>3. Dashboard EDA</span>
+      </button>
+      <button onclick="showPage('kt')" id="nav-kt" class="nav-btn w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-indigo-200">
+        <span class="text-base">🧠</span><span>4. Resultados KT</span>
+      </button>
+      <button onclick="showPage('rec')" id="nav-rec" class="nav-btn w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-indigo-200">
+        <span class="text-base">💡</span><span>5. Recomendações</span>
+      </button>
+      <div class="my-2 border-t border-indigo-800"></div>
+      <button onclick="showPage('chat')" id="nav-chat" class="nav-btn w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-indigo-300">
+        <span class="text-base">💬</span><span>Assistente IA</span>
+      </button>
+    </nav>
+
+    <div class="p-4 border-t border-indigo-800 text-xs text-indigo-500">
+      UFSM · EDM · 2026
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="ml-60 flex-1 overflow-y-auto bg-gray-50">
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- PAGE 1: UPLOAD -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <div id="page-upload" class="page active p-8 max-w-4xl mx-auto">
+      <h1 class="text-2xl font-bold text-gray-800 mb-1">Upload de Dataset</h1>
+      <p class="text-gray-500 mb-6 text-sm">Carregue um dataset no formato <strong>ProgSnap2</strong> para iniciar a análise.</p>
+
+      <div class="drag-zone rounded-2xl p-14 text-center mb-6" onclick="simulateUpload()">
+        <div class="text-5xl mb-3">📁</div>
+        <div class="text-gray-700 font-semibold text-base">Arraste a pasta ProgSnap2 ou clique para selecionar</div>
+        <div class="text-sm text-gray-400 mt-2">Suporta estruturas: All/ · Train/ · Test/ · Release/Train/ · Release/Test/</div>
+        <button class="mt-5 px-6 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 transition">
+          Selecionar Dataset
+        </button>
+      </div>
+
+      <div id="upload-results" class="hidden">
+        <!-- Validation banner -->
+        <div class="flex items-start gap-3 bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-5">
+          <span class="text-emerald-500 text-xl mt-0.5">✓</span>
+          <div>
+            <div class="font-semibold text-emerald-800">Dataset validado com sucesso</div>
+            <div class="text-sm text-emerald-600 mt-0.5">
+              5/5 arquivos obrigatórios · ProgSnap2 v6 · Cobertura de CodeStateID: 100% · Score em [0,1]: 100%
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="grid grid-cols-4 gap-4 mb-5">
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+            <div class="text-3xl font-bold text-indigo-600">246</div>
+            <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Estudantes</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+            <div class="text-3xl font-bold text-indigo-600">5</div>
+            <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Assignments</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+            <div class="text-3xl font-bold text-indigo-600">50</div>
+            <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Problemas</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+            <div class="text-3xl font-bold text-indigo-600">87.6k</div>
+            <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Submissões</div>
+          </div>
+        </div>
+
+        <!-- Alerts -->
+        <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 mb-5 text-sm">
+          <span class="text-amber-500 mt-0.5">⚠</span>
+          <div class="text-amber-800">
+            <strong>Duplicatas detectadas:</strong> 236.024 eventos com mesmo (SubjectID, ProblemID, Timestamp). Comportamento esperado — cada <code class="bg-amber-100 px-1 rounded">Run.Program</code> gera um evento filho <code class="bg-amber-100 px-1 rounded">Compile</code> com o mesmo timestamp. Tratados automaticamente.
+          </div>
+        </div>
+
+        <!-- Preview table -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 mb-5">
+          <div class="text-sm font-semibold text-gray-700 mb-3">Pré-visualização — MainTable.csv</div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs">
+              <thead>
+                <tr class="text-gray-400 border-b border-gray-100">
+                  <th class="text-left pb-2 pr-6 font-medium">SubjectID</th>
+                  <th class="text-left pb-2 pr-6 font-medium">AssignmentID</th>
+                  <th class="text-left pb-2 pr-6 font-medium">ProblemID</th>
+                  <th class="text-left pb-2 pr-6 font-medium">EventType</th>
+                  <th class="text-left pb-2 pr-6 font-medium">Score</th>
+                  <th class="text-left pb-2 font-medium">ServerTimestamp</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-600">
+                <tr class="border-b border-gray-50 hover:bg-gray-50">
+                  <td class="py-1.5 pr-6">S1042</td><td class="pr-6">A439</td><td class="pr-6">P4391</td>
+                  <td class="pr-6"><span class="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">Run.Program</span></td>
+                  <td class="pr-6">1.0</td><td>2019-02-14 09:23:11</td>
+                </tr>
+                <tr class="border-b border-gray-50 hover:bg-gray-50">
+                  <td class="py-1.5 pr-6">S1042</td><td class="pr-6">A439</td><td class="pr-6">P4391</td>
+                  <td class="pr-6"><span class="px-1.5 py-0.5 rounded bg-gray-50 text-gray-500">Compile</span></td>
+                  <td class="pr-6">1.0</td><td>2019-02-14 09:23:11</td>
+                </tr>
+                <tr class="border-b border-gray-50 hover:bg-gray-50">
+                  <td class="py-1.5 pr-6">S1043</td><td class="pr-6">A439</td><td class="pr-6">P4392</td>
+                  <td class="pr-6"><span class="px-1.5 py-0.5 rounded bg-red-50 text-red-700">Compile.Error</span></td>
+                  <td class="pr-6">—</td><td>2019-02-14 10:01:44</td>
+                </tr>
+                <tr class="border-b border-gray-50 hover:bg-gray-50">
+                  <td class="py-1.5 pr-6">S1043</td><td class="pr-6">A439</td><td class="pr-6">P4392</td>
+                  <td class="pr-6"><span class="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">Run.Program</span></td>
+                  <td class="pr-6">0.5</td><td>2019-02-14 10:05:32</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-1.5 pr-6 text-gray-400" colspan="6">... 87.590 eventos restantes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <button onclick="showPage('kc')" class="px-6 py-2.5 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition text-sm">
+            Continuar → Gestão de KCs
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- PAGE 2: KC MANAGER -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <div id="page-kc" class="page p-8 max-w-4xl mx-auto">
+      <h1 class="text-2xl font-bold text-gray-800 mb-1">Gestão de Knowledge Components</h1>
+      <p class="text-gray-500 mb-6 text-sm">Defina os KCs usados na modelagem. Combine os modos conforme necessário.</p>
+
+      <!-- Pipeline steps -->
+      <div class="flex items-center gap-2 mb-7 flex-wrap">
+        <button onclick="showKCTab('statement')" id="kc-step-statement" class="pipeline-step active flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm font-medium bg-indigo-600 text-white">
+          📄 Do Enunciado
+        </button>
+        <span class="text-gray-300 font-bold">→</span>
+        <button onclick="showKCTab('code')" id="kc-step-code" class="pipeline-step flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 bg-white">
+          💻 Das Respostas
+        </button>
+        <span class="text-gray-300 font-bold">→</span>
+        <button onclick="showKCTab('manual')" id="kc-step-manual" class="pipeline-step flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 bg-white">
+          ✏️ Revisão Manual
+        </button>
+      </div>
+
+      <!-- TAB: Enunciado -->
+      <div id="kc-tab-statement" class="kc-tab active">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-semibold text-gray-800 mb-1">Extração a partir do Enunciado</h3>
+          <p class="text-sm text-gray-500 mb-4">Cole o enunciado de cada problema. O modelo extrai os KCs <em>intended</em> — o que o professor pretendia avaliar.</p>
+          <div class="flex gap-3 mb-3">
+            <select class="border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-indigo-400 bg-white">
+              <option>A439 — Assignment 1</option>
+              <option>A487 — Assignment 2</option>
+              <option>A492 — Assignment 3</option>
+              <option>A494 — Assignment 4</option>
+              <option>A502 — Assignment 5</option>
+            </select>
+            <select class="border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-indigo-400 bg-white">
+              <option>Todos os problemas</option>
+              <option>P4391</option><option>P4392</option><option>P4393</option>
+            </select>
+          </div>
+          <textarea class="w-full border border-gray-200 rounded-xl p-3.5 text-sm text-gray-700 focus:outline-none focus:border-indigo-400 resize-none" rows="5"
+            placeholder="Cole o enunciado aqui...&#10;&#10;Ex: 'Escreva um método que receba dois inteiros a e b e retorne true se a for divisível por b. Considere que b nunca será zero.'"></textarea>
+          <div class="mt-3 flex items-center justify-between">
+            <span class="text-xs text-gray-400">O LLM analisará o texto e identificará os conceitos de programação avaliados.</span>
+            <button onclick="showStatementResult()" class="px-5 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 transition">
+              Extrair KCs via LLM →
+            </button>
+          </div>
+          <div id="statement-result" class="mt-5 p-4 bg-indigo-50 rounded-xl border border-indigo-100 hidden">
+            <div class="text-xs font-semibold text-indigo-700 mb-3 uppercase tracking-wide">KCs identificados no enunciado</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 bg-white border border-indigo-200 text-indigo-800 rounded-full text-xs font-medium">Operador módulo (%)</span>
+              <span class="px-3 py-1.5 bg-white border border-indigo-200 text-indigo-800 rounded-full text-xs font-medium">Retorno booleano</span>
+              <span class="px-3 py-1.5 bg-white border border-indigo-200 text-indigo-800 rounded-full text-xs font-medium">Assinatura de método (int, int)</span>
+              <span class="px-3 py-1.5 bg-white border border-indigo-200 text-indigo-800 rounded-full text-xs font-medium">Expressão condicional (if/else)</span>
+            </div>
+            <div class="mt-3 text-right">
+              <button onclick="showKCTab('code')" class="text-sm text-indigo-600 hover:underline font-medium">Continuar → Extração das Respostas</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: Respostas -->
+      <div id="kc-tab-code" class="kc-tab">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-semibold text-gray-800 mb-1">Extração a partir das Respostas dos Alunos</h3>
+          <p class="text-sm text-gray-500 mb-5">Analisa as submissões para descobrir KCs <em>demonstrated</em> — incluindo conceitos que os alunos aplicaram mas que não estavam previstos no enunciado.</p>
+
+          <!-- Pipeline progress -->
+          <div class="flex items-center gap-1 mb-6 overflow-x-auto pb-1">
+            <div class="flex flex-col items-center min-w-fit">
+              <div class="w-8 h-8 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">✓</div>
+              <div class="text-xs text-gray-400 mt-1 text-center w-20">Amostragem<br/>diversa</div>
+            </div>
+            <div class="h-px w-8 bg-gray-200 mt-[-10px]"></div>
+            <div class="flex flex-col items-center min-w-fit">
+              <div class="w-8 h-8 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">✓</div>
+              <div class="text-xs text-gray-400 mt-1 text-center w-20">Geração via<br/>LLM</div>
+            </div>
+            <div class="h-px w-8 bg-gray-200 mt-[-10px]"></div>
+            <div class="flex flex-col items-center min-w-fit">
+              <div class="w-8 h-8 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">✓</div>
+              <div class="text-xs text-gray-400 mt-1 text-center w-20">Clustering<br/>HAC</div>
+            </div>
+            <div class="h-px w-8 bg-gray-200 mt-[-10px]"></div>
+            <div class="flex flex-col items-center min-w-fit">
+              <div class="w-8 h-8 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center font-bold">✓</div>
+              <div class="text-xs text-indigo-600 mt-1 text-center w-20 font-medium">Rotulagem<br/>final</div>
+            </div>
+            <div class="h-px w-8 bg-gray-200 mt-[-10px]"></div>
+            <div class="flex flex-col items-center min-w-fit">
+              <div class="w-8 h-8 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center font-bold">✓</div>
+              <div class="text-xs text-gray-400 mt-1 text-center w-20">Q-matrix<br/>gerada</div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+            <div class="flex items-center justify-between mb-3">
+              <div class="text-xs font-semibold text-indigo-700 uppercase tracking-wide">KCs descobertos — A439 (15 clusters)</div>
+              <span class="text-xs text-indigo-500">Silhouette score: 0.323</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-indigo-100">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-indigo-400 flex-shrink-0"></span>Range validation c/ operadores lógicos</div>
+                <span class="tag-intended px-1.5 py-0.5 rounded-full text-xs ml-2">intended</span>
+              </div>
+              <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-indigo-100">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-indigo-400 flex-shrink-0"></span>Expressões booleanas compostas</div>
+                <span class="tag-intended px-1.5 py-0.5 rounded-full text-xs ml-2">intended</span>
+              </div>
+              <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-indigo-100">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-indigo-400 flex-shrink-0"></span>Comparação de limiar numérico</div>
+                <span class="tag-intended px-1.5 py-0.5 rounded-full text-xs ml-2">intended</span>
+              </div>
+              <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-yellow-100">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-400 flex-shrink-0"></span>Casting e conversão de tipos</div>
+                <span class="tag-emerged px-1.5 py-0.5 rounded-full text-xs ml-2">emergente</span>
+              </div>
+              <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-indigo-100">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-indigo-400 flex-shrink-0"></span>Inicialização de variáveis</div>
+                <span class="tag-intended px-1.5 py-0.5 rounded-full text-xs ml-2">intended</span>
+              </div>
+              <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-yellow-100">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-400 flex-shrink-0"></span>Uso de método auxiliar privado</div>
+                <span class="tag-emerged px-1.5 py-0.5 rounded-full text-xs ml-2">emergente</span>
+              </div>
+            </div>
+            <div class="mt-2 text-xs text-indigo-500">
+              🟡 KCs emergentes: identificados no código dos alunos, mas ausentes no enunciado original.
+            </div>
+          </div>
+
+          <div class="mt-4 text-right">
+            <button onclick="showKCTab('manual')" class="text-sm text-indigo-600 hover:underline font-medium">Continuar → Revisão Manual</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: Manual -->
+      <div id="kc-tab-manual" class="kc-tab">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="font-semibold text-gray-800 mb-1">Revisão e Edição Manual</h3>
+          <p class="text-sm text-gray-500 mb-4">Edite, adicione ou remova KCs. A Q-matrix será atualizada automaticamente após salvar.</p>
+
+          <div class="flex gap-3 mb-4">
+            <select class="border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 bg-white focus:outline-none focus:border-indigo-400">
+              <option>A439 — Assignment 1</option>
+            </select>
+          </div>
+
+          <div class="space-y-2 mb-4">
+            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+              <input type="checkbox" checked class="accent-indigo-600 w-4 h-4">
+              <input type="text" value="Range validation com operadores lógicos" class="flex-1 bg-transparent text-sm text-gray-700 focus:outline-none border-b border-transparent focus:border-indigo-400 pb-0.5">
+              <span class="tag-intended px-2 py-0.5 rounded-full text-xs">intended</span>
+              <button class="text-gray-300 hover:text-red-400 text-sm transition">✕</button>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+              <input type="checkbox" checked class="accent-indigo-600 w-4 h-4">
+              <input type="text" value="Expressões booleanas compostas" class="flex-1 bg-transparent text-sm text-gray-700 focus:outline-none border-b border-transparent focus:border-indigo-400 pb-0.5">
+              <span class="tag-intended px-2 py-0.5 rounded-full text-xs">intended</span>
+              <button class="text-gray-300 hover:text-red-400 text-sm transition">✕</button>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+              <input type="checkbox" checked class="accent-indigo-600 w-4 h-4">
+              <input type="text" value="Inicialização de variáveis" class="flex-1 bg-transparent text-sm text-gray-700 focus:outline-none border-b border-transparent focus:border-indigo-400 pb-0.5">
+              <span class="tag-intended px-2 py-0.5 rounded-full text-xs">intended</span>
+              <button class="text-gray-300 hover:text-red-400 text-sm transition">✕</button>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-yellow-100 bg-yellow-50">
+              <input type="checkbox" checked class="accent-indigo-600 w-4 h-4">
+              <input type="text" value="Casting e conversão de tipos" class="flex-1 bg-transparent text-sm text-gray-700 focus:outline-none border-b border-transparent focus:border-yellow-400 pb-0.5">
+              <span class="tag-emerged px-2 py-0.5 rounded-full text-xs">emergente</span>
+              <button class="text-gray-300 hover:text-red-400 text-sm transition">✕</button>
+            </div>
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-yellow-100 bg-yellow-50 opacity-60">
+              <input type="checkbox" class="accent-indigo-600 w-4 h-4">
+              <input type="text" value="Uso de método auxiliar privado" class="flex-1 bg-transparent text-sm text-gray-400 line-through focus:outline-none pb-0.5">
+              <span class="tag-emerged px-2 py-0.5 rounded-full text-xs">emergente</span>
+              <button class="text-gray-300 hover:text-red-400 text-sm transition">✕</button>
+            </div>
+          </div>
+          <button class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">+ Adicionar KC manualmente</button>
+
+          <!-- Q-matrix preview -->
+          <div class="mt-6 pt-5 border-t border-gray-100">
+            <div class="text-sm font-semibold text-gray-700 mb-3">Q-Matrix — A439 (10 problemas × 4 KCs ativos)</div>
+            <div class="overflow-x-auto">
+              <table class="text-xs text-center">
+                <thead>
+                  <tr>
+                    <th class="text-left pr-5 pb-2 text-gray-400 font-normal w-24">Problema</th>
+                    <th class="pb-2 px-3 text-gray-500 font-medium text-center" style="max-width:90px">Range val.</th>
+                    <th class="pb-2 px-3 text-gray-500 font-medium text-center">Bool. comp.</th>
+                    <th class="pb-2 px-3 text-gray-500 font-medium text-center">Init. var.</th>
+                    <th class="pb-2 px-3 text-gray-500 font-medium text-center">Casting</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="text-left pr-5 py-1.5 text-gray-600 font-mono">P4391</td><td><div class="w-7 h-7 mx-auto rounded-md bg-indigo-500"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-indigo-500"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-indigo-500"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-gray-100"></div></td></tr>
+                  <tr><td class="text-left pr-5 py-1.5 text-gray-600 font-mono">P4392</td><td><div class="w-7 h-7 mx-auto rounded-md bg-gray-100"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-indigo-500"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-gray-100"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-indigo-500"></div></td></tr>
+                  <tr><td class="text-left pr-5 py-1.5 text-gray-600 font-mono">P4393</td><td><div class="w-7 h-7 mx-auto rounded-md bg-indigo-500"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-gray-100"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-indigo-500"></div></td><td><div class="w-7 h-7 mx-auto rounded-md bg-gray-100"></div></td></tr>
+                  <tr><td class="text-left pr-5 py-1.5 text-gray-400 font-mono" colspan="5">... 7 problemas restantes</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-4 flex justify-end">
+              <button onclick="showPage('eda')" class="px-6 py-2.5 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition text-sm">
+                Salvar KCs e ir para Dashboard →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- PAGE 3: EDA DASHBOARD -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <div id="page-eda" class="page p-8 max-w-6xl mx-auto">
+      <div class="flex items-start justify-between mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800 mb-1">Dashboard — Análise Exploratória</h1>
+          <p class="text-gray-500 text-sm">Visão geral da turma · Spring 2019 · 246 estudantes · 5 assignments</p>
+        </div>
+        <select class="border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 bg-white focus:outline-none">
+          <option>Todos os Assignments</option>
+          <option>A439 — Assignment 1</option>
+          <option>A487 — Assignment 2</option>
+          <option>A492 — Assignment 3</option>
+          <option>A494 — Assignment 4</option>
+          <option>A502 — Assignment 5</option>
+        </select>
+      </div>
+
+      <!-- KPI row -->
+      <div class="grid grid-cols-5 gap-3 mb-6">
+        <div class="bg-white rounded-xl p-3.5 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-indigo-600">23.7%</div>
+          <div class="text-xs text-gray-400 mt-0.5">Taxa de acerto global</div>
+        </div>
+        <div class="bg-white rounded-xl p-3.5 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-amber-500">3.22×</div>
+          <div class="text-xs text-gray-400 mt-0.5">Desequilíbrio de classes</div>
+        </div>
+        <div class="bg-white rounded-xl p-3.5 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-red-500">46.6%</div>
+          <div class="text-xs text-gray-400 mt-0.5">Taxa Compile.Error</div>
+        </div>
+        <div class="bg-white rounded-xl p-3.5 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-gray-700">32</div>
+          <div class="text-xs text-gray-400 mt-0.5">Mediana de tentativas</div>
+        </div>
+        <div class="bg-white rounded-xl p-3.5 shadow-sm border border-gray-100 text-center">
+          <div class="text-2xl font-bold text-gray-700">89.9%</div>
+          <div class="text-xs text-gray-400 mt-0.5">Completaram todos os 5</div>
+        </div>
+      </div>
+
+      <!-- Charts grid -->
+      <div class="grid grid-cols-2 gap-5 mb-5">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="text-sm font-semibold text-gray-700 mb-4">Taxa de Acerto por Assignment</div>
+          <canvas id="chart-success" height="200"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="text-sm font-semibold text-gray-700 mb-4">Curva de Aprendizado — A439</div>
+          <canvas id="chart-learning" height="200"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="text-sm font-semibold text-gray-700 mb-4">Perfil da Turma (K-Means, k=3)</div>
+          <canvas id="chart-cluster" height="200"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="text-sm font-semibold text-gray-700 mb-4">Taxa de Compile.Error por Assignment</div>
+          <canvas id="chart-ce" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- LLM Interpretation panel -->
+      <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-base flex-shrink-0">🤖</div>
+          <div class="flex-1">
+            <div class="text-sm font-semibold text-indigo-800 mb-1">Interpretação Automática</div>
+            <div class="text-sm text-indigo-700 leading-relaxed">
+              A turma apresenta uma taxa de acerto global de <strong>23.7%</strong>, com o Assignment 3 (A492) sendo o mais desafiador (19.1%). A curva de aprendizado do Assignment 1 mostra progresso real (+6.6pp entre a 1ª e última semana), o que é positivo. Porém, <strong>54.7% dos alunos foram classificados como baixo engajamento</strong> — poucas tentativas, não necessariamente baixa habilidade. Isso sugere que parte da turma pode estar evitando os exercícios por falta de motivação ou por considerá-los excessivamente difíceis já de início. A alta taxa de Compile.Error no A1 (56.3%) é esperada para programadores iniciantes; a queda no A5 (36.5%) indica amadurecimento.
+            </div>
+            <button class="mt-3 text-xs text-indigo-600 hover:underline font-medium">Aprofundar análise no chat →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- PAGE 4: KT RESULTS -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <div id="page-kt" class="page p-8 max-w-6xl mx-auto">
+      <div class="flex items-start justify-between mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800 mb-1">Resultados — Knowledge Tracing</h1>
+          <p class="text-gray-500 text-sm">Probabilidade de mastery por aluno e por KC após o assignment</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-gray-400">Modelo:</span>
+          <button onclick="setModel('codedkt')" id="btn-codedkt" class="model-btn active px-3 py-1.5 rounded-lg border text-xs font-medium">Code-DKT</button>
+          <button onclick="setModel('dkt')" id="btn-dkt" class="model-btn px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-600">DKT</button>
+          <button onclick="setModel('bkt')" id="btn-bkt" class="model-btn px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-600">BKT</button>
+        </div>
+      </div>
+
+      <!-- AUC badge -->
+      <div class="flex gap-4 mb-6">
+        <div class="bg-white rounded-xl px-5 py-3 shadow-sm border border-gray-100 flex items-center gap-3">
+          <div class="text-xs text-gray-400 font-medium">First-attempt AUC</div>
+          <div class="text-xl font-bold text-indigo-600">74.2%</div>
+        </div>
+        <div class="bg-white rounded-xl px-5 py-3 shadow-sm border border-gray-100 flex items-center gap-3">
+          <div class="text-xs text-gray-400 font-medium">All-attempts AUC</div>
+          <div class="text-xl font-bold text-gray-700">78.5%</div>
+        </div>
+        <div class="bg-white rounded-xl px-5 py-3 shadow-sm border border-gray-100 flex items-center gap-3">
+          <div class="text-xs text-gray-400 font-medium">Assignment</div>
+          <select class="text-sm text-gray-700 font-medium bg-transparent focus:outline-none">
+            <option>A439</option><option>A487</option><option>A492</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-5">
+        <!-- Heatmap -->
+        <div class="col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <div class="text-sm font-semibold text-gray-700 mb-4">Mastery por Aluno × KC — A439</div>
+          <div id="heatmap-container" class="overflow-x-auto">
+            <!-- Generated by JS -->
+          </div>
+          <div class="flex items-center gap-3 mt-4 text-xs text-gray-400">
+            <div class="flex items-center gap-1"><div class="w-4 h-4 rounded bg-red-400"></div> Baixo (&lt;40%)</div>
+            <div class="flex items-center gap-1"><div class="w-4 h-4 rounded bg-amber-400"></div> Médio (40–70%)</div>
+            <div class="flex items-center gap-1"><div class="w-4 h-4 rounded bg-emerald-500"></div> Alto (&gt;70%)</div>
+          </div>
+        </div>
+
+        <!-- Critical KCs + at-risk -->
+        <div class="flex flex-col gap-4">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex-1">
+            <div class="text-sm font-semibold text-gray-700 mb-3">KCs Críticos</div>
+            <div class="space-y-2.5">
+              <div>
+                <div class="flex justify-between text-xs text-gray-600 mb-1"><span>Casting / Conversão</span><span class="font-semibold text-red-500">33%</span></div>
+                <div class="h-2 bg-gray-100 rounded-full"><div class="h-2 bg-red-400 rounded-full" style="width:33%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-gray-600 mb-1"><span>Bool. compostas</span><span class="font-semibold text-amber-500">45%</span></div>
+                <div class="h-2 bg-gray-100 rounded-full"><div class="h-2 bg-amber-400 rounded-full" style="width:45%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-gray-600 mb-1"><span>Assinatura de método</span><span class="font-semibold text-amber-500">52%</span></div>
+                <div class="h-2 bg-gray-100 rounded-full"><div class="h-2 bg-amber-400 rounded-full" style="width:52%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-gray-600 mb-1"><span>Range validation</span><span class="font-semibold text-emerald-600">58%</span></div>
+                <div class="h-2 bg-gray-100 rounded-full"><div class="h-2 bg-emerald-400 rounded-full" style="width:58%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-gray-600 mb-1"><span>Init. de variáveis</span><span class="font-semibold text-emerald-600">72%</span></div>
+                <div class="h-2 bg-gray-100 rounded-full"><div class="h-2 bg-emerald-500 rounded-full" style="width:72%"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+            <div class="text-sm font-semibold text-gray-700 mb-3">Alunos em Atenção</div>
+            <div class="space-y-2">
+              <div class="risk-high p-2.5 rounded-lg text-xs">
+                <div class="font-semibold text-gray-700">S1045</div>
+                <div class="text-gray-500 mt-0.5">4 KCs abaixo de 40% · 17 tentativas</div>
+              </div>
+              <div class="risk-high p-2.5 rounded-lg text-xs">
+                <div class="font-semibold text-gray-700">S1043</div>
+                <div class="text-gray-500 mt-0.5">3 KCs abaixo de 40% · 28 tentativas</div>
+              </div>
+              <div class="risk-med p-2.5 rounded-lg text-xs">
+                <div class="font-semibold text-gray-700">S1047</div>
+                <div class="text-gray-500 mt-0.5">Casting abaixo de 35% · 41 tentativas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- PAGE 5: RECOMMENDATIONS -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <div id="page-rec" class="page p-8 max-w-4xl mx-auto">
+      <h1 class="text-2xl font-bold text-gray-800 mb-1">Recomendações</h1>
+      <p class="text-gray-500 mb-6 text-sm">Sugestões baseadas nos KCs com menor taxa de aprendizado na turma.</p>
+
+      <!-- KC summary -->
+      <div class="bg-red-50 border border-red-100 rounded-2xl p-5 mb-6">
+        <div class="text-sm font-semibold text-red-800 mb-2">KCs críticos identificados — A439</div>
+        <div class="flex flex-wrap gap-2 mb-3">
+          <span class="px-3 py-1.5 bg-white border border-red-200 text-red-700 rounded-full text-xs font-medium">Casting / Conversão de tipos (33%)</span>
+          <span class="px-3 py-1.5 bg-white border border-red-200 text-red-700 rounded-full text-xs font-medium">Expressões booleanas compostas (45%)</span>
+          <span class="px-3 py-1.5 bg-white border border-amber-200 text-amber-700 rounded-full text-xs font-medium">Assinatura de método (52%)</span>
+        </div>
+        <p class="text-sm text-red-700 leading-relaxed">
+          Aproximadamente <strong>2 em cada 3 alunos</strong> ainda não demonstraram domínio em <em>casting e conversão de tipos</em>. Recomenda-se revisitar esse conteúdo antes de avançar para o próximo assignment, que exige conversões implícitas e explícitas com maior frequência.
+        </p>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-6">
+        <div class="text-sm font-semibold text-gray-700 mb-3">Temas e formatos sugeridos para reforço</div>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
+            <span class="text-lg mt-0.5">📝</span>
+            <div class="text-sm">
+              <div class="font-medium text-gray-700">Exercícios focados em Casting</div>
+              <div class="text-gray-500 mt-0.5">Procure exercícios ou listas que abordem: <em>conversão int→double, casting explícito, perda de precisão, conversão de String para tipos primitivos</em>. Esses são os subpadrões com menor presença nos códigos corretos da turma.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
+            <span class="text-lg mt-0.5">🔁</span>
+            <div class="text-sm">
+              <div class="font-medium text-gray-700">Revisão de Expressões Booleanas</div>
+              <div class="text-gray-500 mt-0.5">Exercícios com operadores <code class="bg-gray-100 px-1 rounded">&&</code>, <code class="bg-gray-100 px-1 rounded">||</code>, negação e combinações de comparações numéricas ajudarão a consolidar o KC com segunda maior deficiência.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
+            <span class="text-lg mt-0.5">🎯</span>
+            <div class="text-sm">
+              <div class="font-medium text-gray-700">Mini-projeto de consolidação</div>
+              <div class="text-gray-500 mt-0.5">Um problema integrador que combine os 3 KCs críticos em um único contexto seria ideal — por exemplo, um método que receba valores de tipos distintos, valide-os com expressões booleanas e retorne um resultado convertido.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reverse lookup -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="text-sm font-semibold text-gray-700 mb-1">Análise Reversa — Quais KCs esse exercício cobre?</div>
+        <p class="text-xs text-gray-400 mb-4">Cole o enunciado de um exercício (ou de uma lista) e descubra quais KCs ele trabalha — útil para avaliar se uma atividade encontrada vai cobrir as lacunas da turma.</p>
+        <textarea id="reverse-input" class="w-full border border-gray-200 rounded-xl p-3.5 text-sm text-gray-700 focus:outline-none focus:border-indigo-400 resize-none" rows="4"
+          placeholder="Ex: 'Crie um método que receba uma String representando um número e retorne o dobro desse valor como double...'"></textarea>
+        <div class="mt-3 flex items-center justify-between">
+          <span class="text-xs text-gray-400">O modelo identificará quais KCs do assignment esse exercício endereça.</span>
+          <button onclick="showReverseResult()" class="px-5 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 transition">
+            Analisar Exercício →
+          </button>
+        </div>
+        <div id="reverse-result" class="mt-4 p-4 bg-emerald-50 border border-emerald-100 rounded-xl hidden">
+          <div class="text-xs font-semibold text-emerald-700 mb-2 uppercase tracking-wide">KCs cobertos por este exercício</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 bg-white border border-emerald-200 text-emerald-800 rounded-full text-xs font-medium">✓ Casting / Conversão de tipos</span>
+            <span class="px-3 py-1.5 bg-white border border-emerald-200 text-emerald-800 rounded-full text-xs font-medium">✓ Assinatura de método</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-500 rounded-full text-xs">✗ Bool. compostas — não coberto</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-500 rounded-full text-xs">✗ Range validation — não coberto</span>
+          </div>
+          <div class="mt-3 text-xs text-emerald-700">
+            <strong>Avaliação:</strong> Este exercício cobre 2 dos 3 KCs críticos da turma. Boa escolha para reforço de casting. Para cobrir expressões booleanas, considere uma variação com validação de intervalo.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- PAGE 6: CHAT -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <div id="page-chat" class="page p-8 max-w-3xl mx-auto">
+      <h1 class="text-2xl font-bold text-gray-800 mb-1">Assistente IA</h1>
+      <p class="text-gray-500 mb-6 text-sm">Tire dúvidas sobre os dados da turma ou sobre as análises geradas. As respostas são baseadas nos dados reais carregados.</p>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col" style="height: 520px;">
+        <!-- Chat messages -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4">
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-xl bg-indigo-100 flex items-center justify-center text-base flex-shrink-0">🤖</div>
+            <div class="chat-msg-ai p-3.5 text-sm max-w-xs leading-relaxed">
+              Olá! Estou contextualizado com os dados da sua turma (Spring 2019, 246 alunos, 5 assignments). O que gostaria de saber?
+            </div>
+          </div>
+          <div class="flex gap-3 flex-row-reverse">
+            <div class="w-8 h-8 rounded-xl bg-indigo-200 flex items-center justify-center text-base flex-shrink-0">👤</div>
+            <div class="chat-msg-user p-3.5 text-sm max-w-xs leading-relaxed">
+              Por que o KC de casting está tão baixo no Assignment 1?
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-8 h-8 rounded-xl bg-indigo-100 flex items-center justify-center text-base flex-shrink-0">🤖</div>
+            <div class="chat-msg-ai p-3.5 text-sm max-w-sm leading-relaxed">
+              Nos dados do A439, apenas <strong>33% da turma</strong> demonstrou mastery em casting. Analisando os CodeStateIDs dos alunos com baixo mastery, o padrão mais comum é confusão entre divisão inteira e divisão decimal — muitos escrevem <code class="bg-gray-200 px-1 rounded text-xs">int/int</code> esperando resultado <code class="bg-gray-200 px-1 rounded text-xs">double</code>. É um erro clássico de Java para iniciantes. Os alunos S1043 e S1045 têm sequências longas com esse erro persistindo até a última tentativa.
+            </div>
+          </div>
+        </div>
+
+        <!-- Input area -->
+        <div class="border-t border-gray-100 p-4 flex gap-3">
+          <input id="chat-input" type="text" placeholder="Digite sua pergunta sobre a turma..."
+            class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-400"
+            onkeydown="if(event.key==='Enter') sendChat()">
+          <button onclick="sendChat()" class="px-4 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 transition">
+            Enviar
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="text-xs text-gray-400 self-center">Sugestões:</span>
+        <button onclick="suggestChat('Quais alunos precisam de atenção urgente?')" class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs hover:border-indigo-300 transition">Alunos em atenção urgente</button>
+        <button onclick="suggestChat('O Assignment 3 foi mais difícil que o esperado?')" class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs hover:border-indigo-300 transition">A3 foi mais difícil?</button>
+        <button onclick="suggestChat('Qual é o progresso geral da turma ao longo dos assignments?')" class="px-3 py-1.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs hover:border-indigo-300 transition">Progresso geral</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ── PAGE NAVIGATION ──────────────────────────────────────────────
+const pages = ['upload','kc','eda','kt','rec','chat'];
+let chartsInitialized = {};
+
+function showPage(name) {
+  pages.forEach(p => {
+    document.getElementById('page-' + p).classList.remove('active');
+    const btn = document.getElementById('nav-' + p);
+    btn.classList.remove('active');
+    btn.classList.add('text-indigo-200');
+    btn.classList.remove('text-white');
+  });
+  document.getElementById('page-' + name).classList.add('active');
+  const active = document.getElementById('nav-' + name);
+  active.classList.add('active', 'text-white');
+  active.classList.remove('text-indigo-200');
+
+  if (name === 'eda' && !chartsInitialized['eda']) { initEDACharts(); chartsInitialized['eda'] = true; }
+  if (name === 'kt' && !chartsInitialized['kt'])  { initHeatmap();    chartsInitialized['kt']  = true; }
+}
+
+// ── UPLOAD SIMULATION ────────────────────────────────────────────
+function simulateUpload() {
+  const zone = document.getElementById('dragZone');
+  zone.innerHTML = '<div class="text-4xl mb-3 animate-spin">⏳</div><div class="text-gray-600 font-medium">Validando dataset...</div>';
+  setTimeout(() => {
+    zone.style.display = 'none';
+    document.getElementById('upload-results').classList.remove('hidden');
+    document.getElementById('sidebar-badge').classList.remove('hidden');
+  }, 1400);
+}
+
+// ── KC TABS ──────────────────────────────────────────────────────
+const kcSteps = ['statement','code','manual'];
+
+function showKCTab(name) {
+  kcSteps.forEach(s => {
+    document.getElementById('kc-tab-' + s).classList.remove('active');
+    const btn = document.getElementById('kc-step-' + s);
+    btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+    btn.classList.add('bg-white', 'text-gray-700');
+  });
+  document.getElementById('kc-tab-' + name).classList.add('active');
+  const active = document.getElementById('kc-step-' + name);
+  active.classList.add('active', 'bg-indigo-600', 'text-white');
+  active.classList.remove('bg-white', 'text-gray-700');
+}
+
+function showStatementResult() {
+  document.getElementById('statement-result').classList.remove('hidden');
+}
+
+// ── EDA CHARTS ───────────────────────────────────────────────────
+function initEDACharts() {
+  const palette = ['#6366f1','#818cf8','#a5b4fc','#c7d2fe','#e0e7ff'];
+  const red = '#ef4444'; const amber = '#f59e0b'; const emerald = '#10b981';
+
+  // Success rates
+  new Chart(document.getElementById('chart-success'), {
+    type: 'bar',
+    data: {
+      labels: ['A439','A487','A492','A494','A502'],
+      datasets: [{
+        data: [27.3, 24.1, 19.1, 25.4, 30.4],
+        backgroundColor: ['#6366f1','#818cf8','#ef4444','#818cf8','#10b981'],
+        borderRadius: 8, borderSkipped: false
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, max: 40, ticks: { callback: v => v + '%', font: { size: 11 } }, grid: { color: '#f1f5f9' } },
+        x: { ticks: { font: { size: 11 } }, grid: { display: false } }
+      }
+    }
+  });
+
+  // Learning curve A439
+  new Chart(document.getElementById('chart-learning'), {
+    type: 'line',
+    data: {
+      labels: ['Sem 1','Sem 2','Sem 3','Sem 4','Sem 5','Sem 6','Sem 7'],
+      datasets: [{
+        data: [21.7, 23.1, 24.5, 25.2, 26.1, 27.1, 28.3],
+        borderColor: '#6366f1', backgroundColor: 'rgba(99,102,241,0.08)',
+        borderWidth: 2.5, fill: true, tension: 0.4, pointBackgroundColor: '#6366f1', pointRadius: 4
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: false, min: 18, max: 32, ticks: { callback: v => v + '%', font: { size: 11 } }, grid: { color: '#f1f5f9' } },
+        x: { ticks: { font: { size: 11 } }, grid: { display: false } }
+      }
+    }
+  });
+
+  // Student clusters
+  new Chart(document.getElementById('chart-cluster'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Alto desempenho (30.7%)', 'Médio (14.6%)', 'Baixo engajamento (54.7%)'],
+      datasets: [{
+        data: [30.7, 14.6, 54.7],
+        backgroundColor: ['#10b981','#f59e0b','#ef4444'],
+        borderWidth: 0, hoverOffset: 6
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 12, usePointStyle: true } }
+      },
+      cutout: '62%'
+    }
+  });
+
+  // Compile.Error by assignment
+  new Chart(document.getElementById('chart-ce'), {
+    type: 'bar',
+    data: {
+      labels: ['A439','A487','A492','A494','A502'],
+      datasets: [{
+        data: [56.3, 48.2, 44.1, 42.8, 36.5],
+        backgroundColor: ['#fca5a5','#fca5a5','#fca5a5','#fca5a5','#fca5a5'],
+        borderRadius: 8, borderSkipped: false
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, max: 70, ticks: { callback: v => v + '%', font: { size: 11 } }, grid: { color: '#f1f5f9' } },
+        x: { ticks: { font: { size: 11 } }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ── HEATMAP ──────────────────────────────────────────────────────
+const heatStudents = ['S1042','S1043','S1044','S1045','S1046','S1047','S1048','S1049'];
+const heatKCs = ['Range val.','Bool. comp.','Casting','Init. var.','Método'];
+const heatData = [
+  [0.91, 0.85, 0.72, 0.93, 0.88],
+  [0.43, 0.38, 0.21, 0.65, 0.41],
+  [0.78, 0.82, 0.69, 0.87, 0.76],
+  [0.12, 0.18, 0.09, 0.34, 0.15],
+  [0.88, 0.91, 0.84, 0.95, 0.89],
+  [0.56, 0.48, 0.31, 0.72, 0.53],
+  [0.67, 0.71, 0.58, 0.81, 0.65],
+  [0.24, 0.29, 0.17, 0.51, 0.28],
+];
+
+function heatColor(v) {
+  if (v < 0.40) return '#f87171';
+  if (v < 0.70) return '#fbbf24';
+  return '#34d399';
+}
+
+function initHeatmap() {
+  const container = document.getElementById('heatmap-container');
+  let html = '<table class="text-xs border-separate" style="border-spacing:4px">';
+  // Header
+  html += '<thead><tr><th class="text-left pr-4 text-gray-400 font-normal pb-1">Aluno</th>';
+  heatKCs.forEach(kc => { html += `<th class="text-gray-500 font-medium pb-1 w-16 text-center">${kc}</th>`; });
+  html += '</tr></thead><tbody>';
+  heatStudents.forEach((s, i) => {
+    html += `<tr><td class="pr-4 text-gray-600 font-mono py-0.5">${s}</td>`;
+    heatData[i].forEach(v => {
+      const pct = Math.round(v * 100);
+      html += `<td><div class="heat-cell mx-auto" style="background:${heatColor(v)}" title="${pct}%">${pct}</div></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+// ── MODEL SELECTOR ───────────────────────────────────────────────
+function setModel(m) {
+  ['codedkt','dkt','bkt'].forEach(k => {
+    const btn = document.getElementById('btn-' + k);
+    btn.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-600');
+    btn.classList.add('border-gray-200', 'text-gray-600');
+  });
+  const active = document.getElementById('btn-' + m);
+  active.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-600');
+  active.classList.remove('border-gray-200', 'text-gray-600');
+}
+
+// ── REVERSE KC LOOKUP ────────────────────────────────────────────
+function showReverseResult() {
+  const input = document.getElementById('reverse-input').value.trim();
+  if (!input) return;
+  document.getElementById('reverse-result').classList.remove('hidden');
+}
+
+// ── CHAT ─────────────────────────────────────────────────────────
+const canned = [
+  "Dos 246 alunos, <strong>3 apresentam risco alto</strong> (≥3 KCs abaixo de 40%): S1045, S1043 e S1049. Mais 4 alunos têm risco médio com pelo menos 1 KC crítico persistindo até a última tentativa. Uma intervenção direta com esses 7 alunos antes do próximo assignment pode ser decisiva.",
+  "Sim. O A492 tem a menor taxa de acerto (19.1%) e a segunda maior taxa de Compile.Error (44.1%). Os problemas P4921 e P4923 foram os mais difíceis — acerto abaixo de 12% em ambos. Pode ser útil revisar o enunciado ou o critério de avaliação desses dois problemas específicos.",
+  "Há uma tendência positiva: a taxa de acerto média sobe de 27.3% (A1) para 30.4% (A5), mas com uma queda no A3. O engajamento também aumenta levemente nos últimos assignments — a proporção de alunos com mais de 10 tentativas por exercício cresce de 18% no A1 para 24% no A5."
+];
+let cannedIdx = 0;
+
+function sendChat() {
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+  appendChat(msg, 'user');
+  input.value = '';
+  setTimeout(() => {
+    const reply = canned[cannedIdx % canned.length];
+    cannedIdx++;
+    appendChat(reply, 'ai');
+  }, 900);
+}
+
+function suggestChat(text) {
+  document.getElementById('chat-input').value = text;
+  sendChat();
+}
+
+function appendChat(msg, role) {
+  const container = document.getElementById('chat-messages');
+  const isUser = role === 'user';
+  const div = document.createElement('div');
+  div.className = 'flex gap-3' + (isUser ? ' flex-row-reverse' : '');
+  div.innerHTML = `
+    <div class="w-8 h-8 rounded-xl ${isUser ? 'bg-indigo-200' : 'bg-indigo-100'} flex items-center justify-center text-base flex-shrink-0">${isUser ? '👤' : '🤖'}</div>
+    <div class="${isUser ? 'chat-msg-user' : 'chat-msg-ai'} p-3.5 text-sm max-w-xs leading-relaxed">${msg}</div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+</script>
+</body>
+</html>

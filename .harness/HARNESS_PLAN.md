@@ -87,6 +87,10 @@ O Generator é instruído a seguir este template para cada seção analítica:
 
 Este template é verificado pelo Format Evaluator em **todos** os notebooks.
 
+**Voz:** estudante de Engenharia de Computação documentando o próprio TCC.
+Conectar achados com conceitos de CS/ML; explicar implicações de implementação;
+vocabulário técnico preciso; leitor é colega de graduação em CS.
+
 ---
 
 ## Schema dos Planos JSON

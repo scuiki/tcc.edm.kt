@@ -106,7 +106,7 @@ def build_prompt(plan: dict, task: dict, plan_path: Path) -> str:
 
         ## Instructions — Read in order before implementing
 
-        1. Read {CLAUDE_MD_PATH} for project rules (SEED=42, Release/ split, BKT/DKT/Code-DKT protocol).
+        1. Read {CLAUDE_MD_PATH} for project rules (SEED=42, Spring 2019 split (80/20), BKT/DKT/Code-DKT protocol).
         2. Read docs/refs/INDEX.md for an index of available paper references and key facts.
            For full details on a specific paper, read docs/refs/<author><year>_<topic>.md
            (e.g., docs/refs/shi2022_code_dkt.md for Code-DKT, docs/refs/pankiewicz2025_srcml_dkt.md for srcML-DKT).
@@ -141,6 +141,31 @@ def build_prompt(plan: dict, task: dict, plan_path: Path) -> str:
         **Achado:** [main quantitative result — must be calculated, not hardcoded]
         **Implicação para modelagem:** How this finding affects BKT/DKT/Code-DKT choice.
         ```
+
+        ## Voz e perspectiva
+
+        Escreva os textos analíticos (Contexto, Hipótese, Achado, Implicação) como um estudante
+        de Engenharia de Computação documentando sua própria pesquisa de TCC:
+        - Conecte achados com conceitos de CS relevantes (complexidade do EM, estrutura de grafos
+          AST, convergência do LSTM, tradeoff bias-variância, etc.).
+        - Explique por que uma descoberta importa para as decisões de implementação do pipeline,
+          não apenas descreva o número.
+        - Use vocabulário técnico preciso (sem jargão de negócio); o leitor é um colega de CS.
+        - Quando um achado valida ou contradiz uma hipótese do paper, explicite a conexão.
+
+        ## Repositório modelo
+
+        Para dúvidas de arquitetura ou geração de código relacionado ao Code-DKT e DKT,
+        consultar o repositório de referência:
+          /home/leokuntz/Documents/repositories/experiments/Code-DKT/src/
+
+        Arquivos-chave:
+        - c2vRNNModel.py  — arquitetura LSTM + mecanismo de atenção code2vec
+        - run.py          — protocolo de treinamento (10-fold CV, Adam lr=0.0005)
+        - config.py       — hiperparâmetros de referência (hidden=128, length=50, questions=10)
+        - path_extractor.py — extração de caminhos AST (adaptar para srcML neste projeto)
+
+        Nota: o paper usa seed=0 e código Python 2/3 misto; adaptar para SEED=42 e Python 3.10+.
 
         ## Task Focus
 

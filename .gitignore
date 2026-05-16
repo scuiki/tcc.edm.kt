@@ -29,8 +29,8 @@ env/
 .env
 
 # Resultados/outputs intermediários
-results/*.csv
-results/*.pkl
+#results/*.csv
+#results/*.pkl
 *.h5
 *.pt
 *.pth
