@@ -1,0 +1,818 @@
+{
+  "_meta": {
+    "purpose": "Traducao PT-BR dos KCs canonicos para uso na escrita do TCC. Schema de dois niveis: 'concepts' agrupa KCs semanticamente equivalentes sob um termo unificado; 'translations' mantem traducao per-KC com 'concept_id' apontando para o grupo. Pipeline KT (Q-matrix, kc_descriptions_*.json) nao usa este arquivo.",
+    "total_unique_kcs": 70,
+    "total_concepts": 28,
+    "convention_suggestions": [
+      "operador NOT, AND, OR podem ficar em maiusculo conforme uso em Java",
+      "if/else, switch, return mantem grafia original (palavras-chave da linguagem)",
+      "evitar abreviacoes; preferir 'expressao booleana' a 'expr bool'",
+      "manter consistencia: 'pt' per-KC deve usar vocabulario do concept ao qual pertence",
+      "sem em-dash em pt nem em description_pt; usar virgula, dois pontos ou parenteses"
+    ]
+  },
+  "concepts": {
+    "padrao_acumulador": {
+      "pt": "Padrão acumulador",
+      "description_pt": "Uso de variável para agregar valores ao longo de iterações, como soma, contagem ou máximo.",
+      "kc_names": [
+        "Accumulating values through arithmetic operations",
+        "Accumulator counter variable",
+        "Accumulator pattern for aggregating values",
+        "Accumulator patterns for aggregate computation"
+      ]
+    },
+    "negacao_booleana": {
+      "pt": "Negação booleana com operador NOT",
+      "description_pt": "Aplicação do operador lógico NOT para inverter condições no controle de fluxo.",
+      "kc_names": [
+        "Boolean negation in control flow",
+        "Boolean negation with NOT operator"
+      ]
+    },
+    "logica_booleana_composta": {
+      "pt": "Expressões booleanas compostas com operadores lógicos",
+      "description_pt": "Combinação de múltiplas condições por meio dos operadores AND e OR.",
+      "kc_names": [
+        "Compound boolean expressions with logical operators",
+        "Conditional logic and logical operators",
+        "Conjunctive boolean conditions with AND"
+      ]
+    },
+    "retorno_antecipado": {
+      "pt": "Retorno antecipado em controle de fluxo",
+      "description_pt": "Uso de return condicional para encerrar o método assim que uma condição é satisfeita.",
+      "kc_names": [
+        "Conditional logic for return values",
+        "Early exit and return patterns",
+        "Early exit with conditional return",
+        "Early return pattern in control flow"
+      ]
+    },
+    "branching_condicional": {
+      "pt": "Branching condicional multi-caminho",
+      "description_pt": "Estruturação de decisões com múltiplos ramos via if/else encadeados ou aninhados.",
+      "kc_names": [
+        "Boolean logic for control flow",
+        "Conditional branching for data validation",
+        "Conditional branching with multiple paths",
+        "Multi-branch conditional logic patterns"
+      ]
+    },
+    "comparacao_numerica": {
+      "pt": "Comparação numérica e thresholds",
+      "description_pt": "Avaliação de valores numéricos contra limites ou outros valores usando operadores relacionais.",
+      "kc_names": [
+        "Combining multiple comparison operators",
+        "Conditional logic based on threshold values",
+        "Equality comparison of numeric values",
+        "Inequality operators for negative conditions",
+        "Numeric threshold comparison with operators",
+        "Range validation with logical operators"
+      ]
+    },
+    "operador_modulo": {
+      "pt": "Operador módulo e divisibilidade",
+      "description_pt": "Aplicação do operador módulo para testar divisibilidade, paridade e propriedades numéricas.",
+      "kc_names": [
+        "Integer division and modulo arithmetic",
+        "Modulo operator applications and uses",
+        "Modulo operator for numeric property testing",
+        "Parity check optimization for filtering"
+      ]
+    },
+    "iteracao_indexada": {
+      "pt": "Iteração indexada e controle de loop",
+      "description_pt": "Manipulação de índices e limites em loops para percorrer arrays e strings.",
+      "kc_names": [
+        "Index manipulation within loops",
+        "Index-based array traversal and manipulation",
+        "Index-based string manipulation and traversal",
+        "Loop bounds and counter control",
+        "Pattern-based loop boundary adjustment"
+      ]
+    },
+    "bounds_checking": {
+      "pt": "Validação de limites e bounds checking",
+      "description_pt": "Verificação defensiva de índices, tamanhos e fronteiras antes de acesso a coleções.",
+      "kc_names": [
+        "Array length and boundary operations",
+        "Boundary and edge case handling",
+        "Bounds checking before indexed access"
+      ]
+    },
+    "manipulacao_array": {
+      "pt": "Manipulação de arrays",
+      "description_pt": "Criação, modificação e travessia de arrays, incluindo acesso a elementos adjacentes.",
+      "kc_names": [
+        "Adjacent element neighbor access",
+        "Array creation and manipulation techniques",
+        "Array manipulation using indexed access",
+        "Comparing adjacent array elements"
+      ]
+    },
+    "manipulacao_string": {
+      "pt": "Manipulação de strings",
+      "description_pt": "Construção, comparação, conversão e acesso indexado a caracteres e substrings.",
+      "kc_names": [
+        "String building with StringBuilder",
+        "String character access with charAt",
+        "String comparison methods and techniques",
+        "String conversion of integers",
+        "String indexing and substring extraction",
+        "String length validation and edge cases"
+      ]
+    },
+    "metodos_auxiliares": {
+      "pt": "Métodos auxiliares (helpers)",
+      "description_pt": "Decomposição da lógica em métodos auxiliares para organização e reuso.",
+      "kc_names": [
+        "Helper method extraction for logic",
+        "Helper methods for code organization"
+      ]
+    },
+    "tipos_retorno": {
+      "pt": "Tipos e formato de retorno de método",
+      "description_pt": "Escolha do tipo de retorno (boolean, int, etc.) e estruturação dos return de acordo com a lógica.",
+      "kc_names": [
+        "Integer return value with discrete states",
+        "Method return types and statements",
+        "Method return types and values",
+        "Returning values from conditional statements"
+      ]
+    },
+    "min_max": {
+      "pt": "Rastreamento de mínimo e máximo",
+      "description_pt": "Identificação e atualização de valores extremos por meio de comparações condicionais.",
+      "kc_names": [
+        "Min/max value tracking with conditionals"
+      ]
+    },
+    "sentinela": {
+      "pt": "Padrão sentinela em buscas",
+      "description_pt": "Uso de valor sentinela para sinalizar ausência de resultado em buscas.",
+      "kc_names": [
+        "Sentinel value pattern for search results"
+      ]
+    },
+    "edge_cases_especificos": {
+      "pt": "Edge cases específicos do domínio",
+      "description_pt": "Tratamento de condições particulares do problema, como posições duplicadas ou condição de bust.",
+      "kc_names": [
+        "Bust condition detection and validation",
+        "Edge case handling for duplicate positions"
+      ]
+    },
+    "aritmetica_condicional": {
+      "pt": "Aritmética em condicionais",
+      "description_pt": "Uso de expressões aritméticas (incluindo valor absoluto) dentro de condições e cálculos.",
+      "kc_names": [
+        "Absolute value for comparison operations",
+        "Arithmetic expression evaluation and chaining",
+        "Using arithmetic operations in conditionals"
+      ]
+    },
+    "inicializacao_variaveis": {
+      "pt": "Inicialização de variáveis para padrões computacionais",
+      "description_pt": "Definição de valores iniciais adequados para acumuladores ou variáveis temporárias.",
+      "kc_names": [
+        "Variable initialization for computational patterns"
+      ]
+    },
+    "parametros_metodo": {
+      "pt": "Uso de parâmetros de método em computação",
+      "description_pt": "Aplicação de parâmetros recebidos pelo método dentro de cálculos e lógica.",
+      "kc_names": [
+        "Method parameter usage in computation"
+      ]
+    },
+    "default_case_switch": {
+      "pt": "Caso default em switch",
+      "description_pt": "Tratamento de casos residuais em estruturas switch via cláusula default.",
+      "kc_names": [
+        "Default case residual handling"
+      ]
+    },
+    "restricoes_negativas": {
+      "pt": "Enforcement de restrições negativas",
+      "description_pt": "Garantia de que determinadas condições não ocorram no programa.",
+      "kc_names": [
+        "Negative constraint enforcement"
+      ]
+    },
+    "validacao_composta": {
+      "pt": "Validação de múltiplas restrições com operadores lógicos",
+      "description_pt": "Checagem sequencial de várias condições combinadas por AND para validar dados de entrada.",
+      "kc_names": [
+        "Validating multiple constraints with logical operators"
+      ]
+    },
+    "clump_transition": {
+      "pt": "Detecção de transição em clumps",
+      "description_pt": "Identificação de mudança entre elementos iguais e diferentes em sequências.",
+      "kc_names": [
+        "Clump transition detection logic"
+      ]
+    },
+    "busca_propriedade": {
+      "pt": "Busca e seleção de elementos por propriedade",
+      "description_pt": "Localização de elementos que satisfazem critérios específicos, incluindo otimização por distância.",
+      "kc_names": [
+        "Distance calculation for optimal selection",
+        "Finding elements by property with constraints"
+      ]
+    },
+    "dual_pointer": {
+      "pt": "Estratégia de dois ponteiros",
+      "description_pt": "Uso de dois índices simultâneos para percorrer ou manipular estruturas de dados.",
+      "kc_names": [
+        "Dual pointer indexing strategy"
+      ]
+    },
+    "estado_com_indices": {
+      "pt": "Tracking de estado com índices e comparações",
+      "description_pt": "Monitoramento de estado algorítmico através da manipulação de índices e checagens de igualdade.",
+      "kc_names": [
+        "Tracking state with indices and comparisons"
+      ]
+    },
+    "retorno_para_recursos": {
+      "pt": "Valor de retorno para gestão de recursos",
+      "description_pt": "Uso do retorno de método para alocar, gerenciar ou rastrear consumo de recursos.",
+      "kc_names": [
+        "Using return values for resource management"
+      ]
+    },
+    "independencia_ordem": {
+      "pt": "Independência de ordem em lógica e dados",
+      "description_pt": "Operações cujo resultado independe da ordem em que elementos ou condições são avaliados.",
+      "kc_names": [
+        "Order independence in logic and data"
+      ]
+    }
+  },
+  "translations": {
+    "Method return types and values": {
+      "pt": "Tipos e valores de retorno de método",
+      "concept_id": "tipos_retorno",
+      "assignments": [
+        "A439",
+        "A487",
+        "A494"
+      ],
+      "reasoning_hint": "This label captures the common concept of understanding different data types (boolean, integer) that methods can return and work with...."
+    },
+    "Absolute value for comparison operations": {
+      "pt": "Valor absoluto em operações de comparação",
+      "concept_id": "aritmetica_condicional",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label clarifies that absolute value is used as a computational tool for performing comparisons rather than just calculating magnitude...."
+    },
+    "Accumulating values through arithmetic operations": {
+      "pt": "Acúmulo de valores via operações aritméticas",
+      "concept_id": "padrao_acumulador",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "All KCs involve building up results through repeated arithmetic operations or aggregations, whether summing multiple values, testing arithmetic proper..."
+    },
+    "Accumulator counter variable": {
+      "pt": "Variável acumuladora contadora",
+      "concept_id": "padrao_acumulador",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This single KC already captures the complete concept of using variables to track and accumulate values in loops or iterative processes...."
+    },
+    "Accumulator pattern for aggregating values": {
+      "pt": "Padrão acumulador para agregação de valores",
+      "concept_id": "padrao_acumulador",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures the core concept that unites all variants: using a variable to aggregate or track values (sum, count, maximum) through iteration o..."
+    },
+    "Accumulator patterns for aggregate computation": {
+      "pt": "Padrões acumuladores para computação agregada",
+      "concept_id": "padrao_acumulador",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "This label captures the common concept of using accumulator variables to compute aggregate values (sums, averages, extremes) across multiple iteration..."
+    },
+    "Adjacent element neighbor access": {
+      "pt": "Acesso a elementos adjacentes (vizinhos)",
+      "concept_id": "manipulacao_array",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "This is a single KC that already clearly represents the specific concept of accessing neighboring elements in data structures...."
+    },
+    "Arithmetic expression evaluation and chaining": {
+      "pt": "Avaliação e encadeamento de expressões aritméticas",
+      "concept_id": "aritmetica_condicional",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures both the direct evaluation of arithmetic expressions and the specific case of chaining multiple arithmetic operations together...."
+    },
+    "Array creation and manipulation techniques": {
+      "pt": "Técnicas de criação e manipulação de arrays",
+      "concept_id": "manipulacao_array",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "This label captures the cluster's focus on array instantiation, initialization, modification, and return patterns across various creation and usage co..."
+    },
+    "Array length and boundary operations": {
+      "pt": "Operações com comprimento e fronteiras de array",
+      "concept_id": "bounds_checking",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures the common theme of using array length information for bounds checking, validation, slicing, and safe element access across all cl..."
+    },
+    "Array manipulation using indexed access": {
+      "pt": "Manipulação de array via acesso indexado",
+      "concept_id": "manipulacao_array",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures the common theme of using array indices to access, traverse, modify, and search array elements across various patterns and loop st..."
+    },
+    "Boolean logic for control flow": {
+      "pt": "Lógica booleana para controle de fluxo",
+      "concept_id": "branching_condicional",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "All KCs involve using boolean values and conditional logic to direct program execution paths, whether through flags, nested conditions, early exits, o..."
+    },
+    "Boolean negation in control flow": {
+      "pt": "Negação booleana no controle de fluxo",
+      "concept_id": "negacao_booleana",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures the shared concept of using negation logic with booleans across early returns, violation detection, state machines, and complex ex..."
+    },
+    "Boolean negation with NOT operator": {
+      "pt": "Negação booleana com operador NOT",
+      "concept_id": "negacao_booleana",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label most comprehensively captures the cluster by naming both the concept (Boolean negation) and the specific operator (!), avoiding redundancy ..."
+    },
+    "Boundary and edge case handling": {
+      "pt": "Tratamento de fronteiras e edge cases",
+      "concept_id": "bounds_checking",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "This label unifies all three KCs by capturing the common concept of validating and managing special input conditions (empty states, array bounds, leng..."
+    },
+    "Bounds checking before indexed access": {
+      "pt": "Bounds checking antes de acesso indexado",
+      "concept_id": "bounds_checking",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This single KC already precisely captures the defensive programming practice of validating array/collection indices before access to prevent out-of-bo..."
+    },
+    "Bust condition detection and validation": {
+      "pt": "Detecção e validação de condição de bust",
+      "concept_id": "edge_cases_especificos",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This single KC already comprehensively captures the concept of identifying and verifying when bust conditions occur, making it an adequate label for t..."
+    },
+    "Clump transition detection logic": {
+      "pt": "Lógica de detecção de transição em clumps",
+      "concept_id": "clump_transition",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This KC is the only item in the cluster and already represents the concept at an appropriate level of specificity for an introductory Java course...."
+    },
+    "Combining multiple comparison operators": {
+      "pt": "Combinação de múltiplos operadores de comparação",
+      "concept_id": "comparacao_numerica",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This label captures the core concept of using multiple equality, inequality, and comparison operations together with logical operators (AND/NOT) acros..."
+    },
+    "Comparing adjacent array elements": {
+      "pt": "Comparação de elementos adjacentes em array",
+      "concept_id": "manipulacao_array",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label directly captures the core concept of examining and comparing neighboring elements within an array, which encompasses all three related KCs..."
+    },
+    "Compound boolean expressions with logical operators": {
+      "pt": "Expressões booleanas compostas com operadores lógicos",
+      "concept_id": "logica_booleana_composta",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label captures the core concept encompassing both AND and OR logical operators used to combine multiple conditions in boolean expressions, which ..."
+    },
+    "Conditional branching for data validation": {
+      "pt": "Branching condicional para validação de dados",
+      "concept_id": "branching_condicional",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "Both KCs involve using conditionals to check specific properties (edge cases, length) before proceeding, which are forms of input or data validation l..."
+    },
+    "Conditional branching with multiple paths": {
+      "pt": "Branching condicional com múltiplos caminhos",
+      "concept_id": "branching_condicional",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label captures the shared concept of using conditionals to handle multiple decision branches, whether through nesting, chaining, or logical opera..."
+    },
+    "Conditional logic and logical operators": {
+      "pt": "Lógica condicional e operadores lógicos",
+      "concept_id": "logica_booleana_composta",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures the cluster's core focus on using logical operators (AND, OR, NOT) and conditional statements to implement multi-criteria decision..."
+    },
+    "Conditional logic based on threshold values": {
+      "pt": "Lógica condicional baseada em valores de threshold",
+      "concept_id": "comparacao_numerica",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "Both KCs involve making decisions or taking actions based on whether values meet or exceed a specified threshold, which is the unifying concept...."
+    },
+    "Conditional logic for return values": {
+      "pt": "Lógica condicional para valores de retorno",
+      "concept_id": "retorno_antecipado",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This label encompasses the common concept of using conditional statements and case handling to determine which value to return based on different prog..."
+    },
+    "Conjunctive boolean conditions with AND": {
+      "pt": "Condições booleanas conjuntivas com AND",
+      "concept_id": "logica_booleana_composta",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label directly references the AND operator while maintaining the specificity of multiple conditions, accurately capturing all three KCs' focus on..."
+    },
+    "Default case residual handling": {
+      "pt": "Tratamento residual com caso default",
+      "concept_id": "default_case_switch",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This single KC already precisely describes the concept of handling remaining cases in switch statements when default case is used, making it an adequa..."
+    },
+    "Distance calculation for optimal selection": {
+      "pt": "Cálculo de distância para seleção ótima",
+      "concept_id": "busca_propriedade",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This single KC already precisely captures the concept of using distance metrics to identify optimal choices, which is the core idea of the cluster...."
+    },
+    "Dual pointer indexing strategy": {
+      "pt": "Estratégia de indexação com dois ponteiros",
+      "concept_id": "dual_pointer",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This is the only KC in the cluster, so it already represents the group well as a specific technique for traversing or manipulating data structures wit..."
+    },
+    "Early exit and return patterns": {
+      "pt": "Padrões de saída antecipada com return",
+      "concept_id": "retorno_antecipado",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label captures the common concept of using return statements and early exits to control loop flow and function termination across all three KCs...."
+    },
+    "Early exit with conditional return": {
+      "pt": "Saída antecipada com return condicional",
+      "concept_id": "retorno_antecipado",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures both the mechanism (return statement) and the conditional triggering that distinguishes early exit patterns from regular returns...."
+    },
+    "Early return pattern in control flow": {
+      "pt": "Padrão de retorno antecipado no controle de fluxo",
+      "concept_id": "retorno_antecipado",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label captures the common concept of using early returns to exit methods based on conditional logic, encompassing nested blocks, short-circuiting..."
+    },
+    "Edge case handling for duplicate positions": {
+      "pt": "Tratamento de edge case para posições duplicadas",
+      "concept_id": "edge_cases_especificos",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This single KC already adequately describes the specific edge case concept and requires no synthesis or generalization...."
+    },
+    "Equality comparison of numeric values": {
+      "pt": "Comparação de igualdade entre valores numéricos",
+      "concept_id": "comparacao_numerica",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label subsumes the more specific 'integers' case and generalizes to all numeric types (int, double, float, long), making it the most comprehensiv..."
+    },
+    "Finding elements by property with constraints": {
+      "pt": "Localização de elementos por propriedade com restrições",
+      "concept_id": "busca_propriedade",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This KC already precisely captures the concept of locating and filtering elements based on specific properties and conditional requirements...."
+    },
+    "Helper method extraction for logic": {
+      "pt": "Extração de método auxiliar para lógica",
+      "concept_id": "metodos_auxiliares",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This KC already precisely captures the concept of decomposing code logic into separate helper methods for improved organization and reusability...."
+    },
+    "Helper methods for code organization": {
+      "pt": "Métodos auxiliares para organização do código",
+      "concept_id": "metodos_auxiliares",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This label captures both the structural pattern and functional purpose of using helper methods to decompose problems and enable code reuse...."
+    },
+    "Index manipulation within loops": {
+      "pt": "Manipulação de índices dentro de loops",
+      "concept_id": "iteracao_indexada",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label captures the common concept of modifying loop indices based on conditions or fixed offsets, which is the unifying theme across all three KC..."
+    },
+    "Index-based array traversal and manipulation": {
+      "pt": "Travessia e manipulação de array baseadas em índice",
+      "concept_id": "iteracao_indexada",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "This label captures the core concept that unites all KCs: using loop indices to access, iterate through, and modify array elements with explicit bound..."
+    },
+    "Index-based string manipulation and traversal": {
+      "pt": "Manipulação e travessia de string baseadas em índice",
+      "concept_id": "iteracao_indexada",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label captures the dominant theme of using indices to access, extract, traverse, and match substrings and characters in strings, which encompasse..."
+    },
+    "Inequality operators for negative conditions": {
+      "pt": "Operadores de desigualdade para condições negativas",
+      "concept_id": "comparacao_numerica",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This KC is the only item in the cluster and already provides a specific, teachable label for the concept of using inequality operators (!=, <, >, <=, ..."
+    },
+    "Integer division and modulo arithmetic": {
+      "pt": "Divisão inteira e aritmética modular",
+      "concept_id": "operador_modulo",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This label encompasses both the modulo operator for remainder extraction and integer division, capturing the broader concept of arithmetic operations ..."
+    },
+    "Integer return value with discrete states": {
+      "pt": "Retorno inteiro representando estados discretos",
+      "concept_id": "tipos_retorno",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This single KC already captures the specific concept of using integer return values to represent distinct program states or conditions, making it a su..."
+    },
+    "Loop bounds and counter control": {
+      "pt": "Limites de loop e controle de contador",
+      "concept_id": "iteracao_indexada",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures the common theme of managing loop iteration through boundary specification, counter manipulation, and parameter-driven control acr..."
+    },
+    "Method parameter usage in computation": {
+      "pt": "Uso de parâmetros de método em computação",
+      "concept_id": "parametros_metodo",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This single KC already precisely captures the concept of using method parameters within computational logic and operations...."
+    },
+    "Method return types and statements": {
+      "pt": "Tipos de retorno de método e statements return",
+      "concept_id": "tipos_retorno",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label captures the common theme of understanding how methods return values, including their typing, boolean logic, early exits, and default cases..."
+    },
+    "Min/max value tracking with conditionals": {
+      "pt": "Rastreamento de mínimo/máximo com condicionais",
+      "concept_id": "min_max",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "This KC encompasses the core concept of identifying and maintaining extreme values using conditional logic, which subsumes both initialization strateg..."
+    },
+    "Modulo operator applications and uses": {
+      "pt": "Aplicações e usos do operador módulo",
+      "concept_id": "operador_modulo",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "This label captures both the divisibility testing and index wraparound uses of the modulo operator as practical applications of a single mathematical ..."
+    },
+    "Modulo operator for numeric property testing": {
+      "pt": "Operador módulo para teste de propriedades numéricas",
+      "concept_id": "operador_modulo",
+      "assignments": [
+        "A494"
+      ],
+      "reasoning_hint": "This label captures the common concept of using the modulo operator to test numeric properties (divisibility, parity), which is the underlying techniq..."
+    },
+    "Multi-branch conditional logic patterns": {
+      "pt": "Padrões de lógica condicional multi-ramo",
+      "concept_id": "branching_condicional",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This label captures the shared concept of using multiple conditional branches (if/elif, nested, chained) for various decision-making patterns includin..."
+    },
+    "Negative constraint enforcement": {
+      "pt": "Enforcement de restrições negativas",
+      "concept_id": "restricoes_negativas",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This single KC already adequately describes the concept of enforcing constraints that specify what should NOT occur in a program...."
+    },
+    "Numeric threshold comparison with operators": {
+      "pt": "Comparação contra threshold numérico com operadores",
+      "concept_id": "comparacao_numerica",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This KC already clearly and specifically captures the concept of using comparison operators to evaluate numeric values against threshold limits...."
+    },
+    "Order independence in logic and data": {
+      "pt": "Independência de ordem em lógica e dados",
+      "concept_id": "independencia_ordem",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "All three KCs share the concept that certain operations or results are independent of the order in which elements are arranged or conditions are evalu..."
+    },
+    "Parity check optimization for filtering": {
+      "pt": "Checagem de paridade como otimização de filtragem",
+      "concept_id": "operador_modulo",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "This single KC already represents the cluster well as it specifically captures the concept of using parity checks as an optimization technique for fil..."
+    },
+    "Pattern-based loop boundary adjustment": {
+      "pt": "Ajuste de limite de loop baseado em padrão",
+      "concept_id": "iteracao_indexada",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label captures the core concept of adjusting loop limits based on pattern length, which encompasses both calculating boundaries and making adjust..."
+    },
+    "Range validation with logical operators": {
+      "pt": "Validação de intervalo com operadores lógicos",
+      "concept_id": "comparacao_numerica",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label captures the core concept that all KCs share: using comparison and logical operators together to check if values fall within specified nume..."
+    },
+    "Returning values from conditional statements": {
+      "pt": "Retorno de valores a partir de statements condicionais",
+      "concept_id": "tipos_retorno",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label captures the common concept of using return statements within if-else blocks to output different values based on conditions, encompassing b..."
+    },
+    "Sentinel value pattern for search results": {
+      "pt": "Padrão de valor sentinela para resultados de busca",
+      "concept_id": "sentinela",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This is the only KC in the cluster, so it already represents the group well without modification...."
+    },
+    "String building with StringBuilder": {
+      "pt": "Construção de string com StringBuilder",
+      "concept_id": "manipulacao_string",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label captures the core concept of efficient string assembly that unifies all cluster items, from iterative concatenation to explicit StringBuild..."
+    },
+    "String character access with charAt": {
+      "pt": "Acesso a caractere de string com charAt",
+      "concept_id": "manipulacao_string",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label is already present in the cluster and clearly captures the core concept of accessing individual characters in a string using the charAt() m..."
+    },
+    "String comparison methods and techniques": {
+      "pt": "Métodos e técnicas de comparação de strings",
+      "concept_id": "manipulacao_string",
+      "assignments": [
+        "A492"
+      ],
+      "reasoning_hint": "This label captures both specific comparison approaches (case-insensitive, equality) and the broader concept of different string comparison methods av..."
+    },
+    "String conversion of integers": {
+      "pt": "Conversão de inteiros para string",
+      "concept_id": "manipulacao_string",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "The existing KC already concisely captures the concept of converting between string and integer data types...."
+    },
+    "String indexing and substring extraction": {
+      "pt": "Indexação de string e extração de substring",
+      "concept_id": "manipulacao_string",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This label captures the core concept of accessing and extracting portions of strings using index-based operations, which encompasses all three KCs in ..."
+    },
+    "String length validation and edge cases": {
+      "pt": "Validação de comprimento de string e edge cases",
+      "concept_id": "manipulacao_string",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This label captures the common focus on checking string length for safety and correctness across operations and boundary conditions...."
+    },
+    "Tracking state with indices and comparisons": {
+      "pt": "Tracking de estado com índices e comparações",
+      "concept_id": "estado_com_indices",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "Both KCs involve monitoring algorithmic state through index manipulation and equality checks to solve problems like balanced bracket detection...."
+    },
+    "Using arithmetic operations in conditionals": {
+      "pt": "Uso de operações aritméticas em condicionais",
+      "concept_id": "aritmetica_condicional",
+      "assignments": [
+        "A439"
+      ],
+      "reasoning_hint": "This label captures both the evaluation of arithmetic expressions and their use within conditional statements as a unified concept...."
+    },
+    "Using return values for resource management": {
+      "pt": "Uso de valores de retorno para gestão de recursos",
+      "concept_id": "retorno_para_recursos",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "This label captures the common thread of leveraging method outputs to manage, allocate, and track resource consumption across all three KCs...."
+    },
+    "Validating multiple constraints with logical operators": {
+      "pt": "Validação de múltiplas restrições com operadores lógicos",
+      "concept_id": "validacao_composta",
+      "assignments": [
+        "A487"
+      ],
+      "reasoning_hint": "All three KCs involve checking multiple conditions or boundaries sequentially using logical operators (AND) to ensure data meets feasibility requireme..."
+    },
+    "Variable initialization for computational patterns": {
+      "pt": "Inicialização de variáveis para padrões computacionais",
+      "concept_id": "inicializacao_variaveis",
+      "assignments": [
+        "A502"
+      ],
+      "reasoning_hint": "Both KCs involve strategically initializing variables (accumulators or temporaries) to support specific programming patterns like aggregation or value..."
+    }
+  }
+}
