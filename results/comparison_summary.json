@@ -1,0 +1,224 @@
+{
+  "per_assignment": {
+    "BKT": {
+      "439": {
+        "first_mean": 63.2147,
+        "first_std": 0.0,
+        "all_mean": 64.2298,
+        "all_std": 0.0
+      },
+      "487": {
+        "first_mean": 68.3976,
+        "first_std": 0.0,
+        "all_mean": 69.0723,
+        "all_std": 0.0
+      },
+      "492": {
+        "first_mean": 54.2009,
+        "first_std": 0.0,
+        "all_mean": 63.6189,
+        "all_std": 0.0
+      },
+      "494": {
+        "first_mean": 57.8142,
+        "first_std": 0.0,
+        "all_mean": 59.6577,
+        "all_std": 0.0
+      },
+      "502": {
+        "first_mean": 56.9156,
+        "first_std": 0.0,
+        "all_mean": 57.3737,
+        "all_std": 0.0
+      }
+    },
+    "DKT": {
+      "439": {
+        "first_mean": 75.5619,
+        "first_std": 3.3968,
+        "all_mean": 70.886,
+        "all_std": 2.1535
+      },
+      "487": {
+        "first_mean": 76.7022,
+        "first_std": 3.2354,
+        "all_mean": 72.7703,
+        "all_std": 1.1783
+      },
+      "492": {
+        "first_mean": 82.0454,
+        "first_std": 1.6571,
+        "all_mean": 76.6577,
+        "all_std": 0.838
+      },
+      "494": {
+        "first_mean": 80.1674,
+        "first_std": 5.045,
+        "all_mean": 72.5668,
+        "all_std": 2.7856
+      },
+      "502": {
+        "first_mean": 80.7822,
+        "first_std": 4.0141,
+        "all_mean": 72.476,
+        "all_std": 1.8845
+      }
+    },
+    "Code-DKT": {
+      "439": {
+        "first_mean": 73.2654,
+        "first_std": 1.3356,
+        "all_mean": 70.3518,
+        "all_std": 0.6657
+      },
+      "487": {
+        "first_mean": 79.558,
+        "first_std": 0.7607,
+        "all_mean": 74.8884,
+        "all_std": 0.6078
+      },
+      "492": {
+        "first_mean": 86.1242,
+        "first_std": 0.5254,
+        "all_mean": 79.0801,
+        "all_std": 0.74
+      },
+      "494": {
+        "first_mean": 81.845,
+        "first_std": 0.9782,
+        "all_mean": 75.0726,
+        "all_std": 0.9666
+      },
+      "502": {
+        "first_mean": 84.9828,
+        "first_std": 1.0089,
+        "all_mean": 76.2378,
+        "all_std": 0.7683
+      }
+    },
+    "srcML-DKT": {
+      "439": {
+        "first_mean": 70.4071,
+        "first_std": 1.009,
+        "all_mean": 67.2528,
+        "all_std": 0.4419
+      },
+      "487": {
+        "first_mean": 76.5589,
+        "first_std": 0.8674,
+        "all_mean": 71.7951,
+        "all_std": 0.5136
+      },
+      "492": {
+        "first_mean": 81.9293,
+        "first_std": 0.7143,
+        "all_mean": 75.8027,
+        "all_std": 0.8679
+      },
+      "494": {
+        "first_mean": 78.3,
+        "first_std": 0.9048,
+        "all_mean": 70.0387,
+        "all_std": 0.9154
+      },
+      "502": {
+        "first_mean": 81.1651,
+        "first_std": 0.99,
+        "all_mean": 72.5873,
+        "all_std": 0.6278
+      }
+    }
+  },
+  "pooled": {
+    "BKT": {
+      "first": {
+        "mean": null,
+        "std": null
+      },
+      "all": {
+        "mean": null,
+        "std": null
+      }
+    },
+    "DKT": {
+      "first": {
+        "mean": 79.7983,
+        "std": 0.0
+      },
+      "all": {
+        "mean": 73.616,
+        "std": 0.0
+      }
+    },
+    "Code-DKT": {
+      "first": {
+        "mean": 81.5469,
+        "std": 0.0
+      },
+      "all": {
+        "mean": 75.608,
+        "std": 0.0
+      }
+    },
+    "srcML-DKT": {
+      "first": {
+        "mean": 78.0353,
+        "std": 0.4108
+      },
+      "all": {
+        "mean": 72.1855,
+        "std": 0.4069
+      }
+    }
+  },
+  "wilcoxon": {
+    "Code_DKT_vs_DKT": {
+      "first_auc": {
+        "p": 0.001025,
+        "p_adj": 0.002049,
+        "effect_r": 0.428,
+        "mean_diff_pp": 2.1033,
+        "significant": true
+      },
+      "all_auc": {
+        "p": 0.0,
+        "p_adj": 1e-06,
+        "effect_r": 0.6601,
+        "mean_diff_pp": 2.0548,
+        "significant": true
+      }
+    },
+    "srcML_DKT_vs_Code_DKT": {
+      "first_auc": {
+        "p": 0.0,
+        "p_adj": 0.0,
+        "effect_r": 0.8703,
+        "mean_diff_pp": -3.483,
+        "significant": true
+      },
+      "all_auc": {
+        "p": 0.0,
+        "p_adj": 0.0,
+        "effect_r": 0.8703,
+        "mean_diff_pp": -3.6308,
+        "significant": true
+      }
+    },
+    "srcML_DKT_vs_DKT": {
+      "first_auc": {
+        "p": 0.012213,
+        "p_adj": 0.012213,
+        "effect_r": 0.3515,
+        "mean_diff_pp": -1.3798,
+        "significant": true
+      },
+      "all_auc": {
+        "p": 1e-05,
+        "p_adj": 1e-05,
+        "effect_r": 0.5932,
+        "mean_diff_pp": -1.576,
+        "significant": true
+      }
+    }
+  }
+}
