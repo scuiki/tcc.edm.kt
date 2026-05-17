@@ -31,6 +31,8 @@ env/
 # Resultados/outputs intermediários
 #results/*.csv
 #results/*.pkl
+# Cache de paths AST (197 MB, regenerável via 06_code_dkt.ipynb Seção 4)
+results/code_features_cache.pkl
 *.h5
 *.pt
 *.pth
