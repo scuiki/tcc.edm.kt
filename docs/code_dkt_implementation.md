@@ -2,11 +2,10 @@
 
 Baseado em: Shi et al. (2022) *Code-DKT: A Code-based Knowledge Tracing Model for Programming Tasks* (EDM 2022);
 Piech et al. (2015) *Deep Knowledge Tracing* (NeurIPS 2015);
-Pankiewicz, Shi & Baker (2025) *srcML-DKT* (EDM 2025) — motivação para inclusão de Compile.Error, não adotada aqui;
 repositório oficial Code-DKT (`experiments/Code-DKT/src/`);
 repositório code2vec (`experiments/code2vec/`) — aproveitado para vocabulário e conceito de path.
 
-> **Nota sobre srcML**: A abordagem srcML (Pankiewicz et al., 2025) foi avaliada e descartada para este TCC. Adotamos o Code-DKT original de Shi et al. (2022): apenas eventos `Run.Program`, extração de paths via `javalang`. Consultar `docs/refs/pankiewicz2025_srcml_dkt.md` para referência futura.
+Escopo deste plano: Code-DKT vanilla conforme Shi et al. (2022) — apenas eventos `Run.Program`, extração de paths via `javalang`. Comparação direta de protocolo com o paper de referência.
 
 ---
 
@@ -43,6 +42,51 @@ repositório code2vec (`experiments/code2vec/`) — aproveitado para vocabulári
 
 `javalang` é a biblioteca Python usada pelo repositório oficial Code-DKT (`path_extractor.py`) para parsear código Java em AST. Não requer Java instalado no sistema. O code2vec JavaExtractor (alternativa mais robusta com javaparser e retry logic) foi considerado, mas descartado por dependência de Java runtime ausente.
 
+### 1.4 Hardware e implicações de protocolo
+
+O protocolo de 10 runs (Seção 8.3) é o gargalo de compute deste plano. Resumo:
+
+| Etapa | Bottleneck | GPU acelera? |
+|---|---|---|
+| Extração javalang de paths (~69k CodeStateIDs) | CPU + Python | **Não** — paralelizar com `multiprocessing.Pool(n_workers=N_CPU)` |
+| Construção do vocab | CPU single-thread | Não |
+| Tensorização (lookup índices) | CPU single-thread | Não |
+| **Treino do CodeDKTModel** | LSTM + embedding + attention | **Sim, 10–20×** sobre CPU |
+| Predição | Mesmo do treino | Sim |
+
+**Hardware-alvo**: NVIDIA RTX 4050 (6 GB VRAM). Para este modelo (input_dim=170, hidden ∈ {128, 200}, batch=128, seq=50), uso estimado < 1 GB VRAM — folgado.
+
+**Estimativas com GPU**:
+- 1 run de 40 épocas em A439 (~330 alunos treino): 1–3 min
+- 10 runs × 5 assignments = 50–150 min total de treino final
+- Cache de paths permanece CPU-bound: dezenas de minutos mesmo com paralelização
+
+**Fallback documentado se GPU indisponível**: reduzir para 3 runs (seeds 42, 43, 44) e reportar mean ± std com a ressalva metodológica de que o paper usou 10 runs.
+
+### 1.5 Reprodutibilidade
+
+Checklist obrigatório a aplicar nos notebooks `06_code_dkt.ipynb` e em todo módulo que faça operações estocásticas:
+
+```python
+import random, numpy as np, torch
+
+SEED = 42
+
+def set_global_seed(seed: int = SEED) -> None:
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+```
+
+Pontos específicos:
+- **Multiprocessing**: ao usar `Pool` para extração de paths, propagar seed via `initializer=set_global_seed` e seed derivada do `worker_id` para diversificar amostragem dentro de cada submissão sem perder reprodutibilidade global.
+- **Split de validação intra-treino** (Seção 8.2): `train_test_split(..., random_state=SEED, stratify=...)` — fixar seed separadamente.
+- **Multi-run** (Seção 8.3): seeds 42, 43, ..., 51. Antes de cada run, chamar `set_global_seed(seed_i)`.
+- **CUDA não-determinístico em alguns kernels LSTM**: documentar no notebook se `torch.use_deterministic_algorithms(True)` causar erros conhecidos do PyTorch para LSTM em GPU; nesse caso, aceitar não-determinismo mínimo e reportar.
+
 ---
 
 ## 2. Pipeline de dados — Sequências
@@ -65,7 +109,7 @@ A coluna `CodeStateID` já presente em cada evento permite o lookup direto no `C
 
 ### 2.2 Por que não incluir Compile.Error
 
-O `javalang` falha silenciosamente em código não-compilável (`try/except` retorna `"Uncompilable"` → zero paths). Para não introduzir ruído sistemático (todos os Compile.Error teriam representação nula), o Code-DKT original omite esses eventos. Extensão futura possível com srcML (Pankiewicz et al., 2025, Section 3).
+O `javalang` falha silenciosamente em código não-compilável (`try/except` retorna `"Uncompilable"` → zero paths). Para não introduzir ruído sistemático (todos os Compile.Error teriam representação nula), o Code-DKT original (Shi et al., 2022) omite esses eventos. Adotamos o mesmo critério para fidelidade ao protocolo de referência.
 
 ### 2.3 Truncamento e is_first_attempt
 
@@ -146,6 +190,16 @@ Fase 2 — Converter para índices (após construir vocabulário):
   cache_idx: dict{CodeStateID: np.array de shape (R, 3), dtype=int64}
   Armazenado em memória durante o treinamento; não salvo em arquivo separado.
 ```
+
+### 3.5 Métricas de transparência a reportar
+
+Durante a extração, registrar e incluir no notebook:
+
+1. **Taxa de parsing javalang** sobre Run.Program (% submissões com ≥1 path extraído vs % "Uncompilable")
+2. **Distribuição de paths por submissão** antes da amostragem R=50 (mediana, p95, p99)
+3. **Tempo médio de extração por submissão**
+
+Esses números são *características descritivas do dataset sob o protocolo Code-DKT*, não gates de decisão. Shi et al. (2022) usaram exatamente o mesmo `javalang` no mesmo CSEDM e reportaram AUC 74.31% — qualquer perda por não-parsing está embutida no número de referência. Reportar nossos valores serve para transparência metodológica e enriquece a discussão (eventualmente motivando a Fase 2 de srcML).
 
 ---
 
@@ -344,10 +398,26 @@ O paper testa 100 configurações × 10 runs com CV. Para o TCC 1 (objetivo: com
 
 | Parâmetro | Range | Referência |
 |---|---|---|
-| `hidden_dim` | {64, 128} | Code-DKT usa 128; DKT usa 200 |
+| `hidden_dim` | {128, 200} | Code-DKT usa 128; nosso DKT (`05_dkt.ipynb`) selecionou 200 — incluir ambos para comparação justa |
 | `dropout` | {0.0, 0.1} | `c2vRNNModel.py` linha 28: `p=0.1` |
 
-4 combinações × 1 run com seed=42. Seleção pelo `first_auc` no subconjunto de validação de A439 (hold-out 20% dos estudantes do treino).
+4 combinações × 1 run com seed=42 (seleção). Seleção pelo `first_auc` no subconjunto de validação de A439 (hold-out 20% dos estudantes do treino, `train_test_split(..., random_state=SEED, stratify_by=class_or_first_attempt_outcome)`). A escolha de A439 reflete que é o assignment-âncora do critério de conclusão do TCC 1 (CLAUDE.md).
+
+### 8.3 Protocolo multi-run (avaliação final)
+
+Após selecionada a melhor configuração de hiperparâmetros, **rodar 10 runs com seeds 42–51** por assignment, conforme Shi et al. (2022): *"each configuration was evaluated 10 times to account for random initialization variance"*.
+
+Para cada assignment × seed:
+1. `set_global_seed(seed)` antes de instanciar o modelo
+2. Treinar com hiperparâmetros selecionados (40 épocas)
+3. Predizer no test set
+4. Persistir: `(all_auc, first_auc, model_state_dict, pred_df)`
+
+Reportar para cada assignment: `mean ± std` de `all_auc` e `first_auc` sobre os 10 runs. Comparar com `mean ± std` do DKT (idêntico protocolo, 10 runs) e BKT (idem).
+
+**Custo estimado** (GPU): 5 assignments × 10 runs × ~2 min/run = ~100 min de treino.
+
+**Fallback CPU/sem GPU**: 3 runs (seeds 42–44) com nota metodológica explícita de divergência do paper.
 
 ---
 
@@ -358,6 +428,7 @@ Idêntico ao BKT e DKT para comparação justa:
 - **All-attempts AUC**: `compute_auc(pred_df, first_attempt_only=False)`
 - **First-attempt AUC**: `compute_auc(pred_df, first_attempt_only=True)`
 - AUC pooled (todas as predições concatenadas — metodologia Shi et al., 2022 e Piech et al., 2015)
+- **Multi-run**: `mean ± std` sobre 10 runs (Seção 8.3) por assignment
 
 ### 9.1 Valores alvo (Shi et al., 2022)
 
@@ -369,28 +440,56 @@ Idêntico ao BKT e DKT para comparação justa:
 | A494 (A4) | 72.75% | — |
 | A502 (A5) | 79.14% | — |
 
-Os valores do paper são médias de 10 runs; com 1 run e seed=42, esperar variabilidade de ±3pp.
+Os valores do paper são médias de 10 runs. Nosso protocolo (Seção 8.3) replica esse N — comparação direta de `mean ± std` é válida.
 
-### 9.2 Critério de conclusão do TCC 1
+### 9.2 Teste de significância (Wilcoxon signed-rank)
 
-`first_auc` do Code-DKT próximo a 74% para A439 (±3%), superior ao DKT (CLAUDE.md).
+Critério 3 do CLAUDE.md: comparação estatística entre modelos.
+
+Para cada par de modelos (BKT vs DKT, DKT vs Code-DKT, BKT vs Code-DKT):
+1. Para cada assignment × seed (5 × 10 = 50 observações), coletar `(first_auc_modelo_A, first_auc_modelo_B)`
+2. Aplicar `scipy.stats.wilcoxon(auc_A, auc_B, alternative='less')` (hipótese: A < B)
+3. Reportar estatística W, p-valor e tamanho de efeito (r = Z / √N)
+
+Decisão: p < 0.05 → diferença significativa. Para Code-DKT vs DKT, esperar p < 0.05 favorecendo Code-DKT em todos os assignments (consistente com +3.07–4.00pp de Shi et al., 2022, Table 1).
+
+Reportar também: tabela com `mean(diff) ± std(diff)` por par, intervalo de confiança 95% via bootstrap (1000 resamples) sobre os 50 pares.
+
+### 9.3 Critério de conclusão do TCC 1
+
+`first_auc` do Code-DKT próximo a 74% para A439 (CLAUDE.md critério 1: ±3%), superior ao DKT com significância estatística (Wilcoxon p < 0.05).
 
 ---
 
 ## 10. Schema de `code_dkt_results.pkl`
 
-Compatível com `dkt_results.pkl` para que `07_comparison.ipynb` consuma os dois uniformemente:
+Compatível com `dkt_results.pkl` para que `07_comparison.ipynb` consuma os dois uniformemente. Estendido para multi-run (Seção 8.3):
 
 ```python
 {
   int assignment_id: {
-    'all_auc':          float | None,
-    'first_auc':        float | None,
+    # Agregado dos 10 runs (chaves principais — consumidas por 07_comparison)
+    'all_auc_mean':     float,          # media sobre 10 runs
+    'all_auc_std':      float,
+    'first_auc_mean':   float,
+    'first_auc_std':    float,
+
+    # Detalhe por run (para Wilcoxon e analises adicionais)
+    'runs': [
+        {
+            'seed':              int,
+            'all_auc':           float,
+            'first_auc':         float,
+            'pred_df':           pd.DataFrame,   # predicoes do test set
+            'model_state_dict':  dict,           # torch state_dict (nao o modelo completo)
+        },
+        ...   # 10 entradas
+    ],
+
     'n_train_events':   int,
     'n_test_events':    int,
-    'model':            CodeDKTModel,   # nn.Module treinado
-    'config':           dict,           # hiperparâmetros usados
-    'vocab': {                          # adicional em relação ao DKT
+    'config':           dict,           # hiperparametros selecionados (Secao 8.2)
+    'vocab': {                          # adicional em relacao ao DKT
         'token_to_idx': dict[str, int],
         'path_to_idx':  dict[str, int],
         'node_count':   int,
@@ -399,6 +498,8 @@ Compatível com `dkt_results.pkl` para que `07_comparison.ipynb` consuma os dois
   }
 }
 ```
+
+**Nota sobre tamanho**: 10 `pred_df` + 10 `model_state_dict` por assignment × 5 assignments pode gerar arquivo de ~100–300 MB. Se exceder limite gitignore-friendly, considerar serializar `model_state_dict` em arquivos separados (`results/code_dkt_models/{assignment}_{seed}.pt`) e manter apenas referências no pickle.
 
 ---
 
@@ -471,32 +572,109 @@ Interface idêntica ao `dkt.py` para que `07_comparison.ipynb` consuma os dois u
 
 | Seção | Conteúdo |
 |---|---|
-| 1 — Setup | Imports, SEED=42, device (CUDA), paths; carregar `sequences_bkt_dkt.pkl` |
+| 1 — Setup | Imports, `set_global_seed(42)`, device (CUDA), paths; carregar `sequences_bkt_dkt.pkl` |
 | 2 — CodeStates | Carregar `CodeStates/CodeStates.csv`; verificar cobertura de CodeStateID |
-| 3 — Extração de paths | `extract_paths_javalang` em sample de 10 submissões; inspecionar paths extraídos |
-| 4 — Cache de features | Extrair paths para todos os CodeStateIDs únicos (train + test); salvar `code_features_cache.pkl` |
-| 5 — Vocabulário | `build_vocab` sobre train CodeStateIDs; reportar `node_count`, `path_count` |
+| 3 — Extração de paths | `extract_paths_javalang` em sample de 100 submissões; **medir taxa de parsing, distribuição de paths, tempo médio** (métricas de transparência da Seção 3.5); inspecionar 3 exemplos de paths extraídos |
+| 4 — Cache de features | Extrair paths para todos os CodeStateIDs únicos (train + test); salvar `code_features_cache.pkl`. Paralelizar com `multiprocessing.Pool` |
+| 5 — Vocabulário | `build_vocab` sobre train CodeStateIDs; reportar `node_count`, `path_count`, **% OOV no test set** |
 | 6 — Tensorização | `build_code_input_tensor` para A439; verificar shapes; smoke test forward pass |
-| 7 — Smoke test | `train_and_evaluate` em A439 com config default (5 épocas); verificar loss decresce |
-| 8 — Seleção de hiperparâmetros | Grid search 4 combinações × A439; escolher melhor config por `first_auc` |
-| 9 — Treinamento completo | 5 assignments × 40 épocas com melhor config |
-| 10 — Avaliação | All-attempts AUC + first-attempt AUC; tabela vs BKT e DKT |
-| 11 — Análise qualitativa de paths | Inspecionar paths com maiores pesos de atenção para exemplos corretos vs errados |
-| 12 — Serialização | `results/code_dkt_results.pkl` — schema com `vocab` adicional |
-| 13 — Sumário | Tabela comparativa BKT vs DKT vs Code-DKT; conclusão para TCC 1 |
+| 7 — Smoke test | `train_and_evaluate` em A439 com config default (5 épocas, seed=42); verificar loss decresce; reportar `first_auc` smoke como sanity check |
+| 8 — Seleção de hiperparâmetros | Grid search 4 combinações × A439 (Seção 8.2); escolher melhor config por `first_auc` no validation set |
+| 9 — Treinamento completo (10 runs) | 5 assignments × 10 runs (seeds 42–51) × 40 épocas com melhor config (Seção 8.3); barra de progresso |
+| 10 — Avaliação | `mean ± std` de all-attempts AUC + first-attempt AUC por assignment; tabela vs BKT e DKT (Seção 9) |
+| 11 — Teste de significância | Wilcoxon signed-rank entre pares de modelos (Seção 9.2); reportar W, p-valor, intervalo de confiança 95% bootstrap |
+| 12 — Análise qualitativa de paths | **Deliverable concreto**: tabela com top-5 paths de maior atenção em 3 problemas selecionados (1 baixa, 1 média, 1 alta taxa de acerto) × {predição correta, predição errada} = 30 paths anotados com (start_token, path_str, end_token, peso_atenção). Discussão de 2 parágrafos relacionando paths salientes à dificuldade do problema |
+| 13 — Serialização | `results/code_dkt_results.pkl` — schema multi-run da Seção 10 |
+| 14 — Sumário | Tabela comparativa BKT vs DKT vs Code-DKT com `mean ± std` + significância; conclusão para TCC 1 |
 
 ---
 
 ## 14. Pontos em aberto
 
-Os itens abaixo precisam de investigação empírica antes ou durante a implementação:
+Os itens abaixo precisam de investigação empírica durante a implementação. **Nenhum é gate de decisão** — todos viram métricas reportadas no notebook (transparência metodológica).
 
-1. **Cobertura de parsing por javalang**: Quantas submissões Run.Program do CSEDM resultam em zero paths (`"Uncompilable"`)? O `program_parser` usa `parse_member_declaration` (adequado para métodos Java isolados, formato típico do CSEDM). Verificar no início do notebook (Seção 3) com uma amostra de 1000 CodeStateIDs.
+1. **Cobertura de parsing por javalang**: Quantas submissões Run.Program do CSEDM resultam em zero paths (`"Uncompilable"`)? O `program_parser` usa `parse_member_declaration` (adequado para métodos Java isolados, formato típico do CSEDM). Medir na Seção 3 (sample de 100) e na Seção 4 (cache completo). Reportar como descritor do dataset sob o protocolo Code-DKT — Shi et al. (2022) usaram exatamente o mesmo javalang no mesmo dataset, qualquer perda está embutida no AUC de referência (74.31%).
 
-2. **Custo de extração srcML**: A extração de paths javalang para ~69.627 CodeStateIDs únicos pode levar dezenas de minutos. Medir o tempo por submissão na Seção 3 e estimar tempo total antes de rodar o cache completo (Seção 4). Considerar paralelização com `multiprocessing.Pool`.
+2. **Custo de extração**: A extração de paths javalang para ~69.627 CodeStateIDs únicos pode levar dezenas de minutos (CPU-bound, GPU não acelera — Seção 1.4). Medir o tempo por submissão na Seção 3 (sample) e estimar tempo total antes de rodar o cache completo (Seção 4). Paralelização com `multiprocessing.Pool(n_workers=N_CPU)` é esperada.
 
 3. **OOV em teste**: Tokens e paths presentes no test set mas ausentes no train set são mapeados para índice 0 (PAD/UNK). O impacto no AUC depende da frequência de OOV. Reportar percentual de OOV na Seção 5 como verificação de sanidade.
 
-4. **Vocabulário por assignment ou global**: O plano recomenda vocabulário por assignment (cada assignment tem padrões de código distintos e problemas diferentes). Se o vocabulário global for muito grande, considerar limitação por frequência mínima (ex.: descartar tokens com contagem < 3), seguindo o code2vec (vocabularies.py, `create_from_freq_dict`).
+4. **Vocabulário por assignment ou global**: O plano recomenda vocabulário por assignment (cada assignment tem padrões de código distintos e problemas diferentes). Se o vocabulário por assignment for muito grande, considerar limitação por frequência mínima (ex.: descartar tokens com contagem < 3), seguindo o code2vec (vocabularies.py, `create_from_freq_dict`).
 
-5. **Compatibilidade do code2vec JavaExtractor para uso futuro**: O JAR em `experiments/code2vec/JavaExtractor/JPredict/target/` usa javaparser com retry logic mais robusto que javalang. Se Java JDK for instalado futuramente (`sudo apt install default-jdk`), o `extractor.py` pode ser adaptado para o pipeline deste TCC com melhor cobertura de código não-compilável.
+---
+
+## 15. Handoff document — Chat 1 → Chat 2
+
+Este plano é executado em **dois chats sequenciais** (decisão registrada em discussão com o usuário):
+
+- **Chat 1 (Implementação + Smoke test)**: cobre Seções 1.3, 11, 12 do plano (módulos `src/code_features.py`, `src/models/code_dkt.py`) e Seções 1–7 do notebook (até smoke test passar).
+- **Chat 2 (Experimentação + Análise)**: cobre Seções 8–14 do notebook (grid search, 10 runs × 5 assignments, Wilcoxon, análise qualitativa, serialização, sumário).
+
+Ao final do Chat 1, gerar `docs/code_dkt_handoff.md` com o template abaixo. O Chat 2 entra com contexto fresco e consulta este handoff para retomar.
+
+### Template `docs/code_dkt_handoff.md`
+
+```markdown
+# Code-DKT — Handoff Chat 1 → Chat 2
+
+Gerado por: Chat 1 em <YYYY-MM-DD HH:MM>
+Status do Chat 1: <CONCLUÍDO | BLOQUEADO>
+
+## 1. Artefatos produzidos
+
+| Artefato | Caminho | Status |
+|---|---|---|
+| Módulo extração | `src/code_features.py` | <pronto / parcial> |
+| Módulo modelo | `src/models/code_dkt.py` | <pronto / parcial> |
+| Notebook | `notebooks/06_code_dkt.ipynb` (seções 1–7) | <pronto / parcial> |
+| Cache de paths | `results/code_features_cache.pkl` | <pronto / pendente> |
+| Vocab (apenas A439) | embutido no notebook | <pronto / pendente> |
+
+## 2. Métricas de transparência (Seção 3.5 do plano)
+
+- **Taxa de parsing javalang** sobre Run.Program: <X%> sucesso, <Y%> "Uncompilable"
+- **Distribuição de paths por submissão** (antes de R=50): mediana=<>, p95=<>, p99=<>
+- **Tempo médio de extração por submissão**: <ms>
+- **Tempo total do cache** (com `Pool(n=<>)`): <min>
+- **Tamanho de `code_features_cache.pkl`**: <MB>
+
+## 3. Vocabulário A439
+
+- `node_count`: <>
+- `path_count`: <>
+- **OOV em test set**: tokens=<X%>, paths=<Y%>
+
+## 4. Smoke test (A439, 5 épocas, seed=42)
+
+- Loss inicial → final: <> → <>
+- `first_auc` (smoke): <>
+- Tempo de treino: <min>
+- Tempo de inferência no test: <s>
+- Pico de VRAM (se GPU): <MB>
+
+## 5. Decisões tomadas no Chat 1
+
+<lista de decisões de design que divergiram do plano ou exigiram interpretação>
+
+## 6. Issues conhecidas / TODO para Chat 2
+
+<lista de pontos de atenção ou bugs menores deixados para resolver>
+
+## 7. Comando para Chat 2 retomar
+
+O notebook está em estado executável até a Seção 7. Para Chat 2:
+
+1. Verificar que `.venv` tem javalang instalado: `.venv/bin/python -c "import javalang; print(javalang.__version__)"`
+2. Verificar GPU: `.venv/bin/python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0) if torch.cuda.is_available() else None)"`
+3. Carregar `code_features_cache.pkl` (já existe — não re-extrair)
+4. Prosseguir da Seção 8 do notebook (grid search)
+
+## 8. Confirmações go/no-go para Chat 2
+
+- [ ] Smoke test convergiu (loss decrescente, `first_auc` smoke > 0.55)? <SIM/NÃO>
+- [ ] OOV em test set < 30%? <SIM/NÃO>
+- [ ] Tempo estimado de 50 runs (5 assignments × 10 seeds) com hardware atual é viável (< 4h)? <SIM/NÃO>
+- [ ] Cache de paths persistido e re-carregável sem erros? <SIM/NÃO>
+
+Se algum NÃO, Chat 2 deve ler a seção "Decisões tomadas" e ajustar protocolo (ex.: fallback de 3 runs se hardware limitar tempo).
+```
