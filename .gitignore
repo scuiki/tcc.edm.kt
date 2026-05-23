@@ -28,6 +28,9 @@ env/
 # Variáveis de ambiente
 .env
 
+# Artefatos do Playwright MCP (snapshots/logs gerados ao navegar)
+.playwright-mcp/
+
 # Resultados/outputs intermediários
 #results/*.csv
 #results/*.pkl

@@ -90,7 +90,30 @@
         </div>
       </section>
 
-      <!-- ============ SLIDE 4 · As 4 fases como funções (IDE Dev-C++, coladas) ============ -->
+      <!-- ============ SLIDE 4 · O problema (Martins, Marin e Alves, 2024) ============ -->
+      <section data-background-color="#F1F6FB">
+        <div class="deck-slide slide-problem">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+
+          <p class="prob-head kicker"><span class="ps1">&gt;</span>o problema<span class="caret blink"></span></p>
+          <p class="prob-lead">Aprender lógica de programação é um dos maiores obstáculos nos cursos de tecnologia, marcado por altos índices de reprovação e desistência nas disciplinas introdutórias.</p>
+          <p class="prob-sub">Dificuldades enfrentadas pelos alunos e o número de ocorrências nos estudos analisados por Martins <i>et al.</i> (2024):</p>
+
+          <div class="ascii-chart" data-ascii>
+            <div class="bar-row" data-val="13"><span class="bar-label">Falta de conhecimento em conceitos técnicos de programação</span><span class="bar"><span class="fill"></span><span class="empty"></span></span><span class="bar-num">0</span></div>
+            <div class="bar-row" data-val="12"><span class="bar-label">Dificuldade ao necessitar utilizar raciocínio lógico</span><span class="bar"><span class="fill"></span><span class="empty"></span></span><span class="bar-num">0</span></div>
+            <div class="bar-row" data-val="10"><span class="bar-label">Não conseguir pensar de forma abstrata</span><span class="bar"><span class="fill"></span><span class="empty"></span></span><span class="bar-num">0</span></div>
+            <div class="bar-row" data-val="8"><span class="bar-label">Não conseguir resolver problemas</span><span class="bar"><span class="fill"></span><span class="empty"></span></span><span class="bar-num">0</span></div>
+            <div class="bar-row" data-val="7"><span class="bar-label">Dificuldade ao tentar utilizar linguagens de programação, sintaxe</span><span class="bar"><span class="fill"></span><span class="empty"></span></span><span class="bar-num">0</span></div>
+            <div class="bar-row" data-val="6"><span class="bar-label">Dificuldades ao compreender e desenvolver algoritmos</span><span class="bar"><span class="fill"></span><span class="empty"></span></span><span class="bar-num">0</span></div>
+            <div class="bar-row" data-val="6"><span class="bar-label">Falta de conhecimento matemático</span><span class="bar"><span class="fill"></span><span class="empty"></span></span><span class="bar-num">0</span></div>
+          </div>
+
+          <p class="prob-cite">// fonte: Martins, Marin e Alves (2024), Quadro 3</p>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE 5 · As 4 fases como funções (IDE Dev-C++, coladas) ============ -->
       <!-- fundo claro: barras laterais claras (invisíveis), sem bordas -->
       <section data-background-color="#F1F6FB">
         <div class="deck-slide slide-ide">
@@ -218,7 +241,51 @@
       })();
     }
 
-    function initSlide(slide) { if (!slide) return; clearTimers(); runTyping(slide); pasteIDE(slide); }
+    /* --- gráfico de barras ASCII/CLI preenchendo de 0 ao valor --- */
+    function animateAscii(slide) {
+      const chart = slide.querySelector('[data-ascii]');
+      if (!chart) return;
+      const rows = Array.from(chart.querySelectorAll('.bar-row'));
+      const maxVal = Math.max(...rows.map((r) => parseInt(r.dataset.val, 10)));
+      const maxCells = maxVal;                 // 1 célula = 1 ocorrência
+      const cellsOf = (v) => Math.max(1, Math.round((v / maxVal) * maxCells));
+
+      rows.forEach((r) => {
+        r.querySelector('.fill').textContent = '';
+        r.querySelector('.empty').textContent = '░'.repeat(maxCells);
+        r.querySelector('.bar-num').textContent = '0';
+      });
+
+      if (reduceMotion) {
+        rows.forEach((r) => {
+          const c = cellsOf(parseInt(r.dataset.val, 10));
+          r.querySelector('.fill').textContent = '█'.repeat(c);
+          r.querySelector('.empty').textContent = '░'.repeat(maxCells - c);
+          r.querySelector('.bar-num').textContent = r.dataset.val;
+        });
+        return;
+      }
+
+      rows.forEach((r, i) => {
+        const val = parseInt(r.dataset.val, 10);
+        const cells = cellsOf(val);
+        const fill = r.querySelector('.fill');
+        const empty = r.querySelector('.empty');
+        const num = r.querySelector('.bar-num');
+        let c = 0;
+        const tick = () => {
+          c++;
+          fill.textContent = '█'.repeat(c);
+          empty.textContent = '░'.repeat(maxCells - c);
+          num.textContent = Math.round((val * c) / cells);
+          if (c < cells) timers.push(setTimeout(tick, 30));
+          else num.textContent = val;
+        };
+        timers.push(setTimeout(tick, 200 + i * 140));
+      });
+    }
+
+    function initSlide(slide) { if (!slide) return; clearTimers(); runTyping(slide); pasteIDE(slide); animateAscii(slide); }
 
     Reveal.initialize({
       width: 1280, height: 720, margin: 0,

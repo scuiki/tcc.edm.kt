@@ -158,6 +158,30 @@ html, .reveal-viewport { background-color: #15171c; }
 .ide .pun{ color: #3a414d; }
 .ide .cmt-time { color: #c07a00; font-style: italic; margin-left: 28px; }
 
+/* ===========================================================================
+   SLIDE · O problema (frase + gráfico de barras ASCII/CLI · Martins et al., 2024)
+   =========================================================================== */
+.slide-problem { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; }
+.slide-problem .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
+.slide-problem .prob-head { font-size: 32px; color: var(--uni-ink); }
+.slide-problem .prob-head .ps1 { color: var(--uni-blue); }
+.slide-problem .prob-lead { font-size: 26px; line-height: 1.4; color: var(--uni-ink); margin-top: 18px; max-width: 1080px; }
+.slide-problem .prob-sub { font-size: 20px; color: #5b6472; margin-top: 26px; }
+
+.ascii-chart {
+  margin-top: 14px; font-family: var(--mono); font-size: 21px;
+  display: grid; grid-template-columns: max-content max-content max-content;
+  column-gap: 18px; row-gap: 10px; align-items: baseline;
+}
+.ascii-chart .bar-row { display: contents; }
+.ascii-chart .bar-label { color: var(--uni-ink); }
+.ascii-chart .bar { white-space: pre; }
+.ascii-chart .bar .fill { color: var(--uni-blue); }
+.ascii-chart .bar .empty { color: #cdd8ec; }
+.ascii-chart .bar-num { color: #5b6472; font-weight: 700; min-width: 2ch; text-align: right; }
+
+.slide-problem .prob-cite { margin-top: 26px; font-family: var(--mono); font-size: 18px; font-style: italic; color: #5b6472; }
+
 /* respeitar quem pede menos movimento */
 @media (prefers-reduced-motion: reduce) {
   .reveal .slides section * { animation: none !important; opacity: 1 !important; transform: none !important; }
