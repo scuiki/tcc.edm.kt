@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 620" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d62728"/>
+    </marker>
+    <marker id="arrowBlack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#000"/>
+    </marker>
+  </defs>
+
+  <!-- Bloco de codigo (esquerda) -->
+  <text x="40" y="280" font-size="16" font-style="italic">Código</text>
+  <rect x="20" y="290" width="200" height="100" fill="#fafafa" stroke="#000" stroke-width="1.2"/>
+  <text x="32" y="315" font-size="14" font-family="'Courier New', monospace">def metodo(entrada):</text>
+  <text x="50" y="338" font-size="14" font-family="'Courier New', monospace">fazerAlgo(entrada)</text>
+  <text x="50" y="361" font-size="14" font-family="'Courier New', monospace">return "valor"</text>
+
+  <!-- Label AST -->
+  <text x="380" y="380" font-size="16" font-style="italic">AST</text>
+
+  <!-- Arestas -->
+  <!-- metodo -> entrada (vermelho) -->
+  <line x1="350" y1="78" x2="265" y2="138" stroke="#d62728" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+  <!-- metodo -> corpo (vermelho) -->
+  <line x1="380" y1="78" x2="420" y2="138" stroke="#d62728" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+  <!-- corpo -> fazerAlgo (preto) -->
+  <line x1="425" y1="178" x2="345" y2="248" stroke="#000" stroke-width="2" marker-end="url(#arrowBlack)"/>
+  <!-- corpo -> String (vermelho) -->
+  <line x1="445" y1="178" x2="490" y2="248" stroke="#d62728" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+  <!-- fazerAlgo -> entrada (preto) -->
+  <line x1="330" y1="288" x2="330" y2="348" stroke="#000" stroke-width="2" marker-end="url(#arrowBlack)"/>
+  <!-- String -> "valor" (vermelho) -->
+  <line x1="490" y1="288" x2="490" y2="348" stroke="#d62728" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+
+  <!-- No: metodo (raiz, vermelho) -->
+  <ellipse cx="370" cy="55" rx="50" ry="22" fill="white" stroke="#d62728" stroke-width="2.5"/>
+  <text x="370" y="61" text-anchor="middle" font-size="16" font-family="'Courier New', monospace">metodo</text>
+
+  <!-- No: entrada (parametro, vermelho) -->
+  <ellipse cx="240" cy="160" rx="48" ry="22" fill="white" stroke="#d62728" stroke-width="2.5"/>
+  <text x="240" y="166" text-anchor="middle" font-size="15" font-family="'Courier New', monospace">entrada</text>
+
+  <!-- No: corpo (vermelho) -->
+  <ellipse cx="435" cy="160" rx="40" ry="22" fill="white" stroke="#d62728" stroke-width="2.5"/>
+  <text x="435" y="166" text-anchor="middle" font-size="15" font-family="'Courier New', monospace">corpo</text>
+
+  <!-- No: fazerAlgo (preto) -->
+  <ellipse cx="330" cy="270" rx="55" ry="22" fill="white" stroke="#000" stroke-width="2"/>
+  <text x="330" y="276" text-anchor="middle" font-size="15" font-family="'Courier New', monospace">fazerAlgo</text>
+
+  <!-- No: String (vermelho) -->
+  <ellipse cx="490" cy="270" rx="45" ry="22" fill="white" stroke="#d62728" stroke-width="2.5"/>
+  <text x="490" y="276" text-anchor="middle" font-size="15" font-family="'Courier New', monospace">String</text>
+
+  <!-- No: entrada (folha, preto) -->
+  <ellipse cx="330" cy="370" rx="48" ry="22" fill="white" stroke="#000" stroke-width="2"/>
+  <text x="330" y="376" text-anchor="middle" font-size="15" font-family="'Courier New', monospace">entrada</text>
+
+  <!-- No: "valor" (folha, vermelho) -->
+  <ellipse cx="490" cy="370" rx="45" ry="22" fill="white" stroke="#d62728" stroke-width="2.5"/>
+  <text x="490" y="376" text-anchor="middle" font-size="15" font-family="'Courier New', monospace">"valor"</text>
+
+  <!-- Legenda -->
+  <text x="40" y="465" font-size="15" font-weight="bold">Figura 2:</text>
+  <text x="115" y="465" font-size="15">Uma AST simples na qual nós e arestas em</text>
+  <text x="40" y="488" font-size="15">vermelho representam um caminho folha-a-folha de</text>
+  <text x="40" y="511" font-size="15">
+    <tspan font-family="'Courier New', monospace">entrada</tspan>
+    <tspan> até </tspan>
+    <tspan font-family="'Courier New', monospace">"valor"</tspan>
+    <tspan>.</tspan>
+  </text>
+</svg>

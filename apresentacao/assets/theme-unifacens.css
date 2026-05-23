@@ -1,0 +1,165 @@
+/* ===========================================================================
+   Tema UniFacens para reveal.js  (protótipo TCC)
+   Identidade do template oficial "Layout PPTs UniFacens_TCC.pptx"
+   + acentos de programação (Cascadia Code, prompt, terminal Windows, IDE).
+
+   Nota: o reveal.js aplica `display:block` inline na <section> ativa,
+   sobrescrevendo `display:flex` da folha de estilos. Por isso TODO o layout
+   fica num <div class="deck-slide"> interno; a <section> fica com o reveal.
+   =========================================================================== */
+
+:root {
+  --uni-blue:   #2667FF;
+  --uni-blue-d: #1a4fd6;
+  --uni-dark:   #202124;
+  --uni-light:  #F1F6FB;
+  --uni-gray:   #DDE2EC;
+  --uni-ink:    #111317;
+  --uni-font:   "Segoe UI", system-ui, -apple-system, "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --mono:       "Cascadia Code", "Cascadia Mono", "JetBrains Mono", Consolas, "DejaVu Sans Mono", monospace;
+}
+
+/* letterbox (área fora do slide quando a janela não é 16:9): grafite, sem branco */
+html, .reveal-viewport { background-color: #15171c; }
+
+/* ---- Base reveal -------------------------------------------------------- */
+.reveal { font-family: var(--uni-font); font-weight: 400; color: var(--uni-ink); }
+.reveal .slides { text-align: left; }
+.reveal .slides > section {
+  width: 1280px; height: 720px; top: 0 !important;
+  padding: 0; box-sizing: border-box;
+}
+.deck-slide { position: relative; width: 100%; height: 720px; box-sizing: border-box; overflow: hidden; }
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--uni-font); text-transform: none; letter-spacing: 0; line-height: 1.15; margin: 0;
+}
+
+/* ---- Acentos compartilhados ------------------------------------------- */
+.kicker { font-family: var(--mono); font-weight: 400; }
+.kicker .ps1 { color: var(--ps1, var(--uni-blue)); margin-right: 10px; font-weight: 700; }
+
+.caret {
+  display: inline-block; width: .55em; height: 1.02em;
+  background: var(--caret-color, var(--uni-blue));
+  transform: translateY(3px); margin-left: 4px;
+}
+.caret.blink { animation: caretBlink 1.05s steps(1) infinite; }
+@keyframes caretBlink { 50% { opacity: 0; } }
+
+.tw-line { opacity: 0; transition: opacity .16s ease; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ---- Componente TERMINAL ---------------------------------------------- */
+.term {
+  background: #15171c; border: 1px solid #2c2f36; border-radius: 10px;
+  box-shadow: 0 26px 60px rgba(15,23,42,.42); overflow: hidden;
+  font-family: var(--mono); text-align: left;
+}
+.term__bar { display: flex; align-items: center; gap: 9px; padding: 11px 14px; background: #23262d; border-bottom: 1px solid #2c2f36; }
+.term__title { color: #b9c0cc; font-size: 14px; }
+.term__body { padding: 24px 28px; }
+.term__body .tline { white-space: pre-wrap; min-height: 1em; }
+
+/* terminal estilo Windows (Prompt de Comando) */
+.term--win { --caret-color: #cccccc; border-color: #3a3a3a; }
+.term--win .term__bar { background: #2d2d2d; justify-content: space-between; padding: 7px 6px 7px 14px; border-bottom: 1px solid #1f1f1f; }
+.term--win .term__title { color: #e6e6e6; }
+.term__wc { display: inline-flex; align-items: center; }
+.term--win .wc { width: 30px; height: 22px; display: inline-flex; align-items: center; justify-content: center; }
+.term--win .wc::before { content: ""; display: inline-block; }
+.term--win .wc.min::before { width: 11px; height: 1px; background: #d6d6d6; }
+.term--win .wc.max::before { width: 10px; height: 10px; border: 1px solid #d6d6d6; }
+.term--win .wc.close::before { content: "\2715"; color: #d6d6d6; font-size: 13px; font-family: var(--uni-font); }
+.term--win .term__body { background: #0c0c0c; color: #cccccc; }
+.term--win .wprompt { color: #cccccc; }
+
+/* ===========================================================================
+   SLIDE 1  ·  Abertura (azul, logo + escrita de terminal)
+   =========================================================================== */
+.slide-cover-brand {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 30px; text-align: center;
+  --caret-color: #ffffff; --ps1: #bcd3ff;
+}
+.slide-cover-brand .brand-logo { width: 42%; max-width: 560px; opacity: 0; transform: scale(0.92); }
+.reveal .slides section.present .slide-cover-brand .brand-logo {
+  animation: brandIn 1000ms cubic-bezier(.16,.84,.44,1) forwards;
+}
+@keyframes brandIn { 0% { opacity: 0; transform: scale(0.92); filter: blur(6px); } 100% { opacity: 1; transform: scale(1); filter: blur(0); } }
+.slide-cover-brand .cover-tagline { font-size: 23px; color: rgba(255,255,255,.95); min-height: 1.4em; }
+
+/* ===========================================================================
+   SLIDE 2  ·  Capa do TCC (grafite, marca d'água, terminal Windows estático)
+   =========================================================================== */
+.slide-title-tcc { display: flex; flex-direction: column; padding: 48px 60px; color: #fff; }
+.slide-title-tcc .watermark { position: absolute; right: -60px; top: 50%; transform: translateY(-50%); width: 600px; color: #2b2d32; pointer-events: none; z-index: 0; }
+.slide-title-tcc > *:not(.watermark) { position: relative; z-index: 1; }
+
+.slide-title-tcc .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.slide-title-tcc .tcc-label { font-size: 25px; font-weight: 700; line-height: 1.3; }
+.slide-title-tcc .topbar .logo { width: 178px; flex: none; }
+
+.slide-title-tcc .center { flex: 1; display: flex; align-items: center; justify-content: center; }
+.slide-title-tcc .term { width: 860px; max-width: 92%; }
+.slide-title-tcc .term__body { font-size: 19px; line-height: 1.7; }
+
+/* ===========================================================================
+   SLIDE 3  ·  Agenda (faixa azul à esquerda, mais larga + itens digitados)
+   =========================================================================== */
+.slide-agenda { display: flex; background: var(--uni-light); }
+.slide-agenda .agenda-side {
+  width: 27%; flex: none; background: var(--uni-blue); color: #fff;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 64px 36px; box-sizing: border-box;
+}
+.slide-agenda .agenda-side h2 { font-size: 44px; font-weight: 600; margin-top: 24px; }
+.slide-agenda .agenda-side .logo { width: 150px; }
+.slide-agenda .agenda-main {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  padding: 56px 60px; box-sizing: border-box;
+}
+.agenda-list { list-style: none; margin: 0; padding: 0; width: 100%; --caret-color: var(--uni-blue); }
+.agenda-list li { font-family: var(--mono); font-size: 27px; color: var(--uni-ink); padding: 9px 0; }
+.agenda-list li .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 12px; }
+
+/* ===========================================================================
+   SLIDE 4  ·  As 4 fases como funções, estilo IDE (Dev-C++), coladas (Ctrl+V)
+   =========================================================================== */
+.slide-ide { display: flex; flex-direction: column; background: var(--uni-light); padding: 40px 56px 44px; --caret-color: #1f2430; }
+.slide-ide .ide-head { margin-bottom: 16px; }
+.slide-ide h2 { font-size: 32px; font-weight: 600; color: var(--uni-ink); }
+.slide-ide .cite { font-size: 17px; color: #5b6472; font-weight: 600; margin-top: 4px; }
+.slide-ide .ide-watermark { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; }
+
+.ide { border: 1px solid #b9c2d0; border-radius: 7px; overflow: hidden; box-shadow: 0 18px 44px rgba(31,41,55,.18); background: #fff; }
+.ide__bar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(#eef2f8, #dde4ee); border-bottom: 1px solid #c5cdd9;
+  padding: 7px 12px; font-family: var(--uni-font); font-size: 13px; color: #3a414d;
+}
+.ide__bar .title { font-weight: 600; }
+.ide__bar .win { display: flex; gap: 7px; }
+.ide__bar .win i { width: 13px; height: 11px; border: 1px solid #99a2b1; border-radius: 2px; display: inline-block; }
+.ide__tabs { background: #e7ecf3; border-bottom: 1px solid #d3dae4; padding: 0 10px; }
+.ide__tab { display: inline-block; background: #fff; border: 1px solid #d3dae4; border-bottom: none; border-radius: 6px 6px 0 0; padding: 6px 16px; margin-top: 6px; font-family: var(--mono); font-size: 13px; color: #1f2430; }
+.ide__editor { display: flex; background: #fff; }
+.ide__gutter { text-align: right; padding: 16px 12px; background: #f4f6fa; color: #aab2c0; font-family: var(--mono); font-size: 17px; line-height: 1.6; border-right: 1px solid #e6eaf1; user-select: none; }
+.ide__gutter span { display: block; visibility: hidden; }   /* revelado ao colar */
+.ide__code { margin: 0; padding: 16px 20px; font-family: var(--mono); font-size: 17px; line-height: 1.6; color: #1f2430; white-space: normal; }
+.ide__code .ln { display: block; min-height: 1.6em; }
+.ide__code[data-paste-code] .ln { opacity: 0; }             /* revelado ao colar */
+.ide__code .ln.ind { padding-left: 2.6ch; }
+.ide__code .ln.pasted { animation: pasteFlash 600ms ease; } /* destaque de "colado" */
+@keyframes pasteFlash { 0% { background: rgba(49,106,197,.32); } 100% { background: transparent; } }
+.ide .k  { color: #0033cc; font-weight: 700; }
+.ide .fn { color: #6a2bb5; }
+.ide .cm { color: #138a36; font-style: italic; }
+.ide .pun{ color: #3a414d; }
+.ide .cmt-time { color: #c07a00; font-style: italic; margin-left: 28px; }
+
+/* respeitar quem pede menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .reveal .slides section * { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .ide__gutter span { visibility: visible !important; }
+}

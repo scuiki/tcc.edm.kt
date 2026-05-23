@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCC · UniFacens · Apresentação (protótipo)</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5/400.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5/700.css">
+  <link rel="stylesheet" href="assets/theme-unifacens.css">
+</head>
+<body>
+
+  <!-- símbolo Facens reutilizável (recolorível via currentColor) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="sym" viewBox="0 0 136.7 139.78">
+      <path fill="currentColor" d=" M 70.51 3.97 C 76.92 3.97 83.44 4.98 89.87 7.14 C 91.27 7.61 92.64 8.13 93.99 8.68 L 98.5 7.04 C 95.77 5.7 92.93 4.52 89.96 3.54 C 82.8 1.15 75.51 0.01 68.34 0.01 C 39.72 0 13.07 18.12 3.52 46.76 C 1.14 53.92 0 61.21 0 68.37 C 0 93.77 14.26 117.6 37.48 129.32 C 37.16 127.89 36.98 126.46 36.98 125.03 C 36.98 122.38 37.52 119.79 38.53 117.4 C 20.3 106.26 9.28 86.32 9.28 65.21 C 9.28 58.8 10.29 52.28 12.44 45.84 C 21 20.19 44.88 3.97 70.51 3.97 Z M 128.98 36.86 C 128.06 37.7 127.01 38.42 125.81 38.97 C 129.66 47.08 131.74 56.02 131.74 65.18 C 131.74 71.6 130.72 78.12 128.58 84.55 C 120.68 108.27 99.64 123.92 76.26 126.13 C 76.04 129.92 74.73 133.54 72.53 136.57 C 99.54 134.91 124.1 117.2 133.18 89.96 C 135.56 82.8 136.7 75.5 136.7 68.34 C 136.7 57.25 133.97 46.46 128.98 36.84 Z" />
+      <path fill="currentColor" d=" M 61.67 138.9 C 54.04 141.67 45.58 137.74 42.81 130.1 C 40.03 122.46 43.96 114.01 51.6 111.23 C 59.24 108.45 67.69 112.39 70.46 120.03 C 73.25 127.67 69.3 136.12 61.66 138.91 Z M 129.31 0.3 L 47.14 30.21 C 44.18 31.29 41.76 34.74 41.75 37.91 L 41.73 50.93 L 41.73 64.74 C 41.73 64.74 123.9 34.83 123.9 34.83 C 126.86 33.76 129.29 30.29 129.29 27.14 L 129.31 6.04 L 129.31 6.04 L 129.31 0.3 Z M 97.17 60.16 L 97.17 54.43 L 47.13 72.65 C 44.16 73.72 41.74 77.19 41.74 80.33 L 41.74 84.13 L 41.74 84.13 L 41.74 107.16 C 41.74 107.16 91.77 88.95 91.77 88.95 C 94.74 87.87 97.16 84.41 97.16 81.25 L 97.16 76.62 L 97.16 76.62 L 97.16 72.83 C 97.16 72.83 97.17 60.15 97.17 60.15 L 97.17 60.15 Z" />
+    </symbol>
+  </svg>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ============ SLIDE 1 · Abertura ============ -->
+      <section data-background-color="#2667FF">
+        <div class="deck-slide slide-cover-brand">
+          <img class="brand-logo" src="assets/logo-unifacens-white.svg" alt="UniFacens">
+          <p class="cover-tagline kicker">
+            <span class="ps1">&gt;</span>Educational data mining · Knowledge Tracing<span class="caret blink"></span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE 2 · Capa do TCC (terminal Windows, estático) ============ -->
+      <section data-background-color="#202124">
+        <div class="deck-slide slide-title-tcc">
+          <svg class="watermark" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+
+          <div class="topbar">
+            <div class="tcc-label">
+              Trabalho de Conclusão de Curso<br>
+              Engenharia da Computação
+            </div>
+            <img class="logo" src="assets/logo-unifacens-white.svg" alt="UniFacens">
+          </div>
+
+          <div class="center">
+            <div class="term term--win">
+              <div class="term__bar">
+                <span class="term__title">Prompt de Comando</span>
+                <span class="term__wc"><span class="wc min"></span><span class="wc max"></span><span class="wc close"></span></span>
+              </div>
+              <div class="term__body">
+                <div class="tline"><span class="wprompt">C:\TCC&gt;</span> type tcc.txt</div>
+                <div class="tline">Análise do aprendizado de programação utilizando mineração de dados educacionais</div>
+                <div class="tline">&nbsp;</div>
+                <div class="tline">Nome 1</div>
+                <div class="tline">Nome 2</div>
+                <div class="tline">Nome 3</div>
+                <div class="tline">&nbsp;</div>
+                <div class="tline">Orientador(a): Titulação + Nome Completo<span class="caret blink"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE 3 · Agenda (faixa azul à esquerda, itens digitados) ============ -->
+      <!-- fundo em corte seco azul|branco (33%), alinhado à coluna: barra esquerda azul, direita branca -->
+      <section data-background-gradient="linear-gradient(to right, #2667FF 27%, #F1F6FB 27%)">
+        <div class="deck-slide slide-agenda">
+          <div class="agenda-side">
+            <h2>Agenda</h2>
+            <img class="logo" src="assets/logo-unifacens-white.svg" alt="UniFacens">
+          </div>
+          <div class="agenda-main" data-typed data-speed="26" data-linegap="150">
+            <ul class="agenda-list">
+              <li class="tw-line"><span class="ps1">&gt;</span><span class="txt" data-type="Introdução"></span></li>
+              <li class="tw-line"><span class="ps1">&gt;</span><span class="txt" data-type="Trabalhos Correlatos"></span></li>
+              <li class="tw-line"><span class="ps1">&gt;</span><span class="txt" data-type="O que será feito"></span></li>
+              <li class="tw-line"><span class="ps1">&gt;</span><span class="txt" data-type="O que não será feito"></span></li>
+              <li class="tw-line"><span class="ps1">&gt;</span><span class="txt" data-type="Benefícios"></span></li>
+              <li class="tw-line"><span class="ps1">&gt;</span><span class="txt" data-type="Recursos utilizados"></span></li>
+              <li class="tw-line"><span class="ps1">&gt;</span><span class="txt" data-type="Demonstração"></span></li>
+              <li class="tw-line"><span class="ps1">&gt;</span><span class="txt" data-type="Metas para o TCC2"></span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE 4 · As 4 fases como funções (IDE Dev-C++, coladas) ============ -->
+      <!-- fundo claro: barras laterais claras (invisíveis), sem bordas -->
+      <section data-background-color="#F1F6FB">
+        <div class="deck-slide slide-ide">
+          <svg class="ide-watermark" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <div class="ide-head">
+            <h2>As quatro fases do processo de EDM</h2>
+            <p class="cite">Segundo Zorić (2020)</p>
+          </div>
+
+          <div class="ide">
+            <div class="ide__bar">
+              <span class="title">edm.cpp - Dev-C++</span>
+              <span class="win"><i></i><i></i><i></i></span>
+            </div>
+            <div class="ide__tabs"><span class="ide__tab">edm.cpp</span></div>
+            <div class="ide__editor">
+              <div class="ide__gutter">
+                <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+              </div>
+              <div class="ide__code" data-paste-code data-pgap="560">
+                <span class="ln" data-grp="1"><span class="cm">// As 4 fases do processo de EDM (Zorić, 2020)</span></span>
+                <span class="ln" data-grp="1"></span>
+                <span class="ln" data-grp="2"><span class="k">void</span> <span class="fn">definicaoDoProblema</span><span class="pun">() {</span></span>
+                <span class="ln ind" data-grp="2"><span class="cm">// traduz o problema em um problema de mineração</span></span>
+                <span class="ln" data-grp="2"><span class="pun">}</span></span>
+                <span class="ln" data-grp="3"><span class="k">void</span> <span class="fn">preparacaoDosDados</span><span class="pun">() {</span><span class="cmt-time">// 80% do tempo</span></span>
+                <span class="ln ind" data-grp="3"><span class="cm">// identificar, limpar e formatar os dados</span></span>
+                <span class="ln" data-grp="3"><span class="pun">}</span></span>
+                <span class="ln" data-grp="4"><span class="k">void</span> <span class="fn">modelagemEAvaliacao</span><span class="pun">() {</span></span>
+                <span class="ln ind" data-grp="4"><span class="cm">// selecionar técnicas e ajustar parâmetros</span></span>
+                <span class="ln" data-grp="4"><span class="pun">}</span></span>
+                <span class="ln" data-grp="5"><span class="k">void</span> <span class="fn">implantacao</span><span class="pun">() {</span></span>
+                <span class="ln ind" data-grp="5"><span class="cm">// organizar e apresentar os resultados</span></span>
+                <span class="ln" data-grp="5"><span class="pun">}</span></span>
+                <span class="ln" data-grp="6"><span class="cm">// iterativo: a saída pode iniciar um novo ciclo (ZORIĆ, 2020)</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const timers = [];
+    function clearTimers() { while (timers.length) clearTimeout(timers.pop()); }
+
+    /* --- typewriter para terminais / listas (segmentos .txt[data-type]) --- */
+    function runTyping(slide) {
+      slide.querySelectorAll('[data-typed]').forEach((box) => {
+        const segs = Array.from(box.querySelectorAll('.txt[data-type]'));
+        if (!segs.length) return;
+        let caret = box.querySelector('.caret');
+        if (!caret) { caret = document.createElement('span'); caret.className = 'caret'; }
+        caret.classList.remove('blink');
+        const speed = parseInt(box.dataset.speed || '40', 10);
+        const gap   = parseInt(box.dataset.linegap || '90', 10);
+        const reveal = (el) => { const ln = el.closest('.tw-line'); if (ln) ln.style.opacity = '1'; };
+
+        if (reduceMotion) {
+          segs.forEach((s) => { s.textContent = s.getAttribute('data-type'); reveal(s); });
+          segs[segs.length - 1].appendChild(caret); caret.classList.add('blink');
+          return;
+        }
+        segs.forEach((s) => { s.textContent = ''; });
+        let i = 0;
+        (function typeSeg() {
+          if (i >= segs.length) { segs[segs.length - 1].appendChild(caret); caret.classList.add('blink'); return; }
+          const el = segs[i]; reveal(el);
+          const text = el.getAttribute('data-type'); let c = 0; el.appendChild(caret);
+          (function step() {
+            el.textContent = text.slice(0, c); el.appendChild(caret); c++;
+            if (c <= text.length) timers.push(setTimeout(step, speed));
+            else { i++; timers.push(setTimeout(typeSeg, gap)); }
+          })();
+        })();
+      });
+    }
+
+    /* --- efeito de "colar" (Ctrl+V) cada função no editor IDE --- */
+    function pasteIDE(slide) {
+      const code = slide.querySelector('.ide__code[data-paste-code]');
+      if (!code) return;
+      const gutter = slide.querySelector('.ide__gutter');
+      const gnums = gutter ? Array.from(gutter.children) : [];
+      const lines = Array.from(code.querySelectorAll('.ln'));
+      const gap = parseInt(code.dataset.pgap || '560', 10);
+
+      lines.forEach((l) => { l.style.opacity = '0'; l.classList.remove('pasted'); });
+      gnums.forEach((g) => { g.style.visibility = 'hidden'; });
+
+      if (reduceMotion) {
+        lines.forEach((l) => { l.style.opacity = '1'; });
+        gnums.forEach((g) => { g.style.visibility = 'visible'; });
+        return;
+      }
+
+      // agrupa as linhas por data-grp (cada grupo = uma função colada)
+      const groups = [];
+      lines.forEach((l, idx) => {
+        const g = l.dataset.grp || '0';
+        let bucket = groups.find((b) => b.g === g);
+        if (!bucket) { bucket = { g, idxs: [] }; groups.push(bucket); }
+        bucket.idxs.push(idx);
+      });
+
+      let gi = 0;
+      (function pasteGroup() {
+        if (gi >= groups.length) {
+          const last = lines[lines.length - 1];
+          const caret = document.createElement('span'); caret.className = 'caret blink';
+          last.appendChild(caret);
+          return;
+        }
+        groups[gi].idxs.forEach((idx) => {
+          lines[idx].style.opacity = '1';
+          lines[idx].classList.add('pasted');
+          if (gnums[idx]) gnums[idx].style.visibility = 'visible';
+        });
+        gi++;
+        timers.push(setTimeout(pasteGroup, gap));
+      })();
+    }
+
+    function initSlide(slide) { if (!slide) return; clearTimers(); runTyping(slide); pasteIDE(slide); }
+
+    Reveal.initialize({
+      width: 1280, height: 720, margin: 0,
+      center: false, hash: true,
+      controls: true, progress: true,
+      transition: 'fade', transitionSpeed: 'default', backgroundTransition: 'fade'
+    }).then(() => {
+      initSlide(Reveal.getCurrentSlide());
+      Reveal.on('slidechanged', (e) => initSlide(e.currentSlide));
+    });
+  </script>
+</body>
+</html>
