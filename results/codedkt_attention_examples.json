@@ -1,0 +1,312 @@
+{
+  "by_concept": {
+    "aritmetica_condicional": {
+      "concept": "Aritmética em condicionais",
+      "aid": 494,
+      "problem": 41,
+      "start": "int",
+      "end": "+",
+      "avg_attn": 0.8466,
+      "freq": 10
+    },
+    "bounds_checking": {
+      "concept": "Validação de limites e bounds checking",
+      "aid": 494,
+      "problem": 49,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.8773,
+      "freq": 9
+    },
+    "branching_condicional": {
+      "concept": "Branching condicional multi-caminho",
+      "aid": 439,
+      "problem": 235,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9761,
+      "freq": 26
+    },
+    "busca_propriedade": {
+      "concept": "Busca e seleção de elementos por propriedade",
+      "aid": 494,
+      "problem": 108,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.7148,
+      "freq": 36
+    },
+    "clump_transition": {
+      "concept": "Detecção de transição em clumps",
+      "aid": 494,
+      "problem": 107,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.8454,
+      "freq": 28
+    },
+    "comparacao_numerica": {
+      "concept": "Comparação numérica e thresholds",
+      "aid": 439,
+      "problem": 232,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9685,
+      "freq": 155
+    },
+    "default_case_switch": {
+      "concept": "Caso default em switch",
+      "aid": 439,
+      "problem": 235,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9761,
+      "freq": 26
+    },
+    "dual_pointer": {
+      "concept": "Estratégia de dois ponteiros",
+      "aid": 494,
+      "problem": 106,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.7714,
+      "freq": 36
+    },
+    "edge_cases_especificos": {
+      "concept": "Edge cases específicos do domínio",
+      "aid": 492,
+      "problem": 40,
+      "start": "String",
+      "end": "str",
+      "avg_attn": 0.61,
+      "freq": 10
+    },
+    "estado_com_indices": {
+      "concept": "Tracking de estado com índices e comparações",
+      "aid": 502,
+      "problem": 48,
+      "start": "nums",
+      "end": "i",
+      "avg_attn": 0.4913,
+      "freq": 18
+    },
+    "independencia_ordem": {
+      "concept": "Independência de ordem em lógica e dados",
+      "aid": 487,
+      "problem": 25,
+      "start": "||",
+      "end": "||",
+      "avg_attn": 0.3926,
+      "freq": 7
+    },
+    "inicializacao_variaveis": {
+      "concept": "Inicialização de variáveis para padrões computacionais",
+      "aid": 502,
+      "problem": 71,
+      "start": "i",
+      "end": "1",
+      "avg_attn": 0.4375,
+      "freq": 5
+    },
+    "iteracao_indexada": {
+      "concept": "Iteração indexada e controle de loop",
+      "aid": 492,
+      "problem": 32,
+      "start": "countCode",
+      "end": "str",
+      "avg_attn": 0.9634,
+      "freq": 11
+    },
+    "logica_booleana_composta": {
+      "concept": "Expressões booleanas compostas com operadores lógicos",
+      "aid": 439,
+      "problem": 235,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9761,
+      "freq": 26
+    },
+    "manipulacao_array": {
+      "concept": "Manipulação de arrays",
+      "aid": 494,
+      "problem": 49,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.8773,
+      "freq": 9
+    },
+    "manipulacao_string": {
+      "concept": "Manipulação de strings",
+      "aid": 492,
+      "problem": 32,
+      "start": "countCode",
+      "end": "str",
+      "avg_attn": 0.9634,
+      "freq": 11
+    },
+    "metodos_auxiliares": {
+      "concept": "Métodos auxiliares (helpers)",
+      "aid": 494,
+      "problem": 104,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.765,
+      "freq": 26
+    },
+    "min_max": {
+      "concept": "Rastreamento de mínimo e máximo",
+      "aid": 502,
+      "problem": 64,
+      "start": "a",
+      "end": "=",
+      "avg_attn": 0.4323,
+      "freq": 5
+    },
+    "negacao_booleana": {
+      "concept": "Negação booleana com operador NOT",
+      "aid": 439,
+      "problem": 3,
+      "start": "int",
+      "end": "+",
+      "avg_attn": 0.9215,
+      "freq": 5
+    },
+    "operador_modulo": {
+      "concept": "Operador módulo e divisibilidade",
+      "aid": 494,
+      "problem": 44,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.8587,
+      "freq": 15
+    },
+    "padrao_acumulador": {
+      "concept": "Padrão acumulador",
+      "aid": 492,
+      "problem": 36,
+      "start": "countCode",
+      "end": "str",
+      "avg_attn": 0.9269,
+      "freq": 47
+    },
+    "parametros_metodo": {
+      "concept": "Uso de parâmetros de método em computação",
+      "aid": 439,
+      "problem": 1,
+      "start": "int",
+      "end": "sum",
+      "avg_attn": 0.8354,
+      "freq": 7
+    },
+    "restricoes_negativas": {
+      "concept": "Enforcement de restrições negativas",
+      "aid": 492,
+      "problem": 38,
+      "start": "<",
+      "end": "str",
+      "avg_attn": 0.757,
+      "freq": 5
+    },
+    "retorno_antecipado": {
+      "concept": "Retorno antecipado em controle de fluxo",
+      "aid": 439,
+      "problem": 235,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9761,
+      "freq": 26
+    },
+    "retorno_para_recursos": {
+      "concept": "Valor de retorno para gestão de recursos",
+      "aid": 487,
+      "problem": 101,
+      "start": "int",
+      "end": "*",
+      "avg_attn": 0.4832,
+      "freq": 5
+    },
+    "sentinela": {
+      "concept": "Padrão sentinela em buscas",
+      "aid": 492,
+      "problem": 40,
+      "start": "String",
+      "end": "str",
+      "avg_attn": 0.61,
+      "freq": 10
+    },
+    "tipos_retorno": {
+      "concept": "Tipos e formato de retorno de método",
+      "aid": 439,
+      "problem": 235,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9761,
+      "freq": 26
+    },
+    "validacao_composta": {
+      "concept": "Validação de múltiplas restrições com operadores lógicos",
+      "aid": 487,
+      "problem": 101,
+      "start": "int",
+      "end": "*",
+      "avg_attn": 0.4832,
+      "freq": 5
+    }
+  },
+  "by_martins": {
+    "Estruturas de controle": {
+      "concept": "Branching condicional multi-caminho",
+      "aid": 439,
+      "problem": 235,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9761,
+      "freq": 26
+    },
+    "Manipulação de variáveis": {
+      "concept": "Padrão acumulador",
+      "aid": 492,
+      "problem": 36,
+      "start": "countCode",
+      "end": "str",
+      "avg_attn": 0.9269,
+      "freq": 47
+    },
+    "Operadores e expressões lógicas": {
+      "concept": "Expressões booleanas compostas com operadores lógicos",
+      "aid": 439,
+      "problem": 235,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9761,
+      "freq": 26
+    },
+    "Funções": {
+      "concept": "Tipos e formato de retorno de método",
+      "aid": 439,
+      "problem": 235,
+      "start": "int",
+      "end": "vacation",
+      "avg_attn": 0.9761,
+      "freq": 26
+    },
+    "Vetores": {
+      "concept": "Manipulação de arrays",
+      "aid": 494,
+      "problem": 49,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.8773,
+      "freq": 9
+    },
+    "Conhecimento matemático": {
+      "concept": "Operador módulo e divisibilidade",
+      "aid": 494,
+      "problem": 44,
+      "start": "int",
+      "end": "0",
+      "avg_attn": 0.8587,
+      "freq": 15
+    }
+  }
+}

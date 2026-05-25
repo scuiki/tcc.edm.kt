@@ -90,19 +90,23 @@ html, .reveal-viewport { background-color: #15171c; }
 .slide-cover-brand .cover-tagline { font-size: 23px; color: rgba(255,255,255,.95); min-height: 1.4em; }
 
 /* ===========================================================================
-   SLIDE 2  ·  Capa do TCC (grafite, marca d'água, terminal Windows estático)
+   SLIDE 2  ·  Capa do TCC (grafite, marca d'água, formal como o modelo
+   + acento de terminal no cabeçalho: prompt ">" e caret piscando)
    =========================================================================== */
-.slide-title-tcc { display: flex; flex-direction: column; padding: 48px 60px; color: #fff; }
+.slide-title-tcc { display: flex; flex-direction: column; padding: 48px 60px; color: #fff; --caret-color: var(--uni-blue); }
 .slide-title-tcc .watermark { position: absolute; right: -60px; top: 50%; transform: translateY(-50%); width: 600px; color: #2b2d32; pointer-events: none; z-index: 0; }
 .slide-title-tcc > *:not(.watermark) { position: relative; z-index: 1; }
 
 .slide-title-tcc .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
-.slide-title-tcc .tcc-label { font-size: 25px; font-weight: 700; line-height: 1.3; }
+.slide-title-tcc .tcc-label { font-size: 22px; font-weight: 700; line-height: 1.45; color: #fff; }
+.slide-title-tcc .tcc-label__cont { display: inline-block; padding-left: 22px; }
 .slide-title-tcc .topbar .logo { width: 178px; flex: none; }
 
 .slide-title-tcc .center { flex: 1; display: flex; align-items: center; justify-content: center; }
-.slide-title-tcc .term { width: 860px; max-width: 92%; }
-.slide-title-tcc .term__body { font-size: 19px; line-height: 1.7; }
+.tcc-cover { text-align: center; max-width: 1000px; }
+.tcc-title { font-family: var(--uni-font); font-size: 40px; font-weight: 700; line-height: 1.25; color: #fff; }
+.tcc-authors { font-size: 24px; line-height: 1.55; color: #e6e6e6; margin-top: 38px; }
+.tcc-advisor { font-size: 28px; font-weight: 600; color: #fff; margin-top: 42px; }
 
 /* ===========================================================================
    SLIDE 3  ·  Agenda (faixa azul à esquerda, mais larga + itens digitados)
@@ -124,39 +128,68 @@ html, .reveal-viewport { background-color: #15171c; }
 .agenda-list li .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 12px; }
 
 /* ===========================================================================
-   SLIDE 4  ·  As 4 fases como funções, estilo IDE (Dev-C++), coladas (Ctrl+V)
+   SLIDE 5  ·  As 4 fases do EDM — lista numerada formal (Arial) · Zorić (2020)
    =========================================================================== */
-.slide-ide { display: flex; flex-direction: column; background: var(--uni-light); padding: 40px 56px 44px; --caret-color: #1f2430; }
-.slide-ide .ide-head { margin-bottom: 16px; }
-.slide-ide h2 { font-size: 32px; font-weight: 600; color: var(--uni-ink); }
-.slide-ide .cite { font-size: 17px; color: #5b6472; font-weight: 600; margin-top: 4px; }
-.slide-ide .ide-watermark { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; }
+.slide-phases { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; --caret-color: var(--uni-blue); }
+.slide-phases .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
+.slide-phases .phases-title { font-size: 32px; color: var(--uni-ink); }
+.slide-phases .cite { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 17px; color: #5b6472; font-weight: 600; margin-top: 6px; padding-left: 22px; }
 
-.ide { border: 1px solid #b9c2d0; border-radius: 7px; overflow: hidden; box-shadow: 0 18px 44px rgba(31,41,55,.18); background: #fff; }
-.ide__bar {
-  display: flex; align-items: center; justify-content: space-between;
-  background: linear-gradient(#eef2f8, #dde4ee); border-bottom: 1px solid #c5cdd9;
-  padding: 7px 12px; font-family: var(--uni-font); font-size: 13px; color: #3a414d;
+.phases-list { list-style: none; counter-reset: phase; margin: auto 0 0; padding: 0; max-width: 1120px; }
+.phases-list li {
+  counter-increment: phase; position: relative; padding-left: 46px;
+  font-family: Arial, "Helvetica Neue", sans-serif; font-size: 23px; line-height: 1.5;
+  color: var(--uni-ink); margin-bottom: 22px; text-align: justify;
 }
-.ide__bar .title { font-weight: 600; }
-.ide__bar .win { display: flex; gap: 7px; }
-.ide__bar .win i { width: 13px; height: 11px; border: 1px solid #99a2b1; border-radius: 2px; display: inline-block; }
-.ide__tabs { background: #e7ecf3; border-bottom: 1px solid #d3dae4; padding: 0 10px; }
-.ide__tab { display: inline-block; background: #fff; border: 1px solid #d3dae4; border-bottom: none; border-radius: 6px 6px 0 0; padding: 6px 16px; margin-top: 6px; font-family: var(--mono); font-size: 13px; color: #1f2430; }
-.ide__editor { display: flex; background: #fff; }
-.ide__gutter { text-align: right; padding: 16px 12px; background: #f4f6fa; color: #aab2c0; font-family: var(--mono); font-size: 17px; line-height: 1.6; border-right: 1px solid #e6eaf1; user-select: none; }
-.ide__gutter span { display: block; visibility: hidden; }   /* revelado ao colar */
-.ide__code { margin: 0; padding: 16px 20px; font-family: var(--mono); font-size: 17px; line-height: 1.6; color: #1f2430; white-space: normal; }
-.ide__code .ln { display: block; min-height: 1.6em; }
-.ide__code[data-paste-code] .ln { opacity: 0; }             /* revelado ao colar */
-.ide__code .ln.ind { padding-left: 2.6ch; }
-.ide__code .ln.pasted { animation: pasteFlash 600ms ease; } /* destaque de "colado" */
-@keyframes pasteFlash { 0% { background: rgba(49,106,197,.32); } 100% { background: transparent; } }
-.ide .k  { color: #0033cc; font-weight: 700; }
-.ide .fn { color: #6a2bb5; }
-.ide .cm { color: #138a36; font-style: italic; }
-.ide .pun{ color: #3a414d; }
-.ide .cmt-time { color: #c07a00; font-style: italic; margin-left: 28px; }
+.phases-list li::before {
+  content: counter(phase) "."; position: absolute; left: 8px; top: 0;
+  color: var(--uni-blue); font-weight: 700;
+}
+.phases-list .name { font-weight: 700; color: var(--uni-ink); }
+.phases-list .desc { color: #3a414d; }
+
+.slide-phases .phases-note { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 19px; color: var(--uni-ink); margin-top: auto; max-width: 1120px; }
+.slide-phases .phases-fonte { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 17px; color: #5b6472; margin-top: 10px; }
+
+/* ===========================================================================
+   SLIDE · Trabalhos correlatos (template) — 1º uso: Martins, Marin e Alves (2024)
+   cabeçalho com acento de terminal + obra + faixa de método + teses centrais
+   =========================================================================== */
+.slide-related { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; --caret-color: var(--uni-blue); }
+.slide-related .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
+.slide-related .rel-kicker { font-size: 24px; color: #5b6472; }
+.slide-related .rel-kicker .ps1 { color: var(--uni-blue); }
+.slide-related .rel-title { font-size: 36px; font-weight: 700; color: var(--uni-ink); margin-top: 6px; }
+.slide-related .rel-sub { font-size: 22px; color: #5b6472; margin-top: 2px; }
+.slide-related .rel-lead { font-size: 25px; line-height: 1.5; color: var(--uni-ink); margin-top: 26px; max-width: 1060px; }
+.slide-related .rel-finding {
+  font-size: 24px; line-height: 1.45; color: var(--uni-ink);
+  margin-top: 30px; max-width: 1040px; padding-left: 22px; border-left: 4px solid var(--uni-blue);
+}
+.slide-related .rel-finding b { color: var(--uni-blue-d); font-weight: 700; }
+.slide-related .rel-aim { font-size: 21px; line-height: 1.45; color: #5b6472; margin-top: 28px; max-width: 1040px; }
+.slide-related .rel-quote {
+  position: relative; font-size: 24px; line-height: 1.45; color: var(--uni-ink);
+  margin: 26px 0 0; padding: 4px 0 4px 26px; max-width: 1080px;
+  border-left: 4px solid var(--uni-blue);
+}
+.slide-related .rel-quote .src { font-size: 20px; color: #5b6472; }
+.slide-related .rel-intro { font-size: 22px; color: var(--uni-ink); margin-top: 28px; }
+.slide-related .rel-points { list-style: none; margin: 14px 0 0; padding: 0; max-width: 1060px; }
+.slide-related .rel-points li { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 22px; line-height: 1.5; color: var(--uni-ink); padding: 3px 0; }
+.slide-related .rel-points li .ps1 { font-family: var(--mono); color: var(--uni-blue); font-weight: 700; margin-right: 12px; }
+.slide-related .rel-src { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; margin-top: 14px; }
+.slide-related .rel-cite { margin-top: auto; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; }
+
+/* ===========================================================================
+   SLIDE · Ferramentas e metodologias da EDM (ponte para as 4 fases · Zorić)
+   texto técnico em prosa (Arial, justificado), conforme o manual
+   =========================================================================== */
+.slide-methods .meth-text {
+  font-family: Arial, "Helvetica Neue", sans-serif; font-size: 23px; line-height: 1.55;
+  color: var(--uni-ink); margin-top: 24px; max-width: 1080px; text-align: justify;
+}
+.slide-methods .meth-text b { color: var(--uni-blue-d); font-weight: 700; }
 
 /* ===========================================================================
    SLIDE · O problema (frase + gráfico de barras ASCII/CLI · Martins et al., 2024)
@@ -166,6 +199,12 @@ html, .reveal-viewport { background-color: #15171c; }
 .slide-problem .prob-head { font-size: 32px; color: var(--uni-ink); }
 .slide-problem .prob-head .ps1 { color: var(--uni-blue); }
 .slide-problem .prob-lead { font-size: 26px; line-height: 1.4; color: var(--uni-ink); margin-top: 18px; max-width: 1080px; }
+.slide-problem .prob-quote {
+  position: relative; font-size: 25px; line-height: 1.45; color: var(--uni-ink);
+  margin: 20px 0 0; padding: 4px 0 4px 26px; max-width: 1080px;
+  border-left: 4px solid var(--uni-blue);
+}
+.slide-problem .prob-quote .src { font-size: 21px; color: #5b6472; white-space: nowrap; }
 .slide-problem .prob-sub { font-size: 20px; color: #5b6472; margin-top: 26px; }
 
 .ascii-chart {
@@ -180,7 +219,95 @@ html, .reveal-viewport { background-color: #15171c; }
 .ascii-chart .bar .empty { color: #cdd8ec; }
 .ascii-chart .bar-num { color: #5b6472; font-weight: 700; min-width: 2ch; text-align: right; }
 
-.slide-problem .prob-cite { margin-top: 26px; font-family: var(--mono); font-size: 18px; font-style: italic; color: #5b6472; }
+.slide-problem .prob-cite { margin-top: 26px; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; }
+
+/* ===========================================================================
+   SLIDE · Figura — KCs (KCGen-KT) ligados as dificuldades (Martins et al.)
+   modelo "Word": quadrados ligados, tudo em Arial; titulo mantem o > piscando;
+   titulo acima e fonte abaixo (centralizada), conforme manual de quadros.
+   =========================================================================== */
+.slide-kcfig {
+  display: flex; flex-direction: column; background: var(--uni-light);
+  padding: 36px 52px 26px; --caret-color: var(--uni-blue);
+  font-family: Arial, "Helvetica Neue", "Liberation Sans", sans-serif;
+}
+.slide-kcfig .wm { position: absolute; top: 24px; right: 30px; width: 52px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
+.slide-kcfig .kcfig-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 22px; font-weight: 700; line-height: 1.3; color: var(--uni-ink); max-width: 1170px; }
+.slide-kcfig .kcfig-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
+
+.kcfig-map { margin-top: 18px; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; gap: 15px; }
+.kc-row { display: grid; grid-template-columns: 264px 30px 1fr; align-items: center; }
+.kc-diff {
+  background: #fff; border: 1.5px solid #1f1f1f; border-radius: 0;
+  padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.22;
+  color: #111; text-align: center;
+}
+.kc-link { position: relative; height: 1.5px; background: #1f1f1f; }
+.kc-link::after {
+  content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  border-left: 7px solid #1f1f1f; border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+}
+.kc-group { display: flex; flex-wrap: wrap; gap: 9px; padding: 5px 0 5px 16px; border-left: 1.5px solid #1f1f1f; }
+.kc-box {
+  background: #fff; border: 1px solid #1f1f1f; border-radius: 0;
+  padding: 7px 11px; font-size: 13px; line-height: 1.18; color: #111; text-align: center;
+}
+
+.slide-kcfig .kcfig-fonte {
+  margin-top: 6px; padding-top: 10px; text-align: center;
+  font-family: Arial, "Helvetica Neue", sans-serif; font-size: 14px; color: #5b6472;
+}
+
+/* ===========================================================================
+   SLIDE · Figura científica embutida (resultados Code-DKT)
+   título mantém o > piscando; figura centralizada; fonte abaixo (manual)
+   =========================================================================== */
+.slide-fig {
+  display: flex; flex-direction: column; background: var(--uni-light);
+  padding: 34px 56px 24px; --caret-color: var(--uni-blue);
+  font-family: Arial, "Helvetica Neue", sans-serif;
+}
+.slide-fig .wm { position: absolute; top: 24px; right: 30px; width: 50px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
+.slide-fig .fig-title { font-family: Arial, sans-serif; font-size: 22px; font-weight: 700; line-height: 1.28; color: var(--uni-ink); max-width: 1160px; }
+.slide-fig .fig-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
+.slide-fig .fig-wrap { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-height: 0; margin-top: 2px; }
+.slide-fig .fig-wrap img { max-width: 92%; max-height: 488px; object-fit: contain; }
+.slide-fig .fig-read { font-size: 16px; line-height: 1.4; color: var(--uni-ink); margin-top: 4px; max-width: 1160px; }
+.slide-fig .fig-read b { color: var(--uni-blue-d); }
+.slide-fig .fig-caveat { font-size: 13.5px; color: #8a5a00; margin-top: 6px; }
+.slide-fig .fig-fonte { margin-top: 8px; text-align: center; font-size: 13.5px; color: #5b6472; }
+
+/* ===========================================================================
+   SLIDE · O que o Code-DKT olha ao prever erro (exemplo de código real)
+   =========================================================================== */
+.slide-code {
+  display: flex; flex-direction: column; background: var(--uni-light);
+  padding: 34px 56px 24px; --caret-color: var(--uni-blue);
+  font-family: Arial, "Helvetica Neue", sans-serif;
+}
+.slide-code .wm { position: absolute; top: 24px; right: 30px; width: 50px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
+.slide-code .code-title { font-size: 22px; font-weight: 700; line-height: 1.28; color: var(--uni-ink); }
+.slide-code .code-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
+.slide-code .code-lead { font-size: 17px; line-height: 1.4; color: var(--uni-ink); margin-top: 10px; max-width: 1130px; }
+.slide-code .code-lead b { color: var(--uni-blue-d); }
+.code-card { display: flex; justify-content: flex-start; margin: 16px 0 0; }
+/* trecho de código cru (Dev-C++): sem janela/sombra, só gutter de linhas + sintaxe */
+.devcpp { background: none; border: none; }
+.devcpp__body { display: flex; }
+.devcpp__gutter, .devcpp__code {
+  margin: 0; font-family: "Courier New", Consolas, "DejaVu Sans Mono", monospace;
+  font-size: 16px; line-height: 1.5; font-feature-settings: "liga" 0, "calt" 0;
+}
+.devcpp__gutter { padding: 0 12px 0 2px; border-right: 1px solid #c2cddd;
+  color: #99a5b7; text-align: right; white-space: pre; user-select: none; }
+.devcpp__code { padding: 0 0 0 16px; color: #1a1a1a; white-space: pre; }
+.devcpp__code .kw  { color: #0000cd; font-weight: 700; }
+.devcpp__code .num { color: #0a7d28; }
+.devcpp__code .hl  { background: #ffe14d; border-radius: 2px; padding: 0 1px; }
+.slide-code .tokmark { font-family: var(--mono); font-weight: 400; background: #ffe14d; color: #15171c; border-radius: 3px; padding: 0 5px; }
+.slide-code .code-take { font-size: 16px; line-height: 1.4; color: var(--uni-ink); margin-top: 12px; max-width: 1130px; }
+.slide-code .code-take b { color: var(--uni-blue-d); }
+.slide-code .code-fonte { margin-top: auto; padding-top: 8px; text-align: center; font-size: 13px; color: #5b6472; }
 
 /* respeitar quem pede menos movimento */
 @media (prefers-reduced-motion: reduce) {

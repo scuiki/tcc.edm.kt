@@ -1,0 +1,122 @@
+{
+  "operador_modulo": {
+    "concept": "Operador módulo e divisibilidade",
+    "aid": 502,
+    "problem": 64,
+    "start": "%",
+    "end": "i",
+    "avg_attn": 0.3573,
+    "freq": 38,
+    "token_tipo": "estrutural"
+  },
+  "iteracao_indexada": {
+    "concept": "Iteração indexada e controle de loop",
+    "aid": 492,
+    "problem": 38,
+    "start": "<",
+    "end": "str",
+    "avg_attn": 0.757,
+    "freq": 5,
+    "token_tipo": "estrutural"
+  },
+  "logica_booleana_composta": {
+    "concept": "Expressões booleanas compostas com operadores lógicos",
+    "aid": 439,
+    "problem": 235,
+    "start": "int",
+    "end": "&&",
+    "avg_attn": 0.8261,
+    "freq": 6,
+    "token_tipo": "estrutural"
+  },
+  "negacao_booleana": {
+    "concept": "Negação booleana com operador NOT",
+    "aid": 439,
+    "problem": 234,
+    "start": "!",
+    "end": "isWeekend",
+    "avg_attn": 0.0071,
+    "freq": 11,
+    "token_tipo": "estrutural"
+  },
+  "comparacao_numerica": {
+    "concept": "Comparação numérica e thresholds",
+    "aid": 439,
+    "problem": 1,
+    "start": "b",
+    "end": "==",
+    "avg_attn": 0.5684,
+    "freq": 13,
+    "token_tipo": "estrutural"
+  },
+  "manipulacao_string": {
+    "concept": "Manipulação de strings",
+    "aid": 492,
+    "problem": 32,
+    "start": "countCode",
+    "end": "str",
+    "avg_attn": 0.9634,
+    "freq": 11,
+    "token_tipo": "estrutural"
+  },
+  "manipulacao_array": {
+    "concept": "Manipulação de arrays",
+    "aid": 494,
+    "problem": 107,
+    "start": "nums",
+    "end": "=",
+    "avg_attn": 0.6192,
+    "freq": 18,
+    "token_tipo": "estrutural"
+  },
+  "retorno_antecipado": {
+    "concept": "Retorno antecipado em controle de fluxo",
+    "aid": 439,
+    "problem": 235,
+    "start": "int",
+    "end": "vacation",
+    "avg_attn": 0.9761,
+    "freq": 26,
+    "token_tipo": "identificador"
+  },
+  "branching_condicional": {
+    "concept": "Branching condicional multi-caminho",
+    "aid": 439,
+    "problem": 235,
+    "start": "int",
+    "end": "vacation",
+    "avg_attn": 0.9761,
+    "freq": 26,
+    "token_tipo": "identificador"
+  },
+  "bounds_checking": {
+    "concept": "Validação de limites e bounds checking",
+    "aid": 494,
+    "problem": 49,
+    "start": "int",
+    "end": "length",
+    "avg_attn": 0.516,
+    "freq": 25,
+    "token_tipo": "estrutural"
+  },
+  "padrao_acumulador": {
+    "concept": "Padrão acumulador",
+    "aid": 494,
+    "problem": 41,
+    "start": "int",
+    "end": "+",
+    "avg_attn": 0.8466,
+    "freq": 10,
+    "token_tipo": "estrutural"
+  },
+  "aritmetica_condicional": {
+    "concept": "Aritmética em condicionais",
+    "aid": 494,
+    "problem": 41,
+    "start": "int",
+    "end": "+",
+    "avg_attn": 0.8466,
+    "freq": 10,
+    "token_tipo": "estrutural"
+  }
+}
