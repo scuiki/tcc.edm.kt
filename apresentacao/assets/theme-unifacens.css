@@ -38,6 +38,10 @@ html, .reveal-viewport { background-color: #15171c; }
 .kicker { font-family: var(--mono); font-weight: 400; }
 .kicker .ps1 { color: var(--ps1, var(--uni-blue)); margin-right: 10px; font-weight: 700; }
 
+/* identificação de tópico no topo de cada slide após a Agenda (> tópico) + título abaixo */
+.deck-topic { font-family: var(--mono); font-weight: 400; font-size: 24px; color: #5b6472; margin: 0 0 16px; }
+.deck-topic .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; }
+
 .caret {
   display: inline-block; width: .55em; height: 1.02em;
   background: var(--caret-color, var(--uni-blue));
@@ -132,7 +136,7 @@ html, .reveal-viewport { background-color: #15171c; }
    =========================================================================== */
 .slide-phases { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; --caret-color: var(--uni-blue); }
 .slide-phases .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
-.slide-phases .phases-title { font-size: 32px; color: var(--uni-ink); }
+.slide-phases .phases-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; color: var(--uni-ink); }
 .slide-phases .cite { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 17px; color: #5b6472; font-weight: 600; margin-top: 6px; padding-left: 22px; }
 
 .phases-list { list-style: none; counter-reset: phase; margin: auto 0 0; padding: 0; max-width: 1120px; }
@@ -157,10 +161,10 @@ html, .reveal-viewport { background-color: #15171c; }
    =========================================================================== */
 .slide-related { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; --caret-color: var(--uni-blue); }
 .slide-related .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
-.slide-related .rel-kicker { font-size: 24px; color: #5b6472; }
+.slide-related .rel-kicker { font-size: 24px; color: #5b6472; margin: 0 0 16px; }
 .slide-related .rel-kicker .ps1 { color: var(--uni-blue); }
-.slide-related .rel-title { font-size: 36px; font-weight: 700; color: var(--uni-ink); margin-top: 6px; }
-.slide-related .rel-sub { font-size: 22px; color: #5b6472; margin-top: 2px; }
+.slide-related .rel-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; color: var(--uni-ink); margin-top: 0; }
+.slide-related .rel-sub { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 22px; color: #5b6472; margin-top: 2px; }
 .slide-related .rel-lead { font-size: 25px; line-height: 1.5; color: var(--uni-ink); margin-top: 26px; max-width: 1060px; }
 .slide-related .rel-finding {
   font-size: 24px; line-height: 1.45; color: var(--uni-ink);
@@ -192,12 +196,53 @@ html, .reveal-viewport { background-color: #15171c; }
 .slide-methods .meth-text b { color: var(--uni-blue-d); font-weight: 700; }
 
 /* ===========================================================================
+   SLIDE · Ponte EDM -> KT (Yağcı, 2022): sequência + prosa (Arial)
+   =========================================================================== */
+.slide-bridge .bridge-seq {
+  display: flex; align-items: stretch; justify-content: center; gap: 0;
+  margin-top: 38px; font-family: Arial, "Helvetica Neue", sans-serif;
+}
+.slide-bridge .bridge-seq .step {
+  flex: 1 1 0; text-align: center; font-size: 19px; font-weight: 700; color: #111;
+  background: #fff; border: 1.5px solid #1f1f1f; border-radius: 0; padding: 16px 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.slide-bridge .bridge-seq .arr { flex: none; align-self: center; color: #1f1f1f; font-size: 26px; font-weight: 700; padding: 0 16px; }
+.slide-bridge .bridge-text {
+  margin-top: 34px; max-width: 1100px; font-family: Arial, "Helvetica Neue", sans-serif;
+  font-size: 22px; line-height: 1.55; color: var(--uni-ink); text-align: justify;
+}
+
+/* ===========================================================================
+   SLIDE · Corbett e Anderson (1995): origem do KT + modelo de 2 estados (BKT)
+   =========================================================================== */
+.slide-corbett .bkt-lead {
+  font-family: Arial, "Helvetica Neue", sans-serif; font-size: 21px; line-height: 1.5;
+  color: var(--uni-ink); margin-top: 28px; max-width: 1080px;
+}
+.slide-corbett .bkt-lead b { color: var(--uni-blue-d); font-weight: 700; }
+.slide-corbett .param { display: flex; align-items: baseline; gap: 14px; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 21px; color: var(--uni-ink); }
+.slide-corbett .param .sym { font-family: var(--mono); font-weight: 700; color: var(--uni-blue); min-width: 70px; }
+.slide-corbett .param .lbl { color: #3a414d; }
+
+/* dois pares de parâmetros: aprendizado (estado oculto) × desempenho (observável) */
+.slide-corbett .bkt-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 44px; margin-top: 18px; max-width: 1060px; }
+.slide-corbett .bkt-group__head { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 20px; font-weight: 700; color: var(--uni-blue-d); margin: 0 0 10px; }
+.slide-corbett .bkt-group__cap { display: block; font-weight: 400; font-size: 15px; color: #5b6472; margin-top: 2px; }
+.slide-corbett .bkt-group .param { font-size: 20px; margin-bottom: 9px; }
+.slide-corbett .bkt-group .param .sym { min-width: 62px; }
+.slide-corbett .bkt-group .param .lbl { line-height: 1.35; }
+
+/* fecho: como os 4 parâmetros se combinam na inferência do estado */
+.slide-corbett .bkt-close { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 20px; line-height: 1.5; color: var(--uni-ink); margin-top: 22px; max-width: 1080px; }
+.slide-corbett .bkt-close b { color: var(--uni-blue-d); font-weight: 700; }
+
+/* ===========================================================================
    SLIDE · O problema (frase + gráfico de barras ASCII/CLI · Martins et al., 2024)
    =========================================================================== */
 .slide-problem { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; }
 .slide-problem .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
-.slide-problem .prob-head { font-size: 32px; color: var(--uni-ink); }
-.slide-problem .prob-head .ps1 { color: var(--uni-blue); }
+.slide-problem .prob-head { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; color: var(--uni-ink); }
 .slide-problem .prob-lead { font-size: 26px; line-height: 1.4; color: var(--uni-ink); margin-top: 18px; max-width: 1080px; }
 .slide-problem .prob-quote {
   position: relative; font-size: 25px; line-height: 1.45; color: var(--uni-ink);
@@ -232,7 +277,7 @@ html, .reveal-viewport { background-color: #15171c; }
   font-family: Arial, "Helvetica Neue", "Liberation Sans", sans-serif;
 }
 .slide-kcfig .wm { position: absolute; top: 24px; right: 30px; width: 52px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
-.slide-kcfig .kcfig-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 22px; font-weight: 700; line-height: 1.3; color: var(--uni-ink); max-width: 1170px; }
+.slide-kcfig .kcfig-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--uni-ink); max-width: 1170px; margin: 0; }
 .slide-kcfig .kcfig-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
 
 .kcfig-map { margin-top: 18px; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; gap: 15px; }
@@ -268,7 +313,7 @@ html, .reveal-viewport { background-color: #15171c; }
   font-family: Arial, "Helvetica Neue", sans-serif;
 }
 .slide-fig .wm { position: absolute; top: 24px; right: 30px; width: 50px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
-.slide-fig .fig-title { font-family: Arial, sans-serif; font-size: 22px; font-weight: 700; line-height: 1.28; color: var(--uni-ink); max-width: 1160px; }
+.slide-fig .fig-title { font-family: Arial, sans-serif; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--uni-ink); max-width: 1160px; }
 .slide-fig .fig-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
 .slide-fig .fig-wrap { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-height: 0; margin-top: 2px; }
 .slide-fig .fig-wrap img { max-width: 92%; max-height: 488px; object-fit: contain; }
@@ -286,7 +331,7 @@ html, .reveal-viewport { background-color: #15171c; }
   font-family: Arial, "Helvetica Neue", sans-serif;
 }
 .slide-code .wm { position: absolute; top: 24px; right: 30px; width: 50px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
-.slide-code .code-title { font-size: 22px; font-weight: 700; line-height: 1.28; color: var(--uni-ink); }
+.slide-code .code-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--uni-ink); }
 .slide-code .code-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
 .slide-code .code-lead { font-size: 17px; line-height: 1.4; color: var(--uni-ink); margin-top: 10px; max-width: 1130px; }
 .slide-code .code-lead b { color: var(--uni-blue-d); }
