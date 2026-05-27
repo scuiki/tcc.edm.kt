@@ -24,7 +24,7 @@ v1: 37 → 33 → 30 reqs.
 
 ### MERGE — Consolidações de slides
 
-- [ ] **MERGE-01**: Fundir slide Zorić p1 (`slide-related` introdução de autor) + slide Zorić p2 (`slide-methods` ferramentas e metodologias da EDM) num único slide com cabeçalho `> mineração de dados educacionais`. **Voz:** substituir as 2 citações diretas atuais (Zorić, 2020, p. 12, tradução nossa) por paráfrase indireta com autor parentético, centrada em "nosso trabalho aplica EDM" (ex.: "Nosso trabalho aplica o processo de Mineração de Dados Educacionais, área que combina mineração de dados, estatística e aprendizado de máquina para apoiar decisões pedagógicas (Zorić, 2020).").
+- [x] **MERGE-01**: Fundir slide Zorić p1 (`slide-related` introdução de autor) + slide Zorić p2 (`slide-methods` ferramentas e metodologias da EDM) num único slide com cabeçalho `> mineração de dados educacionais`. **Voz:** substituir as 2 citações diretas atuais (Zorić, 2020, p. 12, tradução nossa) por paráfrase indireta com autor parentético, centrada em "nosso trabalho aplica EDM" (ex.: "Nosso trabalho aplica o processo de Mineração de Dados Educacionais, área que combina mineração de dados, estatística e aprendizado de máquina para apoiar decisões pedagógicas (Zorić, 2020)."). ✓ 2026-05-27 (commit `f9907b8`)
 
 ### REMOVE — Slides a remover
 
@@ -147,7 +147,7 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | REFORMAT-03 | Phase 1 | Pending |
 | REFORMAT-04 | Phase 1 | Pending |
 | REFORMAT-05 | Phase 1 | Pending |
-| MERGE-01 | Phase 1 | Pending |
+| MERGE-01 | Phase 1 | Completed (`f9907b8`, 2026-05-27) |
 | REMOVE-01 | Phase 1 | Completed (`91b9675`, 2026-05-27) |
 | INTRO-01 | Phase 2 | Pending (funde antigo INTRO-01+INTRO-02) |
 | INTRO-03 | Phase 2 | Pending |

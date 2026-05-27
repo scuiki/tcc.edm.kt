@@ -35,7 +35,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 
 **Plans:** 7 plans (executar via `/gsd-execute-phase 1`)
 - [x] 01-01-PLAN.md — Triage do working tree + REMOVE-01 (Corbett ×2) ✓ 2026-05-27
-- [ ] 01-02-PLAN.md — MERGE-01: fundir Zorić p1+p2 com paráfrase D-26
+- [x] 01-02-PLAN.md — MERGE-01: fundir Zorić p1+p2 com paráfrase D-26 ✓ 2026-05-27 (commit `f9907b8`)
 - [ ] 01-03-PLAN.md — REFORMAT-03: fundir Yağcı p1+p2 com paráfrase D-27
 - [ ] 01-04-PLAN.md — REFORMAT-01: cabeçalho > introdução no Martins p1
 - [ ] 01-05-PLAN.md — REFORMAT-02: cabeçalho > as quatro fases da edm no slide-phases
