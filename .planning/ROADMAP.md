@@ -38,7 +38,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 - [x] 01-02-PLAN.md — MERGE-01: fundir Zorić p1+p2 com paráfrase D-26 ✓ 2026-05-27 (commit `f9907b8`)
 - [x] 01-03-PLAN.md — REFORMAT-03: fundir Yağcı p1+p2 com paráfrase D-27 ✓ 2026-05-27 (commit `b60439e`)
 - [x] 01-04-PLAN.md — REFORMAT-01: cabeçalho > introdução no Martins p1 ✓ 2026-05-27 (commit `c31658c`)
-- [ ] 01-05-PLAN.md — REFORMAT-02: cabeçalho > as quatro fases da edm no slide-phases
+- [x] 01-05-PLAN.md — REFORMAT-02: cabeçalho > as quatro fases da edm no slide-phases ✓ 2026-05-27 (commit `23eed8b`)
 - [ ] 01-06-PLAN.md — REFORMAT-04 + REFORMAT-05: reformatar e mover os 5 slides finais (D-15..D-17)
 - [ ] 01-07-PLAN.md — STYLE.md (D-21) + CSS cleanup opcional + checkpoint humano final
 
