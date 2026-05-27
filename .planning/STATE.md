@@ -3,18 +3,18 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-last_updated: "2026-05-27T19:15:43.710Z"
+last_updated: "2026-05-27T20:00:00Z"
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 7
-  completed_plans: 5
-  percent: 71
+  completed_plans: 6
+  percent: 86
 ---
 
 # State: Apresentação TCC 1
 
-**Last updated:** 2026-05-27 após execução do plan 01-05 (REFORMAT-02 Zorić p3 / slide-phases)
+**Last updated:** 2026-05-27 após execução do plan 01-06 (REFORMAT-04 + REFORMAT-05: reformat + DOM move dos 5 slides finais)
 
 ## Project Reference
 
@@ -28,7 +28,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 | # | Phase | Status |
 |---|---|---|
-| 1 | Reformatação da base | In Progress (5 / 7 plans) |
+| 1 | Reformatação da base | In Progress (6 / 7 plans) |
 | 2 | Intro, Dataset e Problema (Fase 1 EDM) | Pending |
 | 3 | EDA e Pré-processamento (Fase 2 EDM) | Pending |
 | 4 | Modelagem e Avaliação (Fase 3 EDM) | Pending |
@@ -43,6 +43,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 | 01-03 | REFORMAT-03 | `b60439e` | Fundir Yağcı p1+p2 num único slide `slide-related slide-bridge` com cabeçalho `> da edm ao knowledge tracing`; citação direta p.2 substituída por paráfrase D-27 ("acompanhamos o conhecimento ao longo do tempo"); `.bridge-seq` (3 passos) preservada literalmente; section count cai de 13 para 12 |
 | 01-04 | REFORMAT-01 | `c31658c` | Reformatar slide Martins p1 (`slide-related`): par `.rel-kicker.kicker` + `<h2 class="rel-title">Martins, Marin e Alves (2024)</h2>` substituído por `<p class="deck-topic">> introdução</p>` único com caret blink (D-04); 3 `.rel-lead` preservados (D-29); rodapé `Fonte: Martins, Marin e Alves (2024).` mantido (D-23); último `.rel-kicker` do arquivo eliminado; section count permanece em 12 |
 | 01-05 | REFORMAT-02 | `23eed8b` | Reformatar slide-phases (Zorić p3): `<p class="deck-topic">` interno trocado de `> trabalhos correlatos` para `> as quatro fases da edm` (D-05) e `<h2 class="phases-title">As quatro fases do processo de EDM</h2>` removido por inteiro (D-03); wrapper `<div class="phases-head">` preservado por decisão conservadora (efeito visual a validar em browser); `.phases-list` (4 itens), `.phases-note` e rodapé `Fonte: Zorić (2020).` preservados intactos (D-29, D-23); comentário HTML atualizado de `SLIDE 5 · ... fluxo horizontal formal` para `SLIDE · As 4 fases da EDM (Zorić, 2020)`; section count permanece em 12 |
+| 01-06 | REFORMAT-04, REFORMAT-05 | `590ae34`, `2a86049` | Reformatar + mover 5 slides finais em duas passadas atômicas. Task 1 (`590ae34`): cabeçalhos dos 5 slides reformatados in-place — Martins p2/p3 (`> retomando o problema`, MESMO cabeçalho D-07), slide-kcfig (`> kcs semânticos extraídos`, D-08), slide-fig (`> evolução por dificuldade`, D-09), slide-code (`> o que o code-dkt olha`, D-10); `<h2 class="prob-head">` (×2), `<h2 class="fig-title">`, `<h2 class="code-title">` e `<p class="kcfig-title">` deletados (D-03); 2 citações diretas Martins (`mencionada por 13 autores` p.19 e `citado por 10 autores` p.20) PRESERVADAS como exceção legítima D-28. Task 2 (`2a86049`): os 5 sections recortados do meio do arquivo e colados no fim de `<div class="slides">` na ordem travada D-16 (slide-code → slide-kcfig → Martins p2 → Martins p3 → slide-fig); restrições D-17a/b/c (Martins p2-p3 adjacentes; slide-fig logo após Martins p3; slide-code+slide-kcfig precedem o trio) validadas via script Python parseando classes deck-slide. Claude's Discretion D-16: slide-code antes de slide-kcfig (recomendação do plan seguida). Section count permanece em 12 |
 
 ## Workflow
 
@@ -69,4 +70,4 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 /gsd-execute-phase 1
 ```
 
-Continuar a fase 1 com o plan 01-06 (REFORMAT-04 + REFORMAT-05a/b/c: DOM move + reformatação dos 5 slides finais — Martins p2/p3, slide-kcfig, slide-fig, slide-code; D-15..D-17).
+Continuar a fase 1 com o plan 01-07 (último plan da fase): STYLE.md update (D-21) + cleanup CSS órfão (`.rel-kicker`/`.rel-title`/`.rel-sub` se grep retornar 0 no `index.html`) + checkpoint humano final (browser smoke test fim-a-fim, navegação do slide 0 ao 11, animações ASCII no Martins p2/p3, console sem erro).
