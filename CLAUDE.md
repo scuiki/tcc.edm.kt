@@ -141,3 +141,30 @@ tcc.edm.kt/
 2. Tabela comparativa BKT vs DKT vs Code-DKT por assignment, reportando first-attempt AUC e all-attempts AUC
 3. Teste de significância Wilcoxon signed-rank entre modelos
 4. Todos os notebooks executáveis do zero com seed fixo
+
+## Iteração ativa: Apresentação da defesa (GSD)
+
+A iteração atual usa Get-Shit-Done (GSD) para orquestrar a finalização da apresentação reveal.js em `apresentacao/`. Os artefatos vivos estão em `.planning/`:
+
+- `.planning/PROJECT.md` — escopo da iteração, requirements (Validated/Active/Out of Scope), constraints (estilo, ABNT, 10 min, sem em-dash), princípios de processo (ler referência completa antes de escrever sobre ela)
+- `.planning/REQUIREMENTS.md` — 37 requirements v1 com REQ-IDs, categorias REFORMAT/MERGE/REMOVE/INTRO/MARKER/EDA/MODEL/CLOSE/TOOL/END/AGENDA/PENDING, e tabela de traceability
+- `.planning/ROADMAP.md` — 5 fases (Vertical MVP) levando à defesa: Reformatação da base → Intro/Dataset/Problema → EDA → Modelagem → Implantação/Encerramento
+- `.planning/STATE.md` — fase ativa e ponteiros
+- `.planning/codebase/` — mapa do repositório (já gerado por `/gsd-map-codebase`)
+- `.planning/config.json` — workflow GSD (mode interactive, granularity coarse, model_profile quality, research+plan_check ligados, verifier desligado)
+
+**Convenções da iteração da apresentação:**
+
+- Cabeçalho novo dos slides: `> [nome da seção]` com caret piscando substitui o tópico ("trabalhos correlatos") e o título h2 (nome do autor); única menção ao autor é o rodapé "Fonte:"
+- Toda alteração em `apresentacao/` deve respeitar `apresentacao/STYLE.md` (tipografia Arial, paleta UniFacens, slide 1280×720)
+- Citações ABNT seguindo manual MSGQ-21.01 em `apresentacao/`; "tradução nossa" só em direta literal estrangeira; sem em-dash em prosa
+- Antes de redigir ou alterar slide que cite um autor, ler a referência completa em `docs/` (este é um trabalho científico, vinculante)
+- Commits atômicos por slide concluído; cada fase termina com `apresentacao/index.html` navegável no browser
+
+**Comandos GSD úteis:**
+
+- `/gsd-progress` — situação atual da iteração
+- `/gsd-discuss-phase N` — entrar na fase N com discussão antes do plano detalhado
+- `/gsd-plan-phase N` — gerar PLAN.md da fase
+- `/gsd-execute-phase N` — executar plans da fase
+- `/gsd-settings` — ajustar workflow agents e perfil de modelo
