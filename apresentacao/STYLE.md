@@ -36,20 +36,28 @@ são `apresentacao/index.html` (marcação dos slides) e
 
 ## Cabeçalho de todo slide após a AGENDA
 
-Padrão obrigatório: **linha de tópico + título**, com **16px** de espaço entre eles.
+Padrão obrigatório: **uma única linha de cabeçalho** com o nome da seção, em
+formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
 
 ```html
-<p class="deck-topic"><span class="ps1">&gt;</span>trabalhos correlatos<span class="caret blink"></span></p>
-<h2 class="prob-head">Título do slide</h2>
+<p class="deck-topic"><span class="ps1">&gt;</span>nome da seção<span class="caret blink"></span></p>
 ```
 
-- Tópico genérico: classe `.deck-topic`. Nos slides de correlato (template
-  `.slide-related`) o equivalente é `.rel-kicker.kicker` + `.rel-title`.
-- Hoje todos os slides de conteúdo usam o tópico **`> trabalhos correlatos`**.
-- O caret piscante (`<span class="caret blink">`) fica no fim do tópico, ou no fim
-  do último item de uma lista (padrão da Agenda e do correlato do Zorić).
-- Gap tópico→título = 16px: garantido por `margin:0 0 16px` no tópico e
-  `margin-top:0` no título (zerar a margem padrão de `<p>` quando o título for `<p>`).
+- Classe única: `.deck-topic`. Aplica a TODOS os slides de conteúdo (após a AGENDA),
+  incluindo os que antes usavam o template `.slide-related` com par
+  `.rel-kicker.kicker` + `.rel-title` + `.rel-sub`.
+- Texto do cabeçalho: minúsculo, em Cascadia (`--mono`) 24px, cor `#5b6472`, com
+  o `>` em azul UniFacens (`--uni-blue`). Exemplos travados na fase 1:
+  `> introdução`, `> mineração de dados educacionais`, `> as quatro fases da edm`,
+  `> da edm ao knowledge tracing`, `> retomando o problema`,
+  `> kcs semânticos extraídos`, `> evolução por dificuldade`,
+  `> o que o code-dkt olha`.
+- Nome do autor **não aparece** no corpo, nem em `<h2>`, nem em `.rel-sub`. Migra
+  para a linha "Fonte:" no rodapé do slide (ver `Convenções de citação`).
+- Caret piscante (`<span class="caret blink">`) como último filho de
+  `<p class="deck-topic">`.
+- Cabeçalhos travados por seção/fase ficam documentados nos PLAN.md de cada fase
+  (D-04..D-11 da fase 1).
 
 ## Caret / blink
 
@@ -77,8 +85,14 @@ Padrão obrigatório: **linha de tópico + título**, com **16px** de espaço en
 - **Termos estrangeiros em itálico e minúsculas** (ex.: *knowledge tracing*),
   inclusive em títulos/subtítulos. Nomes de modelos (BKT, Code-DKT) ficam como estão.
 - **Sem travessões (em-dash)** na prosa; usar vírgula, dois-pontos ou parênteses.
-- **Regra dos correlatos:** todo autor novo é introduzido em um slide
-  `> trabalhos correlatos` ANTES do slide que usa seus resultados.
+- **Apresentação de autores:** autores são introduzidos no momento da relevância
+  via cabeçalho temático `> [nome da seção]`, nunca em slide dedicado de
+  "trabalhos correlatos". O nome do autor não aparece no corpo nem no cabeçalho,
+  apenas em `Fonte:` no rodapé do slide.
+- **Voz própria como padrão:** paráfrase indireta com autor parentético é o
+  padrão. Voz em primeira pessoa do plural quando aplicável ("nosso trabalho
+  aplica", "nós seguimos", "implementamos"). Citação direta literal só quando a
+  frase específica é o argumento (ex.: dados quantitativos em Martins p2/p3).
 
 ## Diagramas (estilo Word/ABNT)
 
@@ -91,32 +105,33 @@ background:#fff; border:1.5px solid #1f1f1f; border-radius:0;  /* cantos retos *
 Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 `.bridge-seq .step` (slide-ponte). Cada figura/diagrama leva `Fonte:` abaixo.
 
-## Inventário de slides (ordem atual)
+## Inventário de slides (ordem atual, pós-fase 1)
 
-| # | classe | conteúdo |
-|---|---|---|
-| 0 | slide-cover-brand | Abertura (logo + tagline) |
-| 1 | slide-title-tcc | Capa do TCC (grafite, formal) |
-| 2 | slide-agenda | Agenda (faixa azul + lista `>`) |
-| 3 | slide-related | Correlato: Martins, Marin e Alves (2024) |
-| 4 | slide-problem | O problema (dificuldades, Quadro 3) |
-| 5 | slide-problem | Dentro dos conceitos técnicos |
-| 6 | slide-kcfig | KCs (KCGen-KT) × dificuldades |
-| 7 | slide-fig | Curva de aprendizado do Code-DKT |
-| 8 | slide-code | O que o Code-DKT "olha" ao prever erro |
-| 9 | slide-related | Correlato: Zorić (2020) — EDM |
-| 10 | slide-related slide-methods | Ferramentas e metodologias da EDM |
-| 11 | slide-phases | As quatro fases do processo de EDM |
-| 12 | slide-related | Correlato: Yağcı (2022) — predição |
-| 13 | slide-related slide-bridge | Ponte: da predição ao *knowledge tracing* |
-| 14 | slide-related slide-corbett | Corbett e Anderson (1995) — origem do KT (motivação: mastery learning, model tracing × knowledge tracing) |
-| 15 | slide-related slide-corbett | Corbett e Anderson (1995) — modelo de dois estados e os 4 parâmetros (base do BKT) |
+| # | classe | cabeçalho | conteúdo |
+|---|---|---|---|
+| 0 | slide-cover-brand | (sem cabeçalho) | Abertura (logo + tagline) |
+| 1 | slide-title-tcc | (sem cabeçalho) | Capa do TCC (autores em grafite) |
+| 2 | slide-agenda | (sem cabeçalho temático) | Agenda |
+| 3 | slide-related | `> introdução` | Recorte do problema (Martins, Marin e Alves, 2024) |
+| 4 | slide-related | `> mineração de dados educacionais` | EDM como processo (Zorić, 2020), fundido p1+p2 |
+| 5 | slide-phases | `> as quatro fases da edm` | As 4 fases (Zorić, 2020) |
+| 6 | slide-related slide-bridge | `> da edm ao knowledge tracing` | Ponte EDM para KT (Yağcı, 2022), fundido p1+p2 |
+| 7 | slide-code | `> o que o code-dkt olha` | Atenção do Code-DKT no operador `&&` da submissão real do CSEDM (Code-DKT, Shi et al., 2022) |
+| 8 | slide-kcfig | `> kcs semânticos extraídos` | Mapeamento KCs (pipeline LLM, Duan et al., 2025) para dificuldades de Martins, Marin e Alves (2024) |
+| 9 | slide-problem | `> retomando o problema` | Dificuldades dos alunos (Martins p2, 13 autores; citação direta mantida porque o número é o argumento) |
+| 10 | slide-problem | `> retomando o problema` | Dentro dos conceitos técnicos (Martins p3, 10 autores; idem) |
+| 11 | slide-fig | `> evolução por dificuldade` | Curva de aprendizado do Code-DKT por sub-dificuldade |
 
-Linhagem de KT no deck: **Corbett & Anderson (1995): KT + BKT → Piech (2015): DKT
-→ Shi (2022): Code-DKT** (Code-DKT é o que fundamenta o TCC). Corbett e Anderson
-ocupam dois slides (#14 motivação, #15 modelo/parâmetros). Em aberto: ordem
-cronológica (os slides de resultado do Code-DKT, #7-#8, estão antes da
-fundamentação de KT) e os próximos correlatos (Piech, Shi).
+**Estado do deck:** 12 slides após a fase 1 (era 16 antes; Corbett ×2 removidos; Zorić p1+p2 e Yağcí p1+p2 fundidos; 5 slides reposicionados ao fim do `<div class="slides">`).
+
+**Gaps reservados para fases 2-5:**
+
+- Após `> introdução` (slide 3): INTRO-01 "nosso dataset" + INTRO-03 "Shi e o problema" + MARKER-01 (fase 2).
+- Após `> da edm ao knowledge tracing` (slide 6): EDA-01, EDA-02, EDA-03 + MARKER-02 (fase 3).
+- Antes do trio Martins+fig (entre slide-code/slide-kcfig e Martins p2): MODEL-01, MODEL-03, MODEL-04, MODEL-05 (fase 4); slide-code vira MODEL-03 reaproveitado; slide-kcfig é a saída do pipeline MODEL-05; slide-fig é o CLOSE-03.
+- Após slide-fig: MARKER-03 (fim da fase 4 da EDM); depois TOOL-01, TOOL-03, MARKER-04, END-01 (fase 5); AGENDA-01 revisado.
+
+**Linhagem de KT (preenchida em fases futuras):** Corbett e Anderson (1995) volta na cronologia do MODEL-01 (fase 4), seguida por Piech (2015) DKT e Shi (2022) Code-DKT. Yağcı (2022) ocupa o slide-bridge (slide 6) e Duan (2025) é introduzido no MODEL-05 (fase 4).
 
 ## Classes reutilizáveis
 
