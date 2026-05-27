@@ -3,7 +3,7 @@ phase: 01-reformata-o-da-base
 plan: 07
 subsystem: apresentacao
 tags: [style-md, css-cleanup, checkpoint, mvp, phase-closure]
-status: pre-checkpoint
+status: complete
 requires:
   - "01-06 (deck com 12 sections, padrão `.deck-topic` aplicado em todos os 9 slides de conteúdo; ordem D-16/D-17 verificada; working tree clean)"
 provides:
@@ -27,7 +27,9 @@ decisions:
   - "D-29 aplicado (implícito): Cabeçalho do STYLE.md menciona explicitamente que os slides que já estão em paráfrase recebem apenas cabeçalho, sem reescrita textual (cabeçalhos travados D-04..D-11)."
   - "D-30 aplicado (implícito na escrita do STYLE.md): as paráfrases D-26 (Zorić fundido) e D-27 (Yağcí fundido) ficam referenciadas pelos cabeçalhos novos na tabela; STYLE.md não duplica o texto da paráfrase, apenas formaliza a política."
   - "Task 4 Branch A escolhido: grep -c 'rel-kicker|rel-title|rel-sub' apresentacao/index.html retornou 0; as 4 regras CSS órfãs foram deletadas do theme-unifacens.css em commit dedicado `30ba911`. Demais classes do template .slide-related preservadas (.rel-lead em uso por Martins p1 e Zorić fundido; .rel-cite em uso por rodapés Fonte: de todos os slide-related; .rel-quote/.rel-points/.rel-finding/.rel-aim/.rel-src/.rel-intro mantidas no CSS porque podem voltar nas fases 2-5)."
-  - "Task 5 status: AWAITING HUMAN VERIFICATION. Execução sequencial parou aqui per <checkpoint_protocol_human_verify> no prompt do executor. Comandos automatizados de gate rodados; outputs anotados abaixo na seção 'Automated Gate Output (pre-checkpoint)'."
+  - "Task 5 status: APPROVED. Usuário respondeu `approved` após smoke test fim-a-fim no browser; os 8 Success Criteria do ROADMAP fase 1 confirmados visualmente. Ver seção 'Checkpoint Resolution' abaixo."
+  - "Task 5 follow-up tweaks: 4 ajustes tipográficos aplicados inline pelo orchestrator antes do approval (deck-topic Arial bold uppercase; tcc-label Arial explícito; 6 classes Fonte: padronizadas em 18px Arial; slide Zorić fundido teve `<b>Mineração de Dados Educacionais</b>` substituído por `mineração de dados educacionais (Educational Data Mining, EDM)` e removido `<b>` de 'predição'). Commit `9224d5f`."
+  - "Task 6 concluído por agente de continuação após approval: PHASE-SUMMARY.md criado agregando os 7 plans; STATE.md marca fase 1 como Complete e current focus aponta para fase 2; ROADMAP.md atualizado via gsd-sdk phase.complete; REQUIREMENTS.md marca os 7 requirements REFORMAT-01..05 + MERGE-01 + REMOVE-01 como Complete."
   - "Política sem em-dash em prosa preservada: a regra `**Sem travessões (em-dash)**` no STYLE.md continua intacta; nenhum em-dash novo introduzido em prosa nesta sessão (duas pré-existentes em STYLE.md linhas 1 e 29 ficaram, mas são fora do escopo deste plano per Scope Boundary do executor)."
 requirements_completed:
   - REFORMAT-01
@@ -39,9 +41,9 @@ requirements_completed:
   - REMOVE-01
 metrics:
   duration_seconds: 200
-  duration_human: "~3 min até o checkpoint (Tasks 1-4); STATE/REQUIREMENTS/ROADMAP serão atualizados na Task 6 após approve do usuário"
-  completed_at: "2026-05-27T19:31:49Z"
-  tasks_completed: 4
+  duration_human: "~3 min até o checkpoint (Tasks 1-4); checkpoint humano + tweaks tipográficos + Task 6 concluídos em sessão de continuação"
+  completed_at: "2026-05-27T20:30:00Z"
+  tasks_completed: 6
   tasks_total: 6
 ---
 
@@ -210,16 +212,31 @@ Bonus checks:
 
 **Imprecisão idêntica aos plans 01-05 e 01-06:** o gate literal `grep -c "> $hdr"` retorna 0 porque o `>` no markup é entidade HTML `&gt;` (não literal) e o texto vem em seguida sem espaço (`</span>introdução`). Política aplicada (igual aos plans anteriores): rodar o equivalente substantivo `grep -c "$hdr<span class=\"caret blink\""` para confirmar o cabeçalho. Documentado nesta seção e na seção "Deviations from Plan" abaixo.
 
-## Success Criteria checklist (8 do ROADMAP fase 1 — para o usuário marcar durante a validação)
+## Success Criteria checklist (8 do ROADMAP fase 1 — confirmados pelo usuário no checkpoint approval)
 
-- [ ] #1 `apresentacao/index.html` abre no browser sem erro de console e a navegação reveal.js funciona do primeiro ao último slide
-- [ ] #2 Slide Martins p1 (slide 3) exibe cabeçalho `> introdução` (caret piscando); autor aparece apenas em "Fonte:" no rodapé
-- [ ] #3 Slide Zorić p3 / slide-phases (slide 5) exibe cabeçalho `> as quatro fases da edm` com o conteúdo das fases preservado
-- [ ] #4 Slide Yağcí fundido (slide 6) exibe cabeçalho `> da edm ao knowledge tracing` com gancho explícito sobre acompanhamento ao longo do tempo (`.bridge-seq` + `.bridge-text`)
-- [ ] #5 Slide Zorić fundido (slide 4) tem cabeçalho `> mineração de dados educacionais` e mostra Zorić como autor + ferramentas/metodologias num único slide (paráfrase única em voz própria)
-- [ ] #6 Os 2 slides de Corbett & Anderson removidos; busca por `slide-corbett` no `index.html` retorna 0 ocorrências (já confirmado nos automated gates acima)
-- [ ] #7 Slides Martins p2/p3 (slides 9 e 10) movidos para posição próxima ao final do deck, adjacentes
-- [ ] #8 Slides `slide-fig` (11), `slide-code` (7) e `slide-kcfig` (8) reformatados ao novo padrão de cabeçalho
+- [x] #1 `apresentacao/index.html` abre no browser sem erro de console e a navegação reveal.js funciona do primeiro ao último slide
+- [x] #2 Slide Martins p1 (slide 3) exibe cabeçalho `> introdução` (caret piscando); autor aparece apenas em "Fonte:" no rodapé
+- [x] #3 Slide Zorić p3 / slide-phases (slide 5) exibe cabeçalho `> as quatro fases da edm` com o conteúdo das fases preservado
+- [x] #4 Slide Yağcí fundido (slide 6) exibe cabeçalho `> da edm ao knowledge tracing` com gancho explícito sobre acompanhamento ao longo do tempo (`.bridge-seq` + `.bridge-text`)
+- [x] #5 Slide Zorić fundido (slide 4) tem cabeçalho `> mineração de dados educacionais` e mostra Zorić como autor + ferramentas/metodologias num único slide (paráfrase única em voz própria)
+- [x] #6 Os 2 slides de Corbett & Anderson removidos; busca por `slide-corbett` no `index.html` retorna 0 ocorrências (já confirmado nos automated gates acima)
+- [x] #7 Slides Martins p2/p3 (slides 9 e 10) movidos para posição próxima ao final do deck, adjacentes
+- [x] #8 Slides `slide-fig` (11), `slide-code` (7) e `slide-kcfig` (8) reformatados ao novo padrão de cabeçalho
+
+## Checkpoint Resolution
+
+**User response:** `approved` (após smoke test fim-a-fim no browser).
+
+**Tweaks tipográficos aplicados inline pelo orchestrator antes do approval final, em commit dedicado `9224d5f` (`apresentacao: ajustes tipográficos pós-checkpoint fase 1`):**
+
+1. **`.deck-topic` (theme-unifacens.css L42):** Cascadia mono → Arial; cor cinza `#5b6472` → preto `var(--uni-ink)`; `font-weight: 400` → `700`; adicionado `text-transform: uppercase` e `letter-spacing: 0.02em`. Efeito visual: os 8 cabeçalhos `> [seção]` dos slides 3 a 11 passam a aparecer em Arial bold uppercase preto (mais peso narrativo; mantém a identidade do caret azul piscante).
+2. **`.slide-title-tcc .tcc-label` (theme-unifacens.css L105):** `font-family: Arial, "Helvetica Neue", sans-serif` explícito (não mais herdado do default Segoe UI).
+3. **6 classes "Fonte:" padronizadas em 18px Arial:** `.phases-fonte` (17 → 18), `.kcfig-fonte` (14 → 18), `.fig-fonte` (13.5 → 18 + Arial), `.code-fonte` (13 → 18 + Arial). `.rel-cite` e `.prob-cite` já estavam em 18px e ficaram intocadas. Resultado: legendas "Fonte:" de tamanho uniforme em todos os slides com rodapé.
+4. **Slide Zorić fundido (index.html L107):** `<b>Mineração de Dados Educacionais</b>` substituído por `mineração de dados educacionais (<i>Educational Data Mining</i>, EDM)`. Removido `<b>` de "predição". Razão: padrão ABNT pede sigla entre parênteses na primeira ocorrência do termo, em itálico para termo estrangeiro, sem negrito; o `<b>` original conflitava com a política de paráfrase em voz própria. Termo "predição" volta ao corpo de texto sem destaque negrito (foco no conteúdo, não em palavras isoladas).
+
+Esses 4 ajustes são cosméticos por construção (CSS + 1 reescrita pontual no HTML) e não afetam o markup estrutural validado nos plans 01-01 a 01-07. Nenhum dos 8 Success Criteria do ROADMAP foi reaberto pelos tweaks.
+
+**Confirmação dos 8 Success Criteria:** todos marcados acima como [x] após a navegação fim-a-fim feita pelo usuário no browser com DevTools aberto, console limpo, 12 sections navegáveis.
 
 ## Deviations from Plan
 
@@ -229,19 +246,24 @@ Bonus checks:
 
 3. **Pre-checkpoint SUMMARY criado antes da Task 5 completar:** o orchestrator's `<sequential_execution>` block diz "Write SUMMARY.md → commit → only then any narration", e o `<success_criteria>` do prompt pede "Pre-SUMMARY parcial criado para o orchestrator capturar o estado pré-checkpoint". Este SUMMARY documenta o estado pós-Task 4 / pré-Task 5, com placeholders para Tasks 5 e 6. Após o `approved` do usuário, o agente de continuação atualiza este mesmo arquivo (ou cria uma seção `## Post-Checkpoint Resolution`) com o registro da aprovação e o resultado final de STATE/REQUIREMENTS/ROADMAP/PHASE-SUMMARY.
 
-## Self-Check: PASSED (parcial)
+## Self-Check: PASSED
 
-- `apresentacao/STYLE.md`: FOUND (modificado, +53 / -38 vs HEAD~2)
-- `apresentacao/assets/theme-unifacens.css`: FOUND (modificado, -4 vs HEAD~1)
-- `.planning/phases/01-reformata-o-da-base/01-07-SUMMARY.md`: FOUND (este arquivo, será incluído no commit final da Task 6)
-- Commit `907a4b5` (STYLE.md, Tasks 1-3): FOUND em `git log --oneline -3`
-- Commit `30ba911` (CSS cleanup, Task 4): FOUND em `git log --oneline -3`
+- `apresentacao/STYLE.md`: FOUND (modificado em `907a4b5`, +53 / -38)
+- `apresentacao/assets/theme-unifacens.css`: FOUND (modificado em `30ba911` -4 e `9224d5f` ajustes tipográficos)
+- `.planning/phases/01-reformata-o-da-base/01-07-SUMMARY.md`: FOUND (este arquivo, comitado neste plano)
+- `.planning/phases/01-reformata-o-da-base/PHASE-SUMMARY.md`: FOUND (criado neste mesmo commit)
+- Commit `907a4b5` (STYLE.md, Tasks 1-3): FOUND em `git log`
+- Commit `30ba911` (CSS cleanup, Task 4): FOUND em `git log`
+- Commit `9224d5f` (tweaks tipográficos pós-checkpoint): FOUND em `git log`
 - Automated gates Task 5: 13 / 13 PASSADOS
-- Tasks 5 e 6: AGUARDANDO checkpoint humano e agente de continuação (documentado em Deviations item 3)
+- Checkpoint humano Task 5: APPROVED pelo usuário
+- Task 6 (PHASE-SUMMARY + STATE/REQUIREMENTS/ROADMAP): concluído nesta passada
+- 8 Success Criteria do ROADMAP fase 1: todos confirmados pelo usuário
 
 ## Próximo Passo
 
-Aguardar resposta do usuário ao checkpoint Task 5 (vide PLAN.md `<resume-signal>`):
+```
+/gsd-discuss-phase 2
+```
 
-- **Se `approved`:** agente de continuação executa Task 6 (STATE.md, REQUIREMENTS.md, ROADMAP.md updates + opcional PHASE-SUMMARY.md + commit final `docs: marcar fase 1 (reformatação da base) como concluída`). Depois: `/gsd-discuss-phase 2`.
-- **Se lista de problemas:** abrir `/gsd-plan-phase 1 --gaps` com os items reportados; NÃO marcar a fase como completa.
+Fase 1 (Reformatação da base) está oficialmente concluída. Próxima fase: 2 (Intro, Dataset e Problema — Fase 1 EDM), que adiciona INTRO-01 (CSEDM + ProgSnap2 fundido), INTRO-03 (Shi e o problema), MARKER-01 (Definição do Problema ✓). Ver `.planning/phases/01-reformata-o-da-base/PHASE-SUMMARY.md` para o resumo agregado dos 7 plans da fase 1.
