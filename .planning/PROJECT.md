@@ -54,9 +54,8 @@ Hipóteses até serem implementadas e validadas no browser.
 - [ ] **REMOVE-01**: Remover os 2 slides de Corbett & Anderson (1995); referenciar apenas em citação dentro do slide de cronologia que leva ao Code-DKT
 
 **Novos slides — Fase 1 EDM (Definição do problema):**
-- [ ] **NEW-01**: Slide ProgSnap2 (Price, 2020) — formato e diferencial (múltiplas tentativas do mesmo estudante)
-- [ ] **NEW-02**: Slide dataset CSEDM — origem (CS1 Java), período de coleta (2019), uso na competição CSEDM 2021
-- [ ] **NEW-03**: Slide Shi e o problema — modelos KT atuais usam classificação binária, ignoram código; importância da análise estrutural; 1 a 2 slides
+- [ ] **NEW-01**: Slide "nosso dataset" (fundido) — dataset CSEDM (CS1 Java, coleta 2019, competição CSEDM 2021) armazenado no formato ProgSnap2 (Price, 2020); diferencial de múltiplas tentativas do mesmo estudante; voz em primeira pessoa do plural (funde NEW-01 e NEW-02 originais)
+- [ ] **NEW-03**: Slide Shi e o problema — paráfrase indireta: modelos KT atuais usam classificação binária, ignoram código; importância da análise estrutural; 1 a 2 slides
 
 **Marcador de fase 1 concluída:**
 - [ ] **NEW-04**: Slide marcador "Definição do Problema ✓" sobre as 4 fases EDM (estilo computação a definir)
@@ -70,11 +69,9 @@ Hipóteses até serem implementadas e validadas no browser.
 - [ ] **NEW-08**: Slide marcador "Preparação dos Dados ✓"
 
 **Novos slides — Fase 3 EDM (Modelagem):**
-- [ ] **NEW-09**: Slide Code-DKT — funcionamento sucinto (sem aprofundar), predecessores (Piech DKT, BKT), vetorização code2vec via javalang
-- [ ] **NEW-10**: Slide exemplo de AST (.svg já existente no projeto)
+- [ ] **NEW-09**: Slide Code-DKT funcionamento + AST inset visual (fundido) — funcionamento sucinto (sem aprofundar), predecessores (Piech DKT, BKT) na cronologia, vetorização code2vec via javalang; inset visual da .svg de AST de exemplo já existente no projeto (funde NEW-09 e NEW-10 originais)
 - [ ] **NEW-11**: Slide resultados Code-DKT + comparação com Shi (paper)
-- [ ] **NEW-12**: Slide Duan (2025) + pipeline KCs semânticos — Duan introduz LLM-para-KC; nosso pipeline (Report 4 em `/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`, prompts inspirados no apêndice de Duan) implementa a ideia em 3 etapas; tudo num único slide (funde NEW-12 e NEW-13 originais)
-- [ ] **NEW-14**: Slide gráfico ou imagem dos KCs semânticos gerados
+- [ ] **NEW-12**: Slide Duan (2025) + pipeline KCs semânticos — Duan introduz LLM-para-KC; nosso pipeline (Report 4 em `/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`, prompts inspirados no apêndice de Duan) implementa a ideia em 3 etapas; voz própria; tudo num único slide (funde NEW-12 e NEW-13 originais)
 
 **Fechamento (retomada problema → evidência):**
 - [ ] **NEW-16**: Slide retomando Martins p2 — comparar dificuldades reportadas com KCs semânticos gerados
@@ -93,7 +90,9 @@ Hipóteses até serem implementadas e validadas no browser.
 - [ ] **PENDING-02**: Definir qual gráfico de insight de estudantes entra no slide NEW-07
 - [ ] **PENDING-04**: Validar o gráfico Code-DKT antes do NEW-18 (memória `project_codedkt_kc_difficulty` indica re-treino por desalinhamento do `pred_df` salvo)
 
-**Removidos de v1 em 2026-05-27 (feedback orientadora):** NEW-13 (pipeline KCs, fundido em NEW-12), NEW-15 (KCs aplicados a caso concreto, absorvido em CLOSE-01/02 via Martins return), NEW-20 (pipeline ferramenta, fundido em NEW-19), PENDING-03 (vinculado a NEW-15 cortado).
+**Removidos de v1 em 2026-05-27 (feedback orientadora, duas rodadas):**
+- 1ª rodada: NEW-13 (pipeline KCs, fundido em NEW-12), NEW-15 (KCs aplicados a caso concreto, absorvido em CLOSE-01/02 via Martins return), NEW-20 (pipeline ferramenta, fundido em NEW-19), PENDING-03 (vinculado a NEW-15 cortado).
+- 2ª rodada: NEW-02 (dataset CSEDM, fundido em NEW-01 como "nosso dataset"), NEW-10 (AST exemplo, fundido em NEW-09 como inset visual), NEW-14 (gráfico KCs gerados, cortado por redundância com slide-kcfig que já mostra o mapeamento KC ↔ dificuldade).
 
 ### Out of Scope
 
@@ -133,7 +132,7 @@ Hipóteses até serem implementadas e validadas no browser.
 ## Constraints
 
 - **Timeline**: defesa em ~1 semana (deadline absoluto). Cortar antes de adicionar.
-- **Duração da apresentação**: 10 minutos máximo. ~32 slides projetados (após reduções de 2026-05-27) implicam ritmo médio de ~18s por slide; CLOSE-01/02/03 (Martins return) ganham 30-40s cada por serem eixo prioritário; correlatos e MARKERs ficam abaixo da média para compensar.
+- **Duração da apresentação**: 10 minutos máximo. ~29 slides projetados (após duas rodadas de reduções em 2026-05-27) implicam ritmo médio de ~20s por slide; CLOSE-01/02/03 (Martins return) ganham 30-40s cada por serem eixo prioritário; correlatos e MARKERs ficam abaixo da média para compensar.
 - **Stack**: reveal.js + HTML/CSS puro (sem build system). Conforme `apresentacao/STYLE.md`.
 - **Estilo visual obrigatório** (definido em `apresentacao/STYLE.md`):
   - Slides 1280×720
@@ -182,6 +181,8 @@ Este é um trabalho científico. Os princípios abaixo são vinculantes durante 
 | Agenda atual a refazer; conteúdo definitivo decidido depois | A agenda existente lista 8 seções genéricas (Introdução, Trabalhos Correlatos, etc.) que não casam mais com a nova estrutura | — Pending |
 | Modo de trabalho `interactive`, granularidade `coarse`, plano e checagem habilitados, verifier desabilitado, perfil `quality` | Defesa próxima exige cuidado nos planos mas pouco overhead; verificação visual é mais rápida que agente verifier | ✓ Confirmado |
 | Retomada Martins (CLOSE-01/02/03) é o eixo prioritário da defesa; TCC 2 espelha as fases anteriores sem repetir o pipeline; ProgSnap2 é nominalmente único em INTRO-01 | Feedback da orientadora 2026-05-27: 10 min é apertado, cortar detalhamentos, validar tudo no Martins antes de mostrar a ferramenta. Implicações: MODEL-06 fundido em MODEL-05 (Duan + pipeline), TOOL-02 fundido em TOOL-01 (proposta + pipeline mini-horizontal), MODEL-08 + PENDING-03 cortados, EDA-01 sem ProgSnap2, "entrada de submissões dos alunos" em vez de "entrada ProgSnap2" nas menções à ferramenta | ✓ Confirmado |
+| Paráfrase indireta com autor parentético é o padrão de voz; citação direta literal só quando a frase específica é o argumento | Feedback da orientadora 2026-05-27 (2ª rodada): o foco da defesa é NOSSO trabalho. Citação direta tira protagonismo dos autores da defesa e gasta tempo de leitura. Implicações: MERGE-01 (Zorić fundido) reescrita como paráfrase ("nosso trabalho aplica EDM..."), REFORMAT-03 (Yağcí fundido) reescrita como paráfrase ("Yağcı mostrou X. Nós seguimos o passo seguinte..."), slides novos nascem com paráfrase. Exceção legítima: CLOSE-01 e CLOSE-02 (Martins p2/p3) MANTÊM citação direta porque "13 autores" / "10 autores" são o argumento quantitativo | ✓ Confirmado |
+| Cortes adicionais (2ª rodada): INTRO-01+02 fundidos ("nosso dataset" único); MODEL-01+02 fundidos (Code-DKT funcionamento + AST inset); MODEL-07 cortado (lista de KCs redundante com slide-kcfig mapeamento) | Feedback da orientadora 2026-05-27 (2ª rodada): "ainda são slides demais". Análise mostrou 3 cortes seguros sem perder cronologia. v1 cai de 33 para 30 reqs | ✓ Confirmado |
 
 ## Evolution
 

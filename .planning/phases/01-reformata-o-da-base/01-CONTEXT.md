@@ -1,6 +1,6 @@
 # Phase 1: Reformatação da base - Context
 
-**Gathered:** 2026-05-27
+**Gathered:** 2026-05-27 (atualizado 2026-05-27 com 2ª rodada de feedback da orientadora)
 **Status:** Ready for planning
 
 <domain>
@@ -62,6 +62,17 @@ Resultado da fase: deck navegável no browser do primeiro ao último slide, com 
 
 - **D-23:** Cada slide mantém a linha "Fonte:" que já carrega no HEAD atual (ex.: `Fonte: Zorić (2020).`, `Fonte: Yağcı (2022).`, `Fonte: adaptado de Martins, Marin e Alves (2024).`). Fase 1 só garante: (a) cada slide reformatado tem UMA linha "Fonte:" no rodapé; (b) sobrenome e ano corretos; (c) "adaptado de" preservado quando aplicável.
 - **D-24:** Para slides com múltiplas referências (ex. slide-kcfig cita Duan + Martins), manter o formato existente "Fonte: elaborado pelos autores, com base em Duan et al. (2025) e Martins, Marin e Alves (2024)." (sem mudança).
+
+### Voz: paráfrase como padrão, citação direta como exceção (adicionado em 2ª rodada de feedback)
+
+Política aplicável a todos os slides desta fase com texto citacional. Resumo: o foco da defesa é o NOSSO trabalho; citações diretas literais tiram protagonismo dos autores da defesa e gastam tempo de leitura.
+
+- **D-25 (regra geral):** Paráfrase indireta com autor parentético é o padrão para textos novos e existentes. Voz em primeira pessoa do plural quando aplicável ("nosso trabalho aplica", "nós seguimos", "implementamos"). Citação direta literal só quando a frase específica É o argumento (caso quantitativo Martins).
+- **D-26 (MERGE-01 Zorić fundido — REESCRITA):** Substituir as 2 citações diretas atuais do slide-related Zorić p1 ("A Mineração de Dados Educacionais (EDM) é uma área de pesquisa interdisciplinar...", Zorić, 2020, p. 12, tradução nossa) E do slide-methods Zorić p2 ("Utiliza diferentes métodos e técnicas de aprendizado de máquina...", Zorić, 2020, p. 12, tradução nossa) por paráfrase indireta única, voz própria. Sugestão de texto: "Nosso trabalho aplica o processo de **Mineração de Dados Educacionais**, área interdisciplinar que combina mineração de dados, estatística e aprendizado de máquina para apoiar decisões pedagógicas (Zorić, 2020). Tarefas típicas incluem classificação, agrupamento, **predição** e associação." Sem `<blockquote class="rel-quote">`; texto corre como `<p class="rel-lead">` ou similar. Rodapé `Fonte: Zorić (2020).` mantido.
+- **D-27 (REFORMAT-03 Yağcí fundido — REESCRITA):** Substituir a citação direta atual do slide-bridge Yağcí p2 ("Outra dimensão da análise de aprendizagem é prever o desempenho acadêmico dos estudantes [...] e determinar os estudantes potencialmente em risco de reprovação", Yağcı, 2022, p. 2, tradução nossa) por paráfrase centrada no avanço do nosso trabalho. Sugestão de texto: "Yağcı (2022) mostrou o valor de prever desempenho acadêmico para identificar alunos em risco. Nós seguimos o passo seguinte: em vez de uma previsão única ao fim do curso, **acompanhamos o conhecimento ao longo do tempo**, a cada nova tentativa, via *knowledge tracing*." Sem `<blockquote class="rel-quote">`; mantém a sequência `.bridge-seq` (3 passos) e o parágrafo `.bridge-text` (que naturalmente é paráfrase). Rodapé `Fonte: Yağcı (2022).` mantido.
+- **D-28 (REFORMAT-04 Martins p2/p3 — EXCEÇÃO LEGÍTIMA):** **MANTER** as citações diretas atuais (Martins; Marin; Alves, 2024, p. 19 e p. 20). Os números "mencionada por 13 autores" e "citado por 10 autores" são o argumento quantitativo da revisão sistemática; paráfrase enfraqueceria o impacto. Esta é a exceção justificada à regra D-25.
+- **D-29 (REFORMAT-01 Martins p1, REFORMAT-02 Zorić p3, REFORMAT-05a/b/c, MERGE-01 demais elementos):** Slides que JÁ estão em paráfrase ou que não têm citação direta no HEAD atual — sem reescrita textual; apenas cabeçalho conforme D-04 a D-11.
+- **D-30 (impacto no plano):** O plan-phase 1 deve listar D-26 e D-27 como sub-tasks textuais EXPLÍCITAS dentro dos slides MERGE-01 e REFORMAT-03, não apenas mudança de cabeçalho. Tempo de execução estimado: +5-10 min por slide para escrever a paráfrase e validar visualmente.
 
 ### Claude's Discretion (executor decide no plano)
 

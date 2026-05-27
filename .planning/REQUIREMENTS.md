@@ -7,19 +7,24 @@
 
 Cada requirement representa um slide a ser entregue ou uma reformatação a aplicar em `apresentacao/index.html`. Categorias correspondem aos blocos narrativos da apresentação.
 
-**Nota 2026-05-27 (consolidação por feedback da orientadora):** Reduções aplicadas para caber em 10 min, priorizar a retomada Martins (CLOSE-01/02/03), garantir ProgSnap2 único e TCC 2 sem repetir o pipeline já mostrado. Mudanças: `MODEL-06` fundido em `MODEL-05` (Duan + pipeline); `TOOL-02` fundido em `TOOL-01` (proposta + pipeline mini-horizontal); `MODEL-08` e `PENDING-03` movidos para v2 (caso concreto de KC absorvido por CLOSE-01/02). v1: 37 → 33 reqs.
+**Nota 2026-05-27 (consolidação por feedback da orientadora, 1ª e 2ª rodadas):** Reduções aplicadas para caber em 10 min, priorizar a retomada Martins (CLOSE-01/02/03), garantir ProgSnap2 único, TCC 2 sem repetir o pipeline já mostrado, e voz própria (paráfrase como padrão; citação direta apenas quando a frase é o argumento). Mudanças acumuladas:
+- 1ª rodada: `MODEL-06` fundido em `MODEL-05` (Duan + pipeline); `TOOL-02` fundido em `TOOL-01` (proposta + pipeline mini-horizontal); `MODEL-08` e `PENDING-03` movidos para v2 (caso concreto de KC absorvido por CLOSE-01/02).
+- 2ª rodada: `INTRO-02` fundido em `INTRO-01` (CSEDM + ProgSnap2 num único slide "nosso dataset"); `MODEL-02` fundido em `MODEL-01` (Code-DKT funcionamento + AST inset); `MODEL-07` cortado (lista de KCs redundante com slide-kcfig que já mostra o mapeamento).
+- Política de voz: paráfrase indireta com autor parentético é o padrão; citação direta literal só onde a frase específica é o argumento (mantida em CLOSE-01/02 porque "13 autores" / "10 autores" são o argumento quantitativo).
+
+v1: 37 → 33 → 30 reqs.
 
 ### REFORMAT — Reformatações de slides já existentes
 
 - [ ] **REFORMAT-01**: Slide Martins p1 reformatado com cabeçalho `> introdução` (substitui tópico "trabalhos correlatos" + título "Martins, Marin e Alves (2024)"); autor mantido apenas em rodapé "Fonte:"
 - [ ] **REFORMAT-02**: Slide Zorić p3 (`slide-phases`) reformatado com cabeçalho `> as quatro fases da edm`; conteúdo preservado
-- [ ] **REFORMAT-03**: Slide Yağcí (consolidado de p1 + p2 se possível) reformatado com cabeçalho `> da edm ao knowledge tracing`; conteúdo precisa puxar o gancho "acompanha o conhecimento do estudante ao longo do tempo, a cada nova tentativa"
-- [ ] **REFORMAT-04**: Slides Martins p2 ("O problema") e Martins p3 ("Dentro dos conceitos técnicos") movidos para o bloco final da apresentação; cabeçalho da seção a definir (provavelmente `> retomando o problema` ou similar)
+- [ ] **REFORMAT-03**: Slide Yağcí (consolidado de p1 + p2 se possível) reformatado com cabeçalho `> da edm ao knowledge tracing`; conteúdo precisa puxar o gancho "acompanha o conhecimento do estudante ao longo do tempo, a cada nova tentativa". **Voz:** substituir a citação direta atual (Yağcı, 2022, p. 2, tradução nossa) por paráfrase centrada em "nós seguimos o passo seguinte" (ex.: "Yağcı (2022) mostrou o valor de prever desempenho acadêmico para identificar alunos em risco. Nós seguimos o passo seguinte: em vez de uma previsão única, acompanhamos o conhecimento ao longo do tempo via knowledge tracing.").
+- [ ] **REFORMAT-04**: Slides Martins p2 ("O problema") e Martins p3 ("Dentro dos conceitos técnicos") movidos para o bloco final da apresentação; cabeçalho da seção a definir (provavelmente `> retomando o problema` ou similar). **Voz:** **MANTER as citações diretas** atuais (Martins; Marin; Alves, 2024, p. 19 e p. 20) — os números "mencionada por 13 autores" e "citado por 10 autores" SÃO o argumento quantitativo do estudo; paráfrase enfraqueceria a força retórica. Esta é a exceção legítima à política de paráfrase como padrão.
 - [ ] **REFORMAT-05**: Slides `slide-fig` (curva de aprendizado Code-DKT), `slide-code` (atenção Code-DKT) e `slide-kcfig` (KCs KCGen-KT) reformatados para o bloco de modelagem/fechamento com cabeçalhos novos
 
 ### MERGE — Consolidações de slides
 
-- [ ] **MERGE-01**: Fundir slide Zorić p1 (`slide-related` introdução de autor) + slide Zorić p2 (`slide-methods` ferramentas e metodologias da EDM) num único slide com cabeçalho `> mineração de dados educacionais`
+- [ ] **MERGE-01**: Fundir slide Zorić p1 (`slide-related` introdução de autor) + slide Zorić p2 (`slide-methods` ferramentas e metodologias da EDM) num único slide com cabeçalho `> mineração de dados educacionais`. **Voz:** substituir as 2 citações diretas atuais (Zorić, 2020, p. 12, tradução nossa) por paráfrase indireta com autor parentético, centrada em "nosso trabalho aplica EDM" (ex.: "Nosso trabalho aplica o processo de Mineração de Dados Educacionais, área que combina mineração de dados, estatística e aprendizado de máquina para apoiar decisões pedagógicas (Zorić, 2020).").
 
 ### REMOVE — Slides a remover
 
@@ -27,9 +32,8 @@ Cada requirement representa um slide a ser entregue ou uma reformatação a apli
 
 ### INTRO — Slides novos de introdução e dataset (Fase 1 EDM)
 
-- [ ] **INTRO-01**: Slide ProgSnap2 — Price (2020) como fonte; explicar o formato e o diferencial de armazenar múltiplas tentativas do mesmo estudante (gancho com o que Yağcí cita sobre acompanhamento ao longo do tempo)
-- [ ] **INTRO-02**: Slide dataset CSEDM — origem (curso introdutório CS1 em Java), uso na competição CSEDM 2021, período de coleta (2019); contextualizar para a banca
-- [ ] **INTRO-03**: Slide Shi e o problema — modelos de KT atuais usam classificação binária e ignoram o código; aluno pode ter acertado parcialmente e o modelo vê como errado (0); 1 a 2 slides conforme cabimento; NÃO apresenta o modelo Code-DKT aqui
+- [ ] **INTRO-01**: Slide "nosso dataset" (fundido) — dataset **CSEDM** (curso introdutório CS1 em Java, coleta 2019, competição CSEDM 2021) armazenado no formato **ProgSnap2** (Price, 2020), que preserva múltiplas tentativas do mesmo estudante; gancho com o que Yağcí mostrou sobre acompanhamento ao longo do tempo. Voz própria: "Nosso dataset é o CSEDM, armazenado em ProgSnap2 (Price, 2020), formato que...". (Funde INTRO-01 e INTRO-02 originais.)
+- [ ] **INTRO-03**: Slide Shi e o problema — paráfrase indireta: "Shi et al. (2022) apontaram que modelos de KT clássicos (BKT, DKT) usam apenas acerto/erro e ignoram a estrutura do código; um aluno pode acertar parcialmente e o modelo ver como erro completo." 1 a 2 slides conforme cabimento; NÃO apresenta o modelo Code-DKT aqui
 
 ### MARKER — Marcadores de fase EDM concluída
 
@@ -46,12 +50,10 @@ Cada requirement representa um slide a ser entregue ou uma reformatação a apli
 
 ### MODEL — Slides novos de Fase 3 EDM (Modelagem)
 
-- [ ] **MODEL-01**: Slide Code-DKT funcionamento sucinto — citar predecessores (Piech 2015 DKT, Corbett & Anderson 1995 BKT) na cronologia que leva ao Code-DKT; vetorização code2vec via javalang; sem aprofundar tecnicamente
-- [ ] **MODEL-02**: Slide exemplo de AST (.svg já existente no projeto)
+- [ ] **MODEL-01**: Slide Code-DKT funcionamento + AST como inset visual — citar predecessores (Corbett & Anderson 1995 BKT, Piech 2015 DKT) na cronologia que leva ao Code-DKT; mostrar inset com a `.svg` de AST de exemplo já existente no projeto demonstrando "o Code-DKT parseia o código como árvore"; vetorização code2vec via javalang; sem aprofundar tecnicamente. (Funde MODEL-01 e MODEL-02 originais.)
 - [ ] **MODEL-03**: Slide visualização Code-DKT em código (a partir do `slide-code` existente, reformatado)
 - [ ] **MODEL-04**: Slide resultados Code-DKT + comparação direta com Shi et al. (2022)
-- [ ] **MODEL-05**: Slide Duan (2025) + pipeline de KCs semânticos — Duan introduz extração automática de KCs via LLM; nosso pipeline (baseado em Report 4 em `/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`, prompts inspirados no apêndice de Duan) implementa essa ideia em 3 etapas; importância dos KCs semânticos para interpretabilidade. Nota privada (NÃO no slide): ASTs não inclusas nos prompts, falar apenas se a banca perguntar. (Funde MODEL-05 e MODEL-06 originais.)
-- [ ] **MODEL-07**: Slide gráfico ou imagem dos KCs semânticos gerados pela pipeline
+- [ ] **MODEL-05**: Slide Duan (2025) + pipeline de KCs semânticos — Duan introduz extração automática de KCs via LLM; nosso pipeline (baseado em Report 4 em `/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`, prompts inspirados no apêndice de Duan) implementa essa ideia em 3 etapas; importância dos KCs semânticos para interpretabilidade. Voz própria: "Duan et al. (2025) propuseram X. Nosso pipeline implementa essa ideia em 3 etapas: ...". Nota privada (NÃO no slide): ASTs não inclusas nos prompts, falar apenas se a banca perguntar. (Funde MODEL-05 e MODEL-06 originais.) A saída do pipeline (KCs gerados + mapeamento com dificuldades) é mostrada no slide-kcfig (REFORMAT-05a) que aparece em seguida no deck.
 
 ### CLOSE — Fechamento (retomada problema → evidência)
 
@@ -95,10 +97,16 @@ Deferidos para depois da defesa.
 
 ### FUSED — Removidos de v1 em 2026-05-27 (feedback orientadora)
 
+**1ª rodada:**
 - **MODEL-06 (fundido em MODEL-05)**: pipeline de extração de KCs semânticos baseado em Report 4. Conteúdo absorvido no MODEL-05 expandido.
 - **MODEL-08 (cortado, eventualmente recoverable)**: caso concreto de KCs semânticos por estudante/assignment/problema. Aplicação dos KCs já aparece em CLOSE-01/02 via Martins return.
 - **PENDING-03 (some com MODEL-08)**: definição do formato do slide MODEL-08.
 - **TOOL-02 (fundido em TOOL-01)**: pipeline da ferramenta. Pipeline mini-horizontal absorvido no TOOL-01 expandido; detalhamento por etapa não repete porque já apareceu nas fases 2-4.
+
+**2ª rodada:**
+- **INTRO-02 (fundido em INTRO-01)**: dataset CSEDM (origem, período, competição). Absorvido no INTRO-01 expandido como "nosso dataset CSEDM armazenado em ProgSnap2".
+- **MODEL-02 (fundido em MODEL-01)**: slide isolado da AST de exemplo. Vira inset visual no slide de funcionamento do Code-DKT.
+- **MODEL-07 (cortado, redundante)**: gráfico/lista dos KCs gerados pela pipeline. Slide-kcfig (REFORMAT-05a) JÁ mostra todos os KCs no mapeamento com dificuldades de Martins, estritamente mais informativo.
 
 ### SRC — srcML-DKT Chat 2
 
@@ -141,8 +149,7 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | REFORMAT-05 | Phase 1 | Pending |
 | MERGE-01 | Phase 1 | Pending |
 | REMOVE-01 | Phase 1 | Pending |
-| INTRO-01 | Phase 2 | Pending |
-| INTRO-02 | Phase 2 | Pending |
+| INTRO-01 | Phase 2 | Pending (funde antigo INTRO-01+INTRO-02) |
 | INTRO-03 | Phase 2 | Pending |
 | MARKER-01 | Phase 2 | Pending |
 | MARKER-02 | Phase 3 | Pending |
@@ -151,12 +158,10 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | EDA-01 | Phase 3 | Pending |
 | EDA-02 | Phase 3 | Pending |
 | EDA-03 | Phase 3 | Pending |
-| MODEL-01 | Phase 4 | Pending |
-| MODEL-02 | Phase 4 | Pending |
+| MODEL-01 | Phase 4 | Pending (funde antigo MODEL-01+MODEL-02) |
 | MODEL-03 | Phase 4 | Pending |
 | MODEL-04 | Phase 4 | Pending |
 | MODEL-05 | Phase 4 | Pending (funde antigo MODEL-05+MODEL-06) |
-| MODEL-07 | Phase 4 | Pending |
 | CLOSE-01 | Phase 4 | Pending |
 | CLOSE-02 | Phase 4 | Pending |
 | CLOSE-03 | Phase 4 | Pending |
@@ -169,10 +174,11 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | PENDING-04 | Phase 4 | Pending |
 
 **Coverage:**
-- v1 requirements: 33 total (era 37, reduzido em 2026-05-27 conforme feedback da orientadora)
-- Mapped to phases: 33
+- v1 requirements: 30 total (era 37, reduzido em 2026-05-27 em duas rodadas de feedback da orientadora)
+- Mapped to phases: 30
 - Unmapped: 0 ✓
-- Removidos / fundidos: MODEL-06 (fundido em MODEL-05), MODEL-08 (movido para v2), PENDING-03 (movido para v2 com MODEL-08), TOOL-02 (fundido em TOOL-01)
+- Removidos / fundidos (1ª rodada): MODEL-06 (fundido em MODEL-05), MODEL-08 (movido para v2), PENDING-03 (movido para v2 com MODEL-08), TOOL-02 (fundido em TOOL-01)
+- Removidos / fundidos (2ª rodada): INTRO-02 (fundido em INTRO-01), MODEL-02 (fundido em MODEL-01), MODEL-07 (cortado, redundante com slide-kcfig)
 
 ---
 *Requirements defined: 2026-05-27*
