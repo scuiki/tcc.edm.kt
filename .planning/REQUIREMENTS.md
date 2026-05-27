@@ -28,7 +28,7 @@ v1: 37 → 33 → 30 reqs.
 
 ### REMOVE — Slides a remover
 
-- [ ] **REMOVE-01**: Remover os 2 slides de Corbett & Anderson (1995) (`slide-related slide-corbett`); referenciar apenas em citação dentro do slide de cronologia que leva ao Code-DKT
+- [x] **REMOVE-01**: Remover os 2 slides de Corbett & Anderson (1995) (`slide-related slide-corbett`); referenciar apenas em citação dentro do slide de cronologia que leva ao Code-DKT ✓ 2026-05-27 (commit `91b9675`)
 
 ### INTRO — Slides novos de introdução e dataset (Fase 1 EDM)
 
@@ -148,7 +148,7 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | REFORMAT-04 | Phase 1 | Pending |
 | REFORMAT-05 | Phase 1 | Pending |
 | MERGE-01 | Phase 1 | Pending |
-| REMOVE-01 | Phase 1 | Pending |
+| REMOVE-01 | Phase 1 | Completed (`91b9675`, 2026-05-27) |
 | INTRO-01 | Phase 2 | Pending (funde antigo INTRO-01+INTRO-02) |
 | INTRO-03 | Phase 2 | Pending |
 | MARKER-01 | Phase 2 | Pending |

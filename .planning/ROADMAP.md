@@ -34,7 +34,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 8. Slides `slide-fig`, `slide-code` e `slide-kcfig` reformatados ao novo padrão de cabeçalho
 
 **Plans:** 7 plans (executar via `/gsd-execute-phase 1`)
-- [ ] 01-01-PLAN.md — Triage do working tree + REMOVE-01 (Corbett ×2)
+- [x] 01-01-PLAN.md — Triage do working tree + REMOVE-01 (Corbett ×2) ✓ 2026-05-27
 - [ ] 01-02-PLAN.md — MERGE-01: fundir Zorić p1+p2 com paráfrase D-26
 - [ ] 01-03-PLAN.md — REFORMAT-03: fundir Yağcı p1+p2 com paráfrase D-27
 - [ ] 01-04-PLAN.md — REFORMAT-01: cabeçalho > introdução no Martins p1

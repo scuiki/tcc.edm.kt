@@ -2,19 +2,19 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-last_updated: "2026-05-27T18:41:42.906Z"
+status: in-progress
+last_updated: "2026-05-27T18:52:44Z"
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 7
-  completed_plans: 0
-  percent: 0
+  completed_plans: 1
+  percent: 14
 ---
 
 # State: Apresentação TCC 1
 
-**Last updated:** 2026-05-27 after `/gsd-new-project`
+**Last updated:** 2026-05-27 após execução do plan 01-01 (REMOVE-01 Corbett)
 
 ## Project Reference
 
@@ -22,17 +22,23 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 **Core value:** Slides HTML reveal.js funcionais, narrativamente claros e cientificamente fiéis, prontos para defesa em ~1 semana.
 
-**Current focus:** Phase 1 — Reformatação da base (próximo passo: `/gsd-discuss-phase 1`)
+**Current focus:** Phase 01 — reformata-o-da-base
 
 ## Phases
 
 | # | Phase | Status |
 |---|---|---|
-| 1 | Reformatação da base | Pending |
+| 1 | Reformatação da base | In Progress (1 / 7 plans) |
 | 2 | Intro, Dataset e Problema (Fase 1 EDM) | Pending |
 | 3 | EDA e Pré-processamento (Fase 2 EDM) | Pending |
 | 4 | Modelagem e Avaliação (Fase 3 EDM) | Pending |
 | 5 | Implantação, Agenda e Encerramento (Fase 4 EDM) | Pending |
+
+## Plans concluídos
+
+| Plan | Requirement | Commits | Resumo |
+|---|---|---|---|
+| 01-01 | REMOVE-01 | `ed03327`, `91b9675` | Working tree snapshot (commit-wip) + delete dos 2 slides Corbett |
 
 ## Workflow
 
@@ -56,7 +62,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 ## Next action
 
 ```
-/gsd-discuss-phase 1
+/gsd-execute-phase 1
 ```
 
-Para entrar na fase 1 (Reformatação da base) com discussão antes do plano detalhado.
+Continuar a fase 1 com o plan 01-02 (MERGE-01 Zorić p1+p2 fundido com paráfrase D-26).
