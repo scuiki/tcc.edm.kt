@@ -129,48 +129,48 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 
 | Requirement | Phase | Status |
 |---|---|---|
-| REFORMAT-01 | TBD | Pending |
-| REFORMAT-02 | TBD | Pending |
-| REFORMAT-03 | TBD | Pending |
-| REFORMAT-04 | TBD | Pending |
-| REFORMAT-05 | TBD | Pending |
-| MERGE-01 | TBD | Pending |
-| REMOVE-01 | TBD | Pending |
-| INTRO-01 | TBD | Pending |
-| INTRO-02 | TBD | Pending |
-| INTRO-03 | TBD | Pending |
-| MARKER-01 | TBD | Pending |
-| MARKER-02 | TBD | Pending |
-| MARKER-03 | TBD | Pending |
-| MARKER-04 | TBD | Pending |
-| EDA-01 | TBD | Pending |
-| EDA-02 | TBD | Pending |
-| EDA-03 | TBD | Pending |
-| MODEL-01 | TBD | Pending |
-| MODEL-02 | TBD | Pending |
-| MODEL-03 | TBD | Pending |
-| MODEL-04 | TBD | Pending |
-| MODEL-05 | TBD | Pending |
-| MODEL-06 | TBD | Pending |
-| MODEL-07 | TBD | Pending |
-| MODEL-08 | TBD | Pending |
-| CLOSE-01 | TBD | Pending |
-| CLOSE-02 | TBD | Pending |
-| CLOSE-03 | TBD | Pending |
-| TOOL-01 | TBD | Pending |
-| TOOL-02 | TBD | Pending |
-| TOOL-03 | TBD | Pending |
-| END-01 | TBD | Pending |
-| AGENDA-01 | TBD | Pending |
-| PENDING-01 | TBD | Pending |
-| PENDING-02 | TBD | Pending |
-| PENDING-03 | TBD | Pending |
-| PENDING-04 | TBD | Pending |
+| REFORMAT-01 | Phase 1 | Pending |
+| REFORMAT-02 | Phase 1 | Pending |
+| REFORMAT-03 | Phase 1 | Pending |
+| REFORMAT-04 | Phase 1 | Pending |
+| REFORMAT-05 | Phase 1 | Pending |
+| MERGE-01 | Phase 1 | Pending |
+| REMOVE-01 | Phase 1 | Pending |
+| INTRO-01 | Phase 2 | Pending |
+| INTRO-02 | Phase 2 | Pending |
+| INTRO-03 | Phase 2 | Pending |
+| MARKER-01 | Phase 2 | Pending |
+| MARKER-02 | Phase 3 | Pending |
+| MARKER-03 | Phase 4 | Pending |
+| MARKER-04 | Phase 5 | Pending |
+| EDA-01 | Phase 3 | Pending |
+| EDA-02 | Phase 3 | Pending |
+| EDA-03 | Phase 3 | Pending |
+| MODEL-01 | Phase 4 | Pending |
+| MODEL-02 | Phase 4 | Pending |
+| MODEL-03 | Phase 4 | Pending |
+| MODEL-04 | Phase 4 | Pending |
+| MODEL-05 | Phase 4 | Pending |
+| MODEL-06 | Phase 4 | Pending |
+| MODEL-07 | Phase 4 | Pending |
+| MODEL-08 | Phase 4 | Pending |
+| CLOSE-01 | Phase 4 | Pending |
+| CLOSE-02 | Phase 4 | Pending |
+| CLOSE-03 | Phase 4 | Pending |
+| TOOL-01 | Phase 5 | Pending |
+| TOOL-02 | Phase 5 | Pending |
+| TOOL-03 | Phase 5 | Pending |
+| END-01 | Phase 5 | Pending |
+| AGENDA-01 | Phase 5 | Pending |
+| PENDING-01 | Phase 5 | Pending |
+| PENDING-02 | Phase 3 | Pending |
+| PENDING-03 | Phase 4 | Pending |
+| PENDING-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 37 total
-- Mapped to phases: 0
-- Unmapped: 37 (a preencher no ROADMAP)
+- Mapped to phases: 37
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-05-27*
