@@ -33,6 +33,8 @@ Cada requirement representa um slide a ser entregue ou uma reformatação a apli
 
 - [ ] **MARKER-01**: Slide marcador após INTRO-03 sinalizando "Definição do Problema ✓" sobre as 4 fases da EDM; estética com referência a computação (a definir)
 - [ ] **MARKER-02**: Slide marcador após EDA sinalizando "Preparação dos Dados ✓"
+- [ ] **MARKER-03**: Slide marcador após CLOSE-03 sinalizando "Modelagem e Avaliação ✓" (fim da fase 3 da EDM, antes de entrar na proposta da ferramenta TCC 2)
+- [ ] **MARKER-04**: Slide marcador após TOOL-03 sinalizando "Implantação ✓" (fim da fase 4 da EDM, antes do agradecimento)
 
 ### EDA — Slides novos de Fase 2 EDM (Preparação dos dados)
 
@@ -139,6 +141,8 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | INTRO-03 | TBD | Pending |
 | MARKER-01 | TBD | Pending |
 | MARKER-02 | TBD | Pending |
+| MARKER-03 | TBD | Pending |
+| MARKER-04 | TBD | Pending |
 | EDA-01 | TBD | Pending |
 | EDA-02 | TBD | Pending |
 | EDA-03 | TBD | Pending |
@@ -164,9 +168,9 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | PENDING-04 | TBD | Pending |
 
 **Coverage:**
-- v1 requirements: 35 total
+- v1 requirements: 37 total
 - Mapped to phases: 0
-- Unmapped: 35 (a preencher no ROADMAP)
+- Unmapped: 37 (a preencher no ROADMAP)
 
 ---
 *Requirements defined: 2026-05-27*
