@@ -33,6 +33,15 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 7. Slides Martins p2/p3 movidos para posição próxima ao final do deck (ordem preliminar dos `<section>` reflete a estrutura nova)
 8. Slides `slide-fig`, `slide-code` e `slide-kcfig` reformatados ao novo padrão de cabeçalho
 
+**Plans:** 7 plans (executar via `/gsd-execute-phase 1`)
+- [ ] 01-01-PLAN.md — Triage do working tree + REMOVE-01 (Corbett ×2)
+- [ ] 01-02-PLAN.md — MERGE-01: fundir Zorić p1+p2 com paráfrase D-26
+- [ ] 01-03-PLAN.md — REFORMAT-03: fundir Yağcı p1+p2 com paráfrase D-27
+- [ ] 01-04-PLAN.md — REFORMAT-01: cabeçalho > introdução no Martins p1
+- [ ] 01-05-PLAN.md — REFORMAT-02: cabeçalho > as quatro fases da edm no slide-phases
+- [ ] 01-06-PLAN.md — REFORMAT-04 + REFORMAT-05: reformatar e mover os 5 slides finais (D-15..D-17)
+- [ ] 01-07-PLAN.md — STYLE.md (D-21) + CSS cleanup opcional + checkpoint humano final
+
 ### Phase 2: Intro, Dataset e Problema (Fase 1 EDM)
 **Goal:** Adicionar os novos slides da abertura narrativa que estabelecem o problema: o gancho do Yağcí leva ao slide "nosso dataset" (CSEDM armazenado em ProgSnap2, fundidos), depois ao problema apontado por Shi (KT binário ignora código). Fecha com o marcador da Fase 1 EDM concluída. Voz: paráfrase indireta com autor parentético; sem citação direta literal nestes 3 slides novos.
 **Mode:** mvp
