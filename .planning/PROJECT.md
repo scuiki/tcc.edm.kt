@@ -62,7 +62,7 @@ Hipóteses até serem implementadas e validadas no browser.
 - [ ] **NEW-04**: Slide marcador "Definição do Problema ✓" sobre as 4 fases EDM (estilo computação a definir)
 
 **Novos slides — Fase 2 EDM (Preparação dos dados):**
-- [ ] **NEW-05**: Slide EDA — distribuição e organização do CSEDM, referência ao ProgSnap2 quando cabível
+- [ ] **NEW-05**: Slide EDA — distribuição e organização do CSEDM (n estudantes, n problemas, n eventos); NÃO repete formato ProgSnap2 (já introduzido em NEW-01/INTRO-01)
 - [ ] **NEW-06**: Slide pré-processamento — aproximação ao protocolo de Shi como parâmetro de comparação, com ênfase em EDM/análise
 - [ ] **NEW-07**: Slide gráfico com insight sobre estudantes (qual gráfico será definido durante execução)
 
@@ -73,10 +73,8 @@ Hipóteses até serem implementadas e validadas no browser.
 - [ ] **NEW-09**: Slide Code-DKT — funcionamento sucinto (sem aprofundar), predecessores (Piech DKT, BKT), vetorização code2vec via javalang
 - [ ] **NEW-10**: Slide exemplo de AST (.svg já existente no projeto)
 - [ ] **NEW-11**: Slide resultados Code-DKT + comparação com Shi (paper)
-- [ ] **NEW-12**: Slide Duan (2025) — extração automática de KCs via LLM, importância dos KCs semânticos
-- [ ] **NEW-13**: Slide pipeline KCs semânticos baseado em Report 4 (`/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`); prompts inspirados no apêndice de Duan
+- [ ] **NEW-12**: Slide Duan (2025) + pipeline KCs semânticos — Duan introduz LLM-para-KC; nosso pipeline (Report 4 em `/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`, prompts inspirados no apêndice de Duan) implementa a ideia em 3 etapas; tudo num único slide (funde NEW-12 e NEW-13 originais)
 - [ ] **NEW-14**: Slide gráfico ou imagem dos KCs semânticos gerados
-- [ ] **NEW-15**: Slide aplicando KCs semânticos a um estudante/assignment/problem específico (formato a pensar juntos)
 
 **Fechamento (retomada problema → evidência):**
 - [ ] **NEW-16**: Slide retomando Martins p2 — comparar dificuldades reportadas com KCs semânticos gerados
@@ -84,8 +82,7 @@ Hipóteses até serem implementadas e validadas no browser.
 - [ ] **NEW-18**: Slide com gráfico Code-DKT (`slide-fig` existente, validar e reformatar) mostrando progressão por dificuldade
 
 **Fase 4 EDM (Implantação no TCC 2):**
-- [ ] **NEW-19**: Slide proposta da ferramenta — baseada em `docs/tcc2_prototipo.html`
-- [ ] **NEW-20**: Slide pipeline da ferramenta — entrada ProgSnap2, extração automática de KCs, validação pelo professor (adicionar, modificar, excluir), preparação, Code-DKT, dashboard
+- [ ] **NEW-19**: Slide proposta da ferramenta TCC 2 + pipeline mini-horizontal — baseada em `docs/tcc2_prototipo.html`; sequência (entrada de submissões dos alunos → extração de KCs → professor valida → preparação → Code-DKT → dashboard) sem detalhar cada etapa; pipeline espelha o que já foi mostrado nas fases 2-4 (funde NEW-19 e NEW-20 originais)
 - [ ] **NEW-21**: Slide dashboard — respostas de código por aluno, predição de conhecimento por estudante, dificuldade da turma por KC
 
 **Encerramento:**
@@ -94,8 +91,9 @@ Hipóteses até serem implementadas e validadas no browser.
 **Decisões pendentes:**
 - [ ] **PENDING-01**: Decidir conteúdo e forma do slide Agenda (provavelmente as 4 fases da EDM como sumário, mas a definir depois de montar os slides do meio)
 - [ ] **PENDING-02**: Definir qual gráfico de insight de estudantes entra no slide NEW-07
-- [ ] **PENDING-03**: Definir formato do slide NEW-15 (valor de KCs semânticos em caso concreto)
 - [ ] **PENDING-04**: Validar o gráfico Code-DKT antes do NEW-18 (memória `project_codedkt_kc_difficulty` indica re-treino por desalinhamento do `pred_df` salvo)
+
+**Removidos de v1 em 2026-05-27 (feedback orientadora):** NEW-13 (pipeline KCs, fundido em NEW-12), NEW-15 (KCs aplicados a caso concreto, absorvido em CLOSE-01/02 via Martins return), NEW-20 (pipeline ferramenta, fundido em NEW-19), PENDING-03 (vinculado a NEW-15 cortado).
 
 ### Out of Scope
 
@@ -135,7 +133,7 @@ Hipóteses até serem implementadas e validadas no browser.
 ## Constraints
 
 - **Timeline**: defesa em ~1 semana (deadline absoluto). Cortar antes de adicionar.
-- **Duração da apresentação**: 10 minutos máximo. ~29 slides projetados implicam ritmo de ~20s por slide; correlatos precisam ser objetivos.
+- **Duração da apresentação**: 10 minutos máximo. ~32 slides projetados (após reduções de 2026-05-27) implicam ritmo médio de ~18s por slide; CLOSE-01/02/03 (Martins return) ganham 30-40s cada por serem eixo prioritário; correlatos e MARKERs ficam abaixo da média para compensar.
 - **Stack**: reveal.js + HTML/CSS puro (sem build system). Conforme `apresentacao/STYLE.md`.
 - **Estilo visual obrigatório** (definido em `apresentacao/STYLE.md`):
   - Slides 1280×720
@@ -183,6 +181,7 @@ Este é um trabalho científico. Os princípios abaixo são vinculantes durante 
 | Marcadores de fases EDM concluídas entre seções | Reforça a estrutura metodológica e dá ritmo à apresentação; estética com referência a computação a definir | — Pending |
 | Agenda atual a refazer; conteúdo definitivo decidido depois | A agenda existente lista 8 seções genéricas (Introdução, Trabalhos Correlatos, etc.) que não casam mais com a nova estrutura | — Pending |
 | Modo de trabalho `interactive`, granularidade `coarse`, plano e checagem habilitados, verifier desabilitado, perfil `quality` | Defesa próxima exige cuidado nos planos mas pouco overhead; verificação visual é mais rápida que agente verifier | ✓ Confirmado |
+| Retomada Martins (CLOSE-01/02/03) é o eixo prioritário da defesa; TCC 2 espelha as fases anteriores sem repetir o pipeline; ProgSnap2 é nominalmente único em INTRO-01 | Feedback da orientadora 2026-05-27: 10 min é apertado, cortar detalhamentos, validar tudo no Martins antes de mostrar a ferramenta. Implicações: MODEL-06 fundido em MODEL-05 (Duan + pipeline), TOOL-02 fundido em TOOL-01 (proposta + pipeline mini-horizontal), MODEL-08 + PENDING-03 cortados, EDA-01 sem ProgSnap2, "entrada de submissões dos alunos" em vez de "entrada ProgSnap2" nas menções à ferramenta | ✓ Confirmado |
 
 ## Evolution
 

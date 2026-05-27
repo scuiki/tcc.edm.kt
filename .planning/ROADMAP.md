@@ -3,7 +3,7 @@
 **Created:** 2026-05-27
 **Mode:** Vertical MVP (cada fase entrega slides funcionais ponta a ponta no browser)
 **Total phases:** 5
-**Total v1 requirements mapped:** 37 / 37
+**Total v1 requirements mapped:** 33 / 33 (reduzido de 37 em 2026-05-27, ver REQUIREMENTS.md "Nota 2026-05-27")
 
 ## Visão geral
 
@@ -14,8 +14,8 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 | 1 | Reformatação da base | Slides existentes ajustados ao novo padrão de cabeçalho, com Zorić fundido e Corbett removido | 7 | mvp |
 | 2 | Intro, Dataset e Problema (Fase 1 EDM) | Novos slides da abertura narrativa: Yağcí ponte → ProgSnap2 → CSEDM → Shi problema, fechando com marcador da Fase 1 EDM | 4 | mvp |
 | 3 | EDA e Pré-processamento (Fase 2 EDM) | Slides de análise exploratória, pré-processamento e um insight visual sobre os estudantes, fechando com marcador da Fase 2 EDM | 5 | mvp |
-| 4 | Modelagem e Avaliação (Fase 3 EDM) | Code-DKT + KCs semânticos via Duan + retomada de Martins (problema → evidência), fechando com marcador da Fase 3 EDM | 14 | mvp |
-| 5 | Implantação, Agenda e Encerramento (Fase 4 EDM) | Proposta da ferramenta TCC 2, dashboard, marcador final, agradecimento e revisão da Agenda | 7 | mvp |
+| 4 | Modelagem e Avaliação (Fase 3 EDM) | Code-DKT + KCs semânticos via Duan + retomada de Martins (problema → evidência, eixo prioritário da defesa), fechando com marcador da Fase 3 EDM | 11 | mvp |
+| 5 | Implantação, Agenda e Encerramento (Fase 4 EDM) | Proposta da ferramenta TCC 2 (espelha as fases anteriores sem repetir), dashboard, marcador final, agradecimento e revisão da Agenda | 6 | mvp |
 
 ## Detalhamento das fases
 
@@ -45,45 +45,43 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 5. Sequência completa do deck (REFORMAT base + nova abertura) navega do início ao slide MARKER-01 sem quebra
 
 ### Phase 3: EDA e Pré-processamento (Fase 2 EDM)
-**Goal:** Adicionar os slides de análise exploratória e pré-processamento do dataset, incluindo um gráfico que comunica um insight legítimo sobre os estudantes. Fecha com o marcador da Fase 2 EDM concluída.
+**Goal:** Adicionar os slides de análise exploratória e pré-processamento do dataset, incluindo um gráfico que comunica um insight legítimo sobre os estudantes. Fecha com o marcador da Fase 2 EDM concluída. ProgSnap2 NÃO é citado aqui (já introduzido em INTRO-01).
 **Mode:** mvp
 **Requirements**: EDA-01, EDA-02, EDA-03, MARKER-02, PENDING-02
 **Success Criteria**:
-1. Slide EDA-01 apresenta distribuição e organização do CSEDM com números corretos (validados em notebook ou memórias)
+1. Slide EDA-01 apresenta distribuição e organização do CSEDM (n estudantes, n problemas, n eventos) com números corretos (validados em notebook ou memórias); sem repetir formato ProgSnap2
 2. Slide EDA-02 justifica a aproximação ao protocolo de Shi como parâmetro de comparação, listando etapas concretas de pré-processamento aplicadas
 3. Slide EDA-03 exibe um gráfico com insight sobre os estudantes; gráfico escolhido junto com o autor (PENDING-02 resolvido) e fonte de dados validada
 4. Slide MARKER-02 mostra "Preparação dos Dados" sinalizado como concluído
 5. Deck navega do início até MARKER-02 sem quebra
 
 ### Phase 4: Modelagem e Avaliação (Fase 3 EDM)
-**Goal:** Apresentar Code-DKT (modelo escolhido) com cronologia de antecessores, AST, atenção, resultados e comparação com Shi. Em seguida, apresentar a extração automática de KCs semânticos via LLM (Duan), pipeline e aplicação a caso concreto. Encerrar retomando Martins (CLOSE-01/02/03) para amarrar problema → evidência, e fechar com o marcador da Fase 3 EDM concluída.
+**Goal:** Apresentar Code-DKT (modelo escolhido) com cronologia de antecessores, AST, atenção, resultados e comparação com Shi. Em seguida, apresentar a extração automática de KCs semânticos via LLM (Duan, com pipeline em 3 etapas no MESMO slide). Encerrar retomando Martins (CLOSE-01/02/03, EIXO PRIORITÁRIO DA DEFESA) para amarrar problema → evidência, e fechar com o marcador da Fase 3 EDM concluída. NÃO repetir aplicação concreta de KC antes do CLOSE (absorvido em CLOSE-01/02).
 **Mode:** mvp
-**Requirements**: MODEL-01, MODEL-02, MODEL-03, MODEL-04, MODEL-05, MODEL-06, MODEL-07, MODEL-08, CLOSE-01, CLOSE-02, CLOSE-03, MARKER-03, PENDING-03, PENDING-04
+**Requirements**: MODEL-01, MODEL-02, MODEL-03, MODEL-04, MODEL-05, MODEL-07, CLOSE-01, CLOSE-02, CLOSE-03, MARKER-03, PENDING-04
 **Success Criteria**:
 1. Slide MODEL-01 cita predecessores na cronologia (Corbett & Anderson 1995 BKT, Piech 2015 DKT) e introduz Code-DKT (Shi 2022) sucintamente; vetorização code2vec via javalang mencionada
 2. Slide MODEL-02 inclui a `.svg` de AST de exemplo já existente no projeto
 3. Slide MODEL-03 reaproveita o `slide-code` ("O que o Code-DKT olha") com cabeçalho novo
 4. Slide MODEL-04 mostra os resultados que tivemos lado a lado com os resultados de Shi (memória `project_codedkt_results`: A439 first_auc=72.55%, dentro da margem ±3% do paper)
-5. Slide MODEL-05 introduz Duan (2025) e a importância dos KCs semânticos; citação conferida em `docs/AutomatedKC.pdf` ou `docs/2025.EDM.short-papers.83.pdf`
-6. Slide MODEL-06 apresenta a pipeline de extração de KCs semânticos baseada no Report 4 (`/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`); nota privada sobre ausência de ASTs nos prompts mantida fora do slide (só falar se a banca perguntar)
-7. Slides MODEL-07 e MODEL-08 mostram os KCs semânticos gerados (gráfico/imagem) e seu valor em caso concreto (estudante/assignment/problem); formato do MODEL-08 decidido durante execução (PENDING-03 resolvido)
-8. Slides CLOSE-01 (Martins p2 reposicionado), CLOSE-02 (Martins p3 reposicionado) e CLOSE-03 (gráfico Code-DKT por dificuldade) fecham a sequência de modelagem amarrando o problema do Martins com a evidência dos nossos KCs e do Code-DKT
-9. Gráfico do CLOSE-03 validado antes da inclusão (PENDING-04 resolvido); se o `pred_df` existente não estiver alinhado, decidir entre regerar ou usar gráfico alternativo
-10. Slide MARKER-03 mostra "Modelagem e Avaliação" sinalizado como concluído
-11. Deck navega do início até MARKER-03 sem quebra
+5. Slide MODEL-05 (fundido) introduz Duan (2025) e o pipeline de KCs semânticos baseado em Report 4 (`/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`) num único slide; citação Duan conferida em `docs/AutomatedKC.pdf` ou `docs/2025.EDM.short-papers.83.pdf`; nota privada sobre ausência de ASTs nos prompts mantida fora do slide
+6. Slide MODEL-07 mostra os KCs semânticos gerados pela pipeline (gráfico/imagem)
+7. Slides CLOSE-01 (Martins p2 reposicionado), CLOSE-02 (Martins p3 reposicionado) e CLOSE-03 (gráfico Code-DKT por dificuldade) fecham a sequência de modelagem amarrando o problema do Martins com a evidência dos nossos KCs e do Code-DKT; estes 3 slides são o eixo prioritário da defesa (30-40s cada)
+8. Gráfico do CLOSE-03 validado antes da inclusão (PENDING-04 resolvido); se o `pred_df` existente não estiver alinhado, decidir entre regerar ou usar gráfico alternativo
+9. Slide MARKER-03 mostra "Modelagem e Avaliação" sinalizado como concluído
+10. Deck navega do início até MARKER-03 sem quebra
 
 ### Phase 5: Implantação, Agenda e Encerramento (Fase 4 EDM)
-**Goal:** Apresentar a proposta da ferramenta TCC 2 (baseada em `docs/tcc2_prototipo.html`), o pipeline e o dashboard. Fechar com o marcador da Fase 4 EDM, agradecimento, e revisar a Agenda inicial para refletir a estrutura final entregue.
+**Goal:** Apresentar a proposta da ferramenta TCC 2 (baseada em `docs/tcc2_prototipo.html`) com pipeline mini-horizontal num único slide e o dashboard. A ferramenta ESPELHA o que já foi mostrado nas fases anteriores; não detalha cada etapa. Fechar com o marcador da Fase 4 EDM, agradecimento, e revisar a Agenda inicial para refletir a estrutura final entregue.
 **Mode:** mvp
-**Requirements**: TOOL-01, TOOL-02, TOOL-03, MARKER-04, END-01, AGENDA-01, PENDING-01
+**Requirements**: TOOL-01, TOOL-03, MARKER-04, END-01, AGENDA-01, PENDING-01
 **Success Criteria**:
-1. Slide TOOL-01 apresenta a ferramenta proposta para o TCC 2, baseada em `docs/tcc2_prototipo.html`
-2. Slide TOOL-02 mostra o pipeline completo: entrada ProgSnap2 do professor → extração automática de KCs → professor valida → preparação → Code-DKT → dashboard
-3. Slide TOOL-03 mostra o dashboard com respostas de código da turma, predição por estudante e dificuldade por KC
-4. Slide MARKER-04 mostra "Implantação" sinalizado como concluído
-5. Slide END-01 de agradecimento encerra a apresentação
-6. Slide AGENDA-01 revisado reflete a estrutura final (PENDING-01 resolvido); decisão entre "4 fases EDM como sumário" ou outra estrutura formalizada
-7. Deck inteiro navega do primeiro ao último slide sem quebra; em ritmo natural de defesa, tempo estimado dentro de 10 minutos
+1. Slide TOOL-01 (fundido) apresenta a ferramenta proposta para o TCC 2 (baseada em `docs/tcc2_prototipo.html`) E o pipeline mini-horizontal (entrada de submissões dos alunos → extração de KCs → professor valida → preparação → Code-DKT → dashboard) num único slide; sem detalhar cada etapa (já apareceram nas fases 2-4); sem mencionar ProgSnap2 nominalmente
+2. Slide TOOL-03 mostra o dashboard com respostas de código da turma, predição por estudante e dificuldade por KC
+3. Slide MARKER-04 mostra "Implantação" sinalizado como concluído
+4. Slide END-01 de agradecimento encerra a apresentação
+5. Slide AGENDA-01 revisado reflete a estrutura final (PENDING-01 resolvido); decisão entre "4 fases EDM como sumário" ou outra estrutura formalizada
+6. Deck inteiro navega do primeiro ao último slide sem quebra; em ritmo natural de defesa, tempo estimado dentro de 10 minutos
 
 ## Traceability — atualização
 
@@ -110,24 +108,20 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 | MODEL-03 | Phase 4 |
 | MODEL-04 | Phase 4 |
 | MODEL-05 | Phase 4 |
-| MODEL-06 | Phase 4 |
 | MODEL-07 | Phase 4 |
-| MODEL-08 | Phase 4 |
 | CLOSE-01 | Phase 4 |
 | CLOSE-02 | Phase 4 |
 | CLOSE-03 | Phase 4 |
 | MARKER-03 | Phase 4 |
-| PENDING-03 | Phase 4 |
 | PENDING-04 | Phase 4 |
 | TOOL-01 | Phase 5 |
-| TOOL-02 | Phase 5 |
 | TOOL-03 | Phase 5 |
 | MARKER-04 | Phase 5 |
 | END-01 | Phase 5 |
 | AGENDA-01 | Phase 5 |
 | PENDING-01 | Phase 5 |
 
-**Coverage:** 37 / 37 requirements mapped (100%)
+**Coverage:** 33 / 33 requirements mapped (100%; v1 reduzido de 37 para 33 em 2026-05-27)
 
 ## Próximos passos
 

@@ -7,6 +7,8 @@
 
 Cada requirement representa um slide a ser entregue ou uma reformatação a aplicar em `apresentacao/index.html`. Categorias correspondem aos blocos narrativos da apresentação.
 
+**Nota 2026-05-27 (consolidação por feedback da orientadora):** Reduções aplicadas para caber em 10 min, priorizar a retomada Martins (CLOSE-01/02/03), garantir ProgSnap2 único e TCC 2 sem repetir o pipeline já mostrado. Mudanças: `MODEL-06` fundido em `MODEL-05` (Duan + pipeline); `TOOL-02` fundido em `TOOL-01` (proposta + pipeline mini-horizontal); `MODEL-08` e `PENDING-03` movidos para v2 (caso concreto de KC absorvido por CLOSE-01/02). v1: 37 → 33 reqs.
+
 ### REFORMAT — Reformatações de slides já existentes
 
 - [ ] **REFORMAT-01**: Slide Martins p1 reformatado com cabeçalho `> introdução` (substitui tópico "trabalhos correlatos" + título "Martins, Marin e Alves (2024)"); autor mantido apenas em rodapé "Fonte:"
@@ -38,7 +40,7 @@ Cada requirement representa um slide a ser entregue ou uma reformatação a apli
 
 ### EDA — Slides novos de Fase 2 EDM (Preparação dos dados)
 
-- [ ] **EDA-01**: Slide EDA — distribuição e organização do dataset CSEDM; referenciar formato ProgSnap2 quando cabível; mencionar que encontramos a base via Shi
+- [ ] **EDA-01**: Slide EDA — distribuição e organização do dataset CSEDM (n estudantes, n problemas, n eventos); mencionar que encontramos a base via Shi. NÃO repetir formato ProgSnap2 (já introduzido em INTRO-01).
 - [ ] **EDA-02**: Slide pré-processamento — justificar aproximação ao protocolo de Shi como parâmetro de comparação ("benchmark") mas com ênfase em EDM e análise; apresentar etapas de pré-processamento aplicadas
 - [ ] **EDA-03**: Slide gráfico com insight sobre estudantes (qual gráfico será decidido durante execução, ver PENDING-02)
 
@@ -48,10 +50,8 @@ Cada requirement representa um slide a ser entregue ou uma reformatação a apli
 - [ ] **MODEL-02**: Slide exemplo de AST (.svg já existente no projeto)
 - [ ] **MODEL-03**: Slide visualização Code-DKT em código (a partir do `slide-code` existente, reformatado)
 - [ ] **MODEL-04**: Slide resultados Code-DKT + comparação direta com Shi et al. (2022)
-- [ ] **MODEL-05**: Slide Duan (2025) como fonte — extração automática de KCs via LLM; importância dos KCs semânticos para interpretabilidade
-- [ ] **MODEL-06**: Slide pipeline de extração de KCs semânticos — baseado em Report 4 (`/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`); prompts inspirados no apêndice de Duan; nota privada (NÃO no slide): ASTs não inclusas nos prompts, falar apenas se a banca perguntar
+- [ ] **MODEL-05**: Slide Duan (2025) + pipeline de KCs semânticos — Duan introduz extração automática de KCs via LLM; nosso pipeline (baseado em Report 4 em `/home/leokuntz/Documents/Facens/TCC/Reports/Report 4/...pdf`, prompts inspirados no apêndice de Duan) implementa essa ideia em 3 etapas; importância dos KCs semânticos para interpretabilidade. Nota privada (NÃO no slide): ASTs não inclusas nos prompts, falar apenas se a banca perguntar. (Funde MODEL-05 e MODEL-06 originais.)
 - [ ] **MODEL-07**: Slide gráfico ou imagem dos KCs semânticos gerados pela pipeline
-- [ ] **MODEL-08**: Slide aplicando KCs semânticos a um caso concreto (estudante, assignment ou problema); formato a pensar juntos durante execução, ver PENDING-03
 
 ### CLOSE — Fechamento (retomada problema → evidência)
 
@@ -61,8 +61,7 @@ Cada requirement representa um slide a ser entregue ou uma reformatação a apli
 
 ### TOOL — Fase 4 EDM (Implantação, proposta TCC 2)
 
-- [ ] **TOOL-01**: Slide proposta da ferramenta — baseada em `docs/tcc2_prototipo.html`
-- [ ] **TOOL-02**: Slide pipeline da ferramenta — entrada ProgSnap2 do professor → extração automática de KCs → professor valida (adicionar, modificar, excluir) → preparação dos dados → aplicação Code-DKT → dashboard
+- [ ] **TOOL-01**: Slide proposta da ferramenta TCC 2 — baseada em `docs/tcc2_prototipo.html`; inclui sequência mini-horizontal das etapas (entrada de submissões dos alunos → extração automática de KCs → professor valida → preparação → Code-DKT → dashboard) sem detalhar cada uma; pipeline espelha o que já foi mostrado nas fases 2-4, não repete conteúdo. (Funde TOOL-01 e TOOL-02 originais; "entrada de submissões dos alunos" substitui "entrada ProgSnap2 do professor" porque ProgSnap2 nominalmente só em INTRO-01.)
 - [ ] **TOOL-03**: Slide dashboard — respostas de código da turma, predição de conhecimento por estudante, dificuldade da turma por KC; auxilia o professor a direcionar aulas
 
 ### END — Encerramento
@@ -77,7 +76,6 @@ Cada requirement representa um slide a ser entregue ou uma reformatação a apli
 
 - [ ] **PENDING-01**: Decidir conteúdo e forma do slide Agenda
 - [ ] **PENDING-02**: Definir qual gráfico de insight de estudantes entra no slide EDA-03
-- [ ] **PENDING-03**: Definir formato do slide MODEL-08 (valor de KCs semânticos em caso concreto)
 - [ ] **PENDING-04**: Validar o gráfico Code-DKT antes de incluir no CLOSE-03 (memória `project_codedkt_kc_difficulty` indica re-treino por desalinhamento do `pred_df` salvo; precisa conferir se é bloqueante ou se o gráfico existente serve)
 
 ## v2 Requirements
@@ -94,6 +92,13 @@ Deferidos para depois da defesa.
 
 - **NB10-01**: Re-treino do Code-DKT com `pred_df` alinhado para gerar curva de dificuldade por KC consistente
 - **NB10-02**: Análise AFM (Additive Factor Model) como problema distinto de oportunidade, se decidido prosseguir
+
+### FUSED — Removidos de v1 em 2026-05-27 (feedback orientadora)
+
+- **MODEL-06 (fundido em MODEL-05)**: pipeline de extração de KCs semânticos baseado em Report 4. Conteúdo absorvido no MODEL-05 expandido.
+- **MODEL-08 (cortado, eventualmente recoverable)**: caso concreto de KCs semânticos por estudante/assignment/problema. Aplicação dos KCs já aparece em CLOSE-01/02 via Martins return.
+- **PENDING-03 (some com MODEL-08)**: definição do formato do slide MODEL-08.
+- **TOOL-02 (fundido em TOOL-01)**: pipeline da ferramenta. Pipeline mini-horizontal absorvido no TOOL-01 expandido; detalhamento por etapa não repete porque já apareceu nas fases 2-4.
 
 ### SRC — srcML-DKT Chat 2
 
@@ -150,27 +155,24 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | MODEL-02 | Phase 4 | Pending |
 | MODEL-03 | Phase 4 | Pending |
 | MODEL-04 | Phase 4 | Pending |
-| MODEL-05 | Phase 4 | Pending |
-| MODEL-06 | Phase 4 | Pending |
+| MODEL-05 | Phase 4 | Pending (funde antigo MODEL-05+MODEL-06) |
 | MODEL-07 | Phase 4 | Pending |
-| MODEL-08 | Phase 4 | Pending |
 | CLOSE-01 | Phase 4 | Pending |
 | CLOSE-02 | Phase 4 | Pending |
 | CLOSE-03 | Phase 4 | Pending |
-| TOOL-01 | Phase 5 | Pending |
-| TOOL-02 | Phase 5 | Pending |
+| TOOL-01 | Phase 5 | Pending (funde antigo TOOL-01+TOOL-02) |
 | TOOL-03 | Phase 5 | Pending |
 | END-01 | Phase 5 | Pending |
 | AGENDA-01 | Phase 5 | Pending |
 | PENDING-01 | Phase 5 | Pending |
 | PENDING-02 | Phase 3 | Pending |
-| PENDING-03 | Phase 4 | Pending |
 | PENDING-04 | Phase 4 | Pending |
 
 **Coverage:**
-- v1 requirements: 37 total
-- Mapped to phases: 37
+- v1 requirements: 33 total (era 37, reduzido em 2026-05-27 conforme feedback da orientadora)
+- Mapped to phases: 33
 - Unmapped: 0 ✓
+- Removidos / fundidos: MODEL-06 (fundido em MODEL-05), MODEL-08 (movido para v2), PENDING-03 (movido para v2 com MODEL-08), TOOL-02 (fundido em TOOL-01)
 
 ---
 *Requirements defined: 2026-05-27*
