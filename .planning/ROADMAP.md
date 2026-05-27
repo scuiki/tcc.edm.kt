@@ -9,13 +9,13 @@
 
 Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma entregando um conjunto de slides que carrega no browser sem quebra. A fase 1 prepara a base (slides existentes ajustados); fases 2 a 5 cobrem as 4 fases da EDM na ordem da apresentação. Validação visual no browser a cada fase concluída.
 
-| # | Fase | Goal | Reqs | Mode |
-|---|---|---|---|---|
-| 1 | Reformatação da base | Slides existentes ajustados ao novo padrão de cabeçalho, com Zorić fundido e Corbett removido | 7 | mvp |
-| 2 | Intro, Dataset e Problema (Fase 1 EDM) | Novos slides da abertura narrativa: Yağcí ponte → "nosso dataset" (CSEDM em ProgSnap2 fundido) → Shi problema, fechando com marcador da Fase 1 EDM | 3 | mvp |
-| 3 | EDA e Pré-processamento (Fase 2 EDM) | Slides de análise exploratória, pré-processamento e um insight visual sobre os estudantes, fechando com marcador da Fase 2 EDM | 5 | mvp |
-| 4 | Modelagem e Avaliação (Fase 3 EDM) | Code-DKT (funcionamento + AST inset, fundidos) + KCs semânticos via Duan + retomada de Martins (problema → evidência, eixo prioritário da defesa), fechando com marcador da Fase 3 EDM | 9 | mvp |
-| 5 | Implantação, Agenda e Encerramento (Fase 4 EDM) | Proposta da ferramenta TCC 2 (espelha as fases anteriores sem repetir), dashboard, marcador final, agradecimento e revisão da Agenda | 6 | mvp |
+| # | Fase | Goal | Reqs | Mode | Status |
+|---|---|---|---|---|---|
+| 1 | Reformatação da base | Slides existentes ajustados ao novo padrão de cabeçalho, com Zorić fundido e Corbett removido | 7 | mvp | Complete ✓ 2026-05-27 |
+| 2 | Intro, Dataset e Problema (Fase 1 EDM) | Novos slides da abertura narrativa: Yağcí ponte → "nosso dataset" (CSEDM em ProgSnap2 fundido) → Shi problema, fechando com marcador da Fase 1 EDM | 3 | mvp | Pending |
+| 3 | EDA e Pré-processamento (Fase 2 EDM) | Slides de análise exploratória, pré-processamento e um insight visual sobre os estudantes, fechando com marcador da Fase 2 EDM | 5 | mvp | Pending |
+| 4 | Modelagem e Avaliação (Fase 3 EDM) | Code-DKT (funcionamento + AST inset, fundidos) + KCs semânticos via Duan + retomada de Martins (problema → evidência, eixo prioritário da defesa), fechando com marcador da Fase 3 EDM | 9 | mvp | Pending |
+| 5 | Implantação, Agenda e Encerramento (Fase 4 EDM) | Proposta da ferramenta TCC 2 (espelha as fases anteriores sem repetir), dashboard, marcador final, agradecimento e revisão da Agenda | 6 | mvp | Pending |
 
 ## Detalhamento das fases
 
@@ -40,7 +40,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 - [x] 01-04-PLAN.md — REFORMAT-01: cabeçalho > introdução no Martins p1 ✓ 2026-05-27 (commit `c31658c`)
 - [x] 01-05-PLAN.md — REFORMAT-02: cabeçalho > as quatro fases da edm no slide-phases ✓ 2026-05-27 (commit `23eed8b`)
 - [x] 01-06-PLAN.md — REFORMAT-04 + REFORMAT-05: reformatar e mover os 5 slides finais (D-15..D-17) ✓ 2026-05-27 (commits `590ae34`, `2a86049`)
-- [ ] 01-07-PLAN.md — STYLE.md (D-21) + CSS cleanup opcional + checkpoint humano final
+- [x] 01-07-PLAN.md — STYLE.md (D-21) + CSS cleanup opcional + checkpoint humano final ✓ 2026-05-27 (commits `907a4b5`, `30ba911`, `9224d5f`)
 
 ### Phase 2: Intro, Dataset e Problema (Fase 1 EDM)
 **Goal:** Adicionar os novos slides da abertura narrativa que estabelecem o problema: o gancho do Yağcí leva ao slide "nosso dataset" (CSEDM armazenado em ProgSnap2, fundidos), depois ao problema apontado por Shi (KT binário ignora código). Fecha com o marcador da Fase 1 EDM concluída. Voz: paráfrase indireta com autor parentético; sem citação direta literal nestes 3 slides novos.
