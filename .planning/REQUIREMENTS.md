@@ -18,7 +18,7 @@ v1: 37 → 33 → 30 reqs.
 
 - [ ] **REFORMAT-01**: Slide Martins p1 reformatado com cabeçalho `> introdução` (substitui tópico "trabalhos correlatos" + título "Martins, Marin e Alves (2024)"); autor mantido apenas em rodapé "Fonte:"
 - [ ] **REFORMAT-02**: Slide Zorić p3 (`slide-phases`) reformatado com cabeçalho `> as quatro fases da edm`; conteúdo preservado
-- [ ] **REFORMAT-03**: Slide Yağcí (consolidado de p1 + p2 se possível) reformatado com cabeçalho `> da edm ao knowledge tracing`; conteúdo precisa puxar o gancho "acompanha o conhecimento do estudante ao longo do tempo, a cada nova tentativa". **Voz:** substituir a citação direta atual (Yağcı, 2022, p. 2, tradução nossa) por paráfrase centrada em "nós seguimos o passo seguinte" (ex.: "Yağcı (2022) mostrou o valor de prever desempenho acadêmico para identificar alunos em risco. Nós seguimos o passo seguinte: em vez de uma previsão única, acompanhamos o conhecimento ao longo do tempo via knowledge tracing.").
+- [x] **REFORMAT-03**: Slide Yağcí (consolidado de p1 + p2 se possível) reformatado com cabeçalho `> da edm ao knowledge tracing`; conteúdo precisa puxar o gancho "acompanha o conhecimento do estudante ao longo do tempo, a cada nova tentativa". **Voz:** substituir a citação direta atual (Yağcı, 2022, p. 2, tradução nossa) por paráfrase centrada em "nós seguimos o passo seguinte" (ex.: "Yağcı (2022) mostrou o valor de prever desempenho acadêmico para identificar alunos em risco. Nós seguimos o passo seguinte: em vez de uma previsão única, acompanhamos o conhecimento ao longo do tempo via knowledge tracing."). ✓ 2026-05-27 (plan 01-03, commit `b60439e`)
 - [ ] **REFORMAT-04**: Slides Martins p2 ("O problema") e Martins p3 ("Dentro dos conceitos técnicos") movidos para o bloco final da apresentação; cabeçalho da seção a definir (provavelmente `> retomando o problema` ou similar). **Voz:** **MANTER as citações diretas** atuais (Martins; Marin; Alves, 2024, p. 19 e p. 20) — os números "mencionada por 13 autores" e "citado por 10 autores" SÃO o argumento quantitativo do estudo; paráfrase enfraqueceria a força retórica. Esta é a exceção legítima à política de paráfrase como padrão.
 - [ ] **REFORMAT-05**: Slides `slide-fig` (curva de aprendizado Code-DKT), `slide-code` (atenção Code-DKT) e `slide-kcfig` (KCs KCGen-KT) reformatados para o bloco de modelagem/fechamento com cabeçalhos novos
 
@@ -144,7 +144,7 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 |---|---|---|
 | REFORMAT-01 | Phase 1 | Pending |
 | REFORMAT-02 | Phase 1 | Pending |
-| REFORMAT-03 | Phase 1 | Pending |
+| REFORMAT-03 | Phase 1 | Completed (`b60439e`, 2026-05-27) |
 | REFORMAT-04 | Phase 1 | Pending |
 | REFORMAT-05 | Phase 1 | Pending |
 | MERGE-01 | Phase 1 | Completed (`f9907b8`, 2026-05-27) |

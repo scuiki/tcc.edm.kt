@@ -3,18 +3,18 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-last_updated: "2026-05-27T18:57:48Z"
+last_updated: "2026-05-27T19:03:13Z"
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 7
-  completed_plans: 2
-  percent: 28
+  completed_plans: 3
+  percent: 42
 ---
 
 # State: Apresentação TCC 1
 
-**Last updated:** 2026-05-27 após execução do plan 01-02 (MERGE-01 Zorić fundido)
+**Last updated:** 2026-05-27 após execução do plan 01-03 (REFORMAT-03 Yağcı fundido)
 
 ## Project Reference
 
@@ -28,7 +28,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 | # | Phase | Status |
 |---|---|---|
-| 1 | Reformatação da base | In Progress (2 / 7 plans) |
+| 1 | Reformatação da base | In Progress (3 / 7 plans) |
 | 2 | Intro, Dataset e Problema (Fase 1 EDM) | Pending |
 | 3 | EDA e Pré-processamento (Fase 2 EDM) | Pending |
 | 4 | Modelagem e Avaliação (Fase 3 EDM) | Pending |
@@ -40,6 +40,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 |---|---|---|---|
 | 01-01 | REMOVE-01 | `ed03327`, `91b9675` | Working tree snapshot (commit-wip) + delete dos 2 slides Corbett |
 | 01-02 | MERGE-01 | `f9907b8` | Fundir Zorić p1+p2 num único slide com cabeçalho `> mineração de dados educacionais`; 2 citações diretas substituídas por paráfrase única em voz própria (D-26); section count cai de 14 para 13 |
+| 01-03 | REFORMAT-03 | `b60439e` | Fundir Yağcı p1+p2 num único slide `slide-related slide-bridge` com cabeçalho `> da edm ao knowledge tracing`; citação direta p.2 substituída por paráfrase D-27 ("acompanhamos o conhecimento ao longo do tempo"); `.bridge-seq` (3 passos) preservada literalmente; section count cai de 13 para 12 |
 
 ## Workflow
 
@@ -66,4 +67,4 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 /gsd-execute-phase 1
 ```
 
-Continuar a fase 1 com o plan 01-03 (REFORMAT-03 Yağcí p1+p2 fundido com paráfrase D-27).
+Continuar a fase 1 com o plan 01-04 (REFORMAT-01 Martins p1: cabeçalho `> introdução`).
