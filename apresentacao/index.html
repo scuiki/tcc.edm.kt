@@ -146,23 +146,6 @@
         </div>
       </section>
 
-      <!-- ============ SLIDE · INTRO-01 · O dataset CSEDM em ProgSnap2 (Price, 2020) ============ -->
-      <section data-background-color="#F1F6FB">
-        <div class="deck-slide slide-related">
-          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
-
-          <p class="deck-topic"><span class="ps1">&gt;</span>o dataset csedm<span class="caret blink"></span></p>
-
-          <p class="rel-lead">Nosso dataset é o <b>CSEDM</b>, coletado de um curso introdutório CS1 em Java, durante a primavera de 2019 e divulgado na competição CSEDM 2021. Armazenado em <b>ProgSnap2</b> (Price, 2020), um formato de base de dados que registra cada evento de programação do estudante (edição, compilação, execução), preservando o histórico completo das tentativas a cada problema.</p>
-
-          <p class="rel-lead intro-stats-line"><b>413</b> estudantes, <b>5</b> assignments com <b>10</b> problemas cada, e <b>201 mil</b> eventos.</p>
-
-          <p class="rel-lead intro-cols-line">Cada evento traz aluno (<code>SubjectID</code>), problema (<code>ProblemID</code>), tipo (<code>EventType</code>), nota (<code>Score</code>), timestamp (<code>ServerTimestamp</code>) e snapshot do código (<code>CodeStateID</code>).</p>
-
-          <p class="rel-cite">Fonte: Price (2020); CSEDM 2021.</p>
-        </div>
-      </section>
-
       <!-- ============ SLIDE · INTRO-03a · O problema do KT binario (Shi et al., 2022) ============ -->
       <section data-background-color="#F1F6FB">
         <div class="deck-slide slide-related">
@@ -239,6 +222,68 @@
           </div>
 
           <p class="rel-cite">Fonte: adaptado de Zorić (2020).</p>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE · INTRO-01 · O dataset CSEDM em ProgSnap2 (Price, 2020) ============ -->
+      <section data-background-color="#F1F6FB">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+
+          <p class="deck-topic"><span class="ps1">&gt;</span>o dataset csedm<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Nosso dataset é o <b>CSEDM</b>, coletado de um curso introdutório CS1 em Java, durante a primavera de 2019 e divulgado na competição CSEDM 2021. Armazenado em <b>ProgSnap2</b> (Price, 2020), um formato de base de dados que registra cada evento de programação do estudante (edição, compilação, execução), preservando o histórico completo das tentativas a cada problema.</p>
+
+          <p class="rel-lead intro-stats-line"><b>413</b> estudantes, <b>5</b> assignments com <b>10</b> problemas cada, e <b>201 mil</b> eventos.</p>
+
+          <p class="rel-lead intro-cols-line">Cada evento traz aluno (<code>SubjectID</code>), problema (<code>ProblemID</code>), tipo (<code>EventType</code>), nota (<code>Score</code>), timestamp (<code>ServerTimestamp</code>) e snapshot do código (<code>CodeStateID</code>).</p>
+
+          <p class="rel-cite">Fonte: Price (2020); CSEDM 2021.</p>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE · EDA-01 · Como navegamos o CSEDM (Spring 2019) ============ -->
+      <section data-background-color="#F1F6FB">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+
+          <p class="deck-topic"><span class="ps1">&gt;</span>como navegamos o csedm<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Ao navegar o CSEDM, observamos como a participação e a taxa de acerto se distribuem entre os 5 <i>assignments</i> do curso.</p>
+
+          <p class="eda-title">Tabela 1 &ndash; Taxa de acerto por <i>assignment</i> (Spring 2019)</p>
+
+          <table class="eda-grid">
+            <thead>
+              <tr><th>Assignment</th><th>Alunos</th><th>Participação</th><th>Problemas</th><th>Taxa de acerto</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A1 (439)</td><td>386</td><td>93,46%</td><td>10</td><td>26,15%</td></tr>
+              <tr><td>A2 (487)</td><td>340</td><td>82,32%</td><td>10</td><td>20,06%</td></tr>
+              <tr><td>A3 (492)</td><td>361</td><td>87,41%</td><td>10</td><td>20,34%</td></tr>
+              <tr><td>A4 (494)</td><td>315</td><td>76,27%</td><td>10</td><td>24,72%</td></tr>
+              <tr><td>A5 (502)</td><td>306</td><td>74,09%</td><td>10</td><td>30,62%</td></tr>
+            </tbody>
+          </table>
+
+          <p class="eda-source">Fonte: elaborado pelo autor sobre CSEDM (Spring 2019).</p>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE · EDA-02 · Pré-processamento, aproximação ao protocolo (Shi et al., 2022) ============ -->
+      <section data-background-color="#F1F6FB">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+
+          <p class="deck-topic"><span class="ps1">&gt;</span>aproximação ao protocolo<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Nosso pré-processamento segue o protocolo de Shi <i>et al.</i> (2022) como <i>baseline</i> de comparação, com ênfase em análise.</p>
+
+          <p class="rel-lead">Dos 413 alunos brutos do CSEDM, mantivemos <b>410</b> com pelo menos 3 tentativas de execução, mesma seleção do paper. Em seguida, dividimos em <b>328 estudantes para treino e 82 para teste</b>, na proporção 80/20 com semente fixa.</p>
+
+          <p class="rel-lead">Limitamos cada sequência às <b>50 últimas tentativas</b>. A mediana é 32 tentativas por aluno e <i>assignment</i>; 28% dos pares ultrapassam 50, com cauda longa até 272.</p>
+
+          <p class="rel-cite">Fonte: adaptado de Shi <i>et al.</i> (2022).</p>
         </div>
       </section>
 
