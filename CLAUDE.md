@@ -93,17 +93,17 @@ tcc.edm.kt/
 **EventType:**
 - Não existe `EventType = Submit` neste dataset
 - Submissões são `Run.Program` com `Score` não-nulo (100% dos Run.Program têm Score)
-- `Compile.Error`: 109.020 eventos (30.27% do total) — código não-compilável com CodeStateID disponível
+- `Compile.Error`: 62.316 eventos (30.92% do total de 201.570) — código não-compilável com CodeStateID disponível
 - Para Code-DKT (srcML): incluir `Compile.Error` na sequência KT como `correct=0`; extrair features via srcML
 - Para BKT e DKT: usar apenas `Run.Program`, label `correct = (Score == 1.0)`
 
 **Score:**
-- Não é puramente binário: ~37% das execuções têm Score parcial (0 < Score < 1)
+- Não é puramente binário: 33.46% das execuções têm Score parcial (0 < Score < 1); 23.68% acerto pleno (Score==1.0); 42.86% falha total (Score==0.0)
 - Para KT binário, usar threshold `Score == 1.0` como "correto"
 - `Score` fora de [0, 1]: 0 registros (dataset limpo nessa dimensão)
 
 **Duplicatas:**
-- 236.024 registros com mesmo (SubjectID, ProblemID, ServerTimestamp) — comportamento esperado: cada `Run.Program` gera um evento filho `Compile` com o mesmo timestamp
+- 132.344 registros com mesmo (SubjectID, ProblemID, ServerTimestamp) — comportamento esperado: cada `Run.Program` gera um evento filho `Compile` com o mesmo timestamp; alguns `Compile.Error` do mesmo aluno/problema também compartilham timestamp (41.230 grupos puros de tamanho 2 + 27.996 grupos > 2)
 
 **Cobertura de CodeStateID:** 100% dos eventos têm CodeStateID (sem missing)
 
