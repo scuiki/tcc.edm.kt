@@ -73,7 +73,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 - [x] 03-01-PLAN.md — MARKER-02: slide marcador "Preparação dos Dados ✓" (zero CSS novo, D-67 deltas mecânicos)
 - [x] 03-02-PLAN.md — EDA-02: aproximação ao protocolo Shi (ponte 413 → 410 → 328/82, truncagem 50; D-65)
 - [x] 03-03-PLAN.md — EDA-01: como navegamos o csedm (parágrafo + tabela A1..A5 MainTable; D-64 + .eda-grid)
-- [ ] 03-04-PLAN.md — EDA-03: três jeitos de aprender (scatter PCA com SEED=42; resolve PENDING-02; script + PNG + slide + STYLE.md update)
+- [x] 03-04-PLAN.md — EDA-03: três jeitos de aprender (scatter PCA com SEED=42; resolve PENDING-02; script + PNG + slide + STYLE.md update)
 
 ### Phase 4: Modelagem e Avaliação (Fase 3 EDM)
 **Goal:** Apresentar Code-DKT (funcionamento + AST como inset visual no mesmo slide), atenção em código real, resultados vs Shi. Em seguida, apresentar a extração automática de KCs semânticos via LLM (Duan, com pipeline em 3 etapas no MESMO slide); a saída do pipeline aparece no slide-kcfig (já posicionado na fase 1). Encerrar retomando Martins (CLOSE-01/02/03, EIXO PRIORITÁRIO DA DEFESA) para amarrar problema → evidência, e fechar com o marcador da Fase 3 EDM concluída. NÃO repetir lista de KCs gerados nem aplicação concreta de KC antes do CLOSE (absorvido em slide-kcfig e CLOSE-01/02).

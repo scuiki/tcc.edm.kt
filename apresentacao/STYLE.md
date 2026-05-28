@@ -105,7 +105,7 @@ background:#fff; border:1.5px solid #1f1f1f; border-radius:0;  /* cantos retos *
 Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 `.bridge-seq .step` (slide-ponte). Cada figura/diagrama leva `Fonte:` abaixo.
 
-## Inventário de slides (ordem atual, pós-fase 1)
+## Inventário de slides (ordem atual, pós-fase 3)
 
 | # | classe | cabeçalho | conteúdo |
 |---|---|---|---|
@@ -116,19 +116,26 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 | 4 | slide-related | `> mineração de dados educacionais` | EDM como processo (Zorić, 2020), fundido p1+p2 |
 | 5 | slide-phases | `> as quatro fases da edm` | As 4 fases (Zorić, 2020) |
 | 6 | slide-related slide-bridge | `> da edm ao knowledge tracing` | Ponte EDM para KT (Yağcı, 2022), fundido p1+p2 |
-| 7 | slide-code | `> o que o code-dkt olha` | Atenção do Code-DKT no operador `&&` da submissão real do CSEDM (Code-DKT, Shi et al., 2022) |
-| 8 | slide-kcfig | `> kcs semânticos extraídos` | Mapeamento KCs (pipeline LLM, Duan et al., 2025) para dificuldades de Martins, Marin e Alves (2024) |
-| 9 | slide-problem | `> retomando o problema` | Dificuldades dos alunos (Martins p2, 13 autores; citação direta mantida porque o número é o argumento) |
-| 10 | slide-problem | `> retomando o problema` | Dentro dos conceitos técnicos (Martins p3, 10 autores; idem) |
-| 11 | slide-fig | `> evolução por dificuldade` | Curva de aprendizado do Code-DKT por sub-dificuldade |
+| 7 | slide-related | `> o problema do kt binário` | INTRO-03a (Shi et al., 2022) |
+| 8 | slide-related | `> sinal pedagógico perdido` | INTRO-03b (adaptado de Shi et al., 2022) |
+| 9 | slide-marker--phase1 | (sem temático) | MARKER-01 — Fase 1 EDM concluída |
+| 10 | slide-related | `> o dataset csedm` | INTRO-01 (movido para abrir a Fase 2 EDM): CSEDM em ProgSnap2 (Price, 2020) |
+| 11 | slide-related | `> como navegamos o csedm` | EDA-01: Tabela 1 com A1..A5 (alunos, participação, problemas, taxa de acerto) |
+| 12 | slide-related | `> como o aprendizado se manifesta` | EDA-03: Figura 1 com curvas de aprendizado por assignment (Spring 2019) |
+| 13 | slide-related | `> engajamento e desempenho` | EDA-04: Figura 2 com X-Grade por número de assignments completados |
+| 14 | slide-related | `> aproximação ao protocolo` | EDA-02: pré-processamento e ponte 413 → 410 → 328/82; 23,68% confirma o match com Shi et al. (2022) |
+| 15 | slide-marker--phase2 | (sem temático) | MARKER-02 — Fase 2 EDM concluída |
+| 16 | slide-code | `> o que o code-dkt olha` | Atenção do Code-DKT no operador `&&` da submissão real do CSEDM (Code-DKT, Shi et al., 2022) |
+| 17 | slide-kcfig | `> kcs semânticos extraídos` | Mapeamento KCs (pipeline LLM, Duan et al., 2025) para dificuldades de Martins, Marin e Alves (2024) |
+| 18 | slide-problem | `> retomando o problema` | Dificuldades dos estudantes (Martins p2, 13 autores; citação direta mantida porque o número é o argumento) |
+| 19 | slide-problem | `> retomando o problema` | Dentro dos conceitos técnicos (Martins p3, 10 autores; idem) |
+| 20 | slide-fig | `> evolução por dificuldade` | Curva de aprendizado do Code-DKT por sub-dificuldade |
 
-**Estado do deck:** 12 slides após a fase 1 (era 16 antes; Corbett ×2 removidos; Zorić p1+p2 e Yağcí p1+p2 fundidos; 5 slides reposicionados ao fim do `<div class="slides">`).
+**Estado do deck:** 21 slides após a fase 3 (era 16 pós-fase 2; 4 novos da fase 3 inseridos no gap após MARKER-01 mais 1 EDA-04 adicionado durante o checkpoint; INTRO-01 movido da seção Introdução para abrir a Fase 2 EDM).
 
-**Gaps reservados para fases 2-5:**
+**Gaps reservados para fases 4-5:**
 
-- Após `> da edm ao knowledge tracing` (slide 6): INTRO-01 "o dataset csedm" + INTRO-03a "o problema do kt binário" + INTRO-03b "sinal pedagógico perdido" + MARKER-01 (fase 2).
-- Após MARKER-01 e antes do trio Martins+fig: EDA-01, EDA-02, EDA-03 + MARKER-02 (fase 3).
-- Antes do trio Martins+fig (entre slide-code/slide-kcfig e Martins p2): MODEL-01, MODEL-03, MODEL-04, MODEL-05 (fase 4); slide-code vira MODEL-03 reaproveitado; slide-kcfig é a saída do pipeline MODEL-05; slide-fig é o CLOSE-03.
+- Antes do trio Martins+fig (entre MARKER-02/slide-code e Martins p2): MODEL-01, MODEL-03, MODEL-04, MODEL-05 (fase 4); slide-code vira MODEL-03 reaproveitado; slide-kcfig é a saída do pipeline MODEL-05; slide-fig é o CLOSE-03.
 - Após slide-fig: MARKER-03 (fim da fase 4 da EDM); depois TOOL-01, TOOL-03, MARKER-04, END-01 (fase 5); AGENDA-01 revisado.
 
 **Linhagem de KT (preenchida em fases futuras):** Corbett e Anderson (1995) volta na cronologia do MODEL-01 (fase 4), seguida por Piech (2015) DKT e Shi (2022) Code-DKT. Yağcı (2022) ocupa o slide-bridge (slide 6) e Duan (2025) é introduzido no MODEL-05 (fase 4).
