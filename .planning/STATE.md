@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: ready_to_plan
-last_updated: "2026-05-28T04:05:34.633Z"
+last_updated: "2026-05-28T05:32:13.694Z"
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 11
+  total_plans: 15
   completed_plans: 13
-  percent: 100
+  percent: 87
 ---
 
 # State: Apresentação TCC 1
