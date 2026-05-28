@@ -89,6 +89,13 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 7. Slide MARKER-03 mostra "Modelagem e Avaliação" sinalizado como concluído
 8. Deck navega do início até MARKER-03 sem quebra
 
+**Plans:** 5 plans (executar via `/gsd-execute-phase 4`)
+- [ ] 04-01-PLAN.md — MODEL-01: como o code-dkt funciona (cronologia 3 chips + AST inset; Shi et al. 2022)
+- [ ] 04-02-PLAN.md — MODEL-04: code-dkt no csedm (tabela ABNT .eda-grid 4 modelos × 5 assignments vs Shi)
+- [ ] 04-03-PLAN.md — MODEL-05: extração automática de kcs (pipeline 5 etapas; Duan et al. 2025)
+- [ ] 04-04-PLAN.md — CLOSE-03 + PENDING-04: pick visual do gráfico Code-DKT (4 candidatos no checkpoint) + cobertura no-op CLOSE-01/02
+- [ ] 04-05-PLAN.md — MARKER-03: Modelagem e Avaliação ✓ (pill 4 running) + STYLE.md inventário pós-fase 4
+
 ### Phase 5: Implantação, Agenda e Encerramento (Fase 4 EDM)
 **Goal:** Apresentar a proposta da ferramenta TCC 2 (baseada em `docs/tcc2_prototipo.html`) com pipeline mini-horizontal num único slide e o dashboard. A ferramenta ESPELHA o que já foi mostrado nas fases anteriores; não detalha cada etapa. Fechar com o marcador da Fase 4 EDM, agradecimento, e revisar a Agenda inicial para refletir a estrutura final entregue.
 **Mode:** mvp
