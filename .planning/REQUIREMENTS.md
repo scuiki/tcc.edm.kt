@@ -33,7 +33,7 @@ v1: 37 → 33 → 30 reqs.
 ### INTRO — Slides novos de introdução e dataset (Fase 1 EDM)
 
 - [x] **INTRO-01**: Slide "nosso dataset" (fundido) — dataset **CSEDM** (curso introdutório CS1 em Java, coleta 2019, competição CSEDM 2021) armazenado no formato **ProgSnap2** (Price, 2020), que preserva múltiplas tentativas do mesmo estudante; gancho com o que Yağcí mostrou sobre acompanhamento ao longo do tempo. Voz própria: "Nosso dataset é o CSEDM, armazenado em ProgSnap2 (Price, 2020), formato que...". (Funde INTRO-01 e INTRO-02 originais.)
-- [ ] **INTRO-03**: Slide Shi e o problema — paráfrase indireta: "Shi et al. (2022) apontaram que modelos de KT clássicos (BKT, DKT) usam apenas acerto/erro e ignoram a estrutura do código; um aluno pode acertar parcialmente e o modelo ver como erro completo." 1 a 2 slides conforme cabimento; NÃO apresenta o modelo Code-DKT aqui
+- [x] **INTRO-03**: Slide Shi e o problema — paráfrase indireta: "Shi et al. (2022) apontaram que modelos de KT clássicos (BKT, DKT) usam apenas acerto/erro e ignoram a estrutura do código; um aluno pode acertar parcialmente e o modelo ver como erro completo." Entregue em 2 sub-slides: INTRO-03a "o problema do kt binário" (diagnóstico) + INTRO-03b "sinal pedagógico perdido" (consequência); Code-DKT NÃO apresentado. ✓ 2026-05-27 (plans 02-03 + 02-04, commits `6f0ae3d`, `53b46e8`, `f7e042a`, `4a9af6e`, `c92b9ff`, `6a70b7f`)
 
 ### MARKER — Marcadores de fase EDM concluída
 
@@ -150,7 +150,7 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | MERGE-01 | Phase 1 | Completed (`f9907b8`, 2026-05-27) |
 | REMOVE-01 | Phase 1 | Completed (`91b9675`, 2026-05-27) |
 | INTRO-01 | Phase 2 | Completed (`c362e9d` + `e07e37b` + `3835336`, plan 02-02, 2026-05-27) |
-| INTRO-03 | Phase 2 | Pending |
+| INTRO-03 | Phase 2 | Completed (`6f0ae3d` + `53b46e8` + `f7e042a` + `4a9af6e` + `c92b9ff` + `6a70b7f`, plans 02-03 + 02-04, 2026-05-27) |
 | MARKER-01 | Phase 2 | Complete |
 | MARKER-02 | Phase 3 | Pending |
 | MARKER-03 | Phase 4 | Pending |
