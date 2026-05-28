@@ -28,7 +28,7 @@
         <div class="deck-slide slide-cover-brand">
           <img class="brand-logo" src="assets/logo-unifacens-white.svg" alt="UniFacens">
           <p class="cover-tagline kicker">
-            <span class="ps1">&gt;</span>Educational data mining · Knowledge Tracing<span class="caret blink"></span>
+            <span class="ps1">&gt;</span><i>Educational data mining</i> e <i>Knowledge Tracing</i><span class="caret blink"></span>
           </p>
         </div>
       </section>
@@ -138,7 +138,7 @@
 
           <p class="deck-topic"><span class="ps1">&gt;</span>da edm ao knowledge tracing<span class="caret blink"></span></p>
 
-          <p class="rel-lead">Yağcı (2022) mostrou o valor de prever desempenho acadêmico para identificar alunos em risco. Nós seguimos o passo seguinte: em vez de uma previsão única ao fim do curso, <b>acompanhamos o conhecimento ao longo do tempo</b>, a cada nova tentativa, via <i>knowledge tracing</i>.</p>
+          <p class="rel-lead">Yağcı (2022) mostrou o valor de prever desempenho acadêmico para identificar estudantes em risco. Nos dispomos a trabalhar de forma similar, mas em vez de uma previsão única ao fim do curso, <b>acompanhamos o conhecimento ao longo do tempo</b>, levando em conta cada tentativa feita durante a resolução do problema, via <i>knowledge tracing</i>.</p>
 
           <p class="bridge-seq"><span class="step">mineração de dados educacionais</span><span class="arr">&rarr;</span><span class="step">predição de desempenho</span><span class="arr">&rarr;</span><span class="step"><i>knowledge tracing</i></span></p>
 
@@ -191,40 +191,54 @@
 
           <p class="rel-lead">Os modelos tratam essa tentativa de forma idêntica a uma <b>completamente errada</b>, e a previsão mais provável é de que o aluno não aprendeu nada do conteúdo abordado, mesmo tendo acertado parte da questão. O aprendizado parcial presente no código fica invisível.</p>
 
-          <p class="rel-lead">Isso abre um <i>gap</i> entre o que o <i>knowledge tracing</i> clássico enxerga e o que de fato aconteceu pedagogicamente. Essa lacuna motiva a criação de modelos sensíveis ao código submetido.</p>
+          <p class="rel-lead">Isso abre um espaço entre o que o <i>knowledge tracing</i> clássico enxerga e o que de fato o estudante aprendeu. Essa lacuna motivou a criação de modelos que são sensíveis a códigos.</p>
 
           <p class="rel-cite">Fonte: adaptado de Shi <i>et al.</i> (2022).</p>
         </div>
       </section>
 
-      <!-- ============ SLIDE · MARKER · Definicao do Problema concluida (Zoric, 2020) ============ -->
+      <!-- ============ SLIDE · MARKER · As quatro fases da EDM, fase 1 concluida (Zoric, 2020) ============ -->
       <section data-background-color="#F1F6FB">
         <div class="deck-slide slide-marker slide-marker--phase1">
           <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
 
+          <p class="marker-title"><span class="ps1">&gt;</span>AS QUATRO FASES DA EDM<span class="caret blink"></span></p>
+
           <div class="marker-track">
-            <span class="marker-step marker-step--done">
-              <span class="marker-step__mark">&check;</span>
-              Definição do Problema
-            </span>
-            <span class="marker-arr">&rarr;</span>
-            <span class="marker-step marker-step--pending">
-              <span class="marker-step__mark">2</span>
-              Preparação dos Dados
-            </span>
-            <span class="marker-arr">&rarr;</span>
-            <span class="marker-step marker-step--pending">
-              <span class="marker-step__mark">3</span>
-              Modelagem e Avaliação
-            </span>
-            <span class="marker-arr">&rarr;</span>
-            <span class="marker-step marker-step--pending">
-              <span class="marker-step__mark">4</span>
-              Implantação
-            </span>
+            <div class="marker-stage">
+              <div class="marker-pill marker-pill--done">
+                <span class="marker-pill-icon">&check;</span>
+                <span class="marker-pill-name">Definição do Problema</span>
+              </div>
+              <span class="marker-badge">[done]</span>
+            </div>
+            <span class="marker-arrow">&rarr;</span>
+            <div class="marker-stage">
+              <div class="marker-pill marker-pill--running">
+                <span class="marker-pill-icon">&#x21BB;</span>
+                <span class="marker-pill-name">Preparação dos Dados</span>
+              </div>
+              <span class="marker-badge">[running]</span>
+            </div>
+            <span class="marker-arrow">&rarr;</span>
+            <div class="marker-stage">
+              <div class="marker-pill marker-pill--pending">
+                <span class="marker-pill-icon">&#x25CB;</span>
+                <span class="marker-pill-name">Modelagem e Avaliação</span>
+              </div>
+              <span class="marker-badge marker-badge--empty">[]</span>
+            </div>
+            <span class="marker-arrow">&rarr;</span>
+            <div class="marker-stage">
+              <div class="marker-pill marker-pill--pending">
+                <span class="marker-pill-icon">&#x25CB;</span>
+                <span class="marker-pill-name">Implantação</span>
+              </div>
+              <span class="marker-badge marker-badge--empty">[]</span>
+            </div>
           </div>
 
-          <p class="marker-fonte">Fonte: adaptado de Zorić (2020).</p>
+          <p class="rel-cite">Fonte: adaptado de Zorić (2020).</p>
         </div>
       </section>
 
