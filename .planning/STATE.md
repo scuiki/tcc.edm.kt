@@ -22,7 +22,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 **Core value:** Slides HTML reveal.js funcionais, narrativamente claros e cientificamente fiéis, prontos para defesa em ~1 semana.
 
-**Current focus:** Phase 03 — eda-e-pr-processamento-fase-2-edm
+**Current focus:** Phase 04 — modelagem-e-avalia-o-fase-3-edm (CONTEXT gathered)
 
 ## Phases
 
@@ -90,13 +90,13 @@ Top commits funcionais (cronológicos):
 
 ## Next action
 
-Fase 2 oficialmente fechada. Próximo passo da iteração da apresentação:
+Fase 3 fechada e Fase 4 CONTEXT gravado (commit `136dad4`). Próximo passo:
 
 ```
-/gsd-discuss-phase 3
+/gsd-plan-phase 4
 ```
 
-**Fase 3: EDA e Pré-processamento (Fase 2 EDM).** Adiciona 4 slides novos (EDA-01, EDA-02, EDA-03 + MARKER-02). Inserção após MARKER-01 (#/10) e antes do slide-code (#/11). Ler `.planning/phases/02-intro-dataset-e-problema-fase-1-edm/PHASE-SUMMARY.md` para vocabulário e decisões herdadas da fase 2.
+**Fase 4: Modelagem e Avaliação (Fase 3 EDM).** Adiciona 4 slides novos (MODEL-01, MODEL-04, MODEL-05, MARKER-03) entre MARKER-02 (`#/15`) e o trio Martins+fig + MARKER-03 no fim do deck. Reaproveita slide-code como MODEL-03, slide-kcfig como saída de MODEL-05, Martins p2/p3 como CLOSE-01/02 (NÃO TOCAR), slide-fig como CLOSE-03 (PENDING-04 picks 4 PNGs candidatos no checkpoint). Ler `.planning/phases/04-modelagem-e-avalia-o-fase-3-edm/04-CONTEXT.md` para decisões D-75..D-91 e refs canônicas.
 
 Decisões ad-hoc das waves da fase 2 (registradas para fases futuras):
 
