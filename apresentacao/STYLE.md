@@ -126,8 +126,8 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 
 **Gaps reservados para fases 2-5:**
 
-- Após `> introdução` (slide 3): INTRO-01 "nosso dataset" + INTRO-03 "Shi e o problema" + MARKER-01 (fase 2).
-- Após `> da edm ao knowledge tracing` (slide 6): EDA-01, EDA-02, EDA-03 + MARKER-02 (fase 3).
+- Após `> da edm ao knowledge tracing` (slide 6): INTRO-01 "o dataset csedm" + INTRO-03a "o problema do kt binário" + INTRO-03b "sinal pedagógico perdido" + MARKER-01 (fase 2).
+- Após MARKER-01 e antes do trio Martins+fig: EDA-01, EDA-02, EDA-03 + MARKER-02 (fase 3).
 - Antes do trio Martins+fig (entre slide-code/slide-kcfig e Martins p2): MODEL-01, MODEL-03, MODEL-04, MODEL-05 (fase 4); slide-code vira MODEL-03 reaproveitado; slide-kcfig é a saída do pipeline MODEL-05; slide-fig é o CLOSE-03.
 - Após slide-fig: MARKER-03 (fim da fase 4 da EDM); depois TOOL-01, TOOL-03, MARKER-04, END-01 (fase 5); AGENDA-01 revisado.
 
