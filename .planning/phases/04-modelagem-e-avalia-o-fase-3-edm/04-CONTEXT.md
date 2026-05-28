@@ -72,7 +72,8 @@ Total esperado de sections no `<div class="slides">` ao fim da fase: 21 (pós-fa
   2. LLM gera KCs brutos do código bruto
   3. Clustering Sentence-BERT + HAC
   4. Rotulagem dos clusters via LLM
-  5. Q-matrix por assignment (28 KCs / 50 problemas)
+  5. Q-matrix por assignment
+- **D-79d-rev (revisão 2026-05-28):** rótulo da caixa 5 ajustado de "Q-matrix por assignment (28 KCs / 50 problemas)" para "Q-matrix por assignment" (sem número). Motivo: a pesquisa (04-RESEARCH.md Open Question 1) constatou que o número "28" não tem origem documentada; slide-kcfig (próximo no deck) mostra 17 KCs e os notebooks geram ~12-15 por assignment. Remover o número evita inconsistência narrativa MODEL-05 → slide-kcfig e risco de QA cobrar valor errado. O número detalhado fica para a fala/QA, não para o slide.
 - **D-79e (fechamento, 1 frase pós-pipeline):** "A decisão-chave foi alimentar o LLM com código bruto, não AST (Duan <i>et al.</i>, 2025, Tab. 4)."
 - **D-79f (override PROJECT.md):** PROJECT.md NEW-09/D-66 fixava "pipeline em 3 etapas". User overrideu para 5 etapas por fidelidade ao 03b_kc_generation.ipynb. Registrar como decisão ad-hoc D-79f.
 - **D-79g (voz):** primeira pessoa do plural ("Construímos", "alimentar"); Duan parentético com `<i>et al.</i>` ABNT (D-54 herdado); sem citação direta literal (D-69 herdado).
@@ -319,7 +320,7 @@ Nomenclatura de classes ficou em sugestão; executor decide pelo que casa melhor
   - Cabeçalho: `> extração automática de kcs`
   - Abertura: "Construímos um pipeline de cinco etapas para extrair Knowledge Components do CSEDM."
   - Pipeline `.bridge-seq` 5 etapas:
-    `[1. Sampling estratificado · n=5/problema] → [2. LLM gera KCs brutos · código bruto] → [3. Clustering Sentence-BERT + HAC] → [4. Rotulagem dos clusters · LLM] → [5. Q-matrix · 28 KCs / 50 problemas]`
+    `[1. Sampling estratificado · n=5/problema] → [2. LLM gera KCs brutos · código bruto] → [3. Clustering Sentence-BERT + HAC] → [4. Rotulagem dos clusters · LLM] → [5. Q-matrix · por assignment]`
   - Fechamento: "A decisão-chave foi alimentar o LLM com código bruto, não AST (Duan <i>et al.</i>, 2025, Tab. 4)."
   - Rodapé: `Fonte: adaptado de Duan <i>et al.</i> (2025).`
 
