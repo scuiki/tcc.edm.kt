@@ -153,9 +153,9 @@
 
           <p class="deck-topic"><span class="ps1">&gt;</span>o dataset csedm<span class="caret blink"></span></p>
 
-          <p class="rel-lead">Nosso dataset é o <b>CSEDM</b> (curso introdutório CS1 em Java, coletado durante a primavera de 2019 e divulgado na competição CSEDM 2021), armazenado em <b>ProgSnap2</b> (Price, 2020), formato que registra cada evento de programação do estudante (edição, compilação, execução), preservando o histórico completo das tentativas a cada problema.</p>
+          <p class="rel-lead">Nosso dataset é o <b>CSEDM</b>, coletado de um curso introdutório CS1 em Java, durante a primavera de 2019 e divulgado na competição CSEDM 2021. Armazenado em <b>ProgSnap2</b> (Price, 2020), um formato de base de dados que registra cada evento de programação do estudante (edição, compilação, execução), preservando o histórico completo das tentativas a cada problema.</p>
 
-          <p class="rel-lead intro-stats-line"><b>413</b> estudantes, <b>5</b> assignments com <b>50</b> problemas, <b>201 mil</b> eventos.</p>
+          <p class="rel-lead intro-stats-line"><b>413</b> estudantes, <b>5</b> assignments com <b>10</b> problemas cada, e <b>201 mil</b> eventos.</p>
 
           <p class="rel-lead intro-cols-line">Cada evento traz aluno (<code>SubjectID</code>), problema (<code>ProblemID</code>), tipo (<code>EventType</code>), nota (<code>Score</code>), timestamp (<code>ServerTimestamp</code>) e snapshot do código (<code>CodeStateID</code>).</p>
 
@@ -187,11 +187,11 @@
 
           <p class="deck-topic"><span class="ps1">&gt;</span>sinal pedagógico perdido<span class="caret blink"></span></p>
 
-          <p class="rel-lead">Considere o cenário: um estudante resolvendo um exercício acerta <b>80% do código</b>, mas erra um dos passos. Para o sistema, sua submissão é registrada como <b>incorreta</b>.</p>
+          <p class="rel-lead">Considere o cenário em que um estudante resolvendo um problema acerta parte do código, mas erra em algum dos passos. Sua submissão pode não ser compilada, ou compilar e estar errada, mas de qualquer forma sua resposta é registrada como <b>incorreta</b>.</p>
 
-          <p class="rel-lead">O modelo trata essa tentativa de forma idêntica a uma <b>completamente errada</b>, e a previsão mais provável é que o aluno não aprendeu nada do conteúdo abordado, mesmo tendo acertado a maior parte da questão. O aprendizado parcial embutido no código fica invisível.</p>
+          <p class="rel-lead">Os modelos tratam essa tentativa de forma idêntica a uma <b>completamente errada</b>, e a previsão mais provável é de que o aluno não aprendeu nada do conteúdo abordado, mesmo tendo acertado parte da questão. O aprendizado parcial presente no código fica invisível.</p>
 
-          <p class="rel-lead">Abre-se uma lacuna entre o que o <i>knowledge tracing</i> clássico enxerga e o que de fato aconteceu pedagogicamente, lacuna que motiva modelos sensíveis ao código submetido.</p>
+          <p class="rel-lead">Isso abre um <i>gap</i> entre o que o <i>knowledge tracing</i> clássico enxerga e o que de fato aconteceu pedagogicamente. Essa lacuna motiva a criação de modelos sensíveis ao código submetido.</p>
 
           <p class="rel-cite">Fonte: adaptado de Shi <i>et al.</i> (2022).</p>
         </div>
