@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: ready_to_plan
-last_updated: "2026-05-28T00:30:00.000Z"
+last_updated: "2026-05-28T04:05:34.633Z"
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 11
-  completed_plans: 11
-  percent: 40
+  completed_plans: 13
+  percent: 100
 ---
 
 # State: Apresentação TCC 1
@@ -99,6 +99,7 @@ Fase 2 oficialmente fechada. Próximo passo da iteração da apresentação:
 **Fase 3: EDA e Pré-processamento (Fase 2 EDM).** Adiciona 4 slides novos (EDA-01, EDA-02, EDA-03 + MARKER-02). Inserção após MARKER-01 (#/10) e antes do slide-code (#/11). Ler `.planning/phases/02-intro-dataset-e-problema-fase-1-edm/PHASE-SUMMARY.md` para vocabulário e decisões herdadas da fase 2.
 
 Decisões ad-hoc das waves da fase 2 (registradas para fases futuras):
+
 - D-50 (02-02): "5 assignments com 10 problemas cada" (atualizado para granularidade aritmética em 02-04) introduzido em INTRO-01; fases 3 (EDA-01) e 4 (MODEL-01..05) não precisam reintroduzir
 - D-51 (02-02): 6 colunas-chave do ProgSnap2 (SubjectID, ProblemID, EventType, Score, ServerTimestamp, CodeStateID) listadas em INTRO-01; EDA-02 pode partir desse vocabulário sem redefinir
 - D-52 (02-03): paráfrase Shi 2022 + Report 4 (mais fiel ao paper que o phrasing-alvo inicial do RESEARCH §1.3); ancorar no vocabulário "tratam respostas como corretas/incorretas, ignorando seu conteúdo"
