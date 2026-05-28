@@ -71,8 +71,8 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 
 **Plans:** 4 plans (executar via `/gsd-execute-phase 3`)
 - [x] 03-01-PLAN.md — MARKER-02: slide marcador "Preparação dos Dados ✓" (zero CSS novo, D-67 deltas mecânicos)
-- [ ] 03-02-PLAN.md — EDA-02: aproximação ao protocolo Shi (ponte 413 → 410 → 328/82, truncagem 50; D-65)
-- [ ] 03-03-PLAN.md — EDA-01: como navegamos o csedm (parágrafo + tabela A1..A5 MainTable; D-64 + .eda-grid)
+- [x] 03-02-PLAN.md — EDA-02: aproximação ao protocolo Shi (ponte 413 → 410 → 328/82, truncagem 50; D-65)
+- [x] 03-03-PLAN.md — EDA-01: como navegamos o csedm (parágrafo + tabela A1..A5 MainTable; D-64 + .eda-grid)
 - [ ] 03-04-PLAN.md — EDA-03: três jeitos de aprender (scatter PCA com SEED=42; resolve PENDING-02; script + PNG + slide + STYLE.md update)
 
 ### Phase 4: Modelagem e Avaliação (Fase 3 EDM)
