@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: ready_to_plan
-last_updated: "2026-05-28T05:32:13.694Z"
+last_updated: "2026-05-28T11:36:39.417Z"
 progress:
   total_phases: 5
   completed_phases: 2
@@ -22,7 +22,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 **Core value:** Slides HTML reveal.js funcionais, narrativamente claros e cientificamente fiéis, prontos para defesa em ~1 semana.
 
-**Current focus:** Phase 3 — EDA e Pré-processamento (Fase 2 EDM)
+**Current focus:** Phase 03 — eda-e-pr-processamento-fase-2-edm
 
 ## Phases
 
