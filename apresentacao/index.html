@@ -88,7 +88,7 @@
 
           <p class="rel-lead">Programar beneficia qualquer pessoa. Porém, o ensino de programação tem se mostrado complexo, com altos índices de reprovação e desistência nas disciplinas introdutórias de cursos de tecnologia.</p>
 
-          <p class="rel-lead">Martins <i>et al.</i> (2024) trazem uma revisão sistemática da literatura, cujo objetivo é identiﬁcar os principais desaﬁos enfrentados por alunos durante a aprendizagem de programação de computadores.</p>
+          <p class="rel-lead">Martins <i>et al.</i> (2024) trazem uma revisão sistemática da literatura, cujo objetivo é identiﬁcar os principais desaﬁos enfrentados por estudantes durante a aprendizagem de programação de computadores.</p>
 
           <p class="rel-lead">Este trabalho pode auxiliar na elaboração de estratégias e métodos de ensino que melhoram 
             o processo de ensino e aprendizagem de programação, ao promover melhores resultados acadêmicos e reduzindo a taxa de desistência e reprovação</p>
@@ -172,7 +172,7 @@
 
           <p class="rel-lead">Considere o cenário em que um estudante resolvendo um problema acerta parte do código, mas erra em algum dos passos. Sua submissão pode não ser compilada, ou compilar e estar errada, mas de qualquer forma sua resposta é registrada como <b>incorreta</b>.</p>
 
-          <p class="rel-lead">Os modelos tratam essa tentativa de forma idêntica a uma <b>completamente errada</b>, e a previsão mais provável é de que o aluno não aprendeu nada do conteúdo abordado, mesmo tendo acertado parte da questão. O aprendizado parcial presente no código fica invisível.</p>
+          <p class="rel-lead">Os modelos tratam essa tentativa de forma idêntica a uma <b>completamente errada</b>, e a previsão mais provável é de que o estudante não aprendeu nada do conteúdo abordado, mesmo tendo acertado parte da questão. O aprendizado parcial presente no código fica invisível.</p>
 
           <p class="rel-lead">Isso abre um espaço entre o que o <i>knowledge tracing</i> clássico enxerga e o que de fato o estudante aprendeu. Essa lacuna motivou a criação de modelos que são sensíveis a códigos.</p>
 
@@ -236,7 +236,7 @@
 
           <p class="rel-lead intro-stats-line"><b>413</b> estudantes, <b>5</b> assignments com <b>10</b> problemas cada, e <b>201 mil</b> eventos.</p>
 
-          <p class="rel-lead intro-cols-line">Cada evento traz aluno (<code>SubjectID</code>), problema (<code>ProblemID</code>), tipo (<code>EventType</code>), nota (<code>Score</code>), timestamp (<code>ServerTimestamp</code>) e snapshot do código (<code>CodeStateID</code>).</p>
+          <p class="rel-lead intro-cols-line">Cada evento traz estudante (<code>SubjectID</code>), problema (<code>ProblemID</code>), tipo (<code>EventType</code>), nota (<code>Score</code>), timestamp (<code>ServerTimestamp</code>) e snapshot do código (<code>CodeStateID</code>).</p>
 
           <p class="rel-cite">Fonte: Price (2020); CSEDM 2021.</p>
         </div>
@@ -270,6 +270,48 @@
         </div>
       </section>
 
+      <!-- ============ SLIDE · EDA-03 · Curvas de aprendizado por assignment (CSEDM Spring 2019) ============ -->
+      <section data-background-color="#F1F6FB">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+
+          <p class="deck-topic"><span class="ps1">&gt;</span>como o aprendizado se manifesta<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Para cada <i>assignment</i>, agregamos a taxa de acerto em função da tentativa ordinal (1ª tentativa de qualquer problema, 2ª, 3ª, ...) sobre todos os 413 estudantes do Spring 2019.</p>
+
+          <p class="eda-title">Figura 1 &ndash; Curvas de aprendizado por <i>assignment</i> (Spring 2019)</p>
+
+          <figure class="eda-fig eda-fig--wide">
+            <img src="assets/eda-curvas-aprendizado.png" alt="Cinco subgráficos com a taxa de acerto ao longo das 30 primeiras tentativas ordinais por assignment A1 a A5">
+          </figure>
+
+          <p class="eda-source">Fonte: elaborado pelo autor sobre CSEDM (Spring 2019).</p>
+
+          <p class="eda-insight">No A1, os estudantes precisam de várias tentativas para acertar; no A5, já acertam logo nas primeiras.</p>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE · EDA-04 · X-Grade por número de assignments completados (CSEDM Spring 2019) ============ -->
+      <section data-background-color="#F1F6FB">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+
+          <p class="deck-topic"><span class="ps1">&gt;</span>engajamento e desempenho<span class="caret blink"></span></p>
+
+          <p class="rel-lead">A <i>X-Grade</i> é a nota final normalizada do estudante na disciplina (escala 0 a 1). Comparamos sua distribuição pelos discentes agrupados por quantos <i>assignments</i> completaram.</p>
+
+          <p class="eda-title">Figura 2 &ndash; <i>X-Grade</i> por número de <i>assignments</i> completados (Spring 2019)</p>
+
+          <figure class="eda-fig eda-fig--compact">
+            <img src="assets/eda-xgrade-completados.png" alt="Cinco boxplots de X-Grade agrupados por número de assignments completados (1 a 5)">
+          </figure>
+
+          <p class="eda-source">Fonte: elaborado pelo autor sobre CSEDM (Spring 2019).</p>
+
+          <p class="eda-insight">Quanto mais <i>assignments</i> o estudante completa, maior a mediana e menor a variância da nota final.</p>
+        </div>
+      </section>
+
       <!-- ============ SLIDE · EDA-02 · Pré-processamento, aproximação ao protocolo (Shi et al., 2022) ============ -->
       <section data-background-color="#F1F6FB">
         <div class="deck-slide slide-related">
@@ -279,9 +321,9 @@
 
           <p class="rel-lead">Nosso pré-processamento segue o protocolo de Shi <i>et al.</i> (2022) como <i>baseline</i> de comparação, com ênfase em análise.</p>
 
-          <p class="rel-lead">Dos 413 alunos brutos do CSEDM, mantivemos <b>410</b> com pelo menos 3 tentativas de execução, mesma seleção do paper. Em seguida, dividimos em <b>328 estudantes para treino e 82 para teste</b>, na proporção 80/20 com semente fixa.</p>
+          <p class="rel-lead">Dos 413 estudantes brutos do CSEDM, mantivemos <b>410</b> com pelo menos 3 tentativas de execução. Esse subset apresenta <b>23,68% de tentativas corretas</b>, mesma proporção reportada no paper, mais um sinal de que estamos trabalhando sob os mesmos dados, viabilizando a comparação direta dos resultados dos nossos modelos aos resultados dos modelos treinados por Shi <i>et al.</i> (2022). Em seguida, dividimos em <b>328 estudantes para treino e 82 para teste</b>, na proporção 80/20 com semente fixa.</p>
 
-          <p class="rel-lead">Limitamos cada sequência às <b>50 últimas tentativas</b>. A mediana é 32 tentativas por aluno e <i>assignment</i>; 28% dos pares ultrapassam 50, com cauda longa até 272.</p>
+          <p class="rel-lead">Limitamos cada sequência às <b>50 últimas tentativas</b>. A mediana é 32 tentativas por estudante e <i>assignment</i>; 28% dos pares ultrapassam 50, com cauda longa até 272.</p>
 
           <p class="rel-cite">Fonte: adaptado de Shi <i>et al.</i> (2022).</p>
         </div>
@@ -458,7 +500,7 @@
 
           <p class="deck-topic"><span class="ps1">&gt;</span>retomando o problema<span class="caret blink"></span></p>
           <blockquote class="prob-quote">&ldquo;A compreensão dos conceitos técnicos da programação pode ser considerada um desafio complexo. Esta é a dificuldade mais comum entre os estudantes, mencionada por 13 autores&rdquo; <span class="src">(Martins; Marin; Alves, 2024, p. 19)</span>.</blockquote>
-          <p class="prob-sub">Dificuldades enfrentadas pelos alunos e o número de ocorrências nos estudos analisados por Martins <i>et al.</i> (2024):</p>
+          <p class="prob-sub">Dificuldades enfrentadas pelos estudantes e o número de ocorrências nos estudos analisados por Martins <i>et al.</i> (2024):</p>
 
           <div class="ascii-chart" data-ascii>
             <div class="bar-row" data-val="13"><span class="bar-label">Falta de conhecimento em conceitos técnicos de programação</span><span class="bar"><span class="fill"></span><span class="empty"></span></span><span class="bar-num">0</span></div>
