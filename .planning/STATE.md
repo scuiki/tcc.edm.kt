@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-05-28T00:45:08.725Z"
+last_updated: "2026-05-27T23:30:00.000Z"
 progress:
   total_phases: 5
   completed_phases: 1
@@ -14,7 +14,7 @@ progress:
 
 # State: Apresentação TCC 1
 
-**Last updated:** 2026-05-27 após fechamento do plan 02-02 (INTRO-01 entregue após 2 iterações pós-checkpoint; granularidade extra para 5 assignments e 6 colunas ProgSnap2 incorporada via D-50/D-51)
+**Last updated:** 2026-05-27 após fechamento do plan 02-03 (INTRO-03a entregue após 3 iterações pós-checkpoint; paráfrase Shi 2022 + ponte KT/CSEDM + `<i>et al.</i>` ABNT normalizado em todo o deck via D-52..D-55)
 
 ## Project Reference
 
@@ -29,7 +29,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 | # | Phase | Status |
 |---|---|---|
 | 1 | Reformatação da base | Complete (7 / 7 plans) ✓ 2026-05-27 |
-| 2 | Intro, Dataset e Problema (Fase 1 EDM) | In progress (2 / 4 plans) |
+| 2 | Intro, Dataset e Problema (Fase 1 EDM) | In progress (3 / 4 plans) |
 | 3 | EDA e Pré-processamento (Fase 2 EDM) | Pending |
 | 4 | Modelagem e Avaliação (Fase 3 EDM) | Pending |
 | 5 | Implantação, Agenda e Encerramento (Fase 4 EDM) | Pending |
@@ -47,6 +47,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 | 01-07 | (consolidação) | `907a4b5`, `30ba911`, `9224d5f` | Fechamento da fase 1. Task 1-3 (`907a4b5`): STYLE.md reescrito (D-21) com 3 seções (cabeçalho `.deck-topic` único; regras de redação com "Apresentação de autores" + "Voz própria como padrão" no lugar da "Regra dos correlatos"; inventário de 12 slides pós-fase 1 + gaps reservados para fases 2-5). Task 4 (`30ba911`, Branch A): 4 regras CSS órfãs `.rel-kicker`/`.rel-title`/`.rel-sub` deletadas de theme-unifacens.css; demais classes do template `.slide-related` preservadas. Task 5: checkpoint humano fim-a-fim no browser APPROVED; 13/13 automated gates + 8 Success Criteria do ROADMAP confirmados. Tweaks tipográficos pós-checkpoint (`9224d5f`): `.deck-topic` em Arial bold uppercase preto; `.slide-title-tcc .tcc-label` Arial explícito; 6 classes Fonte: padronizadas em 18px Arial; slide Zorić fundido reescrito com sigla EDM padrão ABNT. Task 6: PHASE-SUMMARY agregando os 7 plans criado |
 | 02-01 | MARKER-01 | `d37304d`, `3d47be4` | Componente CSS reutilizável `.slide-marker` (host + modificadores `--done`/`--pending`, sem `border-radius`, variáveis existentes) anexado a theme-unifacens.css (linhas 358-408); section MARKER-01 inserido em index.html linhas 149-179 entre slide Yağcí fundido (linha 147) e slide-code; 4 caixas na ordem D-40 (1ª em `--done` com `&check;`, 2-4 em `--pending` com números), 3 setas, rodapé `Fonte: adaptado de Zorić (2020).`; sem `.deck-topic` (D-34d); sem em-dash (D-44); sections do deck: 12 → 13; slide acessível em `#/7`. Checkpoint humano APPROVED como stub funcional; usuário pediu redesenho do formato visual com viés de computação (AST/pipeline/terminal) DIFERIDO para fim da fase 2 ou em batch com MARKER-02/03/04 — contrato de classes preservado, callers não quebram |
 | 02-02 | INTRO-01 | `c362e9d`, `e07e37b`, `3835336` | Section INTRO-01 inserido em index.html linhas 149-164, entre Yağcí (#/6) e MARKER-01 (que desloca para #/8); reusa template `.slide-related` + `.rel-lead` + `.rel-cite` (zero CSS novo); cabeçalho `> o dataset csedm` (D-34a); voz 1ª pessoa do plural ("Nosso dataset é o CSEDM..."); 3 números brutos validados via pandas (413 estudantes, 50 problemas, 201.570 eventos) escritos como "413 estudantes, 5 assignments com 50 problemas, 201 mil eventos"; citação parentética `(Price, 2020)`; rodapé literal `Fonte: Price (2020); CSEDM 2021.`; sem em-dash (D-44); sections do deck: 13 → 14. Após checkpoint visual APPROVED, reviewer pediu 2 iterações pós-checkpoint: `e07e37b` adicionou granularidade (Spring 2019 explícito, "5 assignments com 50 problemas", parágrafo `.intro-cols-line` listando 6 colunas-chave do ProgSnap2: SubjectID, ProblemID, EventType, Score, ServerTimestamp, CodeStateID); `3835336` ajustou fraseado da coleta ("coletado durante a primavera de 2019 e divulgado") para sujeito implícito coerente. Decisões ad-hoc D-50 (5 assignments com 50 problemas) e D-51 (listar colunas-chave do ProgSnap2) registradas no 02-02-SUMMARY para fases futuras |
+| 02-03 | INTRO-03 (parcial: 03a) | `6f0ae3d`, `53b46e8`, `f7e042a`, `4a9af6e` | Section INTRO-03a inserido em index.html linhas 166-181, entre INTRO-01 (#/7) e MARKER-01 (que desloca para #/9); reusa template `.slide-related` + `.rel-lead` + `.rel-cite` (zero CSS novo); cabeçalho `> o problema do kt binário` (D-34b); 3 parágrafos (ponte KT → crítica Shi → escopo de domínios estruturados); rodapé literal `Fonte: Shi <i>et al.</i> (2022).`; sem em-dash (D-44); sem Code-DKT (gate forte D-36 / Pitfall 3); sections do deck: 14 → 15. Após checkpoint visual APPROVED, reviewer pediu 3 iterações pós-checkpoint: `53b46e8` reescreveu paráfrase com phrasing do Report 4 + Shi 2022 (mais fiel ao paper que a versão inicial); `f7e042a` adicionou primeiro parágrafo de ponte (KT como instrumento central → eventos do CSEDM) antes da crítica Shi para evitar transição abrupta; `4a9af6e` normalizou `<i>et al.</i>` ABNT em todo o deck (8 ocorrências em drive-by sweep). Decisões ad-hoc D-52 (paráfrase Report 4 + Shi 2022), D-53 (ponte KT → trabalho → CSEDM), D-54 (`<i>et al.</i>` ABNT no deck), D-55 (3º parágrafo escopo de domínios sem nomear Code-DKT) registradas no 02-03-SUMMARY |
 
 ## Workflow
 
@@ -63,6 +64,10 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 Top commits funcionais (cronológicos):
 
+- `4a9af6e` apresentacao: italizar "et al." conforme ABNT no deck
+- `f7e042a` apresentacao: adicionar ponte KT-trabalho-CSEDM em INTRO-03a
+- `53b46e8` apresentacao: reescrever INTRO-03a com fraseado do Report 4 + Shi 2022
+- `6f0ae3d` apresentacao: slide INTRO-03a - problema do kt binario (Shi et al. 2022)
 - `3835336` apresentacao: ajustar fraseado da coleta no slide INTRO-01
 - `e07e37b` apresentacao: ajustar INTRO-01 - primavera 2019, 5 assignments, colunas ProgSnap2
 - `c362e9d` apresentacao: slide INTRO-01 - dataset CSEDM (Price, 2020)
@@ -81,19 +86,22 @@ Top commits funcionais (cronológicos):
 
 ## Next action
 
-Continuar fase 2 com os plans restantes (02-03 e 02-04):
+Continuar fase 2 com o plan final (02-04):
 
 ```
 /gsd-execute-phase 2
 ```
 
-Plans 02-01 (MARKER-01, stub) e 02-02 (INTRO-01) concluídos. Próximos:
+Plans 02-01 (MARKER-01, stub), 02-02 (INTRO-01) e 02-03 (INTRO-03a) concluídos. Próximo:
 
-- 02-03: INTRO-03a — slide "o problema do kt binário" (Shi et al. 2022, BKT+DKT, sem Code-DKT). Em andamento neste run após o close do 02-02.
-- 02-04: INTRO-03b — slide "sinal pedagógico perdido" + STYLE.md fix linha 129 + validação fim a fim
+- 02-04: INTRO-03b — slide "sinal pedagógico perdido" + STYLE.md fix linha 129 + validação fim a fim. Em execução neste run após o close do 02-03.
 
-Decisões ad-hoc desta wave registradas para fases futuras:
+Decisões ad-hoc das waves registradas para fases futuras:
 - D-50 (02-02): "5 assignments com 50 problemas" introduzido em INTRO-01; fases 3 (EDA-01) e 4 (MODEL-01..05) não precisam reintroduzir
 - D-51 (02-02): 6 colunas-chave do ProgSnap2 (SubjectID, ProblemID, EventType, Score, ServerTimestamp, CodeStateID) listadas em INTRO-01; EDA-02 pode partir desse vocabulário sem redefinir
+- D-52 (02-03): paráfrase Shi 2022 + Report 4 (mais fiel ao paper que o phrasing-alvo inicial do RESEARCH §1.3); ancorar no vocabulário "tratam respostas como corretas/incorretas, ignorando seu conteúdo"
+- D-53 (02-03): ponte explícita KT → trabalho → CSEDM antes da crítica em slides INTRO de diagnóstico; aplicável a INTRO-03b consequência se ficar abrupto
+- D-54 (02-03): `<i>et al.</i>` ABNT normalizado no deck (8 ocorrências); precedente para fase 2 plan 02-04 e fases 3-5
+- D-55 (02-03): 3º parágrafo de escopo (domínios com respostas estruturadas) sem nomear Code-DKT mantém gate forte fase 4
 
 **Backlog visual (não bloqueante):** redesenhar `.slide-marker` com viés de computação (referências: AST, terminal, pipeline) no fim da fase 2 ou em batch com MARKER-02/03/04. Contrato de classes (`--done`/`--pending`/`__mark`) preservado; redesenho não quebra callers.
