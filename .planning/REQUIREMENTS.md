@@ -37,7 +37,7 @@ v1: 37 → 33 → 30 reqs.
 
 ### MARKER — Marcadores de fase EDM concluída
 
-- [ ] **MARKER-01**: Slide marcador após INTRO-03 sinalizando "Definição do Problema ✓" sobre as 4 fases da EDM; estética com referência a computação (a definir)
+- [x] **MARKER-01**: Slide marcador após INTRO-03 sinalizando "Definição do Problema ✓" sobre as 4 fases da EDM; estética com referência a computação (a definir)
 - [ ] **MARKER-02**: Slide marcador após EDA sinalizando "Preparação dos Dados ✓"
 - [ ] **MARKER-03**: Slide marcador após CLOSE-03 sinalizando "Modelagem e Avaliação ✓" (fim da fase 3 da EDM, antes de entrar na proposta da ferramenta TCC 2)
 - [ ] **MARKER-04**: Slide marcador após TOOL-03 sinalizando "Implantação ✓" (fim da fase 4 da EDM, antes do agradecimento)
@@ -151,7 +151,7 @@ Mapeamento requirement → fase do roadmap. Preenchido durante a criação do `R
 | REMOVE-01 | Phase 1 | Completed (`91b9675`, 2026-05-27) |
 | INTRO-01 | Phase 2 | Pending (funde antigo INTRO-01+INTRO-02) |
 | INTRO-03 | Phase 2 | Pending |
-| MARKER-01 | Phase 2 | Pending |
+| MARKER-01 | Phase 2 | Complete |
 | MARKER-02 | Phase 3 | Pending |
 | MARKER-03 | Phase 4 | Pending |
 | MARKER-04 | Phase 5 | Pending |
