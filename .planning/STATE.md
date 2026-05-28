@@ -3,18 +3,18 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-05-27T21:15:00.000Z"
+last_updated: "2026-05-28T00:45:08.725Z"
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 11
-  completed_plans: 9
-  percent: 82
+  completed_plans: 10
+  percent: 91
 ---
 
 # State: Apresentação TCC 1
 
-**Last updated:** 2026-05-27 após fechamento do plan 02-01 (MARKER-01 como stub funcional aprovado; redesenho diferido para fim da fase 2)
+**Last updated:** 2026-05-27 após fechamento do plan 02-02 (INTRO-01 entregue após 2 iterações pós-checkpoint; granularidade extra para 5 assignments e 6 colunas ProgSnap2 incorporada via D-50/D-51)
 
 ## Project Reference
 
@@ -29,7 +29,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 | # | Phase | Status |
 |---|---|---|
 | 1 | Reformatação da base | Complete (7 / 7 plans) ✓ 2026-05-27 |
-| 2 | Intro, Dataset e Problema (Fase 1 EDM) | In progress (1 / 4 plans) |
+| 2 | Intro, Dataset e Problema (Fase 1 EDM) | In progress (2 / 4 plans) |
 | 3 | EDA e Pré-processamento (Fase 2 EDM) | Pending |
 | 4 | Modelagem e Avaliação (Fase 3 EDM) | Pending |
 | 5 | Implantação, Agenda e Encerramento (Fase 4 EDM) | Pending |
@@ -46,6 +46,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 | 01-06 | REFORMAT-04, REFORMAT-05 | `590ae34`, `2a86049` | Reformatar + mover 5 slides finais em duas passadas atômicas. Task 1 (`590ae34`): cabeçalhos dos 5 slides reformatados in-place (Martins p2/p3 `> retomando o problema` D-07, slide-kcfig `> kcs semânticos extraídos` D-08, slide-fig `> evolução por dificuldade` D-09, slide-code `> o que o code-dkt olha` D-10); `<h2>` deletados (D-03); 2 citações diretas Martins preservadas (D-28). Task 2 (`2a86049`): 5 sections movidos para o fim de `<div class="slides">` na ordem D-16 (slide-code → slide-kcfig → Martins p2 → Martins p3 → slide-fig); D-17a/b/c validados. Discretion D-16: slide-code antes de slide-kcfig. Section count: 12 |
 | 01-07 | (consolidação) | `907a4b5`, `30ba911`, `9224d5f` | Fechamento da fase 1. Task 1-3 (`907a4b5`): STYLE.md reescrito (D-21) com 3 seções (cabeçalho `.deck-topic` único; regras de redação com "Apresentação de autores" + "Voz própria como padrão" no lugar da "Regra dos correlatos"; inventário de 12 slides pós-fase 1 + gaps reservados para fases 2-5). Task 4 (`30ba911`, Branch A): 4 regras CSS órfãs `.rel-kicker`/`.rel-title`/`.rel-sub` deletadas de theme-unifacens.css; demais classes do template `.slide-related` preservadas. Task 5: checkpoint humano fim-a-fim no browser APPROVED; 13/13 automated gates + 8 Success Criteria do ROADMAP confirmados. Tweaks tipográficos pós-checkpoint (`9224d5f`): `.deck-topic` em Arial bold uppercase preto; `.slide-title-tcc .tcc-label` Arial explícito; 6 classes Fonte: padronizadas em 18px Arial; slide Zorić fundido reescrito com sigla EDM padrão ABNT. Task 6: PHASE-SUMMARY agregando os 7 plans criado |
 | 02-01 | MARKER-01 | `d37304d`, `3d47be4` | Componente CSS reutilizável `.slide-marker` (host + modificadores `--done`/`--pending`, sem `border-radius`, variáveis existentes) anexado a theme-unifacens.css (linhas 358-408); section MARKER-01 inserido em index.html linhas 149-179 entre slide Yağcí fundido (linha 147) e slide-code; 4 caixas na ordem D-40 (1ª em `--done` com `&check;`, 2-4 em `--pending` com números), 3 setas, rodapé `Fonte: adaptado de Zorić (2020).`; sem `.deck-topic` (D-34d); sem em-dash (D-44); sections do deck: 12 → 13; slide acessível em `#/7`. Checkpoint humano APPROVED como stub funcional; usuário pediu redesenho do formato visual com viés de computação (AST/pipeline/terminal) DIFERIDO para fim da fase 2 ou em batch com MARKER-02/03/04 — contrato de classes preservado, callers não quebram |
+| 02-02 | INTRO-01 | `c362e9d`, `e07e37b`, `3835336` | Section INTRO-01 inserido em index.html linhas 149-164, entre Yağcí (#/6) e MARKER-01 (que desloca para #/8); reusa template `.slide-related` + `.rel-lead` + `.rel-cite` (zero CSS novo); cabeçalho `> o dataset csedm` (D-34a); voz 1ª pessoa do plural ("Nosso dataset é o CSEDM..."); 3 números brutos validados via pandas (413 estudantes, 50 problemas, 201.570 eventos) escritos como "413 estudantes, 5 assignments com 50 problemas, 201 mil eventos"; citação parentética `(Price, 2020)`; rodapé literal `Fonte: Price (2020); CSEDM 2021.`; sem em-dash (D-44); sections do deck: 13 → 14. Após checkpoint visual APPROVED, reviewer pediu 2 iterações pós-checkpoint: `e07e37b` adicionou granularidade (Spring 2019 explícito, "5 assignments com 50 problemas", parágrafo `.intro-cols-line` listando 6 colunas-chave do ProgSnap2: SubjectID, ProblemID, EventType, Score, ServerTimestamp, CodeStateID); `3835336` ajustou fraseado da coleta ("coletado durante a primavera de 2019 e divulgado") para sujeito implícito coerente. Decisões ad-hoc D-50 (5 assignments com 50 problemas) e D-51 (listar colunas-chave do ProgSnap2) registradas no 02-02-SUMMARY para fases futuras |
 
 ## Workflow
 
@@ -62,6 +63,9 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 Top commits funcionais (cronológicos):
 
+- `3835336` apresentacao: ajustar fraseado da coleta no slide INTRO-01
+- `e07e37b` apresentacao: ajustar INTRO-01 - primavera 2019, 5 assignments, colunas ProgSnap2
+- `c362e9d` apresentacao: slide INTRO-01 - dataset CSEDM (Price, 2020)
 - `3d47be4` apresentacao: slide MARKER-01 - definicao do problema (fase 2)
 - `d37304d` apresentacao: componente .slide-marker reutilizavel (fase 2)
 - `9224d5f` apresentacao: ajustes tipográficos pós-checkpoint fase 1
@@ -77,15 +81,19 @@ Top commits funcionais (cronológicos):
 
 ## Next action
 
-Continuar fase 2 com a próxima wave (plans 02-02, 02-03, 02-04):
+Continuar fase 2 com os plans restantes (02-03 e 02-04):
 
 ```
 /gsd-execute-phase 2
 ```
 
-Plan 02-01 (MARKER-01) concluído como stub funcional aprovado. Próximos plans da fase 2:
-- 02-02: INTRO-01 — slide "o dataset csedm" (CSEDM em ProgSnap2, voz 1ª pessoa)
-- 02-03: INTRO-03a — slide "o problema do kt binário" (Shi et al. 2022, BKT+DKT, sem Code-DKT)
+Plans 02-01 (MARKER-01, stub) e 02-02 (INTRO-01) concluídos. Próximos:
+
+- 02-03: INTRO-03a — slide "o problema do kt binário" (Shi et al. 2022, BKT+DKT, sem Code-DKT). Em andamento neste run após o close do 02-02.
 - 02-04: INTRO-03b — slide "sinal pedagógico perdido" + STYLE.md fix linha 129 + validação fim a fim
+
+Decisões ad-hoc desta wave registradas para fases futuras:
+- D-50 (02-02): "5 assignments com 50 problemas" introduzido em INTRO-01; fases 3 (EDA-01) e 4 (MODEL-01..05) não precisam reintroduzir
+- D-51 (02-02): 6 colunas-chave do ProgSnap2 (SubjectID, ProblemID, EventType, Score, ServerTimestamp, CodeStateID) listadas em INTRO-01; EDA-02 pode partir desse vocabulário sem redefinir
 
 **Backlog visual (não bloqueante):** redesenhar `.slide-marker` com viés de computação (referências: AST, terminal, pipeline) no fim da fase 2 ou em batch com MARKER-02/03/04. Contrato de classes (`--done`/`--pending`/`__mark`) preservado; redesenho não quebra callers.

@@ -52,9 +52,9 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 3. Slide MARKER-01 mostra as 4 fases da EDM com "Definição do Problema" sinalizado como concluído, com estética computação-themed definida durante execução
 4. Sequência completa do deck (REFORMAT base + nova abertura) navega do início ao slide MARKER-01 sem quebra
 
-**Plans:** 1/4 plans executed
+**Plans:** 2/4 plans executed
 - [x] 02-01-PLAN.md, MARKER-01: componente reutilizável .slide-marker + slide "Definição do Problema ✓" (D-39..D-41, D-34d) ✓ 2026-05-27 (commits `d37304d`, `3d47be4`; aprovado como STUB, redesenho visual diferido)
-- [ ] 02-02-PLAN.md, INTRO-01: slide "o dataset csedm" (CSEDM em ProgSnap2, 413/50/201 mil, voz 1ª pessoa) (D-34a, D-35, D-38)
+- [x] 02-02-PLAN.md, INTRO-01: slide "o dataset csedm" (CSEDM em ProgSnap2, 413/50/201 mil, voz 1ª pessoa) (D-34a, D-35, D-38)
 - [ ] 02-03-PLAN.md, INTRO-03a: slide "o problema do kt binário" (Shi et al. 2022, BKT+DKT, sem Code-DKT) (D-34b, D-36, D-43)
 - [ ] 02-04-PLAN.md, INTRO-03b: slide "sinal pedagógico perdido" + STYLE.md fix linha 129 + validação fim a fim (D-34c, D-37, D-32, D-47)
 
