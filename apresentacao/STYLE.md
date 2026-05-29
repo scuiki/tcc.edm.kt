@@ -34,7 +34,7 @@ são `apresentacao/index.html` (marcação dos slides) e
 - O acento de terminal (`>` e caret) permanece em **mono** (Cascadia). Só os
   títulos/corpo são Arial.
 
-## Cabeçalho de todo slide após a AGENDA
+## Cabeçalho de TODO slide (incluindo AGENDA)
 
 Padrão obrigatório: **uma única linha de cabeçalho** com o nome da seção, em
 formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
@@ -43,15 +43,17 @@ formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
 <p class="deck-topic"><span class="ps1">&gt;</span>nome da seção<span class="caret blink"></span></p>
 ```
 
-- Classe única: `.deck-topic`. Aplica a TODOS os slides de conteúdo (após a AGENDA),
-  incluindo os que antes usavam o template `.slide-related` com par
-  `.rel-kicker.kicker` + `.rel-title` + `.rel-sub`.
+- Classe única: `.deck-topic`. Aplica a TODOS os slides de conteúdo,
+  **incluindo a AGENDA** (refator em fase 5), com exceção da capa
+  (`slide-cover-brand`), do título do TCC (`slide-title-tcc`), dos marcadores
+  (`slide-marker`, que usam `.marker-title`) e do slide de encerramento
+  (`slide-end`).
 - Texto do cabeçalho: minúsculo, em Cascadia (`--mono`) 24px, cor `#5b6472`, com
-  o `>` em azul UniFacens (`--uni-blue`). Exemplos travados na fase 1:
-  `> introdução`, `> mineração de dados educacionais`, `> as quatro fases da edm`,
-  `> da edm ao knowledge tracing`, `> retomando o problema`,
-  `> kcs semânticos extraídos`, `> evolução por dificuldade`,
-  `> o que o code-dkt olha`.
+  o `>` em azul UniFacens (`--uni-blue`). Exemplos travados nas fases 1 e 5:
+  `> agenda`, `> introdução`, `> mineração de dados educacionais`,
+  `> as quatro fases da edm`, `> da edm ao knowledge tracing`,
+  `> retomando o problema`, `> kcs semânticos extraídos`,
+  `> evolução por dificuldade`, `> o que o code-dkt olha`.
 - Nome do autor **não aparece** no corpo, nem em `<h2>`, nem em `.rel-sub`. Migra
   para a linha "Fonte:" no rodapé do slide (ver `Convenções de citação`).
 - Caret piscante (`<span class="caret blink">`) como último filho de
