@@ -34,7 +34,7 @@ são `apresentacao/index.html` (marcação dos slides) e
 - O acento de terminal (`>` e caret) permanece em **mono** (Cascadia). Só os
   títulos/corpo são Arial.
 
-## Cabeçalho de TODO slide (incluindo AGENDA)
+## Cabeçalho de todo slide após a AGENDA
 
 Padrão obrigatório: **uma única linha de cabeçalho** com o nome da seção, em
 formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
@@ -43,17 +43,18 @@ formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
 <p class="deck-topic"><span class="ps1">&gt;</span>nome da seção<span class="caret blink"></span></p>
 ```
 
-- Classe única: `.deck-topic`. Aplica a TODOS os slides de conteúdo,
-  **incluindo a AGENDA** (refator em fase 5), com exceção da capa
-  (`slide-cover-brand`), do título do TCC (`slide-title-tcc`), dos marcadores
-  (`slide-marker`, que usam `.marker-title`) e do slide de encerramento
-  (`slide-end`).
+- Classe única: `.deck-topic`. Aplica a TODOS os slides de conteúdo (após a AGENDA),
+  com exceção da capa (`slide-cover-brand`), do título do TCC (`slide-title-tcc`),
+  da AGENDA (`slide-agenda`, padrão UniFacens com faixa azul e `<h2>Agenda</h2>`),
+  dos marcadores (`slide-marker`, que usam `.marker-title`) e do slide de
+  encerramento (replica de `slide-cover-brand`).
 - Texto do cabeçalho: minúsculo, em Cascadia (`--mono`) 24px, cor `#5b6472`, com
   o `>` em azul UniFacens (`--uni-blue`). Exemplos travados nas fases 1 e 5:
-  `> agenda`, `> introdução`, `> mineração de dados educacionais`,
+  `> introdução`, `> mineração de dados educacionais`,
   `> as quatro fases da edm`, `> da edm ao knowledge tracing`,
   `> retomando o problema`, `> kcs semânticos extraídos`,
-  `> evolução por dificuldade`, `> o que o code-dkt olha`.
+  `> evolução por dificuldade`, `> o que o code-dkt olha`,
+  `> proposta da aplicação`.
 - Nome do autor **não aparece** no corpo, nem em `<h2>`, nem em `.rel-sub`. Migra
   para a linha "Fonte:" no rodapé do slide (ver `Convenções de citação`).
 - Caret piscante (`<span class="caret blink">`) como último filho de
@@ -113,7 +114,7 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 |---|---|---|---|
 | 0 | slide-cover-brand | (sem cabeçalho temático) | Abertura (logo + tagline `> educational data mining e knowledge tracing`) |
 | 1 | slide-title-tcc | (sem cabeçalho) | Capa do TCC (autores em grafite) |
-| 2 | slide-related | `> agenda` | AGENDA-01: 4 fases EDM como sumário (refatorada in-place na fase 5) |
+| 2 | slide-agenda | (sem cabeçalho temático, `<h2>Agenda</h2>` na faixa azul) | AGENDA-01: 9 seções narrativas do deck (Introdução, Definição do Problema, Dataset CSEDM, EDA, Modelagem com Code-DKT, Extração de KCs, Resultados, Proposta da Aplicação, Encerramento); padrão UniFacens com faixa azul restaurado pós-fase 5 |
 | 3 | slide-related | `> introdução` | Recorte do problema (Martins, Marin e Alves, 2024) |
 | 4 | slide-related | `> mineração de dados educacionais` | EDM como processo (Zorić, 2020), fundido p1+p2 |
 | 5 | slide-phases | `> as quatro fases da edm` | As 4 fases (Zorić, 2020) |
@@ -157,8 +158,10 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 - `.bkt-groups` (`.bkt-group` > `.bkt-group__head`/`.bkt-group__cap` + `.param` >
   `.sym` + `.lbl`): dois pares de parâmetros do BKT (aprendizado × desempenho);
   `.bkt-close` é o parágrafo de fecho sobre a inferência do estado.
-- `.agenda-edm-list`: lista numerada vertical da AGENDA-01 (uso único; contador azul
-  UniFacens, Arial 23px line-height 1.4, max-width 900px). Adicionada na fase 5.
+- `.slide-agenda` (`.agenda-side`, `.agenda-main`, `.agenda-list`): template UniFacens
+  com faixa azul à esquerda + logo Facens grande + `<h2>Agenda</h2>` + bullets em
+  Cascadia mono com `>` azul. Restaurado pós-fase 5 para abrigar as 9 seções
+  narrativas do deck (override do refator AGENDA da fase 5 plan 05-02).
 - `.marker-pill--planned`: modificador aditivo do `.slide-marker` (estado "futuro
   previsto"; borda tracejada cinza azulado `#5b6472`, sem animação; distinguível de
   `--pending` sólido e `--running` que anima). Adicionado na fase 5.
