@@ -79,14 +79,15 @@ Hipóteses até serem implementadas e validadas no browser.
 - [ ] **NEW-18**: Slide com gráfico Code-DKT (`slide-fig` existente, validar e reformatar) mostrando progressão por dificuldade
 
 **Fase 4 EDM (Implantação no TCC 2):**
-- [ ] **NEW-19**: Slide proposta da ferramenta TCC 2 + pipeline mini-horizontal — baseada em `docs/tcc2_prototipo.html`; sequência (entrada de submissões dos alunos → extração de KCs → professor valida → preparação → Code-DKT → dashboard) sem detalhar cada etapa; pipeline espelha o que já foi mostrado nas fases 2-4 (funde NEW-19 e NEW-20 originais)
-- [ ] **NEW-21**: Slide dashboard — respostas de código por aluno, predição de conhecimento por estudante, dificuldade da turma por KC
+- [x] **NEW-19** (TOOL-01): Slide proposta da aplicação + fluxograma 6 etapas (Import ProgSnap2 → Extração KCs → Docente valida → Preparação → Code-DKT → Dashboard) — fase 5 plan 05-05, commit `efa716a`. CSS Grid para largura uniforme; pivot D-104b absorve REQ TOOL-03 como última etapa.
+- [x] **NEW-21** (TOOL-03): Absorvido pela última etapa "Dashboard" do TOOL-01 (pivot D-104b da fase 5; o wireframe original de 3 painéis foi inserido e revertido após checkpoint visual rejeitar mockup prematuro) — fase 5 plan 05-04 SUMMARY documenta o pivot.
 
 **Encerramento:**
-- [ ] **NEW-22**: Slide de agradecimento
+- [x] **NEW-22** (END-01): Slide de encerramento "Obrigado." como réplica do slide-cover-brand (bracket narrativo com #/0) — fase 5 plan 05-03 v2, commit `5930733`. Reusa classe `slide-cover-brand` sem CSS novo; tagline `> obrigado` com caret blink em fundo azul UniFacens.
+- [x] **MARKER-04**: Slide marcador "Fase 4 EDM — Implantação `--planned`" inserido ao fim do deck — fase 5 plan 05-01, commits `e752fce` (CSS) + `d27f166` (HTML). Novo modificador `.marker-pill--planned` aditivo (borda tracejada cinza azulado, sem animação); honesto: TCC 2 implementará.
 
 **Decisões pendentes:**
-- [ ] **PENDING-01**: Decidir conteúdo e forma do slide Agenda (provavelmente as 4 fases da EDM como sumário, mas a definir depois de montar os slides do meio)
+- [x] **PENDING-01** (AGENDA-01): Resolvido na fase 5 plan 05-02. Slide AGENDA refatorado in-place para template `.slide-related` com cabeçalho `> agenda` e lista numerada `.agenda-edm-list` das 4 fases EDM (Definição do Problema, Preparação dos Dados, Modelagem e Avaliação, Implantação). Commit `01bead5` + cleanup CSS órfão `68c638e` + STYLE.md override `35a0b34`.
 - [ ] **PENDING-02**: Definir qual gráfico de insight de estudantes entra no slide NEW-07
 - [ ] **PENDING-04**: Validar o gráfico Code-DKT antes do NEW-18 (memória `project_codedkt_kc_difficulty` indica re-treino por desalinhamento do `pred_df` salvo)
 
@@ -183,6 +184,10 @@ Este é um trabalho científico. Os princípios abaixo são vinculantes durante 
 | Retomada Martins (CLOSE-01/02/03) é o eixo prioritário da defesa; TCC 2 espelha as fases anteriores sem repetir o pipeline; ProgSnap2 é nominalmente único em INTRO-01 | Feedback da orientadora 2026-05-27: 10 min é apertado, cortar detalhamentos, validar tudo no Martins antes de mostrar a ferramenta. Implicações: MODEL-06 fundido em MODEL-05 (Duan + pipeline), TOOL-02 fundido em TOOL-01 (proposta + pipeline mini-horizontal), MODEL-08 + PENDING-03 cortados, EDA-01 sem ProgSnap2, "entrada de submissões dos alunos" em vez de "entrada ProgSnap2" nas menções à ferramenta | ✓ Confirmado |
 | Paráfrase indireta com autor parentético é o padrão de voz; citação direta literal só quando a frase específica é o argumento | Feedback da orientadora 2026-05-27 (2ª rodada): o foco da defesa é NOSSO trabalho. Citação direta tira protagonismo dos autores da defesa e gasta tempo de leitura. Implicações: MERGE-01 (Zorić fundido) reescrita como paráfrase ("nosso trabalho aplica EDM..."), REFORMAT-03 (Yağcí fundido) reescrita como paráfrase ("Yağcı mostrou X. Nós seguimos o passo seguinte..."), slides novos nascem com paráfrase. Exceção legítima: CLOSE-01 e CLOSE-02 (Martins p2/p3) MANTÊM citação direta porque "13 autores" / "10 autores" são o argumento quantitativo | ✓ Confirmado |
 | Cortes adicionais (2ª rodada): INTRO-01+02 fundidos ("nosso dataset" único); MODEL-01+02 fundidos (Code-DKT funcionamento + AST inset); MODEL-07 cortado (lista de KCs redundante com slide-kcfig mapeamento) | Feedback da orientadora 2026-05-27 (2ª rodada): "ainda são slides demais". Análise mostrou 3 cortes seguros sem perder cronologia. v1 cai de 33 para 30 reqs | ✓ Confirmado |
+| Vocabulário "aplicação" no lugar de "ferramenta" nos slides; REQ-IDs TOOL-01/TOOL-03 não renomeados | D-92 fase 5: a entrega é uma aplicação que contém ferramentas internas (extração de KCs, modelo de ML); REQ-IDs são identificadores estáveis e o vocabulário "ferramenta" fica preservado em ROADMAP/REQUIREMENTS/PROJECT como vocabulário histórico-projeto | ✓ Confirmado |
+| AGENDA-01 incorporada ao padrão `.deck-topic` (override do STYLE.md linha 39-42) | D-93b fase 5: consistência visual com todo o deck pós-AGENDA; a AGENDA original destoava com `<h2>Agenda</h2>` + faixa azul `.agenda-side` + logo grande. Refatorada in-place para template `.slide-related` com lista numerada `.agenda-edm-list` | ✓ Confirmado |
+| TOOL-03 (wireframe dashboard) absorvido como última etapa do TOOL-01 (pivot mid-fase 5) | D-104b fase 5: reviewer rejeitou mockup prematuro no checkpoint visual; o conceito "dashboard final entregue ao professor" cabe melhor como etapa do fluxograma único da aplicação, evitando duplicação narrativa entre pipeline conceitual e mockup visual | ✓ Confirmado |
+| ProgSnap2 nominal no fluxograma TOOL-01 (override D-94h da fase 5) | D-104d fase 5: ProgSnap2 já foi apresentado em INTRO-01 (#/10); recapitular como input no fluxograma reforça a continuidade técnica e ancora a aplicação num formato concreto. Vale só para o TOOL-01; demais menções da aplicação preservam o gate D-94h | ✓ Confirmado |
 
 ## Evolution
 
@@ -201,4 +206,4 @@ This document evolves at phase transitions and milestone boundaries.
 3. Auditar Out of Scope: itens deferidos (texto do TCC, notebook 10, ferramenta TCC 2) sobem para próximo milestone
 
 ---
-*Last updated: 2026-05-27 after initialization*
+*Last updated: 2026-05-29 — fase 5 (Implantação, Agenda e Encerramento) concluída; deck final 30 sections; milestone "Apresentação TCC 1" pronto para defesa (pendente apenas ensaio cronometrado)*
