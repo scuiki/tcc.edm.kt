@@ -113,25 +113,6 @@ html, .reveal-viewport { background-color: #15171c; }
 .tcc-advisor { font-size: 28px; font-weight: 600; color: #fff; margin-top: 42px; }
 
 /* ===========================================================================
-   SLIDE 3  ·  Agenda (faixa azul à esquerda, mais larga + itens digitados)
-   =========================================================================== */
-.slide-agenda { display: flex; background: var(--uni-light); }
-.slide-agenda .agenda-side {
-  width: 27%; flex: none; background: var(--uni-blue); color: #fff;
-  display: flex; flex-direction: column; justify-content: space-between;
-  padding: 64px 36px; box-sizing: border-box;
-}
-.slide-agenda .agenda-side h2 { font-size: 44px; font-weight: 600; margin-top: 24px; }
-.slide-agenda .agenda-side .logo { width: 150px; }
-.slide-agenda .agenda-main {
-  flex: 1; display: flex; flex-direction: column; justify-content: center;
-  padding: 56px 60px; box-sizing: border-box;
-}
-.agenda-list { list-style: none; margin: 0; padding: 0; width: 100%; --caret-color: var(--uni-blue); }
-.agenda-list li { font-family: var(--mono); font-size: 27px; color: var(--uni-ink); padding: 9px 0; }
-.agenda-list li .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 12px; }
-
-/* ===========================================================================
    SLIDE 5  ·  As 4 fases do EDM — lista numerada formal (Arial) · Zorić (2020)
    =========================================================================== */
 .slide-phases { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; --caret-color: var(--uni-blue); }
