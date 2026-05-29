@@ -114,7 +114,7 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 |---|---|---|---|
 | 0 | slide-cover-brand | (sem cabeçalho temático) | Abertura (logo + tagline `> educational data mining e knowledge tracing`) |
 | 1 | slide-title-tcc | (sem cabeçalho) | Capa do TCC (autores em grafite) |
-| 2 | slide-agenda | (sem cabeçalho temático, `<h2>Agenda</h2>` na faixa azul) | AGENDA-01: 9 seções narrativas do deck (Introdução, Definição do Problema, Dataset CSEDM, EDA, Modelagem com Code-DKT, Extração de KCs, Resultados, Proposta da Aplicação, Encerramento); padrão UniFacens com faixa azul restaurado pós-fase 5 |
+| 2 | slide-agenda | (sem cabeçalho temático, `<h2>Agenda</h2>` na faixa azul) | AGENDA-01: 9 seções narrativas do deck (Introdução, Definição do problema, Dataset CSEDM, Preparação dos dados, Modelagem, Extração de KCs, Resultados, Proposta da aplicação, Encerramento); padrão UniFacens com faixa azul restaurado pós-fase 5; bullets em Arial sentence case |
 | 3 | slide-related | `> introdução` | Recorte do problema (Martins, Marin e Alves, 2024) |
 | 4 | slide-related | `> mineração de dados educacionais` | EDM como processo (Zorić, 2020), fundido p1+p2 |
 | 5 | slide-phases | `> as quatro fases da edm` | As 4 fases (Zorić, 2020) |
