@@ -131,10 +131,10 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 | 19 | slide-code | `> o que o code-dkt olha` | MODEL-03: atenção do Code-DKT no operador `&&` da submissão real do CSEDM (Code-DKT, Shi et al., 2022) |
 | 20 | slide-related | `> code-dkt no csedm` | MODEL-04: Tabela 2 ABNT 4 modelos × 5 assignments (vírgula decimal pt-BR; linha Shi com en-dash) |
 | 21 | slide-related slide-bridge | `> extração automática de kcs` | MODEL-05: pipeline 5 etapas Sampling → LLM → Clustering → Rotulagem → Q-matrix (Duan et al., 2025) |
-| 22 | slide-kcfig | `> kcs semânticos extraídos` | Mapeamento KCs (saída do pipeline MODEL-05) para dificuldades de Martins, Marin e Alves (2024) |
-| 23 | slide-problem | `> retomando o problema` | CLOSE-01: Martins p2 (13 autores; citação direta mantida porque o número é o argumento) |
-| 24 | slide-problem | `> retomando o problema` | CLOSE-02: Martins p3 (10 autores; idem) |
-| 25 | slide-fig | `> evolução por dificuldade` | CLOSE-03: Curva de aprendizado do Code-DKT por sub-dificuldade (curves_by_martins, PENDING-04 resolved) |
+| 22 | slide-problem | `> retomando o problema` | CLOSE-01: Martins p2 (13 autores; quote sem destaque, src preto, Arial; citação direta mantida porque o número é o argumento) |
+| 23 | slide-problem | `> retomando o problema` | CLOSE-02: Martins p3 (10 autores; idem) |
+| 24 | slide-kcfig | `> kcs semânticos extraídos` | Mapeamento KCs (saída do pipeline MODEL-05) para dificuldades de Martins, Marin e Alves (2024); brief text + Figura ABNT + blocos estilo bridge-seq |
+| 25 | slide-fig | `> evolução por dificuldade` | CLOSE-03: Curva de aprendizado do Code-DKT por sub-dificuldade (curves_by_martins, PENDING-04 resolved); brief text + Figura ABNT, sem fig-read |
 | 26 | slide-marker--phase3 | (sem temático) | MARKER-03 — Fase 3 EDM concluída (Implantação running) |
 
 **Estado do deck:** 27 slides após a fase 4 (era 21 pós-fase 3; 5 novos da fase 4 inseridos: INTRO-KC adendo + MODEL-01a + MODEL-01b + MODEL-04 + MODEL-05 + MARKER-03 menos a fusão MODEL-01 → MODEL-01a+01b = +6 slides; reformulado o `.slide-code` CSS para consistência com `.slide-related`).
