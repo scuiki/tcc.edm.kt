@@ -181,6 +181,28 @@ html, .reveal-viewport { background-color: #15171c; }
 .slide-related .rel-src { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; margin-top: 14px; }
 .slide-related .rel-cite { margin-top: auto; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; }
 
+/* ---------------------------------------------------------------------------
+   AGENDA (refator fase 5): lista numerada das 4 fases EDM dentro do template
+   .slide-related; cabeçalho `> agenda` (.deck-topic) + .agenda-edm-list com
+   contadores azuis UniFacens. Override D-93b do STYLE.md.
+   --------------------------------------------------------------------------- */
+.agenda-edm-list {
+  list-style: none; counter-reset: agenda;
+  margin: 32px 0 0; padding: 0; max-width: 900px;
+  --caret-color: var(--uni-blue);
+}
+.agenda-edm-list li {
+  counter-increment: agenda; position: relative;
+  padding: 10px 0 10px 50px;
+  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-size: 23px; line-height: 1.4; color: var(--uni-ink);
+}
+.agenda-edm-list li::before {
+  content: counter(agenda) ".";
+  position: absolute; left: 12px; top: 10px;
+  color: var(--uni-blue); font-weight: 700;
+}
+
 /* ===========================================================================
    SLIDE · Ferramentas e metodologias da EDM (ponte para as 4 fases · Zorić)
    texto técnico em prosa (Arial, justificado), conforme o manual
