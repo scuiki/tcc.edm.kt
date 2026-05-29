@@ -206,4 +206,4 @@ This document evolves at phase transitions and milestone boundaries.
 3. Auditar Out of Scope: itens deferidos (texto do TCC, notebook 10, ferramenta TCC 2) sobem para próximo milestone
 
 ---
-*Last updated: 2026-05-29 — fase 5 (Implantação, Agenda e Encerramento) concluída; deck final 30 sections; milestone "Apresentação TCC 1" pronto para defesa (pendente apenas ensaio cronometrado)*
+*Last updated: 2026-05-29 — fase 5 concluída + 2 refatorações pós-fase aplicadas (AGENDA restaurada ao padrão UniFacens com 9 seções narrativas em uppercase bold; slides #/4+#/5 fundidos num único `slide-phases` com descrição EDM + 4 fases de Zorić). Deck final 29 sections. Milestone "Apresentação TCC 1" pronto para defesa (pendente ensaio cronometrado).*
