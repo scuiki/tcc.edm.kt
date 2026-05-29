@@ -105,7 +105,7 @@ background:#fff; border:1.5px solid #1f1f1f; border-radius:0;  /* cantos retos *
 Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 `.bridge-seq .step` (slide-ponte). Cada figura/diagrama leva `Fonte:` abaixo.
 
-## Inventário de slides (ordem atual, pós-fase 3)
+## Inventário de slides (ordem atual, pós-fase 4)
 
 | # | classe | cabeçalho | conteúdo |
 |---|---|---|---|
@@ -125,18 +125,23 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 | 13 | slide-related | `> engajamento e desempenho` | EDA-04: Figura 2 com X-Grade por número de assignments completados |
 | 14 | slide-related | `> aproximação ao protocolo` | EDA-02: pré-processamento e ponte 413 → 410 → 328/82; 23,68% confirma o match com Shi et al. (2022) |
 | 15 | slide-marker--phase2 | (sem temático) | MARKER-02 — Fase 2 EDM concluída |
-| 16 | slide-code | `> o que o code-dkt olha` | Atenção do Code-DKT no operador `&&` da submissão real do CSEDM (Code-DKT, Shi et al., 2022) |
-| 17 | slide-kcfig | `> kcs semânticos extraídos` | Mapeamento KCs (pipeline LLM, Duan et al., 2025) para dificuldades de Martins, Marin e Alves (2024) |
-| 18 | slide-problem | `> retomando o problema` | Dificuldades dos estudantes (Martins p2, 13 autores; citação direta mantida porque o número é o argumento) |
-| 19 | slide-problem | `> retomando o problema` | Dentro dos conceitos técnicos (Martins p3, 10 autores; idem) |
-| 20 | slide-fig | `> evolução por dificuldade` | Curva de aprendizado do Code-DKT por sub-dificuldade |
+| 16 | slide-related | `> conhecimento como componentes` | INTRO-KC: definição de KCs (Corbett e Anderson, 1995) + nossa escolha (KC = ProblemID, protocolo Shi et al., 2022) |
+| 17 | slide-related | `> o modelo escolhido` | MODEL-01a: escolha do Code-DKT + linha do tempo horizontal BKT (1995) → DKT (2015) → Code-DKT (2022) |
+| 18 | slide-related | `> dentro do code-dkt` | MODEL-01b: pipeline interno (javalang → AST → code2vec → atenção → LSTM) + AST como Figura ABNT |
+| 19 | slide-code | `> o que o code-dkt olha` | MODEL-03: atenção do Code-DKT no operador `&&` da submissão real do CSEDM (Code-DKT, Shi et al., 2022) |
+| 20 | slide-related | `> code-dkt no csedm` | MODEL-04: Tabela 2 ABNT 4 modelos × 5 assignments (vírgula decimal pt-BR; linha Shi com en-dash) |
+| 21 | slide-related slide-bridge | `> extração automática de kcs` | MODEL-05: pipeline 5 etapas Sampling → LLM → Clustering → Rotulagem → Q-matrix (Duan et al., 2025) |
+| 22 | slide-kcfig | `> kcs semânticos extraídos` | Mapeamento KCs (saída do pipeline MODEL-05) para dificuldades de Martins, Marin e Alves (2024) |
+| 23 | slide-problem | `> retomando o problema` | CLOSE-01: Martins p2 (13 autores; citação direta mantida porque o número é o argumento) |
+| 24 | slide-problem | `> retomando o problema` | CLOSE-02: Martins p3 (10 autores; idem) |
+| 25 | slide-fig | `> evolução por dificuldade` | CLOSE-03: Curva de aprendizado do Code-DKT por sub-dificuldade (curves_by_martins, PENDING-04 resolved) |
+| 26 | slide-marker--phase3 | (sem temático) | MARKER-03 — Fase 3 EDM concluída (Implantação running) |
 
-**Estado do deck:** 21 slides após a fase 3 (era 16 pós-fase 2; 4 novos da fase 3 inseridos no gap após MARKER-01 mais 1 EDA-04 adicionado durante o checkpoint; INTRO-01 movido da seção Introdução para abrir a Fase 2 EDM).
+**Estado do deck:** 27 slides após a fase 4 (era 21 pós-fase 3; 5 novos da fase 4 inseridos: INTRO-KC adendo + MODEL-01a + MODEL-01b + MODEL-04 + MODEL-05 + MARKER-03 menos a fusão MODEL-01 → MODEL-01a+01b = +6 slides; reformulado o `.slide-code` CSS para consistência com `.slide-related`).
 
-**Gaps reservados para fases 4-5:**
+**Gaps reservados para fase 5:**
 
-- Antes do trio Martins+fig (entre MARKER-02/slide-code e Martins p2): MODEL-01, MODEL-03, MODEL-04, MODEL-05 (fase 4); slide-code vira MODEL-03 reaproveitado; slide-kcfig é a saída do pipeline MODEL-05; slide-fig é o CLOSE-03.
-- Após slide-fig: MARKER-03 (fim da fase 4 da EDM); depois TOOL-01, TOOL-03, MARKER-04, END-01 (fase 5); AGENDA-01 revisado.
+- Após MARKER-03 (fim da fase 4 da EDM): TOOL-01 (proposta da ferramenta TCC 2 com pipeline mini-horizontal), TOOL-03 (dashboard), MARKER-04 (fim da fase 4 EDM = Implantação ✓), END-01 (agradecimento); AGENDA-01 revisado para refletir a estrutura final entregue.
 
 **Linhagem de KT (preenchida em fases futuras):** Corbett e Anderson (1995) volta na cronologia do MODEL-01 (fase 4), seguida por Piech (2015) DKT e Shi (2022) Code-DKT. Yağcı (2022) ocupa o slide-bridge (slide 6) e Duan (2025) é introduzido no MODEL-05 (fase 4).
 
