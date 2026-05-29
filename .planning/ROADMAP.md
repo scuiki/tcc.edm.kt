@@ -92,7 +92,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 **Plans:** 5 plans (executar via `/gsd-execute-phase 4`)
 - [x] 04-01-PLAN.md — MODEL-01: split em 2 slides durante checkpoint (MODEL-01a `> o modelo escolhido` + MODEL-01b `> dentro do code-dkt`) ✓ 2026-05-28 (commit `4f2bc3f`)
 - [x] 04-02-PLAN.md — MODEL-04: code-dkt no csedm (tabela ABNT .eda-grid 4 modelos × 5 assignments vs Shi) ✓ 2026-05-28 (commit `7a9ae9a`)
-- [ ] 04-03-PLAN.md — MODEL-05: extração automática de kcs (pipeline 5 etapas; Duan et al. 2025)
+- [x] 04-03-PLAN.md — MODEL-05: extração automática de kcs (pipeline 5 etapas; Duan et al. 2025) ✓ 2026-05-28 (commit `f093a9b`)
 - [ ] 04-04-PLAN.md — CLOSE-03 + PENDING-04: pick visual do gráfico Code-DKT (4 candidatos no checkpoint) + cobertura no-op CLOSE-01/02
 - [ ] 04-05-PLAN.md — MARKER-03: Modelagem e Avaliação ✓ (pill 4 running) + STYLE.md inventário pós-fase 4
 
