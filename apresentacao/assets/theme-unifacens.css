@@ -128,7 +128,7 @@ html, .reveal-viewport { background-color: #15171c; }
   padding: 56px 60px; box-sizing: border-box;
 }
 .agenda-list { list-style: none; margin: 0; padding: 0; width: 100%; --caret-color: var(--uni-blue); }
-.agenda-list li { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 23px; color: var(--uni-ink); padding: 7px 0; }
+.agenda-list li { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 23px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; color: var(--uni-ink); padding: 7px 0; }
 .agenda-list li .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 12px; }
 
 /* ===========================================================================
