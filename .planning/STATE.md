@@ -8,13 +8,13 @@ progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 21
-  completed_plans: 22
+  completed_plans: 23
   percent: 100
 ---
 
 # State: Apresentação TCC 1
 
-**Last updated:** 2026-05-28 após fechamento da Wave 3 da fase 4 (plan 04-03 MODEL-05 entregue com pipeline horizontal 5 caixas como Figura ABNT + Duan na abertura + parágrafo explicativo sobre extração de KCs de respostas corretas; 25 sections; commit `f093a9b`)
+**Last updated:** 2026-05-29 após fechamento da Wave 4 da fase 4 (plan 04-04 CLOSE-03 + PENDING-04 resolvido com pick: 1 (curves_by_martins) + fix comentário HTML linha 653 Pitfall 9 + D-82 honrado no-op CLOSE-01/02; 25 sections; commit `7e67b74`)
 
 ## Project Reference
 
@@ -52,6 +52,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 | 04-01 | MODEL-01, MODEL-03 | `4f2bc3f` | Plan dividido em 2 slides durante checkpoint visual. MODEL-01a (#/16) `> o modelo escolhido`: frase de justificativa 1ª pessoa do plural (Shi <i>et al.</i>, 2022) + cronologia horizontal com 3 marcadores (1995 Corbett e Anderson, 2015 Piech <i>et al.</i>, 2022 Shi <i>et al.</i>, último dot em azul UniFacens). MODEL-01b (#/17) `> dentro do code-dkt`: frase conceitual + pipeline esquerda-alinhado com setas em 1 linha (`<b><i>Pipeline</i> Code-DKT:</b> javalang → AST → code2vec → atenção → LSTM`) + AST limpa max 460px com título ABNT en-dash + Fonte 14px cinza. SVG da AST trimado (viewBox `0 0 560 620` → `0 0 560 410`, legenda "Figura 2:" embutida removida). MODEL-03 absorvido como no-op (slide-code reaproveitado adiante). Decisões ad-hoc D-79g (split do plan), D-79h (cronologia sem chips), D-79i (pipeline setas em vez de prosa), D-79j (SVG trim em vez de wrapper), D-79k (header `> o modelo escolhido`) registradas em 04-01-SUMMARY. Sections do deck: 21 → 23 (+2); slide-code desloca de #/16 para #/18; checkpoint visual APPROVED após 5 iterações (3 textuais + 1 split estrutural + 1 ajuste final) |
 | 04-02 | MODEL-04 | `7a9ae9a` | Section MODEL-04 inserida entre slide-code (#/18) e slide-kcfig (que desloca para #/20). Cabeçalho `> code-dkt no csedm`; intro `.rel-lead` em 1ª pessoa do plural ("Comparamos os três modelos..."); título `Tabela 2 – <i>First-attempt</i> AUC...` em `.eda-title`; tabela `.eda-grid` 4 linhas (BKT, DKT, Code-DKT, Shi (2022)*) × 6 colunas (Modelo + A439..A502) com vírgula decimal pt-BR; 4 células Shi em `&ndash;` exceto A439=75,74%; caption discreto pós-tabela (Pitfall 8 + Shi §5); rodapé `Fonte: elaborado pelo autor (10 seeds); Shi <i>et al.</i> (2022) Table 2.` em `.eda-source`. Plan executado autônomo (sem checkpoint humano) por se tratar de tabela determinística D-78g; 14/14 acceptance criteria passaram (incluindo HTTP 200 smoke test na porta 8003). Sections do deck: 23 → 24; Code-DKT vence DKT em 4/5 assignments (A439 -2,29pp é inversão conhecida); delta Code-DKT A439 vs Shi paper = -2,47pp (dentro ±3pp do CLAUDE.md) |
 | 04-03 | MODEL-05 | `f093a9b` | Section MODEL-05 inserida entre MODEL-04 (#/18) e slide-kcfig (que desloca para #/20). Cabeçalho `> extração automática de kcs`; abertura cita Duan na 1ª frase ("Construímos um <i>pipeline</i> de cinco etapas, baseado em Duan <i>et al.</i> (2025), para extrair <i>knowledge components</i> do CSEDM."); pipeline como Figura ABNT com `.eda-title` "Figura – Pipeline de extração automática de KCs" + 5 caixas `.bridge-seq` com flex-direction column inline (verbo / descrição empilhados, sem bold, preto #000) na ordem Sampling n=5 → LLM → Clustering → Rotulagem → Q-matrix + `.eda-source` "elaborado pelo autor; adaptado de Duan <i>et al.</i> (2025)"; parágrafo final substitui "código bruto vs AST" do PLAN.md por explicação sobre por que extraímos KCs das respostas corretas (CSEDM sem enunciados; n=5 amostragem). Decisões ad-hoc D-79l (rejeição do fallback CSS narrow), D-79m (Duan na abertura), D-79n (parágrafo CSEDM substitui código-vs-AST), D-79o (pipeline como Figura), D-79p (preto puro #000 inline), D-79q (knowledge components minúsculo). 4 iterações de design durante checkpoint. Sections do deck: 24 → 25 |
+| 04-04 | CLOSE-01, CLOSE-02, CLOSE-03, PENDING-04 | `7e67b74` | Pick visual de 4 PNGs candidatos para o slide-fig (CLOSE-03) via checkpoint humano. Usuário escolheu pick: 1 (curves_by_martins, o PNG canônico atual) após comparação visual dos 4 candidatos em #/24..#/27 temporários. Razão: "Estruturas de controle aprende rápido; Vetores e Funções planos" é leitura mais legítima e direta para o eixo prioritário Martins → Code-DKT da defesa. Único delta: comentário HTML linha 653 corrigido de `<!-- figura: results/fig_codedkt_difficulty_martins.png (...) -->` para `<!-- figura: results/fig_codedkt_curves_by_martins.png (= assets/fig-codedkt-martins-curves.png; PENDING-04 resolved em 04-04) -->` (Pitfall 9 resolvido). `<img>` e `<p class="fig-read">` permanecem intactos. CLOSE-01 (Martins p2 linhas 608-629) e CLOSE-02 (Martins p3 linhas 631-650) confirmados intactos via grep D-82 (0 linhas modificadas em todo o plan). Cleanup: 3 PNGs temporários removidos do disco + 3 sections temporárias removidas do HTML. Sections do deck: 25 → 28 (temp) → 25 (final). Working tree limpo após cleanup |
 
 ## Workflow
 
@@ -68,6 +69,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 Top commits funcionais (cronológicos):
 
+- `7e67b74` apresentacao: slide CLOSE-03 - PENDING-04 mantém curves_by_martins + fix comentário linha 653
 - `f093a9b` apresentacao: slide MODEL-05 - extração automática de kcs (pipeline 5 etapas, Duan et al. 2025)
 - `7a9ae9a` apresentacao: slide MODEL-04 - code-dkt no csedm (tabela ABNT 4 modelos x 5 assignments vs Shi)
 - `4f2bc3f` apresentacao: slides MODEL-01a/01b - o modelo escolhido + dentro do code-dkt (Shi et al., 2022)
@@ -97,9 +99,9 @@ Top commits funcionais (cronológicos):
 
 ## Next action
 
-Waves 1+2+3 da fase 4 fechadas. Próximo passo: Wave 4 (`/gsd-execute-phase 4 --wave 4`) executando plan 04-04 CLOSE-03 + PENDING-04 (pick visual de 4 PNGs candidatos do gráfico Code-DKT; checkpoint humano para escolha visual; corrige Pitfall 9 do comentário HTML). Após Wave 4: Wave 5 (04-05 MARKER-03 + STYLE.md inventário pós-fase 4, checkpoint final).
+Waves 1+2+3+4 da fase 4 fechadas. Próximo passo: Wave 5 (`/gsd-execute-phase 4 --wave 5`) executando plan 04-05 MARKER-03 (slide marcador final da Fase 3 EDM: pill 4 Implantação em estado running + animação spin; STYLE.md §Inventário atualizado para 26 sections finais e §Gaps reservados realocado para fase 5).
 
-**Fase 4: Modelagem e Avaliação (Fase 3 EDM)** — 5 plans (3/5 done). Slide-kcfig agora em #/20 (deslocado por 04-01+04-02+04-03), Martins p2/p3 como CLOSE-01/02 em #/22-23, slide-fig como CLOSE-03 em #/24.
+**Fase 4: Modelagem e Avaliação (Fase 3 EDM)** — 5 plans (4/5 done). Slide-fig em #/24 com PNG canônico curves_by_martins (PENDING-04 resolvido). Slide-kcfig em #/20. Martins p2/p3 (CLOSE-01/02) em #/22-23 intactos D-82.
 
 Decisões ad-hoc das waves da fase 2 (registradas para fases futuras):
 
