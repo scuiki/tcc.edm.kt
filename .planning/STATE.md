@@ -2,19 +2,19 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: ready_to_plan
-last_updated: "2026-05-28T22:10:13.951Z"
+status: in_progress
+last_updated: "2026-05-29T01:30:00.000Z"
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 15
-  completed_plans: 18
-  percent: 100
+  total_plans: 21
+  completed_plans: 20
+  percent: 95
 ---
 
 # State: Apresentação TCC 1
 
-**Last updated:** 2026-05-28 após fechamento da fase 2 (INTRO-03b entregue após 1 iteração textual; STYLE.md §Gaps reservados reescrito; checkpoint fim a fim APPROVED; deck final 16 sections com INTRO-01/03a/03b + MARKER-01 cobrindo a Fase 1 EDM)
+**Last updated:** 2026-05-28 após fechamento da Wave 1 da fase 4 (plan 04-01 entregue como split MODEL-01a + MODEL-01b com 5 iterações de design durante checkpoint visual; 23 sections no deck; commit `4f2bc3f`)
 
 ## Project Reference
 
@@ -22,7 +22,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 **Core value:** Slides HTML reveal.js funcionais, narrativamente claros e cientificamente fiéis, prontos para defesa em ~1 semana.
 
-**Current focus:** Phase 04 — modelagem-e-avalia-o-fase-3-edm (CONTEXT gathered)
+**Current focus:** Phase 04 — modelagem-e-avalia-o-fase-3-edm
 
 ## Phases
 
@@ -49,6 +49,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 | 02-02 | INTRO-01 | `c362e9d`, `e07e37b`, `3835336` | Section INTRO-01 inserido em index.html linhas 149-164, entre Yağcí (#/6) e MARKER-01 (que desloca para #/8); reusa template `.slide-related` + `.rel-lead` + `.rel-cite` (zero CSS novo); cabeçalho `> o dataset csedm` (D-34a); voz 1ª pessoa do plural ("Nosso dataset é o CSEDM..."); 3 números brutos validados via pandas (413 estudantes, 50 problemas, 201.570 eventos) escritos como "413 estudantes, 5 assignments com 50 problemas, 201 mil eventos"; citação parentética `(Price, 2020)`; rodapé literal `Fonte: Price (2020); CSEDM 2021.`; sem em-dash (D-44); sections do deck: 13 → 14. Após checkpoint visual APPROVED, reviewer pediu 2 iterações pós-checkpoint: `e07e37b` adicionou granularidade (Spring 2019 explícito, "5 assignments com 50 problemas", parágrafo `.intro-cols-line` listando 6 colunas-chave do ProgSnap2: SubjectID, ProblemID, EventType, Score, ServerTimestamp, CodeStateID); `3835336` ajustou fraseado da coleta ("coletado durante a primavera de 2019 e divulgado") para sujeito implícito coerente. Decisões ad-hoc D-50 (5 assignments com 50 problemas) e D-51 (listar colunas-chave do ProgSnap2) registradas no 02-02-SUMMARY para fases futuras |
 | 02-03 | INTRO-03 (parcial: 03a) | `6f0ae3d`, `53b46e8`, `f7e042a`, `4a9af6e` | Section INTRO-03a inserido em index.html linhas 166-181, entre INTRO-01 (#/7) e MARKER-01 (que desloca para #/9); reusa template `.slide-related` + `.rel-lead` + `.rel-cite` (zero CSS novo); cabeçalho `> o problema do kt binário` (D-34b); 3 parágrafos (ponte KT → crítica Shi → escopo de domínios estruturados); rodapé literal `Fonte: Shi <i>et al.</i> (2022).`; sem em-dash (D-44); sem Code-DKT (gate forte D-36 / Pitfall 3); sections do deck: 14 → 15. Após checkpoint visual APPROVED, reviewer pediu 3 iterações pós-checkpoint: `53b46e8` reescreveu paráfrase com phrasing do Report 4 + Shi 2022 (mais fiel ao paper que a versão inicial); `f7e042a` adicionou primeiro parágrafo de ponte (KT como instrumento central → eventos do CSEDM) antes da crítica Shi para evitar transição abrupta; `4a9af6e` normalizou `<i>et al.</i>` ABNT em todo o deck (8 ocorrências em drive-by sweep). Decisões ad-hoc D-52 (paráfrase Report 4 + Shi 2022), D-53 (ponte KT → trabalho → CSEDM), D-54 (`<i>et al.</i>` ABNT no deck), D-55 (3º parágrafo escopo de domínios sem nomear Code-DKT) registradas no 02-03-SUMMARY |
 | 02-04 | INTRO-03 (fechado: 03b) | `c92b9ff`, `6a70b7f`, `f4dde9c` | Section INTRO-03b inserido em index.html linhas 183-198, entre INTRO-03a (#/8) e MARKER-01 (que desloca para #/10); reusa template `.slide-related` + `.rel-lead` + `.rel-cite` (zero CSS novo); cabeçalho `> sinal pedagógico perdido` (D-34c); 3 parágrafos consequenciais (cenário concreto: aluno acerta parte do código mas erra em algum passo, submissão pode não compilar ou compilar e estar errada → perda pedagógica: tratada idêntica a completamente errada, aprendizado parcial fica invisível → pivô: gap entre KT clássico e o que pedagogicamente aconteceu, motiva modelos sensíveis ao código); rodapé `Fonte: adaptado de Shi <i>et al.</i> (2022).`; sem em-dash, sem Code-DKT, sem citação parentética nova de Shi no corpo. STYLE.md §Gaps reservados reescrito por inteiro (linha 129 obsoleta substituída + linha 130 ajustada para "Após MARKER-01"). Iteração pós-checkpoint: `6a70b7f` substituiu "80% do código" (arbitrário) por "acerta parte do código, mas erra em algum dos passos" + observação técnica cobrindo Compile.Error + Score parcial; substituiu "Abre-se uma lacuna" por "Isso abre um <i>gap</i>" (D-58 termo estrangeiro D-46 estendido); bônus orgânico em INTRO-01 (granularidade aritmética "5 assignments com 10 problemas cada", reorganização do parágrafo 1 em 2 frases). Decisões ad-hoc D-56 (INTRO-03b autônomo), D-57 (cenário via Report 4 + observação Compile.Error), D-58 (`<i>gap</i>`), D-59 (STYLE.md §Gaps reescrito por inteiro) registradas. Sections do deck: 15 → 16; checkpoint humano fim a fim APPROVED (#/0 → #/15) |
+| 04-01 | MODEL-01, MODEL-03 | `4f2bc3f` | Plan dividido em 2 slides durante checkpoint visual. MODEL-01a (#/16) `> o modelo escolhido`: frase de justificativa 1ª pessoa do plural (Shi <i>et al.</i>, 2022) + cronologia horizontal com 3 marcadores (1995 Corbett e Anderson, 2015 Piech <i>et al.</i>, 2022 Shi <i>et al.</i>, último dot em azul UniFacens). MODEL-01b (#/17) `> dentro do code-dkt`: frase conceitual + pipeline esquerda-alinhado com setas em 1 linha (`<b><i>Pipeline</i> Code-DKT:</b> javalang → AST → code2vec → atenção → LSTM`) + AST limpa max 460px com título ABNT en-dash + Fonte 14px cinza. SVG da AST trimado (viewBox `0 0 560 620` → `0 0 560 410`, legenda "Figura 2:" embutida removida). MODEL-03 absorvido como no-op (slide-code reaproveitado adiante). Decisões ad-hoc D-79g (split do plan), D-79h (cronologia sem chips), D-79i (pipeline setas em vez de prosa), D-79j (SVG trim em vez de wrapper), D-79k (header `> o modelo escolhido`) registradas em 04-01-SUMMARY. Sections do deck: 21 → 23 (+2); slide-code desloca de #/16 para #/18; checkpoint visual APPROVED após 5 iterações (3 textuais + 1 split estrutural + 1 ajuste final) |
 
 ## Workflow
 
@@ -65,6 +66,8 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 
 Top commits funcionais (cronológicos):
 
+- `4f2bc3f` apresentacao: slides MODEL-01a/01b - o modelo escolhido + dentro do code-dkt (Shi et al., 2022)
+- `b501800` docs(apresentacao): editorial tweaks pré-fase 4
 - `f4dde9c` docs(style): atualizar gaps reservados pos-fase 2
 - `6a70b7f` apresentacao: reescrever INTRO-03b com cenario expandido + gap
 - `c92b9ff` apresentacao: slide INTRO-03b - sinal pedagogico perdido
@@ -90,13 +93,9 @@ Top commits funcionais (cronológicos):
 
 ## Next action
 
-Fase 3 fechada e Fase 4 CONTEXT gravado (commit `136dad4`). Próximo passo:
+Wave 1 da fase 4 fechada (commit funcional `4f2bc3f`, SUMMARY pending no próximo commit). Próximo passo: Wave 2 (`/gsd-execute-phase 4 --wave 2`) executando plan 04-02 MODEL-04: tabela ABNT `.eda-grid` 4 modelos × 5 assignments vs Shi (`autonomous: true`, números travados em D-78g, sem checkpoint humano até final). Após Wave 2: Wave 3 (04-03 MODEL-05 Duan pipeline 5 etapas, checkpoint), Wave 4 (04-04 CLOSE-03 pick visual 4 PNGs candidatos, checkpoint), Wave 5 (04-05 MARKER-03 + STYLE.md inventário pós-fase 4, checkpoint).
 
-```
-/gsd-plan-phase 4
-```
-
-**Fase 4: Modelagem e Avaliação (Fase 3 EDM).** Adiciona 4 slides novos (MODEL-01, MODEL-04, MODEL-05, MARKER-03) entre MARKER-02 (`#/15`) e o trio Martins+fig + MARKER-03 no fim do deck. Reaproveita slide-code como MODEL-03, slide-kcfig como saída de MODEL-05, Martins p2/p3 como CLOSE-01/02 (NÃO TOCAR), slide-fig como CLOSE-03 (PENDING-04 picks 4 PNGs candidatos no checkpoint). Ler `.planning/phases/04-modelagem-e-avalia-o-fase-3-edm/04-CONTEXT.md` para decisões D-75..D-91 e refs canônicas.
+**Fase 4: Modelagem e Avaliação (Fase 3 EDM)** — 5 plans (1/5 done). Reaproveita slide-code como MODEL-03 (#/18 após split MODEL-01), slide-kcfig como saída de MODEL-05, Martins p2/p3 como CLOSE-01/02 (NÃO TOCAR), slide-fig como CLOSE-03 (PENDING-04 picks 4 PNGs candidatos no checkpoint). Ler `.planning/phases/04-modelagem-e-avalia-o-fase-3-edm/04-CONTEXT.md` para decisões D-75..D-91 + ad-hoc D-79g..D-79k registradas em 04-01-SUMMARY.
 
 Decisões ad-hoc das waves da fase 2 (registradas para fases futuras):
 

@@ -90,7 +90,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 8. Deck navega do início até MARKER-03 sem quebra
 
 **Plans:** 5 plans (executar via `/gsd-execute-phase 4`)
-- [ ] 04-01-PLAN.md — MODEL-01: como o code-dkt funciona (cronologia 3 chips + AST inset; Shi et al. 2022)
+- [x] 04-01-PLAN.md — MODEL-01: split em 2 slides durante checkpoint (MODEL-01a `> o modelo escolhido` + MODEL-01b `> dentro do code-dkt`) ✓ 2026-05-28 (commit `4f2bc3f`)
 - [ ] 04-02-PLAN.md — MODEL-04: code-dkt no csedm (tabela ABNT .eda-grid 4 modelos × 5 assignments vs Shi)
 - [ ] 04-03-PLAN.md — MODEL-05: extração automática de kcs (pipeline 5 etapas; Duan et al. 2025)
 - [ ] 04-04-PLAN.md — CLOSE-03 + PENDING-04: pick visual do gráfico Code-DKT (4 candidatos no checkpoint) + cobertura no-op CLOSE-01/02
