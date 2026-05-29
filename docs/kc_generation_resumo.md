@@ -122,11 +122,13 @@ A ideia é: se o LLM disse que o Problema 1 exige "Compound boolean expressions 
 
 ---
 
-## O que ainda falta (Etapa 6)
+## Etapa 6 — KC Correctness Labeling (concluída)
 
-A etapa mais cara do pipeline — **KC Correctness Labeling** — não foi implementada ainda. A ideia é: para cada submissão *incorreta* no Release/Train (~26 mil eventos), pedir ao LLM para identificar quais KCs o aluno falhou naquela tentativa. Isso geraria sequências de aprendizagem por KC (não apenas por problema), permitindo curvas de aprendizagem mais granulares e análises interpretativas de onde os alunos têm mais dificuldade.
+A etapa mais cara do pipeline, **KC Correctness Labeling**, foi concluída para os 5 assignments em maio de 2026. Para cada submissão *incorreta* de `Run.Program` no Spring 2019 train, pedimos ao LLM (Claude Haiku 4.5) que identificasse quais KCs o estudante falhou em demonstrar naquela tentativa (rótulo 1 = falhou, 0 = demonstrou apesar do erro). O resultado são sequências de erro por KC (não apenas por problema), que permitem curvas de aprendizagem PFA observadas no nível de conceito e análises interpretativas de onde os estudantes têm mais dificuldade.
 
-O custo estimado é ~$39 com Claude Haiku para ~26 mil chamadas — deixado para uma próxima execução por ser a etapa mais custosa do pipeline.
+Total rotulado: **30.747 submissões** (apenas train, sem tocar no test para evitar vazamento de dados). Custo real: ~$0,000554 por chamada, totalizando ~$8,6 na etapa. A estimativa inicial de ~$39 ficou cerca de 3 vezes inflada, o prompt caching ajuda pouco porque o contexto cacheado (descrição do problema mais nomes de KC) é pequeno perto do código submetido (até 3000 caracteres), que não é cacheado.
+
+Os arquivos são gerados com checkpoint por problema e resume idempotente, então execuções interrompidas (por exemplo, esgotamento de créditos) retomam de onde pararam sem repagar pelo que já foi rotulado.
 
 ---
 
@@ -139,7 +141,7 @@ results/
 ├── kc_descriptions_A*.json  — KCs canônicos (rótulos finais por cluster)           [5/5]
 ├── qmatrix_A*.csv           — Q-matrix ProblemID × KC_id (binário)                [5/5]
 ├── ast_signatures_A*.json   — frequência de nós srcML por ProblemID               [5/5]
-└── kc_correctness_A*.json   — labels KC por submissão incorreta                   [0/5 — pendente]
+└── kc_correctness_A*.json   — labels KC por submissão incorreta (train-only)      [5/5]
 ```
 
 ---
