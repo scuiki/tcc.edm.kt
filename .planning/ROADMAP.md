@@ -110,7 +110,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 
 **Plans:** 6 plans (executar via `/gsd-execute-phase 5`)
 - [x] 05-01-PLAN.md — MARKER-04: pill 4 `--planned` (CSS modifier aditivo) + section após MARKER-03 (D-96, RESEARCH Pitfall 2)
-- [ ] 05-02-PLAN.md — AGENDA-01 + PENDING-01: refatorar #/2 in-place com `> agenda` + 4 fases EDM + STYLE.md §Cabeçalho override (D-93b) + cleanup CSS órfão (D-93f)
+- [x] 05-02-PLAN.md — AGENDA-01 + PENDING-01: refatorar #/2 in-place com `> agenda` + 4 fases EDM + STYLE.md §Cabeçalho override (D-93b) + cleanup CSS órfão (D-93f)
 - [ ] 05-03-PLAN.md — END-01: slide "Obrigado." minimal centralizado + classes `.slide-end`/`.end-thanks`/`.end-credits` (D-97)
 - [ ] 05-04-PLAN.md — TOOL-03: dashboard wireframe 3 painéis (`.bridge-seq` adaptado primeiro; fallback `.dash-card` se necessário) (D-95)
 - [ ] 05-05-PLAN.md — TOOL-01: proposta da aplicação + pipeline `.bridge-seq` 6 etapas neutras (D-94; Pitfall 1 overflow)
