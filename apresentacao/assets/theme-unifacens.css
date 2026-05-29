@@ -138,6 +138,10 @@ html, .reveal-viewport { background-color: #15171c; }
 .slide-phases .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
 .slide-phases .phases-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; color: var(--uni-ink); }
 .slide-phases .cite { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 17px; color: #5b6472; font-weight: 600; margin-top: 6px; padding-left: 22px; }
+.slide-phases .phases-intro {
+  font-family: Arial, "Helvetica Neue", sans-serif; font-size: 21px; line-height: 1.5;
+  color: var(--uni-ink); margin: 26px 0 10px; max-width: 1120px;
+}
 
 .phases-list { list-style: none; counter-reset: phase; margin: auto 0 0; padding: 0; max-width: 1120px; }
 .phases-list li {
