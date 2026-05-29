@@ -107,13 +107,13 @@ background:#fff; border:1.5px solid #1f1f1f; border-radius:0;  /* cantos retos *
 Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 `.bridge-seq .step` (slide-ponte). Cada figura/diagrama leva `Fonte:` abaixo.
 
-## Inventário de slides (ordem atual, pós-fase 4)
+## Inventário de slides (ordem final, pós-fase 5)
 
 | # | classe | cabeçalho | conteúdo |
 |---|---|---|---|
-| 0 | slide-cover-brand | (sem cabeçalho) | Abertura (logo + tagline) |
+| 0 | slide-cover-brand | (sem cabeçalho temático) | Abertura (logo + tagline `> educational data mining e knowledge tracing`) |
 | 1 | slide-title-tcc | (sem cabeçalho) | Capa do TCC (autores em grafite) |
-| 2 | slide-agenda | (sem cabeçalho temático) | Agenda |
+| 2 | slide-related | `> agenda` | AGENDA-01: 4 fases EDM como sumário (refatorada in-place na fase 5) |
 | 3 | slide-related | `> introdução` | Recorte do problema (Martins, Marin e Alves, 2024) |
 | 4 | slide-related | `> mineração de dados educacionais` | EDM como processo (Zorić, 2020), fundido p1+p2 |
 | 5 | slide-phases | `> as quatro fases da edm` | As 4 fases (Zorić, 2020) |
@@ -138,24 +138,30 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 | 24 | slide-kcfig | `> kcs semânticos extraídos` | Mapeamento KCs (saída do pipeline MODEL-05) para dificuldades de Martins, Marin e Alves (2024); brief text + Figura ABNT + blocos estilo bridge-seq |
 | 25 | slide-fig | `> evolução por dificuldade` | CLOSE-03: Curva de aprendizado do Code-DKT por sub-dificuldade (curves_by_martins, PENDING-04 resolved); brief text + Figura ABNT, sem fig-read |
 | 26 | slide-marker--phase3 | (sem temático) | MARKER-03 — Fase 3 EDM concluída (Implantação running) |
+| 27 | slide-related slide-bridge | `> proposta da aplicação` | TOOL-01: fluxograma 6 etapas via CSS Grid (Import ProgSnap2 → Extração de KCs → Docente valida → Preparação dos dados → Code-DKT → Dashboard); absorve REQ TOOL-03 como última etapa (pivot D-104b da fase 5) |
+| 28 | slide-marker--phase4 | (sem temático) | MARKER-04 — Fase 4 EDM (Implantação `--planned`, tracejado cinza, sem animação; sinaliza honestamente que o TCC 2 implementará) |
+| 29 | slide-cover-brand | (sem cabeçalho temático) | END-01: réplica da abertura, tagline `> obrigado` (bracket narrativo com #/0) |
 
-**Estado do deck:** 27 slides após a fase 4 (era 21 pós-fase 3; 5 novos da fase 4 inseridos: INTRO-KC adendo + MODEL-01a + MODEL-01b + MODEL-04 + MODEL-05 + MARKER-03 menos a fusão MODEL-01 → MODEL-01a+01b = +6 slides; reformulado o `.slide-code` CSS para consistência com `.slide-related`).
+**Estado do deck:** 30 slides após a fase 5 (era 27 pós-fase 4; 3 novos da fase 5 inseridos: TOOL-01 fluxograma, MARKER-04, END-01; AGENDA-01 refatorada in-place em #/2 sem deslocar contagem; TOOL-03 originalmente planejado foi absorvido como última etapa do TOOL-01 per pivot D-104b).
 
-**Gaps reservados para fase 5:**
-
-- Após MARKER-03 (fim da fase 4 da EDM): TOOL-01 (proposta da ferramenta TCC 2 com pipeline mini-horizontal), TOOL-03 (dashboard), MARKER-04 (fim da fase 4 EDM = Implantação ✓), END-01 (agradecimento); AGENDA-01 revisado para refletir a estrutura final entregue.
-
-**Linhagem de KT (preenchida em fases futuras):** Corbett e Anderson (1995) volta na cronologia do MODEL-01 (fase 4), seguida por Piech (2015) DKT e Shi (2022) Code-DKT. Yağcı (2022) ocupa o slide-bridge (slide 6) e Duan (2025) é introduzido no MODEL-05 (fase 4).
+**Linhagem de KT (consolidada nas fases 1-4):** Corbett e Anderson (1995) volta na cronologia do MODEL-01 (fase 4), seguida por Piech (2015) DKT e Shi (2022) Code-DKT. Yağcı (2022) ocupa o slide-bridge (slide 6) e Duan (2025) é introduzido no MODEL-05 (fase 4).
 
 ## Classes reutilizáveis
 
 - `.slide-related`: template de correlato (`.rel-kicker`, `.rel-title`, `.rel-sub`,
   `.rel-quote` + `.src`, `.rel-points` com `>`, `.rel-cite`).
 - `.deck-topic`: tópico `>` para slides fora do template de correlato.
-- `.bridge-seq` (`.step`, `.arr`): sequência horizontal estilo Word.
+- `.bridge-seq` (`.step`, `.arr`): sequência horizontal estilo Word. Default flex; o
+  TOOL-01 (slide #/27) aplica inline `display: grid; grid-template-columns: 1fr auto ...`
+  para forçar 6 caixas com largura exatamente igual.
 - `.bkt-groups` (`.bkt-group` > `.bkt-group__head`/`.bkt-group__cap` + `.param` >
   `.sym` + `.lbl`): dois pares de parâmetros do BKT (aprendizado × desempenho);
   `.bkt-close` é o parágrafo de fecho sobre a inferência do estado.
+- `.agenda-edm-list`: lista numerada vertical da AGENDA-01 (uso único; contador azul
+  UniFacens, Arial 23px line-height 1.4, max-width 900px). Adicionada na fase 5.
+- `.marker-pill--planned`: modificador aditivo do `.slide-marker` (estado "futuro
+  previsto"; borda tracejada cinza azulado `#5b6472`, sem animação; distinguível de
+  `--pending` sólido e `--running` que anima). Adicionado na fase 5.
 
 ## Pré-visualizar
 
