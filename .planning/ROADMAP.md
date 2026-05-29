@@ -14,7 +14,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 | 1 | Reformatação da base | Slides existentes ajustados ao novo padrão de cabeçalho, com Zorić fundido e Corbett removido | 7 | mvp | Complete ✓ 2026-05-27 |
 | 2 | Intro, Dataset e Problema (Fase 1 EDM) | Novos slides da abertura narrativa: Yağcí ponte → "nosso dataset" (CSEDM em ProgSnap2 fundido) → Shi problema, fechando com marcador da Fase 1 EDM | 3 | mvp | Complete ✓ 2026-05-27 |
 | 3 | EDA e Pré-processamento (Fase 2 EDM) | Slides de análise exploratória, pré-processamento e um insight visual sobre os estudantes, fechando com marcador da Fase 2 EDM | 5 | mvp | Pending |
-| 4 | Modelagem e Avaliação (Fase 3 EDM) | Code-DKT (funcionamento + AST inset, fundidos) + KCs semânticos via Duan + retomada de Martins (problema → evidência, eixo prioritário da defesa), fechando com marcador da Fase 3 EDM | 9 | mvp | Pending |
+| 4 | Modelagem e Avaliação (Fase 3 EDM) | Code-DKT (funcionamento + AST inset, fundidos) + KCs semânticos via Duan + retomada de Martins (problema → evidência, eixo prioritário da defesa), fechando com marcador da Fase 3 EDM | 9 | mvp | Complete ✓ 2026-05-29 (5/5 plans + 2 adendos: INTRO-KC + slide-code CSS) |
 | 5 | Implantação, Agenda e Encerramento (Fase 4 EDM) | Proposta da ferramenta TCC 2 (espelha as fases anteriores sem repetir), dashboard, marcador final, agradecimento e revisão da Agenda | 6 | mvp | Pending |
 
 ## Detalhamento das fases
@@ -94,7 +94,7 @@ Cinco fases organizadas em ordem narrativa (do reuso ao encerramento), cada uma 
 - [x] 04-02-PLAN.md — MODEL-04: code-dkt no csedm (tabela ABNT .eda-grid 4 modelos × 5 assignments vs Shi) ✓ 2026-05-28 (commit `7a9ae9a`)
 - [x] 04-03-PLAN.md — MODEL-05: extração automática de kcs (pipeline 5 etapas; Duan et al. 2025) ✓ 2026-05-28 (commit `f093a9b`)
 - [x] 04-04-PLAN.md — CLOSE-03 + PENDING-04: pick: 1 (curves_by_martins) + fix Pitfall 9 + D-82 honrado ✓ 2026-05-28 (commit `7e67b74`)
-- [ ] 04-05-PLAN.md — MARKER-03: Modelagem e Avaliação ✓ (pill 4 running) + STYLE.md inventário pós-fase 4
+- [x] 04-05-PLAN.md — MARKER-03: Modelagem e Avaliação ✓ (pill 4 running spin) + STYLE.md inventário pós-fase 4 ✓ 2026-05-29 (commits `ccc7a4f`, `3ea83d3`)
 
 ### Phase 5: Implantação, Agenda e Encerramento (Fase 4 EDM)
 **Goal:** Apresentar a proposta da ferramenta TCC 2 (baseada em `docs/tcc2_prototipo.html`) com pipeline mini-horizontal num único slide e o dashboard. A ferramenta ESPELHA o que já foi mostrado nas fases anteriores; não detalha cada etapa. Fechar com o marcador da Fase 4 EDM, agradecimento, e revisar a Agenda inicial para refletir a estrutura final entregue.
