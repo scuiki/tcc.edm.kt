@@ -92,8 +92,16 @@ def filter_for_code_dkt(df: pd.DataFrame) -> pd.DataFrame:
     Notes
     -----
     Code-DKT inclui Compile.Error como correct=0 para capturar a evolução
-    incremental do código do estudante (Shi et al., 2022; Pankiewicz et al., 2025).
-    srcML extrai features AST mesmo de código não-compilável, viabilizando este protocolo.
+    incremental do código do estudante (Shi et al., 2022).
+
+    Este filtro é agnóstico ao extrator de AST: ele apenas seleciona eventos e
+    monta a label binária. A extração de features de código acontece a jusante,
+    em módulos separados. O pipeline principal usa javalang + code2vec
+    (src/code_features.py), fiel ao Code-DKT original (Shi et al., 2022); é o
+    extrator de melhor desempenho e o adotado daqui em diante. O extrator srcML
+    (src/srcml_features.py, Pankiewicz et al., 2025) é uma variante exploratória,
+    capaz de parsear código não-compilável, mas que ficou abaixo do javalang nos
+    nossos experimentos.
     """
     allowed = {"Run.Program", "Compile.Error"}
     filtered = df[df["EventType"].isin(allowed)].copy()
