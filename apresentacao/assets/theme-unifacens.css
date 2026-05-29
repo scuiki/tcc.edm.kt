@@ -427,6 +427,18 @@ html, .reveal-viewport { background-color: #15171c; }
   border: 1.5px solid #5b6472;
 }
 
+/* Planned: ainda nao executada (TCC 2); texto e borda em cinza azulado tracejado,
+   icone como circulo vazio com borda tracejada, sem animacao; visualmente
+   diferente de --pending (solido) e de --running (anima). */
+.marker-pill--planned {
+  color: #5b6472;
+  border-style: dashed;
+}
+.marker-pill--planned .marker-pill-icon {
+  color: #5b6472;
+  border: 1.5px dashed #5b6472;
+}
+
 .marker-arrow {
   flex: none; align-self: flex-start;
   color: #1f1f1f; font-size: 26px; font-weight: 700;
