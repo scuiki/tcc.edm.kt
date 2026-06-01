@@ -57,10 +57,13 @@ formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
   `> proposta da aplicação`.
 - Nome do autor **não aparece** no corpo, nem em `<h2>`, nem em `.rel-sub`. A
   atribuição vive no próprio cabeçalho temático e, quando há citação direta
-  literal, na fonte inline da `blockquote` (ver `Convenções de citação`). **Os
-  rodapés `Fonte:` foram removidos de todos os slides** (decisão de 2026-05-31):
-  não há mais `.rel-cite`/`.eda-source`/`.phases-fonte`/`.prob-cite`/`.code-fonte`
-  com texto "Fonte:" no canto inferior.
+  literal, na fonte inline da `blockquote` (ver `Convenções de citação`). **Slides
+  de texto não levam rodapé `Fonte:`** (decisão de 2026-05-31): a atribuição fica no
+  cabeçalho temático e, em citação direta literal, na fonte inline da `blockquote`.
+  **Figuras e tabelas levam `Fonte:` abaixo** (exigência ABNT / manual MSGQ-21.01),
+  via `.eda-source` (Arial 14px cinza `#5b6472`, centralizado) ou `.fig-fonte` no
+  `.slide-fig` (Arial 18px). As classes `.phases-fonte`/`.prob-cite`/`.code-fonte`
+  permanecem sem uso (slides de texto).
 - Caret piscante (`<span class="caret blink">`) como último filho de
   `<p class="deck-topic">`.
 - Cabeçalhos travados por seção/fase ficam documentados nos PLAN.md de cada fase
@@ -84,12 +87,14 @@ formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
   ao final → `(Zorić, 2020, p. 12, tradução nossa)`. Só para citação DIRETA literal.
 - **Paráfrase = citação indireta:** `Com base em Sobrenome (ano, p. X)` ou
   citação autor-prominente; **sem** "tradução nossa".
-- **Sem rodapé `Fonte:`** (decisão de 2026-05-31): os slides não levam mais a
-  legenda de fonte no canto inferior. A atribuição fica no cabeçalho temático
-  `> [seção]` e, em citação direta literal, na fonte inline `<span class="src">`
-  dentro da `blockquote`. Exceção preservada: as citações diretas de Martins,
-  Marin e Alves (2024) mantêm `(Sobrenome, ano, p. X)` inline, pois a atribuição
-  é obrigatória na citação literal.
+- **Regra de rodapé `Fonte:` (matizada, decisão de 2026-05-31):** slides de
+  TEXTO não levam rodapé `Fonte:` no canto inferior; a atribuição fica no cabeçalho
+  temático `> [seção]` e, em citação direta literal, na fonte inline
+  `<span class="src">` dentro da `blockquote`. FIGURAS e TABELAS levam `Fonte:`
+  abaixo (exigência ABNT / manual), via `.eda-source` (Arial 14px cinza `#5b6472`,
+  centralizado) ou `.fig-fonte` no `.slide-fig` (Arial 18px). Exceção preservada:
+  as citações diretas de Martins, Marin e Alves (2024) mantêm `(Sobrenome, ano, p.
+  X)` inline, pois a atribuição é obrigatória na citação literal.
 - Sobrenome dentro de parênteses: só a inicial maiúscula. Dois autores: `(Corbett; Anderson, 1995)`.
 
 ## Regras de redação
@@ -101,7 +106,8 @@ formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
   via cabeçalho temático `> [nome da seção]`, nunca em slide dedicado de
   "trabalhos correlatos". O nome do autor não aparece no corpo nem no cabeçalho.
   A atribuição entra como citação parentética na prosa, ou inline na `blockquote`
-  de citação direta. **Não há mais rodapé `Fonte:`** (ver `Convenções de citação`).
+  de citação direta. **Slides de texto não levam rodapé `Fonte:`; figuras e tabelas
+  levam `Fonte:` abaixo** (ver `Convenções de citação`).
 - **Voz própria como padrão:** paráfrase indireta com autor parentético é o
   padrão. Voz em primeira pessoa do plural quando aplicável ("nosso trabalho
   aplica", "nós seguimos", "implementamos"). Citação direta literal só quando a
