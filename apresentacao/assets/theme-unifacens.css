@@ -128,7 +128,7 @@ html, .reveal-viewport { background-color: #15171c; }
   padding: 56px 60px; box-sizing: border-box;
 }
 .agenda-list { list-style: none; margin: 0; padding: 0; width: 100%; --caret-color: var(--uni-blue); }
-.agenda-list li { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 23px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; color: var(--uni-ink); padding: 7px 0; }
+.agenda-list li { font-family: var(--mono); font-size: 27px; color: var(--uni-ink); padding: 9px 0; }
 .agenda-list li .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 12px; }
 
 /* ===========================================================================
@@ -138,10 +138,9 @@ html, .reveal-viewport { background-color: #15171c; }
 .slide-phases .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
 .slide-phases .phases-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; color: var(--uni-ink); }
 .slide-phases .cite { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 17px; color: #5b6472; font-weight: 600; margin-top: 6px; padding-left: 22px; }
-.slide-phases .phases-intro {
-  font-family: Arial, "Helvetica Neue", sans-serif; font-size: 25px; line-height: 1.5;
-  color: var(--uni-ink); margin: 26px 0 10px; max-width: 1120px;
-}
+
+.slide-phases .phases-intro { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 23px; line-height: 1.5; color: var(--uni-ink); margin-top: 26px; max-width: 1120px; }
+.slide-phases .phases-note { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 23px; line-height: 1.5; color: var(--uni-ink); margin-top: 22px; max-width: 1120px; }
 
 .phases-list { list-style: none; counter-reset: phase; margin: auto 0 0; padding: 0; max-width: 1120px; }
 .phases-list li {
@@ -155,10 +154,6 @@ html, .reveal-viewport { background-color: #15171c; }
 }
 .phases-list .name { font-weight: 700; color: var(--uni-ink); }
 .phases-list .desc { color: #3a414d; }
-
-.slide-phases .phases-note { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 19px; color: var(--uni-ink); margin-top: auto; max-width: 1120px; }
-.slide-phases .phases-fonte { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; margin-top: 10px; }
-
 /* ===========================================================================
    SLIDE · Trabalhos correlatos (template) — 1º uso: Martins, Marin e Alves (2024)
    cabeçalho com acento de terminal + obra + faixa de método + teses centrais
@@ -240,30 +235,31 @@ html, .reveal-viewport { background-color: #15171c; }
 /* ===========================================================================
    SLIDE · O problema (frase + gráfico de barras ASCII/CLI · Martins et al., 2024)
    =========================================================================== */
-.slide-problem { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; font-family: Arial, "Helvetica Neue", sans-serif; }
+.slide-problem { display: flex; flex-direction: column; background: var(--uni-light); padding: 52px 64px 40px; }
 .slide-problem .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
 .slide-problem .prob-head { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; color: var(--uni-ink); }
 .slide-problem .prob-lead { font-size: 26px; line-height: 1.4; color: var(--uni-ink); margin-top: 18px; max-width: 1080px; }
 .slide-problem .prob-quote {
   position: relative; font-size: 25px; line-height: 1.45; color: var(--uni-ink);
-  margin: 20px 0 0; padding: 4px 0; max-width: 1080px;
+  margin: 20px 0 0; padding: 4px 0 4px 26px; max-width: 1080px;
+  border-left: 4px solid var(--uni-blue);
 }
-.slide-problem .prob-quote .src { font-size: 21px; color: var(--uni-ink); white-space: nowrap; }
+.slide-problem .prob-quote .src { font-size: 21px; color: #5b6472; white-space: nowrap; }
 .slide-problem .prob-sub { font-size: 20px; color: #5b6472; margin-top: 26px; }
 
 .ascii-chart {
-  margin-top: 14px; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 21px;
+  margin-top: 14px; font-family: var(--mono); font-size: 21px;
   display: grid; grid-template-columns: max-content max-content max-content;
   column-gap: 18px; row-gap: 10px; align-items: baseline;
 }
 .ascii-chart .bar-row { display: contents; }
 .ascii-chart .bar-label { color: var(--uni-ink); }
-.ascii-chart .bar { white-space: pre; font-family: var(--mono); }
+.ascii-chart .bar { white-space: pre; }
 .ascii-chart .bar .fill { color: var(--uni-blue); }
 .ascii-chart .bar .empty { color: #cdd8ec; }
 .ascii-chart .bar-num { color: #5b6472; font-weight: 700; min-width: 2ch; text-align: right; }
 
-.slide-problem .prob-cite { margin-top: auto; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; }
+.slide-problem .prob-cite { margin-top: 26px; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; }
 
 /* ===========================================================================
    SLIDE · Figura — KCs (KCGen-KT) ligados as dificuldades (Martins et al.)
@@ -272,30 +268,34 @@ html, .reveal-viewport { background-color: #15171c; }
    =========================================================================== */
 .slide-kcfig {
   display: flex; flex-direction: column; background: var(--uni-light);
-  padding: 52px 64px 32px; --caret-color: var(--uni-blue);
+  padding: 36px 52px 26px; --caret-color: var(--uni-blue);
   font-family: Arial, "Helvetica Neue", "Liberation Sans", sans-serif;
 }
 .slide-kcfig .wm { position: absolute; top: 24px; right: 30px; width: 52px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
 .slide-kcfig .kcfig-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--uni-ink); max-width: 1170px; margin: 0; }
 .slide-kcfig .kcfig-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
-.slide-kcfig .rel-lead { font-size: 25px; line-height: 1.5; color: var(--uni-ink); margin-top: 18px; max-width: 1060px; }
 
-.kcfig-map { margin-top: 6px; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
-.kc-row { display: grid; grid-template-columns: 280px 30px 1fr; align-items: center; }
+.kcfig-map { margin-top: 18px; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; gap: 15px; }
+.kc-row { display: grid; grid-template-columns: 264px 30px 1fr; align-items: center; }
 .kc-diff {
-  background: #fff; border: 1.5px solid #000; border-radius: 0;
-  padding: 12px 12px; font-size: 18px; font-weight: 400; line-height: 1.2;
-  color: #000; text-align: center;
+  background: #fff; border: 1.5px solid #1f1f1f; border-radius: 0;
+  padding: 9px 12px; font-size: 14px; font-weight: 700; line-height: 1.22;
+  color: #111; text-align: center;
 }
-.kc-link { position: relative; height: 1.5px; background: #000; }
+.kc-link { position: relative; height: 1.5px; background: #1f1f1f; }
 .kc-link::after {
   content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-  border-left: 7px solid #000; border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+  border-left: 7px solid #1f1f1f; border-top: 5px solid transparent; border-bottom: 5px solid transparent;
 }
-.kc-group { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 0 4px 16px; }
+.kc-group { display: flex; flex-wrap: wrap; gap: 9px; padding: 5px 0 5px 16px; border-left: 1.5px solid #1f1f1f; }
 .kc-box {
-  background: #fff; border: 1.5px solid #000; border-radius: 0;
-  padding: 10px 12px; font-size: 17px; line-height: 1.2; color: #000; text-align: center; font-weight: 400;
+  background: #fff; border: 1px solid #1f1f1f; border-radius: 0;
+  padding: 7px 11px; font-size: 13px; line-height: 1.18; color: #111; text-align: center;
+}
+
+.slide-kcfig .kcfig-fonte {
+  margin-top: 6px; padding-top: 10px; text-align: center;
+  font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472;
 }
 
 /* ===========================================================================
@@ -304,15 +304,14 @@ html, .reveal-viewport { background-color: #15171c; }
    =========================================================================== */
 .slide-fig {
   display: flex; flex-direction: column; background: var(--uni-light);
-  padding: 52px 64px 32px; --caret-color: var(--uni-blue);
+  padding: 34px 56px 24px; --caret-color: var(--uni-blue);
   font-family: Arial, "Helvetica Neue", sans-serif;
 }
 .slide-fig .wm { position: absolute; top: 24px; right: 30px; width: 50px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
 .slide-fig .fig-title { font-family: Arial, sans-serif; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--uni-ink); max-width: 1160px; }
 .slide-fig .fig-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
-.slide-fig .rel-lead { font-size: 25px; line-height: 1.5; color: var(--uni-ink); margin-top: 18px; max-width: 1160px; }
-.slide-fig .fig-wrap { flex: 1 1 auto; display: flex; align-items: flex-end; justify-content: center; min-height: 0; margin-top: 2px; }
-.slide-fig .fig-wrap img { max-width: 88%; max-height: 430px; object-fit: contain; }
+.slide-fig .fig-wrap { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-height: 0; margin-top: 2px; }
+.slide-fig .fig-wrap img { max-width: 92%; max-height: 488px; object-fit: contain; }
 .slide-fig .fig-read { font-size: 16px; line-height: 1.4; color: var(--uni-ink); margin-top: 4px; max-width: 1160px; }
 .slide-fig .fig-read b { color: var(--uni-blue-d); }
 .slide-fig .fig-caveat { font-size: 13.5px; color: #8a5a00; margin-top: 6px; }
@@ -323,14 +322,14 @@ html, .reveal-viewport { background-color: #15171c; }
    =========================================================================== */
 .slide-code {
   display: flex; flex-direction: column; background: var(--uni-light);
-  padding: 52px 64px 24px; --caret-color: var(--uni-blue);
+  padding: 34px 56px 24px; --caret-color: var(--uni-blue);
   font-family: Arial, "Helvetica Neue", sans-serif;
 }
 .slide-code .wm { position: absolute; top: 24px; right: 30px; width: 50px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
 .slide-code .code-title { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--uni-ink); }
 .slide-code .code-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
-.slide-code .code-lead { font-size: 21px; line-height: 1.4; color: var(--uni-ink); margin-top: 10px; max-width: 1130px; }
-.slide-code .code-lead b { color: var(--uni-ink); }
+.slide-code .code-lead { font-size: 17px; line-height: 1.4; color: var(--uni-ink); margin-top: 10px; max-width: 1130px; }
+.slide-code .code-lead b { color: var(--uni-blue-d); }
 .code-card { display: flex; justify-content: flex-start; margin: 16px 0 0; }
 /* trecho de código cru (Dev-C++): sem janela/sombra, só gutter de linhas + sintaxe */
 .devcpp { background: none; border: none; }
@@ -346,9 +345,9 @@ html, .reveal-viewport { background-color: #15171c; }
 .devcpp__code .num { color: #0a7d28; }
 .devcpp__code .hl  { background: #ffe14d; border-radius: 2px; padding: 0 1px; }
 .slide-code .tokmark { font-family: var(--mono); font-weight: 400; background: #ffe14d; color: #15171c; border-radius: 3px; padding: 0 5px; }
-.slide-code .code-take { font-size: 18px; line-height: 1.4; color: var(--uni-ink); margin-top: 12px; max-width: 1130px; }
-.slide-code .code-take b { color: var(--uni-ink); }
-.slide-code .code-fonte { margin-top: auto; padding-top: 8px; text-align: left; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; }
+.slide-code .code-take { font-size: 16px; line-height: 1.4; color: var(--uni-ink); margin-top: 12px; max-width: 1130px; }
+.slide-code .code-take b { color: var(--uni-blue-d); }
+.slide-code .code-fonte { margin-top: auto; padding-top: 8px; text-align: center; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; color: #5b6472; }
 
 /* respeitar quem pede menos movimento */
 @media (prefers-reduced-motion: reduce) {
@@ -369,7 +368,6 @@ html, .reveal-viewport { background-color: #15171c; }
   display: flex; flex-direction: column; background: transparent;
   padding: 52px 64px 40px; --caret-color: var(--uni-blue);
   font-family: Arial, "Helvetica Neue", sans-serif;
-  justify-content: space-between;
 }
 .slide-marker .wm { position: absolute; top: 26px; right: 34px; width: 58px; color: var(--uni-gray); opacity: .9; pointer-events: none; }
 
@@ -383,7 +381,7 @@ html, .reveal-viewport { background-color: #15171c; }
 
 .marker-track {
   display: flex; align-items: flex-start; justify-content: center;
-  gap: 14px; width: 100%; max-width: 1180px; margin: 0;
+  gap: 14px; width: 100%; max-width: 1180px; margin: auto 0;
 }
 .marker-stage {
   flex: 1 1 0; display: flex; flex-direction: column;
@@ -429,18 +427,6 @@ html, .reveal-viewport { background-color: #15171c; }
 .marker-pill--pending .marker-pill-icon {
   color: #5b6472;
   border: 1.5px solid #5b6472;
-}
-
-/* Planned: ainda nao executada (TCC 2); texto e borda em cinza azulado tracejado,
-   icone como circulo vazio com borda tracejada, sem animacao; visualmente
-   diferente de --pending (solido) e de --running (anima). */
-.marker-pill--planned {
-  color: #5b6472;
-  border-style: dashed;
-}
-.marker-pill--planned .marker-pill-icon {
-  color: #5b6472;
-  border: 1.5px dashed #5b6472;
 }
 
 .marker-arrow {
@@ -493,9 +479,8 @@ html, .reveal-viewport { background-color: #15171c; }
   border-bottom: 1.5px solid #1f1f1f;
 }
 .eda-grid td { background: transparent; color: var(--uni-ink); }
-.eda-grid tr td:last-child { color: var(--uni-blue); font-weight: 700; }
 .eda-source {
-  width: 92%; margin: 2px auto 0;
+  width: 92%; margin: 4px auto 0;
   font-family: Arial, "Helvetica Neue", sans-serif;
   font-size: 14px; color: #5b6472;
   text-align: center;
@@ -507,15 +492,15 @@ html, .reveal-viewport { background-color: #15171c; }
    secundario (Arial 19px cinza, opcional).
    =================================================================== */
 .eda-fig {
-  margin: 16px auto 0; max-width: 78%;
+  max-width: 100%;
   display: flex; justify-content: center;
 }
 .eda-fig img {
-  width: 100%; height: auto; max-height: 460px;
+  width: 115%; height: auto;;
   object-fit: contain;
 }
-.eda-fig--wide { max-width: 100%; }
-.eda-fig--wide img { max-height: 460px; }
+.eda-fig--wide { max-width: 150%; }
+.eda-fig--wide img { max-height: 1000px; }
 .eda-fig--compact { max-width: 72%; }
 .eda-fig--compact img { max-height: 340px; }
 .eda-insight {

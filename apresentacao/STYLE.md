@@ -55,8 +55,12 @@ formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
   `> retomando o problema`, `> kcs semânticos extraídos`,
   `> evolução por dificuldade`, `> o que o code-dkt olha`,
   `> proposta da aplicação`.
-- Nome do autor **não aparece** no corpo, nem em `<h2>`, nem em `.rel-sub`. Migra
-  para a linha "Fonte:" no rodapé do slide (ver `Convenções de citação`).
+- Nome do autor **não aparece** no corpo, nem em `<h2>`, nem em `.rel-sub`. A
+  atribuição vive no próprio cabeçalho temático e, quando há citação direta
+  literal, na fonte inline da `blockquote` (ver `Convenções de citação`). **Os
+  rodapés `Fonte:` foram removidos de todos os slides** (decisão de 2026-05-31):
+  não há mais `.rel-cite`/`.eda-source`/`.phases-fonte`/`.prob-cite`/`.code-fonte`
+  com texto "Fonte:" no canto inferior.
 - Caret piscante (`<span class="caret blink">`) como último filho de
   `<p class="deck-topic">`.
 - Cabeçalhos travados por seção/fase ficam documentados nos PLAN.md de cada fase
@@ -80,7 +84,12 @@ formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
   ao final → `(Zorić, 2020, p. 12, tradução nossa)`. Só para citação DIRETA literal.
 - **Paráfrase = citação indireta:** `Com base em Sobrenome (ano, p. X)` ou
   citação autor-prominente; **sem** "tradução nossa".
-- **Legenda de fonte** no rodapé do slide: `Fonte: ...` em Arial.
+- **Sem rodapé `Fonte:`** (decisão de 2026-05-31): os slides não levam mais a
+  legenda de fonte no canto inferior. A atribuição fica no cabeçalho temático
+  `> [seção]` e, em citação direta literal, na fonte inline `<span class="src">`
+  dentro da `blockquote`. Exceção preservada: as citações diretas de Martins,
+  Marin e Alves (2024) mantêm `(Sobrenome, ano, p. X)` inline, pois a atribuição
+  é obrigatória na citação literal.
 - Sobrenome dentro de parênteses: só a inicial maiúscula. Dois autores: `(Corbett; Anderson, 1995)`.
 
 ## Regras de redação
@@ -90,8 +99,9 @@ formato `> [nome da seção]`, sem subtítulo e sem `<h2>` com nome do autor.
 - **Sem travessões (em-dash)** na prosa; usar vírgula, dois-pontos ou parênteses.
 - **Apresentação de autores:** autores são introduzidos no momento da relevância
   via cabeçalho temático `> [nome da seção]`, nunca em slide dedicado de
-  "trabalhos correlatos". O nome do autor não aparece no corpo nem no cabeçalho,
-  apenas em `Fonte:` no rodapé do slide.
+  "trabalhos correlatos". O nome do autor não aparece no corpo nem no cabeçalho.
+  A atribuição entra como citação parentética na prosa, ou inline na `blockquote`
+  de citação direta. **Não há mais rodapé `Fonte:`** (ver `Convenções de citação`).
 - **Voz própria como padrão:** paráfrase indireta com autor parentético é o
   padrão. Voz em primeira pessoa do plural quando aplicável ("nosso trabalho
   aplica", "nós seguimos", "implementamos"). Citação direta literal só quando a
@@ -164,6 +174,11 @@ Setas pretas (`#1f1f1f`). Exemplos: `.kc-box`/`.kc-diff` (slide de KCs) e
 - `.marker-pill--planned`: modificador aditivo do `.slide-marker` (estado "futuro
   previsto"; borda tracejada cinza azulado `#5b6472`, sem animação; distinguível de
   `--pending` sólido e `--running` que anima). Adicionado na fase 5.
+- `.slide-marker`: flex column com **título fixo no topo** e `.marker-track`
+  centralizado verticalmente via `margin: auto 0` (2026-05-31). Antes usava
+  `justify-content: space-between` contando com o rodapé `Fonte:` como 3º filho
+  para empurrar o track ao centro; com a remoção dos rodapés `Fonte:`, o track
+  passou a usar margens automáticas para se manter centrado sem depender do rodapé.
 
 ## Pré-visualizar
 
