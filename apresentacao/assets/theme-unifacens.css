@@ -311,7 +311,7 @@ html, .reveal-viewport { background-color: #15171c; }
 .slide-fig .fig-title { font-family: Arial, sans-serif; font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--uni-ink); max-width: 1160px; }
 .slide-fig .fig-title .ps1 { color: var(--uni-blue); font-weight: 700; margin-right: 10px; font-family: var(--mono); }
 .slide-fig .fig-wrap { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-height: 0; margin-top: 2px; }
-.slide-fig .fig-wrap img { max-width: 92%; max-height: 488px; object-fit: contain; }
+.slide-fig .fig-wrap img { max-width: 96%; max-height: 520px; object-fit: contain; }
 .slide-fig .fig-read { font-size: 16px; line-height: 1.4; color: var(--uni-ink); margin-top: 4px; max-width: 1160px; }
 .slide-fig .fig-read b { color: var(--uni-blue-d); }
 .slide-fig .fig-caveat { font-size: 13.5px; color: #8a5a00; margin-top: 6px; }
@@ -499,10 +499,10 @@ html, .reveal-viewport { background-color: #15171c; }
   width: 115%; height: auto;;
   object-fit: contain;
 }
-.eda-fig--wide { max-width: 150%; }
+.eda-fig--wide { max-width: 160%; }
 .eda-fig--wide img { max-height: 1000px; }
-.eda-fig--compact { max-width: 72%; }
-.eda-fig--compact img { max-height: 340px; }
+.eda-fig--compact { max-width: 88%; }
+.eda-fig--compact img { max-height: 430px; }
 .eda-insight {
   margin: 32px 0 0; max-width: 1060px;
   text-align: left;
