@@ -75,7 +75,7 @@ def main() -> None:
             label=f"global: {overall:.1f}%",
         )
         ax.set_title(assign_name[aid], fontsize=16, color=BLACK, pad=8, fontweight="bold")
-        ax.set_xlabel("Tentativa #", fontsize=14, color=BLACK)
+        ax.set_xlabel("Tentativa #", fontsize=14, color=BLACK, fontweight="bold")
         ax.tick_params(axis="both", labelsize=12, colors=BLACK)
         ax.yaxis.set_major_formatter(mticker.PercentFormatter())
         ax.legend(fontsize=12, loc="upper right", frameon=False, labelcolor=BLACK)
@@ -89,8 +89,10 @@ def main() -> None:
             else:
                 spine.set_color(BLACK)
                 spine.set_linewidth(1.0)
+        for lbl in ax.get_xticklabels() + ax.get_yticklabels():
+            lbl.set_fontweight("bold")
 
-    axes[0].set_ylabel("Taxa de acerto", fontsize=15, color=BLACK)
+    axes[0].set_ylabel("Taxa de acerto", fontsize=15, color=BLACK, fontweight="bold")
     plt.tight_layout()
 
     OUT_RESULTS.parent.mkdir(parents=True, exist_ok=True)

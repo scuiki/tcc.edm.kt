@@ -70,8 +70,8 @@ def main() -> None:
                         markeredgecolor=BLACK, alpha=0.9),
     )
 
-    ax.set_xlabel("Assignments completados", fontsize=14, color=BLACK)
-    ax.set_ylabel("X-Grade (nota final, 0 a 1)", fontsize=14, color=BLACK)
+    ax.set_xlabel("Assignments completados", fontsize=14, color=BLACK, fontweight="bold")
+    ax.set_ylabel("X-Grade (nota final, 0 a 1)", fontsize=14, color=BLACK, fontweight="bold")
     ax.tick_params(axis="both", labelsize=12, colors=BLACK)
     ax.set_ylim(0, 1.05)
     ax.grid(axis="y", alpha=0.22, color=UNI_GRAY, linestyle=":")
@@ -82,6 +82,8 @@ def main() -> None:
         else:
             spine.set_color(BLACK)
             spine.set_linewidth(1.2)
+    for lbl in ax.get_xticklabels() + ax.get_yticklabels():
+        lbl.set_fontweight("bold")
 
     plt.tight_layout()
     OUT_RESULTS.parent.mkdir(parents=True, exist_ok=True)

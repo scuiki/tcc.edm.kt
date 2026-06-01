@@ -2,6 +2,7 @@
 narradas por dificuldade: legenda anota o nível inicial (nível@1, menor = mais
 difícil) em vez da inclinação. Fundo transparente, sem título embutido."""
 import json
+import shutil
 from pathlib import Path
 import numpy as np
 import matplotlib
@@ -51,17 +52,23 @@ for g in order:
     lbl = f"{g}  (nível@1={d['nivel1']:.2f}{', 1 conceito' if fragile else ''})"
     ax.plot(xline, d["intercept"] + d["slope"] * xline, color=col, lw=2.6,
             ls="--" if fragile else "-", label=lbl, zorder=4)
-ax.set_xlabel("oportunidade  (n-ésimo problema distinto do KC, primeiras tentativas)", fontsize=10.5)
-ax.set_ylabel("mastery prevista pelo Code-DKT", fontsize=11)
+ax.set_xlabel("oportunidade  (n-ésimo problema distinto do KC, primeiras tentativas)", fontsize=10.5, fontweight="bold")
+ax.set_ylabel("mastery prevista pelo Code-DKT", fontsize=11, fontweight="bold")
 ax.set_xticks(range(1, 7))
 ax.grid(alpha=.25)
 for sp in ("top", "right"):
     ax.spines[sp].set_visible(False)
+for lbl in ax.get_xticklabels() + ax.get_yticklabels():
+    lbl.set_fontweight("bold")
 leg = ax.legend(title="dificuldade de Martins, Marin e Alves (2024)  ·  menor nível@1 = mais difícil",
                 fontsize=9, title_fontsize=8.5, loc="upper left", framealpha=0.0)
 fig.tight_layout()
 out = RES / "fig_martins_curves_predicted.png"
 fig.savefig(out, dpi=140, bbox_inches="tight", transparent=True)
+out_assets = Path("apresentacao") / "assets" / "fig-martins-curves-predita.png"
+out_assets.parent.mkdir(parents=True, exist_ok=True)
+shutil.copyfile(out, out_assets)
 print("salvo (transparente):", out)
+print("copiado para assets:", out_assets)
 for g in order:
     print(f"  {g:35} nível@1={grp[g]['nivel1']:.2f} incl={grp[g]['slope']:+.3f} ({grp[g]['nconc']} conc)")
