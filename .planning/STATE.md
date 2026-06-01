@@ -57,6 +57,14 @@ See: `.planning/PROJECT.md` (updated 2026-05-27)
 | adendo slide-code CSS | UX fix | `ef10154` | Reformulação do `.slide-code` CSS para consistência com `.slide-related`: padding 34px 56px 24px → 52px 64px 24px (título alinhado horizontal/vertical com demais slides); `.code-lead` 17px → 21px; `.code-take` 16px → 18px; bolds `.code-lead b`/`.code-take b` mudaram de `--uni-blue-d` para `--uni-ink` (preto, consistente com demais slides); `.code-fonte` text-align center → left. Syntax highlighting do código Java (`.devcpp__code .kw`) preservado em azul (highlight de sintaxe, não bold de prosa). 2 iterações de checkpoint (1 para fontes/cores/alignment + 1 para padding-top do título). Sem mudanças no markup do slide-code |
 | 04-05 | MARKER-03 | `ccc7a4f`, `3ea83d3` | Section MARKER-03 inserida ao FIM do deck (após slide-fig CLOSE-03), posição #/26. Copy-paste de MARKER-02 com 4 deltas: classe `slide-marker--phase3`; pill 3 (Modelagem e Avaliação) vira `marker-pill--done` com `&check;` e badge `[done]`; pill 4 (Implantação) vira `marker-pill--running` com `&#x21BB;` e badge `[running]` + animação `marker-spin`; comentário HTML atualizado para "fase 3 concluida". 1 reposicionamento durante checkpoint (assistente moveu para após MODEL-05 baseado em pedido literal; usuário corrigiu para fim do deck porque a próxima fase é TCC 2 ferramenta). STYLE.md §Inventário reescrito para 27 slides finais com posições verificadas; §Gaps reservados realocado para fase 5 (TOOL-01, TOOL-03, MARKER-04, END-01, AGENDA-01). Sections do deck: 26 → 27. Phase 4 = COMPLETE |
 
+## Quick Tasks Completed
+
+| # | Description | Date | Commits | Directory |
+|---|-------------|------|---------|-----------|
+| 260531-wkw | Aumentar/centralizar figuras + Fonte ABNT (manual MSGQ-21.01) nas figuras e tabelas; regerar 3 figuras com eixos em negrito | 2026-06-01 | `2e001c9`, `4eba34e`, `4a0ca45`, `e17c04e`, `3baa7ed`, `3eb5215` | [260531-wkw](./quick/260531-wkw-aumentar-e-centralizar-as-figuras-da-apr/) |
+
+Pós-quick (polish de slides na mesma sessão, fora do escopo da quick): `f9eb763` (KCs como texto + gráficos Martins Arial/negrito + Metodologia padronizada). Regra de Fonte agora matizada: slides de texto sem rodapé, figuras e tabelas com `Fonte:` abaixo (ver STYLE.md).
+
 ## Workflow
 
 - Mode: interactive
