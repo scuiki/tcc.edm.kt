@@ -155,21 +155,13 @@
         </div>
       </section>
 
-      <!-- ============ SLIDE · INTRO-03a · O problema do KT binario (Shi et al., 2022) ============ -->
-      <section data-background-color="#F1F6FB">
+            <section data-background-color="#F1F6FB">
         <div class="deck-slide slide-related">
           <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
 
           <p class="deck-topic"><span class="ps1">&gt;</span>o problema<span class="caret blink"></span></p>
 
-          <p class="rel-lead">Modelos de <i>knowledge tracing</i> estimam, a partir do histórico de tentativas, a probabilidade de um estudante acertar o próximo problema.</p>
-
-          <p class="rel-lead">No nosso trabalho, eles são o instrumento central para representar o aprendizado em programação.</p>
-
-          <p class="rel-lead">Mas modelos como BKT e DKT tratam as respostas dos estudantes apenas como corretas ou incorretas, ignorando seu conteúdo.</p>
-
-          <p class="rel-lead">O problema é que em áreas como programação, o conteúdo da resposta importa tanto quanto o resultado final.</p>
-
+          <p class="rel-lead" style="align-self: center; text-align: center; font-size: 30px; margin:auto;">O ensino de programação é marcado por altas taxas de erro e dificuldade persistente, e atualmente carece de ferramentas que auxiliem o professor no processo de ensino.</p>
         </div>
       </section>
 
@@ -291,13 +283,13 @@
 
           <p class="rel-lead">A <i>X-Grade</i> é a nota final normalizada do estudante na disciplina (escala 0 a 1). Comparamos sua distribuição pelos discentes agrupados por quantos <i>assignments</i> completaram.</p>
 
-          <p class="eda-title">Figura 2 &ndash; <i>X-Grade</i> por número de <i>assignments</i> completados (Spring 2019)</p>
+          <p class="eda-title" style="margin-bottom: -20px;">Figura 2 &ndash; <i>X-Grade</i> por número de <i>assignments</i> completados (Spring 2019)</p>
 
           <figure class="eda-fig eda-fig--compact">
             <img src="assets/eda-xgrade-completados.png" alt="Cinco boxplots de X-Grade agrupados por número de assignments completados (1 a 5)">
           </figure>
 
-          <p class="eda-source">Fonte: elaborado pelo autor sobre CSEDM (Spring 2019).</p>
+          <p class="eda-source" style="margin-top: -20px;">Fonte: elaborado pelo autor sobre CSEDM (Spring 2019).</p>
 
         </div>
       </section>
@@ -357,6 +349,24 @@
               <span class="marker-badge marker-badge--empty">[]</span>
             </div>
           </div>
+
+        </div>
+      </section>
+
+            <!-- ============ SLIDE · INTRO-03a · O problema do KT binario (Shi et al., 2022) ============ -->
+      <section data-background-color="#F1F6FB">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+
+          <p class="deck-topic"><span class="ps1">&gt;</span>modelos de knowledge tracing<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Modelos de KT estimam, a partir do histórico de tentativas, a probabilidade de um estudante acertar o próximo problema.</p>
+
+          <p class="rel-lead">No nosso trabalho, eles são o instrumento central para representar o aprendizado em programação.</p>
+
+          <p class="rel-lead">Mas modelos como BKT e DKT tratam as respostas dos estudantes apenas como corretas ou incorretas, ignorando seu conteúdo.</p>
+
+          <p class="rel-lead">O problema é que em áreas como programação, o conteúdo da resposta importa tanto quanto o resultado final.</p>
 
         </div>
       </section>
@@ -491,72 +501,21 @@
 
       <!-- ============ SLIDE · KCs semânticos extraídos (Duan et al., 2025; Martins, Marin e Alves, 2024) ============ -->
       <section data-background-color="#F1F6FB">
-        <div class="deck-slide slide-kcfig">
+        <div class="deck-slide slide-related">
           <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
 
           <p class="deck-topic"><span class="ps1">&gt;</span>kcs semânticos extraídos<span class="caret blink"></span></p>
 
           <p class="rel-lead">Os KCs semânticos extraídos pelo nosso <i>pipeline</i> cobrem as dificuldades de Martins, Marin e Alves (2024), mapeando cada dificuldade conceitual a padrões específicos de código.</p>
 
-          <p class="eda-title" style="margin-top: 10px; margin-bottom: 2px;">Figura 5 &ndash; KCs semânticos extraídos por dificuldade</p>
-
-          <div class="kcfig-map">
-            <div class="kc-row">
-              <div class="kc-diff">Estruturas de controle (decisão e repetição)</div>
-              <div class="kc-link"></div>
-              <div class="kc-group">
-                <div class="kc-box">Branching condicional multi-caminho</div>
-                <div class="kc-box">Iteração indexada e controle de loop</div>
-                <div class="kc-box">Retorno antecipado em controle de fluxo</div>
-              </div>
-            </div>
-            <div class="kc-row">
-              <div class="kc-diff">Manipulação de variáveis</div>
-              <div class="kc-link"></div>
-              <div class="kc-group">
-                <div class="kc-box">Padrão acumulador</div>
-                <div class="kc-box">Inicialização de variáveis</div>
-                <div class="kc-box">Tracking de estado com índices</div>
-              </div>
-            </div>
-            <div class="kc-row">
-              <div class="kc-diff">Operadores e expressões lógicas</div>
-              <div class="kc-link"></div>
-              <div class="kc-group">
-                <div class="kc-box">Expressões booleanas compostas</div>
-                <div class="kc-box">Negação booleana (NOT)</div>
-                <div class="kc-box">Comparação numérica e thresholds</div>
-              </div>
-            </div>
-            <div class="kc-row">
-              <div class="kc-diff">Funções</div>
-              <div class="kc-link"></div>
-              <div class="kc-group">
-                <div class="kc-box">Métodos auxiliares (helpers)</div>
-                <div class="kc-box">Tipos e formato de retorno</div>
-                <div class="kc-box">Uso de parâmetros de método</div>
-              </div>
-            </div>
-            <div class="kc-row">
-              <div class="kc-diff">Vetores</div>
-              <div class="kc-link"></div>
-              <div class="kc-group">
-                <div class="kc-box">Manipulação de arrays</div>
-                <div class="kc-box">Validação de limites (bounds checking)</div>
-                <div class="kc-box">Estratégia de dois ponteiros</div>
-              </div>
-            </div>
-            <div class="kc-row kc-row-math">
-              <div class="kc-diff">Conhecimento matemático</div>
-              <div class="kc-link"></div>
-              <div class="kc-group">
-                <div class="kc-box">Operador módulo e divisibilidade</div>
-                <div class="kc-box">Aritmética em condicionais</div>
-              </div>
-            </div>
+          <div class="kc-json">
+            <p class="kc-json-line"><span class="ps1">&gt;</span><b>Estruturas de controle (decisão e repetição):</b> {Branching condicional multi-caminho, Iteração indexada e controle de loop, Retorno antecipado em controle de fluxo}</p>
+            <p class="kc-json-line"><span class="ps1">&gt;</span><b>Manipulação de variáveis:</b> {Padrão acumulador, Inicialização de variáveis, Tracking de estado com índices}</p>
+            <p class="kc-json-line"><span class="ps1">&gt;</span><b>Operadores e expressões lógicas:</b> {Expressões booleanas compostas, Negação booleana (NOT), Comparação numérica e thresholds}</p>
+            <p class="kc-json-line"><span class="ps1">&gt;</span><b>Funções:</b> {Métodos auxiliares (helpers), Tipos e formato de retorno, Uso de parâmetros de método}</p>
+            <p class="kc-json-line"><span class="ps1">&gt;</span><b>Vetores:</b> {Manipulação de arrays, Validação de limites (bounds checking), Estratégia de dois ponteiros}</p>
+            <p class="kc-json-line"><span class="ps1">&gt;</span><b>Conhecimento matemático:</b> {Operador módulo e divisibilidade, Aritmética em condicionais}</p>
           </div>
-
-          <p class="eda-source">Fonte: elaborado pelos autores, com base em Duan <i>et al.</i> (2025) e Martins, Marin e Alves (2024).</p>
 
         </div>
       </section>
@@ -611,7 +570,7 @@
 
           <p class="deck-topic"><span class="ps1">&gt;</span>dificuldade por conceito<span class="caret blink"></span></p>
 
-          <p class="eda-title" style="margin-top: 4px; margin-bottom: 6px;">Figura 6 &ndash; Curvas de aprendizado por conceito estimadas pelo Code-DKT, agrupadas por Martins</p>
+          <p class="eda-title" style="margin-top: 4px; margin-bottom: 6px;">Figura 5 &ndash; Curvas de aprendizado por conceito estimadas pelo Code-DKT, agrupadas por Martins</p>
           <div class="fig-wrap"><img src="assets/fig-martins-curves-predita.png" alt="Curvas de aprendizado por conceito estimadas pelo Code-DKT, linhas mais baixas indicam conceitos mais difíceis, coloridas por sub-dificuldade de Martins"></div>
 
           <p class="eda-source">Fonte: elaborado pelos autores (estimativa do Code-DKT, Shi <i>et al.</i>, 2022; conceitos via KCGen-KT, Duan <i>et al.</i>, 2025; dificuldades de Martins, Marin e Alves, 2024).</p>
@@ -671,7 +630,7 @@
 
           <p class="rel-lead">Para o TCC 2, nos propomos a desenvolver uma aplicação docente que organiza o fluxo em seis etapas.</p>
 
-          <p class="eda-title" style="margin-top: 22px; color: #000;">Figura 7 &ndash; Fluxo da aplicação docente proposta</p>
+          <p class="eda-title" style="margin-top: 22px; color: #000;">Figura 6 &ndash; Fluxo da aplicação docente proposta</p>
           <p class="bridge-seq" style="margin-top: 10px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr; align-items: stretch;">
             <span class="step" style="min-width: 0; flex-direction: column; justify-content: center; color: #000; border-color: #000; font-weight: 400; padding: 18px 10px; font-size: 14px; font-family: Arial, 'Helvetica Neue', sans-serif;"><b style="font-size: 16px; color: #000;">Import ProgSnap2</b></span>
             <span class="arr" style="color: #000; padding: 0 8px; align-self: center;">&rarr;</span>
