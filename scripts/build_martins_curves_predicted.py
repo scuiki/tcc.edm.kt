@@ -44,13 +44,13 @@ fig, ax = plt.subplots(figsize=(11.5, 6.2))
 fig.patch.set_alpha(0.0); ax.patch.set_alpha(0.0)
 xline = np.array([1, 6], float)
 for g in order:
-    d = grp[g]; col = PAL[g]; fragile = d["nconc"] == 1
+    d = grp[g]; col = PAL[g]
     ax.scatter(d["xs"], d["ys"], color=col, alpha=.40, s=30, zorder=3)
-    lbl = f"{g}  (nível@1={d['nivel1']:.2f}{', 1 conceito' if fragile else ''})"
+    lbl = f"{g}  (nível@1={d['nivel1']:.2f})"
     ax.plot(xline, d["intercept"] + d["slope"] * xline, color=col, lw=2.6,
-            ls="--" if fragile else "-", label=lbl, zorder=4)
+            ls="-", label=lbl, zorder=4)
 ax.set_xlabel("oportunidade  (n-ésimo problema distinto do KC, primeiras tentativas)", fontsize=17, fontweight="bold")
-ax.set_ylabel("mastery prevista pelo Code-DKT", fontsize=17, fontweight="bold")
+ax.set_ylabel("domínio previsto pelo Code-DKT", fontsize=17, fontweight="bold")
 ax.set_xticks(range(1, 7))
 ax.tick_params(axis="both", labelsize=15)
 ax.grid(alpha=.25)
