@@ -490,6 +490,32 @@ html, .reveal-viewport { background-color: #15171c; }
   text-align: center;
 }
 /* ===================================================================
+   QUADRO ABNT (grade fechada) — dados qualitativos / classificacoes.
+   NBR 14724:2011 e manual MSGQ-21.01: bordas fechadas, titulo acima
+   centralizado, fonte abaixo centralizada (reusa .eda-title/.eda-source).
+   Slide MODEL-06: conceitos x KCs extraidos.
+   =================================================================== */
+.kc-quadro {
+  width: 98%; margin: 16px auto 0;
+  border-collapse: collapse;
+  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-size: 27px;
+  border: 1.5px solid #1f1f1f;
+}
+.kc-quadro th, .kc-quadro td {
+  border: 1.5px solid #1f1f1f;
+  padding: 20px 26px;
+  vertical-align: middle;
+}
+.kc-quadro th {
+  background: transparent; font-weight: 700; color: var(--uni-ink);
+  text-align: center;
+}
+.kc-quadro td.conceito {
+  font-weight: 400; color: var(--uni-ink); text-align: left; width: 32%;
+}
+.kc-quadro td.kc-ext { text-align: left; color: var(--uni-ink); }
+/* ===================================================================
    SLIDE · EDA-03 · scatter PCA + insight em destaque.
    .eda-fig envolve o PNG (centraliza, limita altura); .eda-insight e a
    frase de destaque (Arial bold 23px); .eda-subinsight e o subtitulo
