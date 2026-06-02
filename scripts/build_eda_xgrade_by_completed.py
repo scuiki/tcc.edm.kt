@@ -51,7 +51,7 @@ def main() -> None:
         for k in bins
     ]
     sample_sizes = [len(d) for d in data_by_bin]
-    tick_labels = [f"{k}\n(n={n})" for k, n in zip(bins, sample_sizes)]
+    tick_labels = [f"{k}" for k in bins]
 
     fig, ax = plt.subplots(figsize=(9, 4.2), dpi=140)
     fig.patch.set_alpha(0.0)

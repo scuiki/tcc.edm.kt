@@ -50,7 +50,7 @@
             <div class="tcc-cover">
               <h1 class="tcc-title">Análise do aprendizado de programação utilizando mineração de dados educacionais</h1>
               <p class="tcc-authors">Erick Miranda Viana<br>Leonardo Kuntz Oliveira<br>Victor Santos Borba</p>
-              <p class="tcc-advisor">Orientador(a): Profa. Ma. Talita dos Reis Lopes Berbel</p>
+              <p class="tcc-advisor">Orientador(a): Profa. Me. Talita dos Reis Lopes Berbel</p>
             </div>
           </div>
         </div>
@@ -91,9 +91,9 @@
 
           <p class="rel-lead">Martins <i>et al.</i> (2024) trazem uma revisão sistemática da literatura, cujo objetivo é identiﬁcar os principais desaﬁos enfrentados por estudantes durante a aprendizagem de programação de computadores.</p>
 
-          <p class="rel-lead">Esses estudos apontam que muitos estudantes possuem dificuldades relacionadas ao raciocínio lógico, abstração e conceitos técnicos de programação.</p>
-          
-          <p class="rel-lead">Nosso trabalho busca auxiliar na elaboração de estratégias e métodos que melhorem 
+          <p class="rel-lead">Outros estudos similares também apontam que muitos estudantes possuem dificuldades relacionadas ao raciocínio lógico, abstração e conceitos técnicos de programação.</p>
+
+          <p class="rel-lead">Nosso trabalho busca auxiliar na elaboração de métodos que auxiliem
             o processo de ensino e aprendizagem de programação, promovendo melhores resultados acadêmicos.</p>
 
         </div>
@@ -255,22 +255,22 @@
         </div>
       </section>
 
-      <!-- ============ SLIDE · EDA-03 · Curvas de aprendizado por assignment (CSEDM Spring 2019) ============ -->
+      <!-- ============ SLIDE · EDA-03 · Tamanho de sequência por assignment (CSEDM Spring 2019) ============ -->
       <section data-background-color="#F1F6FB">
         <div class="deck-slide slide-related">
           <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
 
-          <p class="deck-topic"><span class="ps1">&gt;</span>como o aprendizado se manifesta<span class="caret blink"></span></p>
+          <p class="deck-topic"><span class="ps1">&gt;</span>tentativas por <i>assignment</i><span class="caret blink"></span></p>
 
-          <p class="rel-lead">Para cada <i>assignment</i>, mostramos a taxa de acerto em função da tentativa ordinal sobre todos os 413 estudantes do Spring 2019.</p>
+          <p class="rel-lead">O gráfico é um boxplot de mostra a relação das tentativas com cada <i>assignment</i> .</p>
 
-          <p class="eda-title">Figura 1 &ndash; Curvas de aprendizado por <i>assignment</i> (Spring 2019)</p>
+          <p class="eda-title" style="margin-bottom: -16px;">Figura 1 &ndash; Tentativas por <i>assignment</i> (Spring 2019)</p>
 
-          <figure class="eda-fig eda-fig--wide">
-            <img src="assets/eda-curvas-aprendizado.png" alt="Cinco subgráficos com a taxa de acerto ao longo das 30 primeiras tentativas ordinais por assignment A1 a A5">
+          <figure class="eda-fig eda-fig--compact" style="max-width: 96%;">
+            <img src="assets/eda-seq-by-assignment.png" style="max-height: 492px;" alt="Cinco boxplots do número de tentativas por estudante em cada assignment A1 a A5, com medianas entre 24 e 40 e cauda longa de valores extremos">
           </figure>
 
-          <p class="eda-source">Fonte: elaborado pelo autor sobre CSEDM (Spring 2019).</p>
+          <p class="eda-source" style="margin-top: -16px;">Fonte: elaborado pelo autor sobre CSEDM (Spring 2019).</p>
         </div>
       </section>
 
@@ -303,7 +303,7 @@
 
           <p class="rel-lead">Nosso pré-processamento segue o protocolo de Shi <i>et al.</i> (2022). Dessa forma, podemos comparar diretamente nosso resultado ao relatado no artigo do Code-DKT.</p>
 
-          <p class="rel-lead">Esse subset apresenta <b>23,68%</b> de tentativas corretas, mesma proporção reportada no paper, mais um sinal de que estamos trabalhando sob os mesmos dados.</p>
+          <p class="rel-lead">Constatamos por meio dessa etapa que o subset apresenta <b>23,68%</b> de tentativas corretas, mesma proporção reportada no paper, mais um sinal de que estamos trabalhando sob os mesmos dados.</p>
 
           <p class="rel-lead">Em seguida, dividimos em <b>328 estudantes para treino e 82 para teste</b>, na proporção 80/20 com semente fixa.</p>
         </div>
@@ -362,9 +362,7 @@
 
           <p class="rel-lead">Modelos de KT estimam, a partir do histórico de tentativas, a probabilidade de um estudante acertar o próximo problema.</p>
 
-          <p class="rel-lead">No nosso trabalho, eles são o instrumento central para representar o aprendizado em programação.</p>
-
-          <p class="rel-lead">Mas modelos como BKT e DKT tratam as respostas dos estudantes apenas como corretas ou incorretas, ignorando seu conteúdo.</p>
+          <p class="rel-lead">No nosso trabalho, eles são o instrumento central para representar o aprendizado em programação, mas modelos como BKT e DKT tratam as respostas dos estudantes apenas como corretas ou incorretas, ignorando seu conteúdo.</p>
 
           <p class="rel-lead">O problema é que em áreas como programação, o conteúdo da resposta importa tanto quanto o resultado final.</p>
 
@@ -423,7 +421,11 @@
 
           <p class="rel-lead" style="margin-top: 18px;"><i>Code2vec</i> transforma cada caminho folha-a-folha em vetor.</p>
 
-          <p class="rel-lead" style="margin-top: 18px;">pondera com atenção e alimenta o LSTM.</p>
+          <p class="rel-lead" style="margin-top: 18px;">Pondera com atenção e alimenta o LSTM.</p>
+
+          <p class="rel-lead" style="margin-top: 18px;">A atenção realça os caminhos da AST mais informativos.</p>
+
+          <p class="rel-lead" style="margin-top: 18px;">O vetor de código entra no LSTM junto com o sinal de acerto/erro.</p>
         </div>
       </section>
 
@@ -433,7 +435,7 @@
 
           <p style="font-family: Arial; font-weight: bold; font-size: 16px; margin: 14px 0 2px 0; text-align: center;">Figura 3 &ndash; AST com caminho folha-a-folha em destaque</p>
           <div style="text-align: center;">
-            <img src="assets/ast_codedkt_ptbr.svg" alt="Árvore de sintaxe abstrata com um caminho folha-a-folha em vermelho" style="max-width: 900px; max-height: 500px; width: 100%; height: auto;">
+            <img src="assets/ast_codedkt_ptbr.svg" alt="Árvore de sintaxe abstrata com um caminho folha-a-folha em vermelho" style="max-width: 1080px; max-height: 580px; width: 100%; height: auto;">
           </div>
 
           <p class="eda-source">Fonte: adaptado de Shi <i>et al.</i> (2022).</p>
