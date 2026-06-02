@@ -17,12 +17,9 @@ proj = json.load(open(RES / "codedkt_kc_difficulty.json"))["curves"]
 cpt = json.load(open(RES / "kc_translations.json"))["concepts"]
 
 MARTINS = {
-    "Estruturas de controle":          ["branching_condicional", "iteracao_indexada", "retorno_antecipado"],
-    "Operadores e expressões lógicas": ["logica_booleana_composta", "negacao_booleana", "comparacao_numerica"],
-    "Vetores":                         ["manipulacao_array", "bounds_checking", "dual_pointer"],
-    "Funções":                         ["metodos_auxiliares", "tipos_retorno", "parametros_metodo"],
-    "Manipulação de variáveis":        ["padrao_acumulador", "inicializacao_variaveis", "estado_com_indices"],
-    "Conhecimento matemático":         ["operador_modulo", "aritmetica_condicional"],
+    "Estrutura de controle":               ["branching_condicional", "iteracao_indexada", "retorno_antecipado"],
+    "Manipulação de variáveis":            ["padrao_acumulador", "inicializacao_variaveis", "estado_com_indices"],
+    "Operadores e expressões booleanas":   ["logica_booleana_composta", "negacao_booleana", "comparacao_numerica"],
 }
 PAL = dict(zip(MARTINS, plt.cm.tab10.colors))
 
@@ -52,16 +49,17 @@ for g in order:
     lbl = f"{g}  (nível@1={d['nivel1']:.2f}{', 1 conceito' if fragile else ''})"
     ax.plot(xline, d["intercept"] + d["slope"] * xline, color=col, lw=2.6,
             ls="--" if fragile else "-", label=lbl, zorder=4)
-ax.set_xlabel("oportunidade  (n-ésimo problema distinto do KC, primeiras tentativas)", fontsize=10.5, fontweight="bold")
-ax.set_ylabel("mastery prevista pelo Code-DKT", fontsize=11, fontweight="bold")
+ax.set_xlabel("oportunidade  (n-ésimo problema distinto do KC, primeiras tentativas)", fontsize=17, fontweight="bold")
+ax.set_ylabel("mastery prevista pelo Code-DKT", fontsize=17, fontweight="bold")
 ax.set_xticks(range(1, 7))
+ax.tick_params(axis="both", labelsize=15)
 ax.grid(alpha=.25)
 for sp in ("top", "right"):
     ax.spines[sp].set_visible(False)
 for lbl in ax.get_xticklabels() + ax.get_yticklabels():
     lbl.set_fontweight("bold")
 leg = ax.legend(title="dificuldade de Martins, Marin e Alves (2024)  ·  menor nível@1 = mais difícil",
-                fontsize=9, title_fontsize=8.5, loc="upper left", framealpha=0.0)
+                fontsize=15, title_fontsize=13, loc="upper left", framealpha=0.0)
 fig.tight_layout()
 out = RES / "fig_martins_curves_predicted.png"
 fig.savefig(out, dpi=140, bbox_inches="tight", transparent=True)
