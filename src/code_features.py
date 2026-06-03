@@ -1,15 +1,5 @@
-"""
-Extração de features de código para Code-DKT (Shi et al., 2022).
+#Extração de features de código para Code-DKT (Shi et al., 2022).
 
-Pipeline: código Java → paths AST via javalang → vocabulário → tensores.
-
-Path format (code2vec): (start_token, path_str, end_token) onde path_str é
-a sequência "@"-separada de todos os nós AST do nó folha de início ao fim,
-incluindo os extremos. Compatível com path_extractor.py do repositório
-oficial Code-DKT.
-
-Referência de implementação: Code-DKT/src/path_extractor.py (Shi et al., 2022).
-"""
 
 from __future__ import annotations
 
@@ -92,23 +82,7 @@ def extract_paths_javalang(
     R: int = 50,
     seed: int = 42,
 ) -> list[tuple[str, str, str]]:
-    """Extrai até R paths AST do código Java via javalang.
 
-    Fiel ao path_extractor.py do Code-DKT (Shi et al., 2022):
-    - Comprimento máximo do path (nós totais): max_path_length
-    - Largura máxima: diferença inteira entre ordens dos nós vizinhos à LCA
-    - Amostragem aleatória de R paths quando há mais disponíveis
-
-    Args:
-        code: string de código Java (método isolado — formato típico CSEDM).
-        max_path_length: máximo de nós no caminho (inclusive start e end).
-        max_path_width: máxima diferença de order inteira entre nós adjacentes à LCA.
-        R: máximo de paths a retornar (amostra de random.Random(seed) se > R).
-        seed: semente para amostragem reprodutível (não afeta o estado global).
-
-    Returns:
-        Lista de (start_token, path_str, end_token). Vazia se o parse falhar.
-    """
     try:
         parsed = _parse_java(code)
     except Exception:
@@ -122,9 +96,9 @@ def extract_paths_javalang(
     if not leaf_nodes:
         return []
 
-    # Padding dos order strings ao comprimento máximo para normalização de rank
-    # (path_extractor.py: get_node_rank). O atributo .order permanece inalterado
-    # e é usado na comparação de largura (get_path_width).
+    #Padding dos order strings ao comprimento máximo para normalização de rank
+    #(path_extractor.py: get_node_rank). O atributo .order permanece inalterado
+    #e é usado na comparação de largura (get_path_width).
     max_depth = max(len(node.name[0]) for node in leaf_nodes)
     for leaf in leaf_nodes:
         while len(leaf.name[0]) < max_depth:
@@ -183,7 +157,7 @@ def extract_paths_javalang(
 # ---------------------------------------------------------------------------
 
 def _worker_extract(args: tuple) -> tuple[str, list]:
-    """Worker picklável para multiprocessing.Pool."""
+    #Worker picklável para multiprocessing.Pool."""
     code_state_id, code, max_path_length, max_path_width, R, seed = args
     paths = extract_paths_javalang(code, max_path_length, max_path_width, R, seed)
     return code_state_id, paths
@@ -198,17 +172,8 @@ def build_cache(
     seed: int = 42,
     n_workers: Optional[int] = None,
 ) -> dict[str, list[tuple[str, str, str]]]:
-    """Extrai paths para todos os CodeStateIDs via multiprocessing.Pool.
+    #Extrai paths para todos os CodeStateIDs via multiprocessing.Pool.
 
-    Args:
-        code_state_ids: lista de CodeStateIDs únicos a processar.
-        code_states: dict {CodeStateID: code_string}.
-        n_workers: número de processos worker (padrão: os.cpu_count()).
-
-    Returns:
-        dict {CodeStateID: list[tuple[str, str, str]]}.
-        CodeStateIDs com parse falho mapeiam para lista vazia.
-    """
     args_list = [
         (csid, code_states.get(csid, ""), max_path_length, max_path_width, R, seed)
         for csid in code_state_ids
@@ -227,17 +192,8 @@ def build_cache(
 def build_vocab(
     cache_raw: dict[str, list[tuple[str, str, str]]],
 ) -> tuple[dict[str, int], dict[str, int]]:
-    """Constrói token_to_idx e path_to_idx a partir do cache do train set.
+    #Constrói token_to_idx e path_to_idx a partir do cache do train set.
 
-    Índice 0 reservado para PAD/UNK (convenção code2vec: SEPARATE_OOV_AND_PAD=False).
-    Tokens/paths do test set ausentes no vocabulário mapeiam para 0.
-
-    Args:
-        cache_raw: dict {CodeStateID: list[paths]} — APENAS do train set.
-
-    Returns:
-        (token_to_idx, path_to_idx) com índices iniciando em 1.
-    """
     tokens: set[str] = set()
     path_strs: set[str] = set()
     for path_list in cache_raw.values():
@@ -261,20 +217,8 @@ def paths_to_tensor(
     path_to_idx: dict[str, int],
     R: int = 50,
 ) -> np.ndarray:
-    """Converte lista de paths em array (R, 3) de índices com zero-padding.
+    #Converte lista de paths em array (R, 3) de índices com zero-padding.
 
-    Cada linha: [token_idx(start), path_idx(path_str), token_idx(end)].
-    Paths ausentes no vocabulário → índice 0 (PAD/UNK).
-    Linhas além do comprimento real da lista → zeros (PAD).
-
-    Args:
-        paths: lista de (start, path, end) tuples.
-        token_to_idx, path_to_idx: dicionários de vocabulário.
-        R: número de paths no tensor de saída.
-
-    Returns:
-        np.ndarray de shape (R, 3) e dtype int64.
-    """
     arr = np.zeros((R, 3), dtype=np.int64)
     for r, (start, path_str, end) in enumerate(paths[:R]):
         arr[r, 0] = token_to_idx.get(start, 0)
@@ -292,31 +236,8 @@ def build_code_input_tensor(
     max_len: int = 50,
     R: int = 50,
 ) -> tuple[Tensor, Tensor, Tensor]:
-    """Constrói tensores de entrada combinados DKT one-hot + code features.
+    #Constrói tensores de entrada combinados DKT one-hot + code features.
 
-    Formato idêntico ao input esperado por CodeDKTModel.forward():
-      X[:, :, :2M]  = DKT one-hot (rnn_first_part)
-      X[:, :, 2M:]  = R*3 índices de paths, armazenados como float32 e
-                      convertidos para long via .reshape(B,L,R,3).long()
-                      dentro do modelo.
-
-    Left-zero-padding conforme readdata.py do Code-DKT (variável 'extra').
-
-    Args:
-        sequences: lista de dicts com keys subject_id, assignment_id, events.
-            events: DataFrame com colunas ProblemID, correct, is_first_attempt,
-            CodeStateID.
-        cache_raw: dict {CodeStateID: list[paths]} pré-computado por build_cache.
-        token_to_idx, path_to_idx: vocabulários (construídos apenas do train).
-        problem_to_idx: {problem_id (int): index (int)}.
-        max_len: comprimento máximo da sequência (Shi et al., 2022: 50).
-        R: paths por step (Shi et al., 2022, Table 3: 50).
-
-    Returns:
-        X:      (N, max_len, 2M + R*3) — input combinado.
-        Y_next: (N, max_len, M)        — one-hot do próximo problema.
-        mask:   (N, max_len)           — bool, True onde há dado real.
-    """
     M = len(problem_to_idx)
     N = len(sequences)
 

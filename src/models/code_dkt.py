@@ -1,16 +1,4 @@
-"""
-Code-DKT — Shi et al. (2022), EDM 2022.
-
-Arquitetura: LSTM + mecanismo de atenção score-attended sobre paths AST
-(code2vec). Fiel ao repositório oficial Code-DKT (c2vRNNModel.py).
-
-Diferenças em relação ao DKT (Piech et al., 2015):
-  Input LSTM: concat(x_t, z_t) ∈ R^{2M+320=340}  (vs R^{20} no DKT)
-  z_t: vetor de código via atenção sobre R paths AST embedados (320-dim)
-  Embeddings: embed_nodes(100) + embed_paths(100) + embed_nodes(100) + x_t(20) = 320
-
-Interface pública idêntica à de dkt.py para consumo uniforme em 07_comparison.ipynb.
-"""
+#Code-DKT, Shi et al. (2022), EDM 2022.
 
 from __future__ import annotations
 
@@ -27,17 +15,7 @@ from src.models.dkt import dkt_loss
 
 
 class CodeDKTModel(nn.Module):
-    """Code-DKT — LSTM com atenção code2vec sobre paths AST.
-
-    Fiel à arquitetura de c2vRNNModel.py (Code-DKT, Shi et al., 2022):
-    - embed_nodes compartilhado para start e end tokens (100-dim cada)
-    - embed_paths exclusivo para sequências de nós (100-dim)
-    - embed_dropout 0.2 no full_embed (ativo apenas em model.train())
-    - path_transformation_layer: Linear(input_dim+300, input_dim+300) + tanh
-    - attention_layer: Linear(input_dim+300, 1) + Softmax(dim=2, sobre R paths)
-    - LSTM input: concat(x_t, code_vector) ∈ R^{2*input_dim+300}
-    - dropout configurável em h_t antes de fc (para grid search)
-    """
+    #Code-DKT — LSTM com atenção code2vec sobre paths AST.
 
     def __init__(
         self,
@@ -52,16 +30,7 @@ class CodeDKTModel(nn.Module):
         node_embed_dim: int = 100,
         path_embed_dim: int = 100,
     ):
-        """
-        Args:
-            input_dim: dimensão DKT one-hot (2M).
-            hidden_dim: tamanho do hidden state do LSTM.
-            output_dim: número de problemas (M).
-            node_count: tamanho do vocabulário de tokens (sem contar PAD/UNK).
-            path_count: tamanho do vocabulário de path strings.
-            R: número de paths por submissão (Shi et al., 2022, Table 3: 50).
-            node_embed_dim, path_embed_dim: dimensão de cada embedding (100).
-        """
+
         super().__init__()
         self.input_dim = input_dim
         self.R = R
@@ -91,15 +60,8 @@ class CodeDKTModel(nn.Module):
         self.fc = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, x: Tensor) -> Tensor:
-        """Forward pass.
-
-        Args:
-            x: (B, L, input_dim + R*3) — DKT one-hot || índices de paths.
-               Índices são armazenados como float32 e convertidos para long.
-
-        Returns:
-            (B, L, M) probabilidades de acerto (Sigmoid).
-        """
+        #Forward pass.
+        
         B, L, _ = x.shape
 
         # Separação do tensor combinado — c2vRNNModel.py linhas 39-42
@@ -151,19 +113,8 @@ def train_code_dkt(
     cache_raw: dict[str, list],
     seed: int = 42,
 ) -> CodeDKTModel:
-    """Treina CodeDKTModel com Adam e gradient clipping.
+    #Treina CodeDKTModel com Adam e gradient clipping.
 
-    Args:
-        train_sequences: sequências do split de treino.
-        problem_to_idx: {problem_id: index}, consistente com train+test.
-        vocab: dict com chaves token_to_idx, path_to_idx, node_count, path_count.
-        config: hiperparâmetros — hidden_dim, dropout, lr, batch_size, epochs, max_len, R.
-        cache_raw: dict {CodeStateID: list[paths]} pré-computado.
-        seed: semente para reprodutibilidade.
-
-    Returns:
-        CodeDKTModel treinado (no device CUDA ou CPU disponível).
-    """
     torch.manual_seed(seed)
     np.random.seed(seed)
 
@@ -246,24 +197,8 @@ def predict_code_dkt(
     max_len: int = 50,
     R: int = 50,
 ) -> pd.DataFrame:
-    """Predições Code-DKT sobre sequências de teste.
+    #Predições Code-DKT sobre sequências de teste.
 
-    Para cada evento t+1, a predição é y_t[q_{t+1}]: componente do vetor de
-    saída do LSTM no passo t correspondente ao problema de t+1. O primeiro
-    evento de cada sequência não tem predição (sem histórico anterior).
-
-    Args:
-        model: CodeDKTModel treinado.
-        sequences: sequências de teste.
-        problem_to_idx: mapeamento global {problem_id: index}.
-        vocab: dict com token_to_idx, path_to_idx.
-        cache_raw: dict {CodeStateID: list[paths]} pré-computado.
-        max_len, R: devem coincidir com os usados no treino.
-
-    Returns:
-        DataFrame com colunas: user_id, skill_name, correct,
-        is_first_attempt, correct_predictions.
-    """
     if not sequences:
         return pd.DataFrame(
             columns=["user_id", "skill_name", "correct",
@@ -313,20 +248,8 @@ def train_and_evaluate(
     cache_raw: dict[str, list],
     seed: int = 42,
 ) -> dict:
-    """Pipeline completo: treina, prediz e calcula AUC para um assignment.
+    #Pipeline completo: treina, prediz e calcula AUC para um assignment.
 
-    Args:
-        train_sequences, test_sequences: splits do assignment.
-        problem_to_idx: {problem_id: index} global (train + test).
-        vocab: dict com token_to_idx, path_to_idx, node_count, path_count.
-        config: hiperparâmetros.
-        cache_raw: dict {CodeStateID: list[paths]} pré-computado.
-        seed: semente.
-
-    Returns:
-        Dict com keys: model, config, all_auc, first_auc,
-        n_train_events, n_test_events, pred_df.
-    """
     max_len = config.get("max_len", 50)
     R = config.get("R", 50)
 

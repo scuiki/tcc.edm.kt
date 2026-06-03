@@ -1,11 +1,4 @@
-"""
-data_loader.py — carregamento do dataset CSEDM (ProgSnap2 v6)
-
-Dataset principal: data/CSEDM/MainTable.csv (Spring 2019, protocolo Shi et al. 2022)
-  - 410 alunos após filtro min_attempts >= 3 (Run.Program globais); 23.68% corretos
-  - Split 80/20: train_test_split(students, test_size=0.2, random_state=1)
-  - Usar load_spring2019_split() para carregamento com split reproduzível.
-"""
+#data_loader.py — carregamento do dataset CSEDM (ProgSnap2 v6)
 
 from pathlib import Path
 import pandas as pd
@@ -14,22 +7,8 @@ _SPLITS = {}
 
 
 def load_main_table(split: str, data_root: Path | str) -> pd.DataFrame:
-    """Carrega MainTable.csv do split especificado e normaliza tipos.
+    #Carrega MainTable.csv do split especificado e normaliza tipos.
 
-    Parameters
-    ----------
-    split : str
-        Um de: 'all', 'all_train', 'all_test', 'release_train', 'release_test'.
-    data_root : Path | str
-        Raiz do dataset — diretório que contém All/, Release/, Train/, Test/.
-
-    Returns
-    -------
-    pd.DataFrame
-        MainTable com ServerTimestamp convertido para datetime e AssignmentID
-        como inteiro (colunas extras de Release/ mantidas).
-
-    """
     data_root = Path(data_root)
     if split not in _SPLITS:
         raise ValueError(f"split deve ser um de {list(_SPLITS)}; recebido: {split!r}")
@@ -49,24 +28,8 @@ def load_main_table(split: str, data_root: Path | str) -> pd.DataFrame:
 
 
 def filter_for_bkt_dkt(df: pd.DataFrame) -> pd.DataFrame:
-    """Filtra eventos para BKT e DKT: apenas Run.Program com label binária.
+    #Filtra eventos para BKT e DKT: apenas Run.Program com label binária.
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-        MainTable carregada via load_main_table.
-
-    Returns
-    -------
-    pd.DataFrame
-        Subset com apenas EventType=='Run.Program'; coluna 'correct' adicionada
-        (1 se Score==1.0, 0 caso contrário). Índice resetado.
-
-    Notes
-    -----
-    BKT e DKT usam apenas tentativas de execução (Run.Program). Compile.Error não
-    entra na sequência porque esses modelos não processam informação do código-fonte.
-    """
     filtered = df[df["EventType"] == "Run.Program"].copy()
     assert filtered["EventType"].nunique() == 1, "EventType inesperado passou pelo filtro BKT/DKT"
     assert set(filtered["EventType"].unique()) == {"Run.Program"}, "Filtro BKT/DKT corrompido"
@@ -75,34 +38,8 @@ def filter_for_bkt_dkt(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def filter_for_code_dkt(df: pd.DataFrame) -> pd.DataFrame:
-    """Filtra eventos para Code-DKT: Run.Program e Compile.Error com label binária.
+    #Filtra eventos para Code-DKT: Run.Program e Compile.Error com label binária.
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-        MainTable carregada via load_main_table.
-
-    Returns
-    -------
-    pd.DataFrame
-        Subset com EventType em {'Run.Program', 'Compile.Error'}; coluna 'correct'
-        adicionada (1 se Run.Program com Score==1.0, 0 em todos os outros casos).
-        Ordenado por (SubjectID, AssignmentID, ServerTimestamp). Índice resetado.
-
-    Notes
-    -----
-    Code-DKT inclui Compile.Error como correct=0 para capturar a evolução
-    incremental do código do estudante (Shi et al., 2022).
-
-    Este filtro é agnóstico ao extrator de AST: ele apenas seleciona eventos e
-    monta a label binária. A extração de features de código acontece a jusante,
-    em módulos separados. O pipeline principal usa javalang + code2vec
-    (src/code_features.py), fiel ao Code-DKT original (Shi et al., 2022); é o
-    extrator de melhor desempenho e o adotado daqui em diante. O extrator srcML
-    (src/srcml_features.py, Pankiewicz et al., 2025) é uma variante exploratória,
-    capaz de parsear código não-compilável, mas que ficou abaixo do javalang nos
-    nossos experimentos.
-    """
     allowed = {"Run.Program", "Compile.Error"}
     filtered = df[df["EventType"].isin(allowed)].copy()
     assert set(filtered["EventType"].unique()).issubset(allowed), "EventType inesperado passou pelo filtro Code-DKT"
@@ -114,42 +51,8 @@ def filter_for_code_dkt(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_sequences(df: pd.DataFrame, assignment_id: int) -> list[dict]:
-    """Constrói sequências KT por estudante para um assignment específico.
+    #Constrói sequências KT por estudante para um assignment específico.
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-        DataFrame filtrado via filter_for_bkt_dkt ou filter_for_code_dkt.
-        Deve conter as colunas: SubjectID, AssignmentID, ProblemID,
-        ServerTimestamp, EventType, correct, CodeStateID.
-    assignment_id : int
-        ID do assignment a processar (coluna AssignmentID).
-
-    Returns
-    -------
-    list[dict]
-        Lista de dicionários, um por estudante que participou do assignment.
-        Cada dicionário contém:
-        - 'subject_id'    (str)          — identificador do estudante
-        - 'assignment_id' (int)          — ID do assignment
-        - 'events'        (pd.DataFrame) — eventos do estudante ordenados por
-          ServerTimestamp, com todas as colunas do df de entrada mais
-          'is_first_attempt' (bool): True para a primeira ocorrência de cada
-          ProblemID na sequência cronológica do estudante (usada para calcular
-          first-attempt AUC conforme Shi et al., 2022).
-
-    Notes
-    -----
-    is_first_attempt marca a primeira tentativa do estudante em cada problema
-    dentro do assignment — independentemente do EventType. Para Code-DKT, mesmo
-    um Compile.Error pode ser a primeira tentativa em um problema (o estudante
-    nunca compilou com sucesso antes). Para BKT/DKT, is_first_attempt marca
-    o primeiro Run.Program por problema.
-
-    A ordenação cronológica é garantida por ServerTimestamp (UTC) antes de
-    marcar is_first_attempt — eventos com mesmo timestamp são desambiguados
-    pela ordem original do DataFrame.
-    """
     assign_df = df[df["AssignmentID"] == assignment_id].copy()
 
     # Ordenar cronologicamente antes de marcar a primeira tentativa
@@ -174,32 +77,8 @@ def build_sequences(df: pd.DataFrame, assignment_id: int) -> list[dict]:
 
 
 def truncate_sequences(sequences: list[dict], max_len: int = 50) -> list[dict]:
-    """Trunca sequências KT para as últimas max_len tentativas por estudante.
+    #Trunca sequências KT para as últimas max_len tentativas por estudante.
 
-    Parameters
-    ----------
-    sequences : list[dict]
-        Saída de build_sequences — lista de dicionários com chaves
-        'subject_id', 'assignment_id', 'events'.
-    max_len : int
-        Comprimento máximo da janela. Padrão: 50, conforme Shi et al. (2022).
-
-    Returns
-    -------
-    list[dict]
-        Lista de dicionários com as mesmas chaves; sequências longas são truncadas
-        para os últimos max_len eventos (os mais recentes cronologicamente).
-        A flag 'is_first_attempt' é recalculada dentro da janela truncada:
-        True para a primeira ocorrência de cada ProblemID na janela resultante.
-
-    Notes
-    -----
-    A truncagem mantém os eventos MAIS RECENTES (tail) porque captura o estado
-    de conhecimento mais próximo do momento de avaliação. Recalcular
-    is_first_attempt é necessário: a primeira tentativa na janela truncada pode
-    ser diferente da primeira tentativa na sequência completa, caso os eventos
-    iniciais tenham sido removidos.
-    """
     truncated = []
     for seq in sequences:
         events = seq["events"]
@@ -218,23 +97,8 @@ def truncate_sequences(sequences: list[dict], max_len: int = 50) -> list[dict]:
 
 
 def load_labels(split: str, data_root: Path | str, which: str = "early") -> pd.DataFrame:
-    """Carrega early.csv ou late.csv do split especificado.
+    #Carrega early.csv ou late.csv do split especificado.
 
-    Parameters
-    ----------
-    split : str
-        Um de: 'all_train', 'all_test', 'release_train', 'release_test'.
-        'all' não possui early/late no nível raiz.
-    data_root : Path | str
-        Raiz do dataset.
-    which : str
-        'early' ou 'late'.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame com colunas SubjectID, AssignmentID e Label (0/1).
-    """
     data_root = Path(data_root)
     if split not in _SPLITS or _SPLITS[split][1] is None:
         raise ValueError(f"Labels não disponíveis para split={split!r}. Use 'all_train', 'all_test', 'release_train' ou 'release_test'.")
@@ -254,21 +118,8 @@ def load_spring2019_split(
     random_state: int = 1,
     min_attempts: int = 3,
 ) -> "tuple[pd.DataFrame, pd.DataFrame]":
-    """Carrega MainTable.csv, filtra min_attempts e split 80/20 por SubjectID.
+    #Carrega MainTable.csv, filtra min_attempts e split 80/20 por SubjectID.
 
-    Replica o protocolo de Shi et al. (2022): 410 alunos, split random_state=1.
-    min_attempts é contado em Run.Program globais (todos os assignments somados).
-
-    Retorna o DataFrame completo (todos os EventTypes) — usar filter_for_bkt_dkt()
-    ou filter_for_code_dkt() nas células subsequentes.
-
-    Taxa de corretos no train split ≈ 23.68% (tolerância ±0.5pp).
-
-    Parameters
-    ----------
-    data_dir : Path | str
-        data/CSEDM/ após reorganização — contém MainTable.csv diretamente.
-    """
     from sklearn.model_selection import train_test_split as _split
 
     data_dir = Path(data_dir)
