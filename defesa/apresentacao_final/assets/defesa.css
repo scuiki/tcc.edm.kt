@@ -1,0 +1,197 @@
+/* ===========================================================================
+   Complementos da defesa do TCC 2 sobre o theme-unifacens.css
+   (mesma linguagem visual: Arial, caixas ABNT de borda preta, azul UniFacens)
+   =========================================================================== */
+
+/* texto corrido mais compacto para slides densos */
+.slide-related .rel-lead--sm { font-size: 22px; line-height: 1.45; margin-top: 16px; }
+.slide-related .rel-lead--xs { font-size: 19px; line-height: 1.4; margin-top: 10px; }
+.slide-related .rel-lead b { color: var(--uni-ink); }
+
+/* duas colunas: texto e figura, ou duas tabelas */
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; margin-top: 6px; }
+.cols--text-fig { grid-template-columns: 1.15fr 1fr; align-items: center; flex: 1 1 auto; }
+.cols--wide-left { grid-template-columns: 1.25fr 1fr; }
+.cols .rel-lead { max-width: none; }
+.col-head { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 22px; font-weight: 700; color: var(--uni-ink); margin: 18px 0 4px; }
+
+/* figura ABNT: título acima, imagem, fonte abaixo */
+.abnt-fig { display: flex; flex-direction: column; align-items: center; margin-top: 14px; }
+.abnt-fig img { display: block; max-width: 100%; object-fit: contain; }
+.abnt-fig .eda-title, .abnt-fig .eda-source { width: 100%; }
+.abnt-fig .eda-source { margin-top: 6px; }
+
+/* tabela ABNT mais compacta (resultados) */
+.eda-grid--sm { font-size: 22px; }
+.eda-grid--sm th, .eda-grid--sm td { padding: 7px 14px; }
+.eda-grid--xs { font-size: 19px; }
+.eda-grid--xs th, .eda-grid--xs td { padding: 5px 10px; }
+.eda-grid .hl { color: var(--uni-blue-d); font-weight: 700; }
+.eda-grid tr.sum td { border-top: 1px solid #1f1f1f; font-weight: 700; }
+.eda-grid td.l, .eda-grid th.l { text-align: left; }
+
+/* quadro ABNT (grade fechada) compacto */
+.kc-quadro--sm { font-size: 20px; margin-top: 8px; }
+.kc-quadro--sm th, .kc-quadro--sm td { padding: 8px 14px; }
+.kc-quadro--xs { font-size: 17px; margin-top: 8px; }
+.kc-quadro--xs th, .kc-quadro--xs td { padding: 6px 10px; }
+.kc-quadro td.c { text-align: center; }
+
+/* bloco de código (Courier, como o exemplo de código do deck anterior) */
+.code-block {
+  margin: 8px 0 0; padding: 12px 16px; background: #fff; border: 1.5px solid #1f1f1f;
+  font-family: "Courier New", Consolas, "DejaVu Sans Mono", monospace; font-size: 17px;
+  line-height: 1.45; color: #1a1a1a; white-space: pre; text-align: left;
+}
+.code-block .hl { background: #ffe14d; }
+.code-block .kw { color: #0000cd; font-weight: 700; }
+
+/* enunciado em inglês, como no artigo */
+.statement { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 18px; line-height: 1.4; color: #3a414d; font-style: italic; margin: 6px 0 0; max-width: 1150px; }
+
+/* texto centralizado de destaque (problema de pesquisa, demonstração) */
+.center-stage { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.center-stage .big { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; line-height: 1.45; color: var(--uni-ink); max-width: 1060px; margin: 0; }
+.center-stage .sub { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 22px; line-height: 1.5; color: #5b6472; max-width: 980px; margin: 30px 0 0; }
+
+/* lista numerada formal (objetivos, adaptações) em tamanho menor */
+.phases-list--sm { margin: 10px 0 0; }
+.phases-list--sm li { font-size: 22px; margin-bottom: 10px; text-align: left; }
+
+/* do domínio por problema ao domínio por conceito */
+.dom-diagram { display: grid; grid-template-columns: 300px 120px 340px; align-items: center; justify-content: center; margin-top: 18px; font-family: Arial, "Helvetica Neue", sans-serif; }
+.dom-probs { display: flex; flex-direction: column; gap: 14px; }
+.dom-box { background: #fff; border: 1.5px solid #1f1f1f; padding: 12px 16px; font-size: 20px; color: #111; text-align: center; }
+.dom-box b { display: block; font-size: 24px; margin-top: 2px; }
+.dom-box--kc { padding: 22px 18px; font-weight: 700; }
+.dom-box--kc b { color: var(--uni-blue-d); font-size: 30px; }
+.dom-arrow { text-align: center; font-size: 18px; color: #1f1f1f; }
+.dom-arrow span { display: block; font-size: 34px; font-weight: 700; line-height: 1; }
+
+/* funil da extração: caixas menores para seis etapas */
+.slide-bridge .bridge-seq--sm { margin-top: 10px; }
+.slide-bridge .bridge-seq--sm .step { font-size: 19px; padding: 12px 8px; flex-direction: column; }
+.slide-bridge .bridge-seq--sm .step b { font-size: 30px; display: block; }
+.slide-bridge .bridge-seq--sm .step.hl { border-color: var(--uni-blue); border-width: 2.5px; }
+.slide-bridge .bridge-seq--sm .step.hl b { color: var(--uni-blue-d); }
+.slide-bridge .bridge-seq--sm .arr { font-size: 20px; padding: 0 8px; }
+
+/* slides de reserva da demonstração: tela inteira da ferramenta */
+.slide-backup .abnt-fig img { max-height: 540px; border: 1px solid #c2cddd; }
+.backup-tag { font-family: var(--mono); font-size: 14px; color: #5b6472; position: absolute; right: 110px; top: 34px; }
+
+/* ===========================================================================
+   Complementos da apresentação final
+   =========================================================================== */
+
+/* coluna "este trabalho" destacada no quadro do love6; as demais são referência */
+.kc-quadro .ours { background: #EAF0FF; color: var(--uni-blue-d); font-weight: 700; }
+.kc-quadro th.ours { color: var(--uni-blue-d); }
+.kc-quadro .ref-tag { display: block; font-size: 14px; font-weight: 400; color: #5b6472; margin-top: 2px; }
+/* conceito grifado no love6, no mesmo amarelo do trecho de código */
+.kc-quadro .kc-mark { background: #ffe14d; border-radius: 2px; padding: 0 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.kc-quadro th.ours .ref-tag { color: var(--uni-blue-d); font-weight: 700; }
+.kc-quadro code, .code-name { font-family: "Courier New", Consolas, monospace; font-size: 0.95em; }
+
+/* linha do tempo compacta (BKT, DKT, Code-DKT) acima da tabela de resultados */
+.tl { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; margin: 4px 0 6px; font-family: Arial, "Helvetica Neue", sans-serif; }
+.tl::before { content: ""; position: absolute; top: 13px; left: 12%; right: 12%; height: 2px; background: #1f1f1f; }
+.tl > div { position: relative; text-align: center; }
+.tl .yr { display: inline-block; background: #fff; padding: 0 10px; font-weight: 700; font-size: 21px; }
+.tl .who { font-size: 17px; font-weight: 700; margin: 4px 0 0; }
+.tl .what { font-size: 16px; margin: 2px 0 0; color: #3a414d; }
+.tl > div.now .yr, .tl > div.now .who { color: var(--uni-blue-d); }
+
+/* lista com marcador de prompt, em tamanho menor */
+.slide-related .rel-points.rel-points--sm li { font-size: 20px; line-height: 1.45; padding: 3px 0; }
+
+/* problema de pesquisa em destaque */
+.prob-box { border-left: 4px solid var(--uni-blue); padding: 6px 0 6px 18px; margin-top: 8px;
+  font-family: Arial, "Helvetica Neue", sans-serif; font-size: 23px; line-height: 1.45; color: var(--uni-ink); max-width: 1120px; }
+
+/* lista em tamanho maior para slides com pouco texto (considerações finais) */
+.slide-related .rel-points.rel-points--lg li { font-size: 25px; line-height: 1.5; padding: 10px 0; }
+
+/* usa a altura toda do slide (o conteúdo pode passar da linha dos controles < >) */
+.slide-related { padding: 40px 64px 14px; }
+.slide-related .deck-topic { margin-bottom: 8px; }
+
+/* frase curta antes ou depois de uma ilustração */
+.slide-related .say { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 21px; line-height: 1.4; color: var(--uni-ink); margin: 10px 0 0; max-width: 1150px; }
+.slide-related .say b { color: var(--uni-ink); }
+.slide-related .say--center { text-align: center; max-width: none; }
+
+/* janela de editor clara, no estilo do Dev-C++ */
+.ide-light { border: 1.5px solid #9aa6b8; background: #fff; box-shadow: 0 2px 0 #dfe4ec; }
+.ide-light__tab { font-family: Arial, "Helvetica Neue", sans-serif; font-size: 15px; background: #eef1f6; border-bottom: 1px solid #c2cddd; padding: 5px 12px; color: #3a414d; }
+.ide-light__tab b { background: #fff; border: 1px solid #c2cddd; border-bottom: none; padding: 3px 10px; font-weight: 700; color: #111; }
+.ide-light .devcpp__body { padding: 8px 0; }
+.ide-light .devcpp__gutter, .ide-light .devcpp__code { font-size: 20px; line-height: 1.55; }
+.ide-light .devcpp__code .ln-hl { background: #e3ecff; display: inline-block; width: 100%; }
+.ide-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; width: 100%; }
+
+/* sem setas de navegação: as frases usam a largura toda */
+.slide-related .say { max-width: none; }
+.slide-related .say--center { max-width: none; }
+.slide-related .rel-lead { max-width: 1150px; }
+
+/* número da página no canto inferior direito, em preto para aparecer no projetor */
+.reveal .slide-number { background: transparent; color: #000; font-family: Arial, "Helvetica Neue", sans-serif; font-size: 30px; font-weight: 700; right: 18px; bottom: 8px; }
+/* nos slides de fundo escuro (abertura, capa, obrigado) o número fica branco */
+.reveal.has-dark-background .slide-number { color: #fff; }
+
+/* troca do modelo de linguagem: ícone com o nome embaixo */
+.llm-swap { display: flex; align-items: center; justify-content: center; gap: 60px; margin-top: 10px; font-family: Arial, "Helvetica Neue", sans-serif; }
+.llm-swap .llm { text-align: center; width: 260px; }
+.llm-swap .llm img { height: 78px; width: 78px; display: block; margin: 0 auto 10px; }
+.llm-swap .llm .name { font-size: 22px; font-weight: 700; color: var(--uni-ink); }
+.llm-swap .llm .who { font-size: 16px; color: #5b6472; margin-top: 4px; }
+.llm-swap .llm--ours .name { color: var(--uni-blue-d); }
+.llm-swap .arrow { font-size: 48px; font-weight: 700; color: #1f1f1f; }
+
+/* troca do modelo de linguagem dentro do quadro: ícone + nome */
+.llm-row { display: flex; align-items: center; gap: 14px; }
+.llm-chip { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
+.llm-chip img { height: 34px; width: 34px; }
+.llm-chip--ours { color: var(--uni-blue-d); }
+.llm-arrow { font-size: 26px; font-weight: 700; }
+.kc-quadro--diff { font-size: 20px; }
+.kc-quadro--diff th, .kc-quadro--diff td { padding: 9px 18px; }
+.kc-quadro--diff .llm-chip img { height: 32px; width: 32px; }
+
+/* espaçamento simples entre frases e ilustrações (vale para todos os slides) */
+.slide-related .say + .eda-title, .slide-related .say + .abnt-fig,
+.slide-related .rel-lead + .eda-title, .slide-related .rel-lead + .abnt-fig,
+.slide-related .rel-points + .abnt-fig { margin-top: 18px !important; }
+.slide-related .eda-source + .say, .slide-related .eda-source + .rel-lead,
+.slide-related .abnt-fig + .say, .slide-related .abnt-fig + .rel-lead,
+.slide-related .cols + .eda-source + .say { margin-top: 18px !important; }
+/* slides com folga vertical: mesmo espaço entre todos os blocos */
+.slide-related--air .say + .eda-title, .slide-related--air .eda-source + .say { margin-top: 36px !important; }
+.slide-related--air > .say:first-of-type + .eda-title { margin-top: 36px !important; }
+
+/* cursor piscando no fim da última linha das listas com ">" */
+.rel-points li .caret { margin-left: 4px; }
+
+/* ===========================================================================
+   Padrão de tamanhos do deck: dois tamanhos de tabela e três de figura.
+   Tabelas e quadros: .tbl-1 (slide com uma ilustração) e .tbl-2 (slide com duas).
+   Figuras: .fig-band (fluxo horizontal), .fig-main (figura principal), .fig-list (slide com lista).
+   =========================================================================== */
+.slide-related table.tbl-1, .slide-related table.tbl-2 { width: 90%; }
+.cols table.tbl-1, .cols table.tbl-2 { width: 100%; }
+table.tbl-1 { font-size: 20px; }
+table.tbl-1 th, table.tbl-1 td { padding: 8px 16px; }
+table.tbl-2 { font-size: 18px; }
+table.tbl-2 th, table.tbl-2 td { padding: 5px 12px; }
+table.tbl-1 .llm-chip img { height: 32px; width: 32px; }
+.abnt-fig img.fig-band { width: 1150px; max-width: 100%; height: auto; }
+.abnt-fig img.fig-main { height: 450px; width: auto; max-width: 100%; object-fit: contain; }
+.abnt-fig img.fig-list { height: 340px; width: auto; max-width: 100%; }
+.slide-backup .abnt-fig img.fig-main { max-height: 450px; }
+
+/* símbolo Facens no canto dos slides brancos, em azul cheio para aparecer no projetor */
+.slide-related .wm { color: var(--uni-blue); opacity: 1; }
+
+/* fonte das ilustrações em preto, como o texto */
+.eda-source, .slide-related .eda-source { color: var(--uni-ink); }

@@ -1,0 +1,872 @@
+# Roteiro da defesa final do TCC
+
+> Gerado a partir de `index.html` (texto da tela e notas do apresentador), para que roteiro e slides fiquem idênticos.
+> Tempo de fala medido no ritmo da primeira apresentação (180 palavras por minuto); a demonstração conta 3:00.
+> Regras de montagem: toda ilustração fica entre frases (frase, ilustração, frase), e fala e slide só citam o que está na tela.
+> Total estimado: **~15:32** (limite de 20:00).
+
+**Onde cortar se estourar:** o slide 20 (associações questionáveis) pode virar uma frase no slide 19, e os slides 24 a 26 (banco de dados) podem ficar só no 25.
+
+| Slide | Tema | Fala medida |
+|---|---|---|
+| 0 | Abertura | 0:00 |
+| 1 | Capa | 0:16 |
+| 2 | Agenda | 0:11 |
+| 3 | Introdução | 0:28 |
+| 4 | Mineração de dados educacionais | 0:19 |
+| 5 | Áreas da EDM | 0:18 |
+| 6 | Knowledge tracing | 0:25 |
+| 7 | Problema e objetivos | 0:24 |
+| 8 | Metodologia | 0:26 |
+| 9 | O dataset CSEDM | 0:22 |
+| 10 | Os dados por atividade | 0:26 |
+| 11 | Preparação dos dados | 0:29 |
+| 12 | Seleção do modelo | 0:58 |
+| 13 | Sobre o Code-DKT | 0:33 |
+| 14 | Code-DKT × Shi et al. | 0:26 |
+| 15 | KCs semânticos | 0:45 |
+| 16 | O que acrescentamos ao método | 0:29 |
+| 17 | Conceitos extraídos na A1 | 0:20 |
+| 18 | O problema love6 | 0:28 |
+| 19 | Trechos de código | 0:22 |
+| 20 | Associações questionáveis | 0:24 |
+| 21 | A ferramenta | 0:34 |
+| 22 | Requisitos da ferramenta | 0:26 |
+| 23 | Arquitetura | 0:22 |
+| 24 | Banco de dados: turma e dados importados | 0:13 |
+| 25 | Banco de dados: extração dos conceitos | 0:11 |
+| 26 | Banco de dados: treino dos modelos | 0:12 |
+| 27 | Reprodutibilidade | 0:20 |
+| 28 | Domínio por conceito | 0:25 |
+| 29 | Demonstração | 3:00 |
+| 30 | Considerações finais | 0:30 |
+| 31 | Limitações e trabalhos futuros | 0:24 |
+| 32 | Obrigado | 0:06 |
+
+---
+
+### [SLIDE 0: Abertura] (~0:00)
+
+**Na tela:**
+
+*[imagem: UniFacens]*
+
+Educational data mining e Knowledge Tracing
+
+### [SLIDE 1: Capa] (~0:16)
+
+**Na tela:**
+
+*[imagem: UniFacens]*
+
+Análise do aprendizado de programação utilizando mineração de dados educacionais
+
+Erick Miranda Viana Leonardo Kuntz Oliveira Victor Santos Borba Orientadora: Profa. Ma. Talita dos Reis Lopes Berbel
+
+**Fala:** Boa noite. Meu nome é Erick Miranda Viana, este é o Victor Santos Borba e este é o Leonardo Kuntz Oliveira. O título do nosso trabalho é "Análise do aprendizado de programação utilizando mineração de dados educacionais", e a nossa orientadora é a professora mestre Talita Berbel.
+
+### [SLIDE 2: Agenda] (~0:11)
+
+**Na tela:**
+
+*[imagem: UniFacens]*
+
+- Introdução
+- Fundamentos
+- Metodologia
+- Dados
+- Modelos
+- Conceitos
+- Ferramenta
+- Demonstração
+- Considerações finais
+
+**Fala:** Vamos começar pelo problema que motivou o trabalho e pelos fundamentos. Depois passamos pelos dados, pelos modelos e pelos conceitos de programação que extraímos, e terminamos com a ferramenta que desenvolvemos, funcionando ao vivo.
+
+### [SLIDE 3: Introdução] (~0:28)
+
+**Na tela:**
+
+O ensino de programação tem se mostrado complexo, com altos índices de reprovação e desistência nas disciplinas introdutórias de cursos de tecnologia.
+
+Martins, Marin e Alves (2024) trazem uma revisão sistemática da literatura, cujo objetivo é identificar os principais desafios enfrentados por estudantes durante a aprendizagem de programação de computadores.
+
+Em nove semestres de um curso de Engenharia de Computação, a reprovação nas disciplinas introdutórias de programação ficou entre 18,51% e 21,98% (Luz et al., 2026).
+
+Nosso trabalho busca auxiliar na elaboração de métodos que auxiliem o processo de ensino e aprendizagem de programação, promovendo melhores resultados acadêmicos.
+
+**Fala:** O ensino de programação tem se mostrado cada vez mais complexo, com altos índices de reprovação e desistência nas disciplinas introdutórias. Martins, Marin e Alves fizeram uma revisão sistemática da literatura para identificar os principais desafios dos estudantes ao aprender programação. E isso aparece nos números: Luz e colegas analisaram nove semestres de um curso de Engenharia de Computação e encontraram reprovação entre 18,5 e 22% nas disciplinas introdutórias. Tendo em vista esse problema, o nosso trabalho busca auxiliar no processo de ensino de programação.
+
+[doc: cap. 1 e seção 2.1]
+
+### [SLIDE 4: Mineração de dados educacionais] (~0:19)
+
+**Na tela:**
+
+A mineração de dados educacionais (Educational Data Mining, EDM) combina mineração de dados, estatística e aprendizado de máquina (Kalita et al., 2025).
+
+Os dados educacionais podem ser utilizados para identificar padrões de aprendizagem, prever desempenho e apoiar decisões pedagógicas.
+
+No ensino de programação, cada interação do estudante em ambientes educacionais digitais gera informações valiosas, como submissões de código, erros e tentativas de resolução.
+
+**Fala:** Para isso, usamos técnicas de mineração de dados educacionais, ou EDM, que combina mineração de dados, estatística e aprendizado de máquina. Os dados educacionais podem ser usados para identificar padrões de aprendizagem, prever desempenho e apoiar decisões pedagógicas. E, no ensino de programação, cada interação do estudante gera informação: cada código submetido, cada erro, cada nova tentativa.
+
+[doc: seção 2.3]
+
+### [SLIDE 5: Áreas da EDM] (~0:18)
+
+**Na tela:**
+
+A EDM e a learning analytics (LA) ocupam a interseção entre ciência da computação, educação e estatística.
+
+Figura 1 – Áreas relacionadas à EDM e à LA
+
+*[imagem: Diagrama de Venn com ciência da computação, educação e estatística; EDM e LA no centro]*
+
+Fonte: adaptado de Srinivasa e Kurni (2021).
+
+Nessa interseção, o trabalho reúne análise de código, knowledge tracing e componentes de conhecimento.
+
+**Fala:** Essa figura mostra onde a EDM se encaixa. Ela e a learning analytics ficam bem no centro, onde computação, educação e estatística se encontram. Dentro dessa área, o nosso trabalho junta três coisas: a análise do código que o aluno escreve, o knowledge tracing e os componentes de conhecimento, que vamos explicar agora.
+
+[doc: Figura 1, seções 2.3, 2.4 e 2.6]
+
+### [SLIDE 6: Knowledge tracing] (~0:25)
+
+**Na tela:**
+
+O objetivo do knowledge tracing é acompanhar a evolução do conhecimento do estudante ao longo do tempo (Abdelrahman; Wang; Nunes, 2023).
+
+Em termos práticos, dado o histórico de interações de um estudante, o modelo tenta prever se ele irá acertar ou errar a próxima atividade.
+
+Para realizar essa previsão, os modelos utilizam os chamados knowledge components, ou KCs, que representam habilidades ou conhecimentos necessários para resolver um problema.
+
+No contexto de programação, exemplos de KCs podem ser estruturas de repetição, condicionais e manipulação de vetores.
+
+**Fala:** O knowledge tracing serve para acompanhar a evolução do conhecimento do aluno ao longo do tempo. Em termos bem práticos: a partir do histórico de tentativas, o modelo tenta prever se o aluno vai acertar ou errar a próxima. Para isso, ele usa os componentes de conhecimento, os KCs, que representam a habilidade que o problema exige. Em programação, um KC pode ser uma estrutura de repetição, uma condicional ou a manipulação de um vetor.
+
+[doc: seções 2.5 e 2.5.1]
+
+### [SLIDE 7: Problema e objetivos] (~0:24)
+
+**Na tela:**
+
+Problema de pesquisa
+
+A análise do aprendizado de programação pode ser melhorada ou facilitada utilizando técnicas de mineração de dados educacionais?
+
+Objetivo geral
+
+Identificar padrões de aprendizagem em programação pela mineração dos códigos submetidos, apontando pontos fortes e fracos por conceito.
+
+Objetivos específicos
+
+- Comparar BKT, DKT e Code-DKT e selecionar o modelo pela AUC.
+- Extrair automaticamente, com um grande modelo de linguagem, KCs interpretáveis das soluções corretas.
+- Desenvolver uma ferramenta web que apresente ao docente o domínio estimado por conceito.
+- Analisar os resultados na ferramenta com dados de uma base pública.
+
+**Fala:** Com isso, chegamos ao nosso problema de pesquisa. A nossa pergunta é se a análise do aprendizado de programação pode ser melhorada ou facilitada com técnicas de mineração de dados educacionais. O objetivo geral é identificar padrões de aprendizagem a partir dos códigos dos alunos, apontando pontos fortes e fracos por conceito. Para isso, definimos quatro objetivos específicos: escolher o modelo, extrair os conceitos, construir a ferramenta e analisar os resultados nela.
+
+[doc: cap. 1 (objetivos); problema reformulado pelos autores para a defesa]
+
+### [SLIDE 8: Metodologia] (~0:26)
+
+**Na tela:**
+
+Pesquisa aplicada, quantitativa e exploratória. A etapa analítica é experimental, e a ferramenta é um desenvolvimento tecnológico com avaliação técnica.
+
+O trabalho segue o processo de EDM em quatro fases (Zorić, 2020):
+
+Figura 2 – Etapas do processo de mineração de dados educacionais
+
+*[imagem: Quatro caixas em sequência: definição do problema, preparação e coleta dos dados, modelagem e avaliação, implantação, com seta de retorno ao início]*
+
+Fonte: elaborado pelos autores (2026).
+
+A preparação dos dados e a modelagem formam a etapa analítica, sobre a base CSEDM. A implantação é a ferramenta.
+
+**Fala:** Quanto à metodologia, é uma pesquisa aplicada, porque resulta numa ferramenta para um problema concreto; quantitativa, porque as decisões saem de medidas numéricas; e exploratória. Para responder a essa pergunta, seguimos o processo de EDM descrito por Zorić, em quatro fases: a definição do problema, que acabamos de apresentar, a preparação dos dados, a modelagem e avaliação, e a implantação. A preparação e a modelagem formam a etapa analítica, e a implantação, no nosso caso, é a ferramenta.
+
+[doc: seções 3.1 e 3.2, Figura 2]
+
+### [SLIDE 9: O dataset CSEDM] (~0:22)
+
+**Na tela:**
+
+Nosso dataset é o CSEDM, coletado de uma disciplina introdutória de programação em Java, no primeiro semestre de 2019, e divulgado no 2º CSEDM Data Challenge (CSEDM Workshop, 2021).
+
+Armazenado em ProgSnap2 (Price et al., 2020), formato que registra cada evento de programação do estudante, preservando o histórico completo das tentativas em cada problema.
+
+Cada evento traz estudante (SubjectID), atividade (AssignmentID), problema (ProblemID), tipo (EventType), pontuação (Score), horário (ServerTimestamp) e estado do código (CodeStateID).
+
+413 estudantes, 5 atividades com 10 problemas cada e 201.570 eventos.
+
+**Fala:** Passando para a preparação dos dados. O dataset que escolhemos é o CSEDM, coletado de uma disciplina introdutória de Java em 2019. O diferencial dele é o formato ProgSnap2, que registra cada evento de programação do aluno: quem fez, qual atividade e problema, a pontuação, o horário e o código daquele momento. São 413 estudantes, cinco atividades de dez problemas e cerca de 201 mil eventos.
+
+[doc: seções 2.5.1, 3.3 e 4.2]
+
+### [SLIDE 10: Os dados por atividade] (~0:26)
+
+**Na tela:**
+
+Para ter uma visão geral, resumimos cada atividade da base.
+
+Tabela 1 – Dados da base CSEDM por atividade
+
+|  | A1 | A2 | A3 | A4 | A5 |
+|---|---|---|---|---|---|
+| Estudantes | 386 | 340 | 361 | 315 | 306 |
+| Execuções do programa | 14.614 | 15.879 | 17.191 | 12.402 | 9.541 |
+| Erros de compilação | 19.840 | 14.050 | 13.150 | 9.801 | 5.475 |
+| Execuções corretas (%) | 26,2 | 20,1 | 20,3 | 24,7 | 30,6 |
+| Estudantes com mais de 50 execuções (%) | 22,3 | 35,9 | 33,2 | 24,8 | 16,7 |
+
+Fonte: elaborado pelos autores (2026).
+
+O número de estudantes cai de 386 na A1 para 306 na A5, e a A5 tem a maior proporção de execuções corretas.
+
+**Fala:** Para ter uma visão geral, esta tabela resume cada atividade. O número de estudantes cai ao longo da disciplina, de 386 na primeira para 306 na última, enquanto a proporção de execuções corretas da última é a maior de todas, 30,6%. Na primeira atividade, os erros de compilação chegam a superar as execuções do programa. E a última linha mostra que uma parte grande dos alunos passa de 50 execuções numa mesma atividade, o que vai importar na preparação.
+
+[doc: Tabela 2 (recorte)]
+
+### [SLIDE 11: Preparação dos dados] (~0:29)
+
+**Na tela:**
+
+- Seguimos o protocolo de Shi et al. (2022): cada execução do programa é uma tentativa, com rótulo 1 se passa em todos os testes e 0 nos demais casos. No total das cinco atividades, 23,68% das execuções são corretas, a mesma proporção do artigo.
+- Em cada atividade, estudantes divididos em 80% treino e 20% teste, com a mesma partição para os três modelos, e um modelo por atividade, com o próprio problema como KC.
+- Sequências com mais de 50 tentativas mantêm as 50 mais recentes:
+
+Figura 3 – Distribuição do número de execuções em cada atividade
+
+*[imagem: Cinco histogramas do número de execuções por estudante, A1 a A5, com linha tracejada no limite de 50 execuções]*
+
+Fonte: elaborado pelos autores (2026).
+
+A linha tracejada indica o limite de 50 execuções aplicado à sequência de cada estudante.
+
+**Fala:** No pré-processamento, seguimos o mesmo protocolo de Shi e colegas, os autores do Code-DKT. Cada execução vira uma tentativa, certa ou errada, e, no total das cinco atividades, chegamos aos mesmos 23,68% de tentativas corretas do artigo, o que indica que reproduzimos o protocolo. Dividimos os alunos de cada atividade em 80% para treino e 20% para teste, a mesma divisão para todos os modelos. E a linha tracejada no gráfico é o limite de 50 execuções: quem passa dele fica só com as 50 mais recentes.
+
+[doc: seções 3.3.1 e 4.2, Figura 12]
+
+### [SLIDE 12: Seleção do modelo] (~0:58)
+
+**Na tela:**
+
+Comparamos três modelos de knowledge tracing que marcam a evolução da área.
+
+Figura 4 – Linha do tempo dos modelos comparados
+
+Corbett e Anderson
+
+BKT, probabilidade bayesiana por KC
+
+Piech et al.
+
+DKT, rede LSTM sobre acertos e erros
+
+Shi et al.
+
+Code-DKT, o DKT com o código de cada tentativa
+
+Fonte: elaborado pelos autores (2026).
+
+Os três usam a mesma base e a mesma partição, e são comparados pela AUC na primeira tentativa de cada estudante em cada problema.
+
+Tabela 2 – AUC de primeira tentativa por atividade
+
+| Atividade | BKT (%) | DKT (%) | Code-DKT (%) |
+|---|---|---|---|
+| A1 | 62,43 ± 0,00 | 70,74 ± 3,59 | 75,42 ± 1,13 |
+| A2 | 62,18 ± 0,78 | 77,33 ± 2,73 | 78,32 ± 0,76 |
+| A3 | 59,57 ± 0,60 | 81,43 ± 4,51 | 85,08 ± 0,79 |
+| A4 | 53,18 ± 0,26 | 73,07 ± 4,34 | 75,56 ± 0,84 |
+| A5 | 59,61 ± 0,49 | 83,13 ± 2,77 | 85,12 ± 0,52 |
+
+Fonte: elaborado pelos autores (2026).
+
+Na AUC geral, o padrão se repete: 63,11% no BKT, 71,79% no DKT e 74,31% no Code-DKT.
+
+**Fala:** Na fase de modelagem, comparamos três modelos de knowledge tracing que marcam a evolução da área. O BKT, de 1995, estima por KC a chance de o aluno dominar aquele conhecimento, com parâmetros como o acerto ao acaso e o deslize. O DKT, de 2015, troca esses parâmetros por uma rede neural recorrente, que aprende direto da sequência de tentativas. Só que os dois tratam a resposta do aluno apenas como certa ou errada. E em programação o código importa: um aluno pode acertar boa parte do código e errar só um detalhe. O Code-DKT, de 2022, pega o DKT e acrescenta o código do aluno. Os três usam a mesma base e a mesma partição, e comparamos pela AUC na primeira tentativa de cada aluno em cada problema, quando o modelo ainda não viu nenhuma tentativa dele naquele exercício. O Code-DKT teve a maior AUC nas cinco atividades, com média de 79,90, e um desvio padrão mais de quatro vezes menor que o do DKT. Por isso ele é o modelo da nossa ferramenta.
+
+[doc: seções 2.5.2 a 2.5.4 e 5.1, Tabelas 3 e 4]
+
+### [SLIDE 13: Sobre o Code-DKT] (~0:33)
+
+**Na tela:**
+
+- A cada tentativa, o Code-DKT converte o código Java em uma árvore de sintaxe abstrata (abstract syntax tree, AST) com o javalang.
+- Os caminhos entre pares de folhas, como o destacado em vermelho, viram vetores, como no code2vec (Alon et al., 2019).
+- A atenção pondera os caminhos e realça os mais informativos.
+- O vetor do código entra na LSTM (long short-term memory) junto com o acerto ou erro.
+- Duas tentativas incorretas com códigos diferentes passam a ter representações diferentes.
+
+Figura 5 – Exemplo de árvore de sintaxe abstrata para um trecho de código
+
+*[imagem: Árvore de sintaxe abstrata com um caminho folha a folha em vermelho]*
+
+Fonte: adaptado de Shi et al. (2022).
+
+**Fala:** Como o Code-DKT funciona? Ele passa o código do aluno por um parser de Java, o javalang, e transforma o código numa árvore de sintaxe abstrata, como esta. Dessa árvore saem os caminhos de uma folha a outra, como o caminho em vermelho, e cada caminho vira um vetor. Esses vetores são ponderados com atenção: alguns caminhos ajudam mais a prever o desempenho e recebem mais peso. O resultado entra na LSTM, a rede neural que entrega a previsão, junto com o acerto ou erro. Assim, duas tentativas erradas, mas com códigos diferentes, deixam de ser iguais para o modelo.
+
+[doc: seções 2.4 e 2.5.4, Figura 4]
+
+### [SLIDE 14: Code-DKT × Shi et al.] (~0:26)
+
+**Na tela:**
+
+Comparamos o Code-DKT implementado com os valores reportados por Shi et al. (2022), na mesma base.
+
+Tabela 3 – AUC geral do Code-DKT em comparação com Shi et al. (2022)
+
+|  | A1 | A2 | A3 | A4 | A5 | Média |
+|---|---|---|---|---|---|---|
+| Shi et al. (2022) (%) | 74,31 | 76,56 | 80,40 | 72,75 | 79,14 | 76,63 |
+| Este trabalho (%) | 71,42 | 73,53 | 78,21 | 72,17 | 76,24 | 74,31 |
+| Diferença (p.p.) | −2,89 | −3,03 | −2,19 | −0,58 | −2,90 | −2,32 |
+
+Fonte: elaborado pelos autores (2026), com os valores de Shi et al. (2022).
+
+Na AUC geral, ficamos em média 2,32 pontos abaixo do artigo, que traz a AUC de primeira tentativa apenas para a A1:
+
+Tabela 4 – AUC do Code-DKT na atividade A1 em comparação com a literatura
+
+| Métrica | Shi et al. (2022) (%) | Este trabalho (%) | Diferença (p.p.) |
+|---|---|---|---|
+| AUC geral | 74,31 ± 0,90 | 71,42 ± 0,72 | −2,89 |
+| AUC de primeira tentativa | 75,74 ± 0,69 | 75,42 ± 1,13 | −0,32 |
+
+Fonte: elaborado pelos autores (2026), com os valores de Shi et al. (2022).
+
+Na primeira tentativa, a diferença cai para 0,32 ponto, com desvio padrão baixo, como no artigo.
+
+**Fala:** Também comparamos o nosso Code-DKT com o do artigo, na mesma base. Na AUC geral, ficamos em média 2,32 pontos abaixo. Mas o artigo só traz a AUC de primeira tentativa para a A1, e nela a diferença cai para 0,32 ponto, com desvio padrão baixo, como no artigo. Ou seja, a nossa implementação reproduz o que caracteriza o Code-DKT: previsão melhor na primeira tentativa e pouca variação entre as execuções, com valores absolutos um pouco menores.
+
+[doc: seção 5.2, Tabelas 5 e 6]
+
+### [SLIDE 15: KCs semânticos] (~0:45)
+
+**Na tela:**
+
+No treino, o KC é o próprio problema, e a previsão não diz qual conceito está sendo avaliado. Para extrair conceitos interpretáveis, seguimos o processo de Duan et al. (2026):
+
+Figura 6 – Pipeline de extração de componentes de conhecimento via LLM
+
+*[imagem: Cinco caixas em sequência: seleção de soluções corretas, geração de KCs por modelo de linguagem, agrupamento por significado, rotulagem dos grupos, Q-matrix]*
+
+Fonte: elaborado pelos autores (2026).
+
+- Para cada problema, o CodeBERT converte as soluções corretas em vetores, que são agrupados; sorteia-se uma solução de cada grupo, somando cinco soluções diversas.
+- Um grande modelo de linguagem (large language model, LLM) recebe o enunciado e essas soluções e devolve os KCs do problema, cada um com uma justificativa.
+- O Sentence-BERT agrupa os KCs semelhantes da atividade, e o LLM dá um nome a cada grupo.
+- A Q-matrix liga cada problema aos seus conceitos. Ela não muda o treino: traduz as estimativas por problema em conceitos.
+
+**Fala:** Só que os KCs usados pelo modelo não são interpretáveis: no treino, o KC é só o número do problema, e isso não diz ao professor qual conceito o aluno domina. Para extrair conceitos, seguimos o processo de Duan e colegas, em cinco etapas. Primeiro, o CodeBERT transforma as soluções corretas de cada problema em vetores, que são agrupados, e sorteamos uma solução de cada grupo, para ter cinco soluções diferentes entre si. Um modelo de linguagem lê o enunciado e essas soluções e devolve os conceitos que o problema exige, justificando cada um. Depois, o Sentence-BERT agrupa os conceitos parecidos, e o modelo de linguagem dá um nome a cada grupo. O resultado é a Q-matrix, que liga cada problema aos seus conceitos. Ela não entra no treino: só traduz a previsão para conceitos.
+
+[doc: seções 2.6 e 3.3.2, Figura 5]
+
+### [SLIDE 16: O que acrescentamos ao método] (~0:29)
+
+**Na tela:**
+
+Sobre o método de Duan et al. (2026), a ferramenta troca o modelo de linguagem e acrescenta etapas para apoiar a revisão do docente:
+
+Quadro 1 – Diferenças em relação ao método de Duan et al. (2026)
+
+| Diferença |
+|---|
+| Modelo de linguagem:
+ GPT-4o
+ →
+ Claude Haiku 4.5 |
+| Agrupamento dos conceitos por atividade |
+| Tradução dos nomes e das justificativas para o português |
+| Trecho de código de cada associação, conferido na solução |
+| Revisão e aprovação do docente antes do treino |
+
+Fonte: elaborado pelos autores (2026).
+
+O Claude Haiku 4.5 é o modelo de linguagem acessível no ambiente em que a ferramenta roda.
+
+**Fala:** Em cima desse método, a ferramenta tem algumas diferenças. A primeira é o modelo de linguagem: o Duan usou o GPT-4o, e nós usamos o Claude Haiku 4.5, que é o modelo acessível no nosso ambiente. As outras são acréscimos para ajudar o professor a revisar: os conceitos são agrupados por atividade, os nomes e as justificativas são traduzidos para o português, cada associação vem com o trecho de código que a justifica, conferido na solução, e o treino só começa depois que o professor revisa e aprova.
+
+[doc: seção 4.4 e síntese da seção 4.5]
+
+### [SLIDE 17: Conceitos extraídos na A1] (~0:20)
+
+**Na tela:**
+
+Na atividade A1, o modelo de linguagem leu 50 soluções dos 10 problemas e gerou 65 KCs, com 26 nomes distintos, agrupados em 13 conceitos e 46 associações entre problema e conceito, em 12 min 41 s.
+
+Quadro 2 – Conceitos extraídos na atividade A1
+
+| Conceito | Nº de problemas |
+|---|---|
+| Estruturas de instrução if-else | 10 |
+| Operadores lógicos e condicionais | 10 |
+| Comparações numéricas | 9 |
+| Operações aritméticas básicas | 5 |
+| Uso do tipo de dado boolean | 3 |
+| Inicialização e atribuição de variável | 2 |
+| Outros sete conceitos | 1 cada |
+
+Fonte: elaborado pelos autores (2026).
+
+Os dois conceitos presentes nos dez problemas, if-else e operadores lógicos, são coerentes com uma atividade de decisões condicionais.
+
+**Fala:** Avaliamos a extração na primeira atividade, cujos dez problemas tratam de condicionais. O modelo leu cinco soluções por problema, 50 no total, e gerou 65 KCs, com 26 nomes distintos, que foram agrupados em 13 conceitos. Os dois conceitos que aparecem nos dez problemas são o if-else e os operadores lógicos, o que é coerente com uma atividade de condicionais.
+
+[doc: seção 5.3, Tabela 8 e Quadro 3]
+
+### [SLIDE 18: O problema love6] (~0:28)
+
+**Na tela:**
+
+Para comparar, usamos o exemplo que Duan et al. (2026) apresentam no artigo, o problema 233 (love6).
+
+Quadro 3 – Componentes de conhecimento do problema 233 (love6)
+
+The number 6 is a truly great number. Given two int values, a and b, return true if either one is 6. Or if their sum or difference is 6. Note: the function Math.abs(num) computes the absolute value of a number.
+
+```java
+public boolean love6(int a, int b) {
+  if (a == 6 || b == 6 ||
+      a + b == 6 ||
+      Math.abs(a - b) == 6)
+    return true;
+  return false;
+}
+```
+
+| KCs escritos por humanos (referência: base CSEDM) | Conceitos extraídos neste trabalho (nosso resultado) | KCs gerados por Duan et al. (2026) (referência: artigo) |
+|---|---|---|
+| If/Else | Estruturas de instrução if-else | If and else if statement |
+| Math (+ − ∗ /) | Operações aritméticas básicas | Basic arithmetic operations |
+| LogicAndNotOr | Operadores lógicos e condicionais | Logical operators |
+| LogicCompare | Comparações numéricas | Numerical comparisons |
+| — | Invocação de método* | Absolute value computation |
+
+* a justificativa do conceito menciona o uso de Math.abs. Fonte: elaborado pelos autores (2026), com os KCs da base CSEDM e de Duan et al. (2026).
+
+Quatro dos cinco KCs de Duan et al. (2026) têm um conceito correspondente; o quinto, o valor absoluto, aparece de forma indireta, na invocação de método.
+
+**Fala:** Para validar os conceitos, usamos o mesmo exemplo que o Duan usa no artigo, o problema love6. As colunas das pontas são referências que já existiam: à esquerda, os KCs marcados por humanos na própria base; à direita, os KCs que o Duan publicou. A coluna do meio, destacada, é o nosso resultado. Quatro dos cinco KCs do Duan têm um conceito correspondente entre os nossos. O quinto, o valor absoluto, aparece de forma indireta, como invocação de método, e a justificativa cita o Math.abs.
+
+[doc: seção 5.4, Quadro 4]
+
+### [SLIDE 19: Trechos de código] (~0:22)
+
+**Na tela:**
+
+Para cada conceito, a ferramenta aponta o trecho das soluções em que ele aparece. No problema 1 (sortaSum):
+
+Figura 7 – Soluções 1 e 4 do problema 1 (sortaSum)
+
+```java
+public int sortaSum(int a, int b)
+{
+    if (a + b >= 10 && a + b <= 19)
+        return 20;
+    else return (a + b);
+}
+```
+
+```java
+public int sortaSum(int a, int b) {
+    int sum = a + b;
+    return sum >= 10 && sum < 20 ? 20 : sum;
+}
+```
+
+Fonte: elaborado pelos autores (2026).
+
+O Quadro 4 relaciona cada conceito ao trecho apontado e à nossa análise:
+
+Quadro 4 – Conceitos e trechos de código do problema 1 (sortaSum)
+
+| Conceito | Trecho | Análise |
+|---|---|---|
+| Estruturas de instrução if-else | if (a + b >= 10 && a + b <= 19) return 20; else return (a + b); | Adequado: é a estrutura central da solução. |
+| Operadores lógicos e condicionais | a + b >= 10 && a + b <= 19 | Adequado: o && une os dois limites do intervalo. |
+| Comparações numéricas | if (a + b >= 10 && a + b <= 19) | Adequado. |
+| Operações aritméticas básicas | int sum = a + b; | Adequado: a soma é o resultado pedido. |
+
+Fonte: elaborado pelos autores (2026).
+
+Os quatro conceitos correspondem diretamente aos trechos apontados.
+
+**Fala:** Para cada conceito, a ferramenta também aponta o trecho de código que o justifica. No sortaSum, na solução 1, a mesma linha 3 mostra a condicional, o operador lógico que une os dois limites e as comparações. Na solução 4, a linha 2 mostra a operação aritmética, a soma. No quadro, está a nossa análise de cada trecho, e os quatro conceitos correspondem diretamente ao código.
+
+[doc: seção 5.5, Figura 14 e Quadro 6]
+
+### [SLIDE 20: Associações questionáveis] (~0:24)
+
+**Na tela:**
+
+A análise dos trechos também identificou associações menos adequadas, como as do Quadro 5.
+
+Quadro 5 – Exemplos de associações questionáveis
+
+| Problema | Conceito | Por quê |
+|---|---|---|
+| 236 (greenTicket) | Operações aritméticas básicas | só uma solução usa subtração; o problema pede igualdades |
+| 233 (love6) | Invocação de método | nome genérico para o valor absoluto |
+| 234 (cigarParty) | Métodos básicos de string | uma solução continha métodos de outros problemas |
+| todos, exceto o 5 | Instrução de retorno | toda solução retorna, mas só o 5 recebeu o conceito |
+
+Fonte: elaborado pelos autores (2026).
+
+Esses casos mostram que os conceitos extraídos precisam de revisão humana antes do uso.
+
+**Fala:** Mas a análise também encontrou associações questionáveis. No greenTicket, a subtração veio de uma única solução, e o problema só pede igualdades. No cigarParty, uma das soluções tinha métodos de outros problemas e trouxe conceitos de string que o problema não exige. E o retorno ficou associado só ao problema 5, apesar de toda solução retornar um valor. Esses casos mostram que os conceitos extraídos precisam de revisão humana antes do uso.
+
+[doc: seções 4.4 e 5.5, Quadro 7]
+
+### [SLIDE 21: A ferramenta] (~0:34)
+
+**Na tela:**
+
+A ferramenta é uma aplicação web que permite ao docente aplicar aos dados da própria turma o processo de mineração de dados educacionais adotado neste trabalho. Seu uso corresponde à fase de implantação desse processo.
+
+Figura 8 – Fluxo de uso da ferramenta
+
+*[imagem: Cinco caixas em sequência: importar dados, extrair conceitos, revisar e aprovar, treinar modelo, analisar domínio]*
+
+Fonte: elaborado pelos autores (2026).
+
+Cada turma é registrada separadamente e mantém suas atividades, os conceitos aprovados e as versões dos modelos.
+
+Duan et al. (2026, tradução própria) recomendam “que KCs gerados automaticamente sejam revisados por especialistas do domínio antes do uso em ambientes educacionais reais”. Por isso, na ferramenta, os conceitos ficam em rascunho até a aprovação do docente.
+
+**Fala:** Chegamos à implantação, que é a ferramenta. Ela é uma aplicação web que permite ao professor aplicar aos dados da própria turma o mesmo processo que acabamos de apresentar. O fluxo é este: ele importa os dados da turma, a ferramenta extrai os conceitos, ele revisa e aprova, treina o modelo e analisa o domínio. Cada turma fica registrada separadamente, com suas atividades, conceitos e versões de modelo. O próprio Duan recomenda que os KCs gerados automaticamente sejam revisados por especialistas antes do uso real. Por isso, na nossa ferramenta, os conceitos ficam em rascunho até o professor revisar e aprovar.
+
+[doc: seção 4.1, Figura 6]
+
+### [SLIDE 22: Requisitos da ferramenta] (~0:26)
+
+**Na tela:**
+
+Um questionário exploratório aplicado a professores de programação apoiou o mapeamento das funcionalidades.
+
+Quadro 6 – Funcionalidades propostas e atendimento pela ferramenta
+
+| Nº | Funcionalidade proposta | Onde aparece na ferramenta |
+|---|---|---|
+| 1 | Visualização dos conceitos que cada estudante domina ou em que tem dificuldade | Abas de conceitos e de estudantes |
+| 2 | Histórico detalhado de tentativas por exercício de cada estudante | Execuções, erros de compilação e tentativas por problema |
+| 3 | Predição de risco de dificuldade ou reprovação | Domínio estimado baixo por problema, conceito e estudante |
+| 4 | Comparação de progresso entre turmas ou semestres | Turmas registradas separadamente |
+| 5 | Sugestão de intervenção pedagógica personalizada | Conceitos de menor domínio da turma e de cada estudante |
+
+Fonte: elaborado pelos autores (2026).
+
+As funcionalidades 1 e 2 estão implementadas. A 3, a 4 e a 5 são atendidas como apoio à análise: a ferramenta reúne a informação, e a interpretação é do docente.
+
+**Fala:** Para definir o que a ferramenta deveria fazer, aplicamos um questionário exploratório a professores de programação, que apoiou o mapeamento das funcionalidades. Este quadro mostra as cinco funcionalidades propostas e onde cada uma aparece. A visualização por conceito e o histórico de tentativas estão implementados. As outras três, risco, comparação entre turmas e sugestão de intervenção, são atendidas como apoio: a ferramenta mostra, por exemplo, os conceitos de menor domínio, e quem decide o que fazer é o professor.
+
+[doc: seções 3.5 e 5.7, Quadro 8]
+
+### [SLIDE 23: Arquitetura] (~0:22)
+
+**Na tela:**
+
+O código se organiza em três partes, e as tecnologias acompanham essa divisão.
+
+Figura 9 – Visão geral da ferramenta
+
+*[imagem: Três blocos: biblioteca com Code-DKT em PyTorch, extração de conceitos e cálculo da AUC; aplicação com FastAPI e SQLite; interface web em React com TypeScript; infraestrutura Docker em servidor local com GPU RTX 4050 de 6 GB]*
+
+Fonte: elaborado pelos autores (2026).
+
+As três partes contam com testes unitários, e o sistema roda em contêineres Docker.
+
+**Fala:** O código tem três partes. Uma biblioteca independente, em Python, com o Code-DKT em PyTorch, a extração de conceitos e o cálculo da AUC. A aplicação, com FastAPI e SQLite, organizada pelas mesmas funcionalidades do fluxo. E a interface web, em React com TypeScript. As três partes têm testes unitários, e tudo roda em contêineres Docker, num servidor local com uma GPU RTX 4050 de 6 GB.
+
+[doc: seção 4.1, Figura 7]
+
+### [SLIDE 24: Banco de dados: turma e dados importados] (~0:13)
+
+**Na tela:**
+
+Os dados de cada etapa ficam em três grupos de tabelas. O primeiro reúne a turma e os dados importados.
+
+Figura 10 – Tabelas da turma e dos dados importados
+
+*[imagem: Diagrama das tabelas classroom, assignment, problem e submission com suas chaves e relações]*
+
+Fonte: elaborado pelos autores (2026).
+
+As execuções dos estudantes ficam em submission, com o código, a pontuação, o horário e a indicação de acerto.
+
+**Fala:** Os dados ficam em três grupos de tabelas, um para cada etapa. O primeiro guarda a turma, as atividades, os problemas e as execuções dos alunos, cada uma com o código, a pontuação, o horário e se acertou ou não.
+
+[doc: seção 4.1, Figura 8]
+
+### [SLIDE 25: Banco de dados: extração dos conceitos] (~0:11)
+
+**Na tela:**
+
+O segundo grupo registra a extração dos conceitos.
+
+Figura 11 – Tabelas da extração dos conceitos
+
+*[imagem: Diagrama das tabelas kc_job, sampled_solution, candidate_kc, kc, problem_kc e kc_evidence com suas chaves e relações]*
+
+Fonte: elaborado pelos autores (2026).
+
+problem_kc representa a Q-matrix, e kc_evidence guarda o trecho de código de cada associação.
+
+**Fala:** O segundo grupo registra a extração: as soluções enviadas ao modelo de linguagem, os KCs gerados, os conceitos finais, a Q-matrix, em problem_kc, e os trechos de código que justificam cada associação, em kc_evidence.
+
+[doc: seção 4.1, Figura 9]
+
+### [SLIDE 26: Banco de dados: treino dos modelos] (~0:12)
+
+**Na tela:**
+
+O terceiro grupo armazena os treinamentos e os modelos.
+
+Figura 12 – Tabelas do treino dos modelos de KT
+
+*[imagem: Diagrama das tabelas training_job, training_metric, model_artifact e mastery_prediction com suas chaves e relações]*
+
+Fonte: elaborado pelos autores (2026).
+
+Cada versão em model_artifact guarda a AUC de primeira tentativa, o commit e o hash dos dados.
+
+**Fala:** O terceiro grupo guarda os treinamentos e os modelos. Cada versão de modelo fica ligada ao commit do código e ao hash dos dados que a produziram, e o domínio estimado de cada aluno fica em mastery_prediction.
+
+[doc: seção 4.1, Figura 10]
+
+### [SLIDE 27: Reprodutibilidade] (~0:20)
+
+**Na tela:**
+
+O treino e a extração usam a GPU e precisam dar o mesmo resultado quando repetidos. Por isso, adotamos práticas de MLOps (Kreuzberger; Kühl; Hirschl, 2023):
+
+- Tarefas pesadas em processos separados, uma por vez, com o estado registrado no banco.
+- Cada versão de modelo ligada ao commit do código e ao hash dos dados; a extração registra o LLM e a versão do prompt.
+- Sementes fixas, versões fixadas do PyTorch e do CUDA e modelos carregados de revisões específicas.
+- Dois testes de regressão: o treino do Code-DKT na A1 com dez sementes e a extração da A1 a partir das respostas armazenadas do LLM.
+
+**Fala:** Como o treino e a extração usam a GPU e precisam dar o mesmo resultado quando repetidos, adotamos práticas de MLOps. As tarefas pesadas rodam em processos separados, uma por vez. Cada modelo fica ligado ao código e aos dados que o geraram. Fixamos sementes e versões, e dois testes de regressão refazem o treino e a extração da primeira atividade.
+
+[doc: seção 4.1]
+
+### [SLIDE 28: Domínio por conceito] (~0:25)
+
+**Na tela:**
+
+Depois do treino, o Code-DKT dá, para cada estudante, a chance de acertar cada problema da atividade, inclusive os que ele ainda não resolveu. Esse valor é o domínio estimado no problema.
+
+O domínio em um conceito é a média do domínio nos problemas associados a ele na Q-matrix.
+
+Figura 13 – Do domínio por problema ao domínio por conceito
+
+[caixa] Problema 3 (in1To10) 44%
+
+[caixa] Problema 13 (caughtSpeeding) 51%
+
+[caixa] Problema 232 (alarmClock) 48%
+
+[caixa] Uso do tipo de dado boolean 48%
+
+Fonte: elaborado pelos autores (2026), com o domínio médio da turma na atividade A1.
+
+Os conceitos não participam do treino: eles agrupam as estimativas em unidades que o docente interpreta.
+
+**Fala:** Antes de mostrar a ferramenta, falta explicar o número principal dela. Ao final do treino, o Code-DKT diz a chance de cada aluno acertar cada problema da atividade, inclusive os que ele ainda não resolveu. Esse é o domínio estimado no problema. A Q-matrix diz quais problemas exigem cada conceito, e o domínio no conceito é a média desses problemas. Os conceitos não entram no treino: só reorganizam o resultado numa forma que o professor entende.
+
+[doc: seção 4.5; valores conferidos no banco da ferramenta (app.db, modelo publicado da A1)]
+
+### [SLIDE 29: Demonstração] (~3:00)
+
+**Na tela:**
+
+Demonstração da ferramenta
+
+Turma CSEDM CodeWorkout · atividade A1 (Assignment 439)
+
+A importação confere os arquivos e o formato antes de gravar os dados.
+
+Figura 14 – Resultado da importação da base CSEDM
+
+*[imagem: Resultado da importação: 413 estudantes, 50 problemas, 131.943 submissões e cinco atividades]*
+
+Fonte: elaborado pelos autores (2026).
+
+Foram reconhecidos 413 estudantes, 50 problemas, 131.943 submissões e cinco atividades.
+
+A tela da turma reúne as atividades importadas.
+
+Figura 15 – Tela da turma
+
+*[imagem: Tela da turma com a A1 treinada e as atividades A2 a A5 aguardando a extração]*
+
+Fonte: elaborado pelos autores (2026).
+
+A A1 (Assignment 439) já tem o modelo treinado; as demais aguardam a extração de conceitos.
+
+Na tela de Conceitos, o docente revisa a Q-matrix da atividade.
+
+Figura 16 – Conceitos extraídos da atividade A1
+
+*[imagem: Q-matrix da A1 com 13 conceitos nas linhas e 10 problemas nas colunas]*
+
+Fonte: elaborado pelos autores (2026).
+
+São 13 conceitos nas linhas e 10 problemas nas colunas, que o docente revisa antes de aprovar a matriz.
+
+Cada conceito pode ser aberto para mostrar sua origem.
+
+Figura 17 – Origem de um conceito
+
+*[imagem: Origem do conceito operadores lógicos e condicionais no problema sortaSum, com o trecho destacado na solução 1]*
+
+Fonte: elaborado pelos autores (2026).
+
+O trecho destacado na solução 1 do sortaSum é o mesmo analisado no Quadro 4.
+
+Com os conceitos aprovados, o docente inicia o treinamento do Code-DKT.
+
+Figura 18 – Treinamento do modelo
+
+*[imagem: Treinamento do Code-DKT em andamento, com as três etapas: preparação do código, treino e avaliação]*
+
+Fonte: elaborado pelos autores (2026).
+
+O treino passa por três etapas: preparação do código, treinamento, e avaliação e publicação.
+
+A aba de problemas reúne o observado nas execuções e o domínio estimado.
+
+Figura 19 – Análise da atividade A1 por problema
+
+*[imagem: Aba de problemas com o problema 13 caughtSpeeding expandido]*
+
+Fonte: elaborado pelos autores (2026).
+
+O problema 13 (caughtSpeeding) tem a menor taxa de acerto, 12%, e a maior mediana de tentativas, 5.
+
+A aba de conceitos coloca a taxa de acerto ao lado do domínio estimado.
+
+Figura 20 – Análise da atividade A1 por conceito
+
+*[imagem: Aba de conceitos com taxa de acerto e domínio médio por conceito]*
+
+Fonte: elaborado pelos autores (2026).
+
+É nessa aba que o docente identifica os conceitos que a turma ainda não domina.
+
+A aba de alunos lista os estudantes em ordem crescente de domínio médio.
+
+Figura 21 – Análise da atividade A1 por estudante
+
+*[imagem: Aba de alunos em ordem crescente de domínio médio]*
+
+Fonte: elaborado pelos autores (2026).
+
+Os primeiros da lista completaram os 10 problemas e, ainda assim, têm domínio baixo.
+
+Ao selecionar um estudante, a ferramenta mostra seu domínio em cada conceito.
+
+Figura 22 – Detalhe de um estudante na atividade A1
+
+*[imagem: Detalhe do estudante 14339 com o domínio em cada conceito]*
+
+Fonte: elaborado pelos autores (2026).
+
+O estudante 14339 completou os 10 problemas em 56 execuções, 23 com erro de compilação.
+
+**Fala e roteiro de cliques:**
+
+ABERTURA: Agora vamos mostrar a ferramenta com os dados da base. A importação, a extração e o treino da primeira atividade já foram feitos, porque a extração leva cerca de 13 minutos e o treino um minuto e meio.
+
+CLIQUES: (1) tela da turma, 15s; (2) Conceitos da A1, abrir a origem de "Operadores lógicos e condicionais" no sortaSum, 45s; (3) Análise, aba Problemas, abrir o 13 caughtSpeeding, 30s; (4) aba Conceitos, 30s; (5) aba Alunos e estudante 14339, 40s.
+
+ABA CONCEITOS: Aqui está o objetivo central da ferramenta: o professor vê quais conceitos a turma ainda não domina. O ícone separa o que o modelo estimou do que foi observado nas execuções.
+
+ABA ALUNOS: Esses alunos completaram todos os problemas e mesmo assim aparecem com domínio baixo, porque o modelo olha a sequência inteira, incluindo as tentativas erradas até acertar.
+
+FECHAMENTO: Com isso, o professor sabe em que parte da atividade cada aluno precisa de apoio.
+
+RESERVA: se a ferramenta não abrir, seta para baixo e narrar as mesmas telas.
+
+
+[doc: seção 5.6, Figuras 15 a 23]
+
+### [SLIDE 30: Considerações finais] (~0:30)
+
+**Na tela:**
+
+- Na base analisada, os resultados indicam que sim: as técnicas de mineração de dados educacionais permitem acompanhar a aprendizagem com mais detalhe do que acertos e erros.
+- O código melhora a previsão: o Code-DKT obteve 79,90% na primeira tentativa e 74,31% na AUC geral, contra 77,14% e 71,79% do DKT, com menor variação.
+- Os 13 conceitos da A1 têm correspondência com os KCs de Duan et al. (2026) e com os KCs escritos por humanos, e os 46 trechos de código foram encontrados nas soluções.
+- Contribuição: reunir análise de código, rastreamento do conhecimento e componentes de conhecimento em um único fluxo, voltado ao docente.
+
+**Fala:** Voltando à pergunta do início: na base analisada, os resultados indicam que sim. O código melhorou a previsão e a estabilidade do modelo, e os conceitos extraídos permitiram mostrar esse resultado numa forma que o professor interpreta. A principal contribuição é a integração: em vez de usar o código, o modelo e os conceitos separadamente, a ferramenta junta tudo num fluxo só. Assim, o código do aluno deixa de ser só o resultado final de um exercício e passa a ser uma fonte de informação sobre como ele aprende.
+
+[doc: cap. 6]
+
+### [SLIDE 31: Limitações e trabalhos futuros] (~0:24)
+
+**Na tela:**
+
+Limitações
+
+- Analisado apenas na base CSEDM, de uma universidade norte-americana, em Java.
+- Extração analisada em detalhe só na A1, de condicionais.
+- De 10,3% a 21,4% das execuções não viram AST e entram sem o código.
+- A ferramenta ainda não foi usada por docentes em sala de aula.
+
+Trabalhos futuros
+
+- Aplicar a turmas brasileiras e avaliar com os docentes, após aprovação do Comitê de Ética em Pesquisa (CEP).
+- Estender a análise dos conceitos às demais atividades, com mais de um avaliador, e comparar modelos de linguagem.
+- Relacionar conceitos entre atividades, para acompanhar um conhecimento ao longo da disciplina.
+
+**Fala:** O trabalho tem limites: analisamos uma única base, americana e em Java, os conceitos em detalhe em uma atividade, uma parte das execuções entra sem o código, e a ferramenta ainda não foi usada por professores numa turma real. Por isso, o próximo passo é levá-la a turmas brasileiras, com aprovação do comitê de ética, e avaliar com os próprios professores se a visão por conceito ajuda a planejar as aulas.
+
+[doc: cap. 6]
+
+### [SLIDE 32: Obrigado] (~0:06)
+
+**Na tela:**
+
+*[imagem: UniFacens]*
+
+obrigado
+
+**Fala:** Esperamos que, com isso, o professor consiga identificar e tratar mais cedo as dificuldades da turma. Muito obrigado.
+
+[doc: cap. 6]
+
+---
+## O que muda em relação à primeira apresentação
+
+| Sai | Motivo |
+|---|---|
+| Gráficos de EDA (tentativas por assignment, X-Grade) e Tabela 1 antiga | Não estão no documento final |
+| "328 treino e 82 teste" | O split agora é por atividade |
+| Tabela antiga de resultados e "tirando o Assignment 1" | Os números mudaram, e o Code-DKT vence nas cinco atividades |
+| "Retomando o problema" com Martins e a curva de dificuldade por conceito | Não estão no documento final |
+| Os três slides de progresso das quatro fases e o slide de Zorić com as fases detalhadas | Zorić passa a ser só citado na metodologia |
+| "Metas do TCC 2" | A ferramenta agora existe e é demonstrada |
+| "O ensino carece de ferramentas" como problema | Trocado pelo problema de pesquisa do documento |
+
+## Perguntas prováveis da banca (preparar, não vão para os slides)
+
+- **Por que 2,32 pontos abaixo de Shi?** As causas não foram investigadas (limitação declarada no cap. 6). Na
+  primeira tentativa da A1, a diferença é de 0,32 ponto.
+- **Por que o BKT tem desvio padrão 0,00 na A1?** O documento não discute. Combinar a resposta antes.
+- **Por que o Claude Haiku 4.5 e não o GPT-4o?** É o modelo acessível no ambiente (seção 4.5, síntese das
+  adaptações). A equivalência não foi avaliada, e a comparação entre modelos de linguagem está nos trabalhos
+  futuros.
+- **Por que alunos que completaram tudo têm domínio baixo?** O modelo estima a partir da sequência inteira,
+  incluindo as tentativas erradas até a conclusão (seção 5.6).
+- **O domínio é uma nota?** Não. É a probabilidade estimada de acerto na próxima tentativa, e um ícone separa o que
+  o modelo estima do que foi observado.
+- **E os erros de compilação?** Seguindo Shi *et al.* (2022), ficam fora das sequências de tentativas. E de 10,3% a
+  21,4% das execuções não são lidas pelo javalang e entram só com o acerto ou erro.
+- **O que o questionário mostrou?** Ele apoiou o mapeamento das funcionalidades, e as respostas não foram
+  analisadas no trabalho.

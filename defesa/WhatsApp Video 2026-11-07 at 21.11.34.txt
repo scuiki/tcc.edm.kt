@@ -1,0 +1,138 @@
+Bom, boa noite. Meu nome é Eric Miranda Viana, esse é o Vitor Santos Borba e esse é o Leonardo Kuntz.
+O título do nosso projeto é Análise de Aprendizados de Programação Utilizando Mineração de Dados Educacionais.
+A nossa orientadora foi a professora mestre Talita Berbel.
+Bom, o nosso trabalho está na área de Educational Data Mine, ou EDM, com foco na utilização de KTs, ou Knowledge Tracings.
+Bom, o ensino de programação tem se mostrado cada vez mais complexo, com altos índices de reprovação e desistência nas disciplinas introdutórias.
+Martins e companhia trouxeram nos seus artigos que os principais desafios que os estudantes passam são relacionados a raciocínio lógico, abstração e conceitos técnicos de programação.
+Tendo em vista esse problema, nosso trabalho busca auxiliar na elaboração de métodos que possam auxiliar no processo de ensino.
+Para isso, nós iremos utilizar técnicas de EDM, ou Mineração de Dados Educacionais, porque o EDM combina mineração de dados, estatística e aprendizado de máquina.
+Então, pense que cada interação que o estudante faz em ambientes educacionais, ele gera informações que podem ser muito valiosas, como tempo de submissão de código, erro e tentativas.
+E esses dados podem ajudar a entender o padrão de aprendizagem.
+E dentro do EDM, nós iremos utilizar uma ferramenta chamada Knowledge Tracing, um método, perdão.
+O método de Knowledge Tracing é basicamente composto para analisar o processo de aprendizagem do aluno durante o ano ou aplicação do processo letivo.
+Em termos bem práticos, cada interação que o aluno tem, seja por provas ou atividades, nós conseguimos meio que traçar um caminho do...
+do conhecimento do aluno, do estudante.
+Então, para isso, nós iremos usar os Knowledge Concepts, ou os KCs, que conseguem representar a habilidade e o conhecimento que o aluno está abordando naquele programa, naquele problema.
+Para nos ajudar a organizar tudo isso, nós iremos usar as quatro fases que a Zorik propôs na metodologia de EDM, que é a definição do problema, preparação e coleta dos dados, modelagem e avaliação e a implantação.
+Como definição?
+Como definição do problema, nós conseguimos entender que, hoje em dia, carece por ferramentas que possam auxiliar o professor no processo de ensino.
+Então, nós temos como objetivo usar técnicas de EDM e KTs para conseguir ter uma visão melhor sobre esse processo de aprendizagem.
+Tendo em vista a definição do problema, agora vamos para a parte de preparação dos dados.
+Bom, na fase de preparação dos dados, o dataset que a gente escolheu foi o CSDM.
+Ele foi coletado de um curso produtório em Java, durante 2019.
+O diferencial desse dataset é que ele foi armazenado em ProgSnap, que é um formato que registra cada evento de programação do estudante.
+Então, informações como qual estudante fez, o problema, o tipo do problema, a nota do aluno, o horário que foi feito, o Snapchat do código e por assim vai.
+Esse dataset reúne 413 estudantes, 5 assignments ou lista de problemas, com 10 problemas cada e 201...
+201 mil eventos.
+Para ter uma visão geral dos dados, a gente relacionou a taxa de participação com a taxa de acerto.
+E nesse gráfico a gente consegue ver que a taxa de participação dos alunos só é caindo ao longo dos assignments.
+Enquanto a taxa de acerto no último assignment é a maior de todas.
+Para entender melhor como o aprendizado dos alunos se manifestou ao longo dos assignments,
+a gente separou um gráfico que mostra a tentativa total de cada aluno por assignment.
+E aqui a gente pode ver que, conforme...
+Conforme mais tarde é o assignment, conforme mais longe é o assignment, os alunos precisam de menos tentativas para acertar.
+Isso indica que eles estão realmente aprendendo conteúdo.
+Falando do engajamento e desempenho dos alunos ao longo dos assignments,
+aqui temos um gráfico que mostra a nota final, normalizada de 0 a 1,
+para alunos que completaram 1 assignment, 2 assignments, 3 assignments e assim por diante.
+Nesse gráfico a gente consegue ver que alunos que completaram todos os 5 assignments têm uma nota maior, uma mediana maior na nota,
+e com uma variança menor.
+Ou seja, eles conseguiram agrupar notas melhores ao longo dos assignments.
+Isso é uma informação muito valiosa para o professor.
+Para o pré-processamento, a gente seguiu o mesmo protocolo do XI.
+Então, seguindo o protocolo dele, a gente chegou nos mesmos 23,68% de tentativas corretas.
+E, em seguida, a gente dividiu ele em 328 estudantes para treino e 82 para teste, na mesma proporção 80-20 que ele usou.
+Dada a fase de preparação dos dados, a gente vai falar dos modelos na fase de modelagem e avaliação.
+Bom, falando um pouquinho dos modelos de Knowledge Tracing.
+O que os modelos fazem?
+Eles estimam, a partir do histórico de tentativas, a probabilidade de um aluno, de um estudante acertar o próximo problema.
+É aqui que fica evidente a importância da gente ter um dataset que traz o histórico de tentativas, que foi o que o Victor falou.
+E o nosso trabalho, os modelos, eles são um instrumento central para representar o aprendizado.
+Só que a gente tem um problema.
+Os modelos mais famosos, como o BKT e o DKT, eles tratam as respostas dos estudantes só como incorretas ou corretas.
+E elas ignoram.
+Então, se o aluno está em uma área de conteúdo e em uma área como programação, em que o código do aluno é tão relevante quanto o resultado final da resposta dele,
+isso não é interessante.
+Porque um aluno pode acertar 80% do código, errar 20%, o código pode não compilar ou dar a resposta errada.
+Isso não significa que ele não aprendeu nada.
+Significa que ele não aprendeu uma parte, mas que boa parte ele pode ter aprendido, por exemplo.
+Com isso em vista, a gente escolheu o modelo Code DKT.
+Ele vem aqui na linha cronológica de BKT.
+Depois de BKT surge o DKT.
+E depois de BKT, ele vai para a regulação de rede neural.
+Dentro do Knowledge Tracing, o X pega o modelo de DKT e ele coloca um parâmetro a mais.
+Que é o código vetorizado do aluno.
+Então ele leva o código em consideração.
+Para isso, a gente vai usar, nesses modelos, a gente vai usar os KCs que o Eric já mencionou.
+E aqui, para esse problema, a gente adotou, igual ao X, um Problem ID como KC durante o treino.
+Falando um pouquinho dentro do Code DKT, como ele funciona.
+Ele extrai o código do estudante através de um parser, que é o Java Lang.
+E ele vai usar o código de um parcer, que é o Java Lang.
+E ele transforma isso em uma árvore de sintaxe abstrata.
+Essa árvore, então, ela é passada pelo Code 2Vec, que vetoriza todos os caminhos possíveis dentro daquela árvore.
+E entrega isso, ponderado com atenção, para LSTM.
+Ponderado com atenção significa que alguns caminhos são mais impactantes,
+são mais relevantes para respostas corretas, alguns para respostas erradas.
+E esses caminhos vão receber pesos diferentes quando eles forem passados para a rede neural,
+que é o LSTM, Long Short Term Memory, que é o que vai entregar a petição no final.
+Aqui a gente tem um exemplo.
+Aqui a gente tem um exemplo de uma árvore ST.
+Então o código vira essa árvore, a parte vermelha seria a vetorização,
+e isso que vai ser entregado para a LSTM no final.
+Aqui a gente tem os resultados dos nossos modelos.
+Então a gente está usando a métrica de comparação, que é o First Attempt ao C.
+First Attempt para não enviesar, então eventualmente o aluno tende a acertar a resposta.
+A gente está considerando só a primeira tentativa dele.
+E ao C, porque esse dataset é muito desbalanceado, como o Victor mostrou.
+Só tem 23,68% de alternativas corretas.
+Então ao C, ele encaixa...
+Ele encaixa justamente em uma petição correta nisso, porque a gente não conseguiria usar a curaça.
+A gente vê que o Code DKT, tirando o Assignment 1 em relação ao DKT,
+ele desempenhou melhor do que todos os outros modelos.
+BKT principalmente e DKT também.
+E a gente vê também que a gente se comparou com o X.
+A gente chegou em um resultado muito próximo,
+que é mais um indicador de que a gente aplicou o pré-processamento de acordo com o protocolo,
+e o modelo também.
+Agora aqui falando um pouquinho dos KCs.
+Então os modelos consideram isso para entregar
+a probabilidade do aprendizado.
+Só que os KCs usados pelos modelos, eles não são interpretáveis.
+Ou são de difícil interpretação.
+Aqui a gente trouxe uma solução que é a extração automática de KCs semânticos via LLM.
+Então a gente tem esse pipeline, que a gente faz o sampling do problema,
+extração dos KCs brutos, clusterização e a entrega dos KCs semânticos.
+Aqui a gente tem alguns exemplos.
+Então no conceito de estrutura de controle a gente tem branch condicional, multicaminho,
+iteração indexada, por exemplo, controle de loop e por aí em diante.
+Aqui a gente retoma o problema.
+Então a gente traz o que o Martins mencionou, que foi abordado pelo Eric lá no começo,
+que uma das dificuldades mais comuns entre os estudantes,
+que foi mencionado por três autores estudados por Martins,
+é a falta de conhecimento em conceitos técnicos de programação.
+Entrando em conceitos técnicos de programação,
+ele evidencia que estrutura de controle, manipulação de variáveis,
+operadores e expressões lógicas, funções e vetores
+são as principais dificuldades abordadas nos estudos.
+Aqui a gente mapeou as três em relação aos KCs que a gente extraiu do dataset
+e a gente colocou eles para fazer uma predição.
+A gente relacionou os KCs semânticos à predição do CodeDKT
+e a gente consegue validar o que o Martins falou,
+que estrutura de controle realmente é o mais difícil dos alunos aprenderem.
+Por isso que ele tem mais menção nos estudos.
+Aqui a gente termina a fase de modelagem e a gente vai para a implantação,
+que são as nossas metas para o TCC.
+Então, no TCC2, a gente vai se dispor a fazer uma ferramenta
+cuja ideia é ajudar o professor para que ele consiga mapear os padrões da turma
+durante o andamento da disciplina, não só no final dela,
+e fazer ajustes nas suas aulas conforme a disciplina andar.
+Então, através disso, a gente vai fazer com importação de dados no formato ProgSnap,
+extração automática de KCs via LLM,
+validação do docente nos KCs, preparação dos dados,
+aplicação do modelo de previsão que é o CodeDKT
+e entregar tudo isso para o professor
+no formato de um dashboard para que ele consiga tomar as decisões
+com base nas informações dos alunos.
+Aqui a gente termina a implantação e ela vai ficar para o TCC2.
+É isso.
+Muito obrigado.

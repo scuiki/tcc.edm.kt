@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1118 1076" width="1118" height="1076">
+  <!-- Figura 1 redesenhada: preenchimentos translúcidos e os três contornos por cima, 100% opacos -->
+  <rect width="1118" height="1076" fill="#FFFFFF"/>
+  <g fill-opacity="0.5">
+    <circle cx="558" cy="380" r="317" fill="#C5DFBD"/>
+    <circle cx="380" cy="686" r="317" fill="#C1DDEB"/>
+    <circle cx="739" cy="686" r="317" fill="#F3EDA9"/>
+  </g>
+  <g fill="none" stroke="#2B2B2B" stroke-width="3.5">
+    <circle cx="558" cy="380" r="317"/>
+    <circle cx="380" cy="686" r="317"/>
+    <circle cx="739" cy="686" r="317"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#000000" text-anchor="middle" dominant-baseline="central">
+    <g font-size="28">
+      <text x="558" y="160">Ciência da</text>
+      <text x="558" y="193">Computação</text>
+      <text x="200" y="770">Educação</text>
+      <text x="918" y="770">Estatística</text>
+    </g>
+    <g font-size="22">
+      <text x="379" y="424">Educação</text>
+      <text x="379" y="452">baseada em</text>
+      <text x="379" y="480">computador</text>
+      <text x="740" y="410">Mineração</text>
+      <text x="740" y="438">de dados e</text>
+      <text x="740" y="466">aprendizado</text>
+      <text x="740" y="494">de máquina</text>
+      <text x="560" y="788">Estatística</text>
+      <text x="560" y="816">educacional</text>
+    </g>
+    <g font-size="25">
+      <text x="560" y="563">EDM e</text>
+      <text x="560" y="596">LA</text>
+    </g>
+  </g>
+</svg>

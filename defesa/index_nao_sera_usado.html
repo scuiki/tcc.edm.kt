@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Defesa do TCC 2</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5/400.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5/700.css">
+  <link rel="stylesheet" href="assets/theme-unifacens.css">
+  <link rel="stylesheet" href="assets/defesa.css">
+</head>
+<body>
+
+  <!-- símbolo Facens reutilizável (recolorível via currentColor) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="sym" viewBox="0 0 136.7 139.78">
+      <path fill="currentColor" d=" M 70.51 3.97 C 76.92 3.97 83.44 4.98 89.87 7.14 C 91.27 7.61 92.64 8.13 93.99 8.68 L 98.5 7.04 C 95.77 5.7 92.93 4.52 89.96 3.54 C 82.8 1.15 75.51 0.01 68.34 0.01 C 39.72 0 13.07 18.12 3.52 46.76 C 1.14 53.92 0 61.21 0 68.37 C 0 93.77 14.26 117.6 37.48 129.32 C 37.16 127.89 36.98 126.46 36.98 125.03 C 36.98 122.38 37.52 119.79 38.53 117.4 C 20.3 106.26 9.28 86.32 9.28 65.21 C 9.28 58.8 10.29 52.28 12.44 45.84 C 21 20.19 44.88 3.97 70.51 3.97 Z M 128.98 36.86 C 128.06 37.7 127.01 38.42 125.81 38.97 C 129.66 47.08 131.74 56.02 131.74 65.18 C 131.74 71.6 130.72 78.12 128.58 84.55 C 120.68 108.27 99.64 123.92 76.26 126.13 C 76.04 129.92 74.73 133.54 72.53 136.57 C 99.54 134.91 124.1 117.2 133.18 89.96 C 135.56 82.8 136.7 75.5 136.7 68.34 C 136.7 57.25 133.97 46.46 128.98 36.84 Z" />
+      <path fill="currentColor" d=" M 61.67 138.9 C 54.04 141.67 45.58 137.74 42.81 130.1 C 40.03 122.46 43.96 114.01 51.6 111.23 C 59.24 108.45 67.69 112.39 70.46 120.03 C 73.25 127.67 69.3 136.12 61.66 138.91 Z M 129.31 0.3 L 47.14 30.21 C 44.18 31.29 41.76 34.74 41.75 37.91 L 41.73 50.93 L 41.73 64.74 C 41.73 64.74 123.9 34.83 123.9 34.83 C 126.86 33.76 129.29 30.29 129.29 27.14 L 129.31 6.04 L 129.31 6.04 L 129.31 0.3 Z M 97.17 60.16 L 97.17 54.43 L 47.13 72.65 C 44.16 73.72 41.74 77.19 41.74 80.33 L 41.74 84.13 L 41.74 84.13 L 41.74 107.16 C 41.74 107.16 91.77 88.95 91.77 88.95 C 94.74 87.87 97.16 84.41 97.16 81.25 L 97.16 76.62 L 97.16 76.62 L 97.16 72.83 C 97.16 72.83 97.17 60.15 97.17 60.15 L 97.17 60.15 Z" />
+    </symbol>
+  </svg>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ============ SLIDE 0 · Abertura ============ -->
+      <section data-background-color="#2667FF">
+        <div class="deck-slide slide-cover-brand">
+          <img class="brand-logo" src="assets/logo-unifacens-white.svg" alt="UniFacens">
+          <p class="cover-tagline kicker">
+            <span class="ps1">&gt;</span><i>Educational data mining</i> e <i>Knowledge Tracing</i><span class="caret blink"></span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ SLIDE 1 · Capa do TCC ============ -->
+      <section data-background-color="#202124">
+        <div class="deck-slide slide-title-tcc">
+          <svg class="watermark" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <div class="topbar">
+            <div class="tcc-label kicker">
+              <span class="ps1">&gt;</span>Trabalho de Conclusão de Curso<br>
+              <span class="tcc-label__cont">Engenharia da Computação<span class="caret blink"></span></span>
+            </div>
+            <img class="logo" src="assets/logo-unifacens-white.svg" alt="UniFacens">
+          </div>
+          <div class="center">
+            <div class="tcc-cover">
+              <h1 class="tcc-title">Análise do aprendizado de programação utilizando mineração de dados educacionais</h1>
+              <p class="tcc-authors">Erick Miranda Viana<br>Leonardo Kuntz Oliveira<br>Victor Santos Borba</p>
+              <p class="tcc-advisor">Orientador(a): Profa. Me. Talita dos Reis Lopes Berbel</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Boa noite. Nós somos Erick Miranda Viana, Leonardo Kuntz Oliveira e Victor Santos Borba, e vamos apresentar o trabalho "Análise do aprendizado de programação utilizando mineração de dados educacionais", orientado pela professora mestre Talita Berbel.</aside>
+      </section>
+
+      <!-- ============ SLIDE 2 · Agenda (capítulos do documento) ============ -->
+      <section data-background-gradient="linear-gradient(to right, #2667FF 27%, #FFFFFF 27%)">
+        <div class="deck-slide slide-agenda">
+          <div class="agenda-side">
+            <h2>Agenda</h2>
+            <img class="logo" src="assets/logo-unifacens-white.svg" alt="UniFacens">
+          </div>
+          <div class="agenda-main">
+            <ul class="agenda-list">
+              <li><span class="ps1">&gt;</span><span class="txt">Introdução</span></li>
+              <li><span class="ps1">&gt;</span><span class="txt">Fundamentação teórica</span></li>
+              <li><span class="ps1">&gt;</span><span class="txt">Metodologia</span></li>
+              <li><span class="ps1">&gt;</span><span class="txt">Desenvolvimento da ferramenta</span></li>
+              <li><span class="ps1">&gt;</span><span class="txt">Resultados</span></li>
+              <li><span class="ps1">&gt;</span><span class="txt">Considerações finais</span><span class="caret blink"></span></li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">A apresentação segue os capítulos do trabalho. Começamos pelo problema, passamos pela base teórica e pela metodologia, mostramos a ferramenta que desenvolvemos, inclusive funcionando, e fechamos com os resultados e as considerações finais.</aside>
+      </section>
+
+      <!-- =====================================================================
+           1 INTRODUÇÃO
+           ===================================================================== -->
+
+      <!-- ============ SLIDE 3 · Introdução (Martins, Marin e Alves, 2024; Luz et al., 2026) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>introdução<span class="caret blink"></span></p>
+
+          <p class="rel-lead">A aprendizagem de programação é uma das etapas que mais impõem dificuldades a estudantes e docentes, sobretudo nas disciplinas introdutórias.</p>
+          <p class="rel-lead">Dificuldades com lógica, abstração e domínio de conceitos técnicos aparecem de forma recorrente e podem levar à desmotivação, à reprovação e à evasão (Martins; Marin; Alves, 2024).</p>
+          <p class="rel-lead">Em nove semestres de um curso de Engenharia de Computação, a reprovação nas disciplinas introdutórias de programação ficou entre <b>18,51%</b> e <b>21,98%</b> (Luz <i>et al.</i>, 2026).</p>
+          <p class="rel-lead">Identificar essas dificuldades <b>durante</b> a disciplina permite agir antes que elas se convertam em reprovação ou evasão.</p>
+        </div>
+        <aside class="notes">O ensino de programação é difícil para os dois lados, para quem aprende e para quem ensina. Uma revisão sistemática de Martins, Marin e Alves mostra que lógica, abstração e conceitos técnicos são as dificuldades mais recorrentes, e que elas levam à desmotivação, à reprovação e à evasão. Luz e colegas olharam nove semestres de um curso de Engenharia de Computação e encontraram reprovação de cerca de 20% nas disciplinas introdutórias. A pergunta que nos moveu foi: dá para o professor enxergar essas dificuldades enquanto a disciplina ainda está acontecendo?</aside>
+      </section>
+
+      <!-- ============ SLIDE 4 · O problema do certo ou errado (Shi et al., 2022) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>o problema do certo ou errado<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Classificar cada tentativa apenas como correta ou incorreta ignora que o estudante pode dominar <b>parte</b> do assunto.</p>
+          <p class="rel-lead">Um estudante pode usar corretamente uma condicional, um laço ou um vetor e, ainda assim, ter a solução marcada como incorreta por um erro localizado (Shi <i>et al.</i>, 2022).</p>
+          <p class="rel-lead">O conteúdo do código acrescenta informação que o resultado final não mostra.</p>
+          <p class="rel-lead">Mesmo usando o código, os modelos não dizem <b>quais conceitos</b> o estudante domina, e é isso que o docente precisa saber.</p>
+        </div>
+        <aside class="notes">Em programação, a nota da tentativa conta pouco da história. Duas tentativas erradas podem mostrar níveis de conhecimento bem diferentes: um aluno pode ter acertado a condicional e o laço e errado só um detalhe. Shi e colegas mostram que o código traz informação que o certo ou errado descarta. Só que tem um segundo problema: mesmo um modelo que lê o código devolve números por exercício, e o professor quer saber em qual conceito a turma está travando.</aside>
+      </section>
+
+      <!-- ============ SLIDE 5 · Problema de pesquisa ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>problema de pesquisa<span class="caret blink"></span></p>
+
+          <div class="center-stage">
+            <p class="big">O uso do código submetido, do histórico de tentativas e de componentes de conhecimento interpretáveis permite acompanhar a aprendizagem em programação com mais detalhes do que uma análise baseada apenas em acertos e erros?</p>
+            <p class="sub"><b>Hipótese:</b> a combinação dessas técnicas representa a aprendizagem de forma mais detalhada e relaciona as estimativas a conceitos que o docente consegue interpretar.</p>
+          </div>
+        </div>
+        <aside class="notes">Nosso problema de pesquisa junta esses dois pontos. A hipótese é que, combinando o código, o histórico de tentativas e conceitos interpretáveis, a gente consegue acompanhar a aprendizagem com mais detalhe do que olhando só acerto e erro. Na revisão de literatura, não encontramos estudos que apliquem essas técnicas em conjunto no contexto brasileiro.</aside>
+      </section>
+
+      <!-- ============ SLIDE 6 · Objetivos ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>objetivos<span class="caret blink"></span></p>
+
+          <p class="rel-lead"><b>Objetivo geral:</b> identificar padrões de aprendizagem em programação pela mineração dos códigos submetidos, apontando pontos fortes e fracos por conceito.</p>
+          <p class="rel-lead"><b>Objetivos específicos:</b></p>
+          <ol class="phases-list phases-list--sm">
+            <li>Comparar BKT, DKT e Code-DKT na base CSEDM e selecionar o modelo pela AUC.</li>
+            <li>Extrair automaticamente, com um grande modelo de linguagem, componentes de conhecimento interpretáveis das soluções corretas dos estudantes.</li>
+            <li>Desenvolver uma ferramenta web que apresente ao docente o domínio estimado por conceito.</li>
+            <li>Verificar a ferramenta com os dados da base CSEDM.</li>
+          </ol>
+        </div>
+        <aside class="notes">O objetivo geral é identificar pontos fortes e fracos na aprendizagem, por conceito, a partir dos códigos dos alunos. Para isso, definimos quatro objetivos específicos: escolher o modelo, extrair os conceitos, construir a ferramenta e verificá-la. São esses quatro que vamos retomar nos resultados.</aside>
+      </section>
+
+      <!-- =====================================================================
+           2 FUNDAMENTAÇÃO TEÓRICA
+           ===================================================================== -->
+
+      <!-- ============ SLIDE 7 · Mineração de dados educacionais ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>mineração de dados educacionais<span class="caret blink"></span></p>
+
+          <div class="cols cols--text-fig">
+            <div>
+              <p class="rel-lead rel-lead--sm">A mineração de dados educacionais (<i>educational data mining</i>, EDM) aplica técnicas de análise de dados e de aprendizado de máquina aos dados gerados por estudantes (Kalita <i>et al.</i>, 2025).</p>
+              <p class="rel-lead rel-lead--sm">Cada interação do estudante, como uma submissão de código, um erro ou uma nova tentativa, vira dado sobre o processo de aprendizagem.</p>
+              <p class="rel-lead rel-lead--sm">A análise de aprendizagem (<i>learning analytics</i>, LA) mede, coleta e analisa esses dados para compreender e otimizar a aprendizagem (Long; Siemens, 2011).</p>
+            </div>
+            <div class="abnt-fig">
+              <p class="eda-title">Figura 1 &ndash; Áreas relacionadas à EDM e à LA</p>
+              <img src="assets/figuras/fig01-edm-la-areas.png" style="max-height: 440px;" alt="Diagrama de Venn com Ciência da Computação, Educação e Estatística; EDM e LA na interseção das três">
+              <p class="eda-source">Fonte: adaptado de Srinivasa e Kurni (2021).</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">A mineração de dados educacionais fica na interseção entre computação, educação e estatística, como mostra a figura. A ideia é que cada interação do aluno, cada submissão, cada erro, cada nova tentativa, é um dado sobre como ele está aprendendo. Junto dela está a learning analytics, que usa esses dados para entender e melhorar a aprendizagem. Em programação, esse dado é especialmente rico, porque cada tentativa gera um código novo.</aside>
+      </section>
+
+      <!-- ============ SLIDE 8 · Knowledge tracing (KT, KC e AUC) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span><i>knowledge tracing</i><span class="caret blink"></span></p>
+
+          <p class="rel-lead rel-lead--sm">O rastreamento do conhecimento (<i>knowledge tracing</i>, KT) usa o histórico de questões e respostas para estimar o conhecimento do estudante e prever seu desempenho na próxima interação (Abdelrahman; Wang; Nunes, 2023).</p>
+          <p class="rel-lead rel-lead--sm">O conhecimento acompanhado é dividido em componentes de conhecimento (<i>knowledge components</i>, KCs), conceitos ou habilidades usados na resolução, como condicionais, laços ou vetores.</p>
+          <p class="rel-lead rel-lead--sm">Os modelos são avaliados pela <b>AUC</b>, a área sob a curva ROC: 0,5 equivale ao acaso e 1 a uma previsão perfeita. Ela não depende de um limiar e é adequada a bases desbalanceadas.</p>
+          <p class="rel-lead rel-lead--sm">A <b>AUC de primeira tentativa</b> considera só a primeira tentativa de cada estudante em cada problema.</p>
+        </div>
+        <aside class="notes">Dentro da EDM, nosso foco é o knowledge tracing: a partir do histórico de tentativas, o modelo estima se o aluno vai acertar a próxima. O que ele acompanha são os componentes de conhecimento, ou KCs, que são os conceitos que o problema exige. Para medir o modelo usamos a AUC, em que 0,5 é chutar e 1 é acertar sempre. Ela funciona bem quando há muito mais erro do que acerto, que é o nosso caso. E olhamos em especial a primeira tentativa em cada problema, quando o modelo ainda não viu o aluno naquele exercício.</aside>
+      </section>
+
+      <!-- ============ SLIDE 9 · BKT, DKT e Code-DKT (linha do tempo) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>bkt, dkt e code-dkt<span class="caret blink"></span></p>
+
+          <p class="rel-lead" style="margin-top: 18px;">Comparamos três modelos de <i>knowledge tracing</i> que marcam a evolução da área.</p>
+
+          <p style="font-family: Arial; font-weight: bold; font-size: 22px; margin: 50px 0 22px 0;">Linha do tempo do <i>knowledge tracing</i></p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: start; position: relative;">
+            <div style="position: absolute; top: 18px; left: 8%; right: 8%; height: 2px; background: #1f1f1f; z-index: 0;"></div>
+
+            <div style="position: relative; z-index: 1; text-align: center;">
+              <p style="font-family: Arial; font-weight: bold; font-size: 24px; margin: 0; background: #FFFFFF; display: inline-block; padding: 0 12px;">1995</p>
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #1f1f1f; margin: 6px auto 12px auto;"></div>
+              <p style="font-family: Arial; font-weight: bold; font-size: 22px; margin: 0 0 6px 0;">Corbett e Anderson</p>
+              <p style="font-family: Arial; font-size: 20px; margin: 0; line-height: 1.4;">BKT, probabilidade de domínio por KC, com conhecimento inicial, aprendizagem, acerto ao acaso e deslize.</p>
+            </div>
+
+            <div style="position: relative; z-index: 1; text-align: center;">
+              <p style="font-family: Arial; font-weight: bold; font-size: 24px; margin: 0; background: #FFFFFF; display: inline-block; padding: 0 12px;">2015</p>
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #1f1f1f; margin: 6px auto 12px auto;"></div>
+              <p style="font-family: Arial; font-weight: bold; font-size: 22px; margin: 0 0 6px 0;">Piech <i>et al.</i></p>
+              <p style="font-family: Arial; font-size: 20px; margin: 0; line-height: 1.4;">DKT, rede LSTM sobre o histórico de acertos e erros.</p>
+            </div>
+
+            <div style="position: relative; z-index: 1; text-align: center;">
+              <p style="font-family: Arial; font-weight: bold; font-size: 24px; margin: 0; background: #FFFFFF; display: inline-block; padding: 0 12px;">2022</p>
+              <div style="width: 14px; height: 14px; border-radius: 50%; background: #2667FF; margin: 6px auto 12px auto;"></div>
+              <p style="font-family: Arial; font-weight: bold; font-size: 22px; margin: 0 0 6px 0;">Shi <i>et al.</i></p>
+              <p style="font-family: Arial; font-size: 20px; margin: 0; line-height: 1.4;">Code-DKT, o DKT com o código de cada tentativa.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Comparamos três modelos que marcam a evolução da área. O BKT, de 1995, é probabilístico: estima a chance de o aluno dominar cada KC com quatro parâmetros, entre eles a chance de acertar no chute e de errar por descuido. O DKT, de 2015, troca isso por uma rede neural recorrente, a LSTM, que aprende com a sequência de acertos e erros. E o Code-DKT, de 2022, mantém o DKT e acrescenta o código.</aside>
+      </section>
+
+      <!-- ============ SLIDE 10 · Dentro do Code-DKT (javalang, AST, caminhos, atenção, LSTM) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>dentro do code-dkt<span class="caret blink"></span></p>
+
+          <p class="rel-lead rel-lead--sm">A cada tentativa, o código Java passa pelo <i>parser</i> <code>javalang</code> e vira uma árvore de sintaxe abstrata (<i>abstract syntax tree</i>, AST).</p>
+          <p class="rel-lead rel-lead--sm">Comparar o código como texto daria peso a diferenças que não mudam a estrutura da solução, como nomes de variáveis, comentários e formatação. A AST organiza o programa em hierarquia.</p>
+          <p class="rel-lead rel-lead--sm">Os caminhos entre pares de folhas viram vetores, como no code2vec (Alon <i>et al.</i>, 2019): nó inicial, caminho e nó final.</p>
+          <p class="rel-lead rel-lead--sm">A atenção pondera os caminhos, e o vetor do código entra na LSTM junto com o acerto ou erro. Duas tentativas incorretas com códigos diferentes passam a ter representações diferentes.</p>
+          <p class="rel-lead rel-lead--sm">Na base CSEDM, o Code-DKT superou o DKT em cerca de 3 a 4 pontos percentuais de AUC, com menor variação (Shi <i>et al.</i>, 2022).</p>
+        </div>
+        <aside class="notes">Por dentro, o Code-DKT precisa transformar o código em algo que a rede entenda. Tratar o código como texto não funciona, porque trocar o nome de uma variável mudaria tudo sem mudar a lógica. Então cada tentativa passa por um parser de Java e vira uma árvore de sintaxe abstrata. Dessa árvore saem caminhos de uma folha a outra, que viram vetores, e a atenção dá mais peso aos caminhos que mais importam. O resultado é um vetor do código, que entra na LSTM junto com o acerto ou erro. No artigo original, isso rendeu de três a quatro pontos de AUC sobre o DKT, com menos variação.</aside>
+      </section>
+
+      <!-- ============ SLIDE 11 · Dentro do Code-DKT, figura da AST ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>dentro do code-dkt<span class="caret blink"></span></p>
+
+          <div class="abnt-fig">
+            <p class="eda-title">Figura 2 &ndash; Exemplo de árvore de sintaxe abstrata para um trecho de código</p>
+            <img src="assets/figuras/fig04-ast.png" style="max-height: 520px;" alt="Árvore de sintaxe abstrata de um método, com o caminho entre as folhas entrada e valor destacado em vermelho">
+            <p class="eda-source">Fonte: adaptado de Shi <i>et al.</i> (2022).</p>
+          </div>
+        </div>
+        <aside class="notes">Aqui está um exemplo. O código à esquerda vira esta árvore: o método, a entrada, o corpo e o que acontece dentro dele. Em vermelho está um dos caminhos, que liga a folha "entrada" à folha "valor". É esse tipo de caminho que o Code-DKT transforma em vetor. Assim, duas tentativas erradas, mas com estruturas diferentes, deixam de ser iguais para o modelo.</aside>
+      </section>
+
+      <!-- ============ SLIDE 12 · Extração de KCs com LLMs (Duan et al., 2026) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>extração de kcs com llms<span class="caret blink"></span></p>
+
+          <p class="rel-lead rel-lead--sm" style="margin-top: 4px;">Definir KCs à mão exige especialistas, leva tempo e varia conforme quem classifica.</p>
+          <p class="rel-lead rel-lead--sm">Duan <i>et al.</i> (2026) usam soluções corretas de estudantes para que um grande modelo de linguagem (<i>large language model</i>, LLM) gere os KCs de cada problema. KCs com nomes diferentes e mesmo significado são agrupados, e o LLM dá um rótulo a cada grupo.</p>
+          <p class="rel-lead rel-lead--sm">O resultado é uma <b>Q-matrix</b>, que liga cada problema aos KCs que ele exige.</p>
+
+          <p class="eda-title" style="margin-top: 26px;">Quadro 1 &ndash; Exemplo de Q-matrix</p>
+          <table class="kc-quadro kc-quadro--sm">
+            <thead>
+              <tr><th>Problema</th><th>Laço de repetição</th><th>Estrutura condicional</th><th>Operações aritméticas</th><th>Manipulação de strings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>P1: somar os elementos de um vetor</td><td class="c">1</td><td class="c">0</td><td class="c">1</td><td class="c">0</td></tr>
+              <tr><td>P2: verificar se um número é par</td><td class="c">0</td><td class="c">1</td><td class="c">1</td><td class="c">0</td></tr>
+              <tr><td>P3: contar as vogais de uma palavra</td><td class="c">1</td><td class="c">1</td><td class="c">0</td><td class="c">1</td></tr>
+            </tbody>
+          </table>
+          <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+        </div>
+        <aside class="notes">Falta tornar isso legível para o professor. Definir conceitos à mão é caro e depende de quem faz. Duan e colegas propõem que um LLM leia soluções corretas dos alunos e diga quais conceitos cada problema exige. Depois, conceitos parecidos com nomes diferentes são agrupados e recebem um nome só. O resultado é uma Q-matrix como esta: cada linha é um problema, cada coluna um conceito, e o 1 diz que aquele problema exige aquele conceito.</aside>
+      </section>
+
+      <!-- =====================================================================
+           3 METODOLOGIA
+           ===================================================================== -->
+
+      <!-- ============ SLIDE 13 · Caracterização da pesquisa (Zorić, 2020) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>caracterização da pesquisa<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Pesquisa <b>aplicada</b>, <b>quantitativa</b> e <b>exploratória</b>. A etapa analítica é experimental, e a ferramenta é um desenvolvimento tecnológico com verificação técnica.</p>
+          <p class="rel-lead">Seguimos as quatro fases do processo de EDM (Zorić, 2020):</p>
+
+          <div class="abnt-fig">
+            <p class="eda-title">Figura 3 &ndash; Etapas do processo de mineração de dados educacionais</p>
+            <img src="assets/figuras/fig02-etapas-edm.png" style="width: 1100px;" alt="Quatro etapas em sequência: definição do problema, preparação dos dados, modelagem e avaliação, implantação">
+            <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+          </div>
+
+          <p class="rel-lead">A preparação dos dados e a modelagem formam a etapa analítica, sobre a base CSEDM. A implantação é a ferramenta.</p>
+        </div>
+        <aside class="notes">É uma pesquisa aplicada, porque resulta numa ferramenta para um problema concreto, quantitativa, porque as decisões saem de medidas como a AUC, e exploratória, porque não encontramos essa combinação aplicada no Brasil. Organizamos o trabalho nas quatro fases do processo de EDM descritas por Zorić. O problema é o que acabamos de apresentar, a preparação e a modelagem são a etapa analítica, e a implantação é a ferramenta.</aside>
+      </section>
+
+      <!-- ============ SLIDE 14 · A base CSEDM (Price et al., 2020) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>a base csedm<span class="caret blink"></span></p>
+
+          <div class="cols cols--wide-left">
+            <div>
+              <p class="rel-lead rel-lead--sm">Submissões de uma disciplina introdutória de programação em Java de uma universidade norte-americana, no primeiro semestre de 2019 (CSEDM Workshop, 2021).</p>
+              <p class="rel-lead rel-lead--sm">Dados públicos e anonimizados, no formato <b>ProgSnap2</b> (Price <i>et al.</i>, 2020): cada evento traz o estudante, a atividade, o problema, o tipo de evento, a pontuação, o horário e o estado do código.</p>
+              <p class="rel-lead rel-lead--sm"><b>413</b> estudantes, <b>50</b> problemas, cinco atividades de dez problemas. Só <b>23,68%</b> das execuções passam em todos os testes.</p>
+            </div>
+            <div>
+              <p class="eda-title" style="margin-top: 22px;">Tabela 1 &ndash; Atividades da base CSEDM</p>
+              <table class="eda-grid eda-grid--sm">
+                <thead>
+                  <tr><th>Atividade</th><th>Identificador na base</th><th>Problemas</th><th>Estudantes</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>A1</td><td>439</td><td>10</td><td>386</td></tr>
+                  <tr><td>A2</td><td>487</td><td>10</td><td>340</td></tr>
+                  <tr><td>A3</td><td>492</td><td>10</td><td>361</td></tr>
+                  <tr><td>A4</td><td>494</td><td>10</td><td>315</td></tr>
+                  <tr><td>A5</td><td>502</td><td>10</td><td>306</td></tr>
+                </tbody>
+              </table>
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Usamos a base CSEDM, a mesma do Code-DKT. São submissões em Java de 413 alunos, em cinco atividades de dez problemas. Ela vem no formato ProgSnap2, que registra cada evento do aluno junto com o código daquele momento, e é isso que permite reconstruir a sequência de tentativas. Só 23,68% das execuções estão corretas, a mesma proporção do artigo, e esse desbalanceamento é o motivo de usarmos a AUC.</aside>
+      </section>
+
+      <!-- ============ SLIDE 15 · Preparação dos dados (protocolo de Shi et al., 2022) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>preparação dos dados<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Cada execução do programa é uma tentativa: rótulo <b>1</b> se passa em todos os testes e <b>0</b> nos demais casos.</p>
+          <p class="rel-lead">Sequências com mais de 50 tentativas mantêm as 50 mais recentes.</p>
+          <p class="rel-lead">Os estudantes de cada atividade são divididos em <b>80%</b> para treino e <b>20%</b> para teste, a mesma partição para os três modelos.</p>
+          <p class="rel-lead">Um modelo por atividade, com o próprio problema como KC, como em Shi <i>et al.</i> (2022).</p>
+          <p class="rel-lead">Cada modelo é executado <b>dez vezes</b>, com sementes de 42 a 51.</p>
+        </div>
+        <aside class="notes">A preparação segue o protocolo de Shi. Cada execução vira uma tentativa, certa ou errada, e guardamos as últimas 50 de cada aluno. Separamos os alunos em 80% para treino e 20% para teste, com a mesma partição para todos os modelos. No treino, o KC é o próprio problema, que é só um identificador. E rodamos cada modelo dez vezes, com sementes diferentes, para medir também a estabilidade.</aside>
+      </section>
+
+      <!-- ============ SLIDE 16 · Extração de KCs semânticos (pipeline, Duan et al., 2026) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>extração de kcs semânticos<span class="caret blink"></span></p>
+
+          <div class="abnt-fig" style="margin-top: 4px;">
+            <p class="eda-title">Figura 4 &ndash; <i>Pipeline</i> de extração de componentes de conhecimento via LLM</p>
+            <img src="assets/figuras/fig05-pipeline-kcs.png" style="width: 1150px;" alt="Cinco etapas: seleção de soluções corretas por problema, geração de KCs pelo modelo de linguagem, agrupamento dos KCs por significado, rotulagem dos grupos, Q-matrix">
+            <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+          </div>
+
+          <p class="rel-lead rel-lead--sm">Cinco soluções corretas <b>diversas</b> por problema: o CodeBERT vetoriza as soluções, que são agrupadas, e sorteia-se uma de cada grupo.</p>
+          <p class="rel-lead rel-lead--sm">O LLM recebe o enunciado e as soluções e devolve os KCs com uma justificativa. O Sentence-BERT agrupa os KCs da atividade, e o LLM rotula cada grupo.</p>
+          <p class="rel-lead rel-lead--sm">A Q-matrix <b>não muda o treino</b>: ela traduz as estimativas por problema em conceitos.</p>
+        </div>
+        <aside class="notes">Para os conceitos, seguimos o processo do Duan em cinco etapas. Primeiro escolhemos cinco soluções corretas bem diferentes entre si para cada problema, para cobrir estratégias diferentes. O LLM lê o enunciado e essas soluções e diz quais conceitos o problema exige, justificando cada um. Depois agrupamos conceitos parecidos e montamos a Q-matrix. Um ponto importante: ela não entra no treino do modelo, ela só traduz o resultado para conceitos.</aside>
+      </section>
+
+      <!-- ============ SLIDE 17 · Requisitos e verificação ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>requisitos e verificação<span class="caret blink"></span></p>
+
+          <div class="cols">
+            <div>
+              <p class="col-head">A ferramenta deve</p>
+              <ol class="phases-list phases-list--sm">
+                <li>importar os registros da turma em ProgSnap2;</li>
+                <li>extrair os KCs de cada atividade e submetê-los à revisão do docente;</li>
+                <li>treinar o modelo selecionado sobre os dados da própria turma;</li>
+                <li>apresentar o domínio estimado por estudante e por conceito, ao lado das estatísticas observadas.</li>
+              </ol>
+            </div>
+            <div>
+              <p class="col-head">Verificação em três frentes</p>
+              <ol class="phases-list phases-list--sm">
+                <li>Code-DKT implementado comparado aos valores de Shi <i>et al.</i> (2022).</li>
+                <li>KCs da atividade A1 comparados aos de Duan <i>et al.</i> (2026) e às marcações da base, com os trechos de código.</li>
+                <li>Demonstração com os dados da base, da importação à análise.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Os requisitos saem do objetivo e foram apoiados por um questionário com professores de programação. A ferramenta precisa importar os dados, extrair e revisar os conceitos, treinar o modelo na turma e mostrar o domínio estimado por conceito. E definimos como verificar: o modelo contra o artigo do Shi, os conceitos contra o Duan e contra as marcações da própria base, e a ferramenta funcionando com os dados reais.</aside>
+      </section>
+
+      <!-- =====================================================================
+           4 DESENVOLVIMENTO DA FERRAMENTA
+           ===================================================================== -->
+
+      <!-- ============ SLIDE 18 · Visão geral da ferramenta (fluxo de uso) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>visão geral da ferramenta<span class="caret blink"></span></p>
+
+          <div class="abnt-fig">
+            <p class="eda-title">Figura 5 &ndash; Fluxo de uso da ferramenta</p>
+            <img src="assets/figuras/fig06-fluxo-uso.png" style="width: 1150px;" alt="Cinco etapas: importar dados, extrair conceitos, revisar e aprovar, treinar modelo, analisar domínio">
+            <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+          </div>
+
+          <p class="rel-lead">O docente cria a turma, importa o pacote ProgSnap2, revisa e aprova os conceitos, treina o modelo e consulta o domínio estimado.</p>
+          <p class="rel-lead">Antes de gravar, a ferramenta valida o pacote. Atividades sem acertos e erros nas primeiras tentativas ficam só para consulta.</p>
+          <p class="rel-lead">Cada turma guarda suas atividades, conceitos e versões de modelo, e os resultados de turmas anteriores continuam disponíveis.</p>
+        </div>
+        <aside class="notes">Este é o fluxo do professor na ferramenta. Ele cria a turma e sobe o pacote de dados. A ferramenta valida o pacote antes de gravar e extrai os conceitos de cada atividade. O professor revisa e aprova, treina o modelo e consulta o resultado. Cada turma fica registrada separadamente, então dá para voltar nas turmas anteriores.</aside>
+      </section>
+
+      <!-- ============ SLIDE 19 · Arquitetura ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>arquitetura<span class="caret blink"></span></p>
+
+          <div class="abnt-fig" style="margin-top: 0;">
+            <p class="eda-title">Figura 6 &ndash; Visão geral da ferramenta</p>
+            <img src="assets/figuras/fig07-visao-geral.png" style="max-height: 545px;" alt="Três partes da ferramenta, biblioteca, aplicação e interface web, com as tecnologias de cada uma, executadas em contêineres Docker com GPU">
+            <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+          </div>
+        </div>
+        <aside class="notes">O código tem três partes. Uma biblioteca independente com o Code-DKT, a extração de conceitos e a AUC, em Python com PyTorch. A aplicação, com FastAPI e SQLite, organizada pelas mesmas funcionalidades que o professor usa. E a interface em React com TypeScript. A extração usa o CodeBERT, o Sentence-BERT e o Claude Haiku 4.5. Tudo roda em contêineres Docker, num servidor local com uma GPU RTX 4050 de 6 GB, e o professor acessa pelo navegador.</aside>
+      </section>
+
+      <!-- ============ SLIDE 20 · O Code-DKT na ferramenta (três adaptações) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>o code-dkt na ferramenta<span class="caret blink"></span></p>
+
+          <div class="abnt-fig" style="margin-top: 0;">
+            <p class="eda-title">Figura 7 &ndash; O Code-DKT implementado na ferramenta</p>
+            <img src="assets/figuras/fig13-codedkt-implementado.png" style="width: 1060px;" alt="Fluxo do Code-DKT: código, AST, caminhos, vetores, atenção, LSTM e probabilidade de acerto">
+            <p class="eda-source">Fonte: elaborado pelos autores (2026), adaptado de Shi <i>et al.</i> (2022).</p>
+          </div>
+
+          <p class="rel-lead rel-lead--xs">Parâmetros de Shi <i>et al.</i> (2022): 100 caminhos por código, LSTM de 128 unidades, 40 épocas e lote de 128 estudantes. Três adaptações:</p>
+          <ol class="phases-list phases-list--sm" style="margin-top: 4px;">
+            <li style="font-size: 19px; margin-bottom: 4px;">gradiente acumulado em duas partes de 64 estudantes, pois o lote não cabe nos 6 GB da GPU;</li>
+            <li style="font-size: 19px; margin-bottom: 4px;"><i>dropout</i> desligado na avaliação, para que a mesma entrada gere a mesma previsão;</li>
+            <li style="font-size: 19px; margin-bottom: 4px;">sementes fixas e operações determinísticas na GPU.</li>
+          </ol>
+          <p class="rel-lead rel-lead--xs">Códigos que não viram AST (de 10,3% a 21,4% por atividade) entram só com o problema e o resultado.</p>
+        </div>
+        <aside class="notes">O Code-DKT da ferramenta segue os parâmetros do Shi, com três adaptações. A primeira é de memória: o lote de 128 alunos não cabe na nossa GPU de 6 GB, então dividimos em duas partes de 64 e acumulamos o gradiente, o que dá o mesmo resultado com menos memória. A segunda e a terceira garantem que o treino e a previsão se repetem. Quando o código do aluno não compila e não vira árvore, a tentativa entra só com o acerto ou erro. Na A1, o treino leva cerca de um minuto e meio.</aside>
+      </section>
+
+      <!-- ============ SLIDE 21 · Os conceitos na ferramenta ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>os conceitos na ferramenta<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Seguimos Duan <i>et al.</i> (2026), com o <b>Claude Haiku 4.5</b> no lugar do GPT-4o.</p>
+          <p class="rel-lead">Os conceitos são agrupados <b>por atividade</b>, para que importar uma atividade nova não altere as que já foram revisadas.</p>
+          <p class="rel-lead">Os conceitos e as justificativas são traduzidos para o português, e o <b>trecho de código</b> que evidencia cada conceito é apontado e conferido na solução.</p>
+          <p class="rel-lead">O resultado fica em <b>rascunho</b>: o docente cria, renomeia, exclui e associa conceitos, e o treino só é liberado após a aprovação da Q-matrix.</p>
+        </div>
+        <aside class="notes">A extração segue o Duan, com duas diferenças principais: usamos o Claude Haiku 4.5 no lugar do GPT-4o e agrupamos por atividade. Acrescentamos duas coisas para ajudar o professor a revisar: a tradução para o português e o trecho de código que justifica cada conceito. E o resultado é sempre um rascunho. O próprio Duan recomenda que um especialista revise os conceitos, então o treino só começa depois que o professor aprova.</aside>
+      </section>
+
+      <!-- ============ SLIDE 22 · Domínio por conceito (Piech et al., 2015) ============ -->
+      <!-- valores: média da turma na A1 (model_artifact 9 do app.db), conceito "Uso do tipo de dado boolean" -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>domínio por conceito<span class="caret blink"></span></p>
+
+          <p class="rel-lead rel-lead--sm">Depois do treino, o Code-DKT dá, para cada estudante, a chance de acertar <b>cada problema</b> da atividade (Piech <i>et al.</i>, 2015). Esse valor é o <b>domínio estimado</b> no problema.</p>
+          <p class="rel-lead rel-lead--sm">O domínio em um conceito é a <b>média</b> do domínio nos problemas associados a ele na Q-matrix.</p>
+
+          <p class="eda-title" style="margin-top: 22px;">Figura 8 &ndash; Do domínio por problema ao domínio por conceito</p>
+          <div class="dom-diagram">
+            <div class="dom-probs">
+              <div class="dom-box">Problema 3 (in1To10)<b>44%</b></div>
+              <div class="dom-box">Problema 13 (caughtSpeeding)<b>51%</b></div>
+              <div class="dom-box">Problema 232 (alarmClock)<b>48%</b></div>
+            </div>
+            <div class="dom-arrow"><span>&rarr;</span>média</div>
+            <div class="dom-box dom-box--kc">Uso do tipo de dado boolean<b>48%</b></div>
+          </div>
+          <p class="eda-source">Fonte: elaborado pelos autores (2026), com o domínio médio da turma na atividade A1.</p>
+        </div>
+        <aside class="notes">Como o modelo e a Q-matrix se encontram? Ao final do treino, para cada aluno, o Code-DKT diz qual a chance de ele acertar cada problema da atividade, inclusive os que ainda não fez. Isso é o domínio estimado por problema. A Q-matrix diz quais problemas exigem cada conceito, e o domínio no conceito é a média desses problemas. Os conceitos não entram no treino. Eles reorganizam o resultado numa forma que o professor entende.</aside>
+      </section>
+
+      <!-- ============ SLIDE 23 · Reprodutibilidade (Kreuzberger; Kühl; Hirschl, 2023) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>reprodutibilidade<span class="caret blink"></span></p>
+
+          <p class="rel-lead rel-lead--sm">Adotamos práticas de operação de sistemas de aprendizado de máquina, ou MLOps (Kreuzberger; Kühl; Hirschl, 2023).</p>
+          <p class="rel-lead rel-lead--sm">As tarefas pesadas rodam em processos separados, uma por vez, com o estado registrado no banco.</p>
+          <p class="rel-lead rel-lead--sm">Cada versão de modelo fica ligada ao <b>commit</b> do código e ao <b>hash</b> dos dados. A extração registra o LLM e a versão do <i>prompt</i>.</p>
+          <p class="rel-lead rel-lead--sm">Sementes fixas, versões fixadas do PyTorch e do CUDA e modelos carregados de revisões específicas.</p>
+          <p class="rel-lead rel-lead--sm"><b>Dois testes de regressão</b>: o treino do Code-DKT na A1 com dez sementes e a extração da A1 a partir das respostas armazenadas do LLM.</p>
+        </div>
+        <aside class="notes">Como o treino e a extração levam minutos e usam a GPU, adotamos práticas de MLOps. Cada tarefa pesada roda em um processo separado, uma por vez. Cada modelo fica ligado ao commit do código e aos dados que o geraram. E, para garantir que o resultado se repete, fixamos sementes e versões e temos dois testes de regressão que refazem o treino e a extração da A1.</aside>
+      </section>
+
+      <!-- =====================================================================
+           5 RESULTADOS
+           ===================================================================== -->
+
+      <!-- ============ SLIDE 24 · Seleção do modelo (AUC de primeira tentativa) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>seleção do modelo<span class="caret blink"></span></p>
+
+          <p class="eda-title" style="margin-top: 0;">Tabela 2 &ndash; AUC de primeira tentativa por atividade</p>
+          <table class="eda-grid eda-grid--sm" style="width: 88%;">
+            <thead>
+              <tr><th>Atividade</th><th>BKT (%)</th><th>DKT (%)</th><th>Code-DKT (%)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A1</td><td>62,43 &plusmn; 0,00</td><td>70,74 &plusmn; 3,59</td><td class="hl">75,42 &plusmn; 1,13</td></tr>
+              <tr><td>A2</td><td>62,18 &plusmn; 0,78</td><td>77,33 &plusmn; 2,73</td><td class="hl">78,32 &plusmn; 0,76</td></tr>
+              <tr><td>A3</td><td>59,57 &plusmn; 0,60</td><td>81,43 &plusmn; 4,51</td><td class="hl">85,08 &plusmn; 0,79</td></tr>
+              <tr><td>A4</td><td>53,18 &plusmn; 0,26</td><td>73,07 &plusmn; 4,34</td><td class="hl">75,56 &plusmn; 0,84</td></tr>
+              <tr><td>A5</td><td>59,61 &plusmn; 0,49</td><td>83,13 &plusmn; 2,77</td><td class="hl">85,12 &plusmn; 0,52</td></tr>
+              <tr class="sum"><td>Média</td><td>59,39</td><td>77,14</td><td class="hl">79,90</td></tr>
+              <tr><td><b>Desvio padrão médio</b></td><td><b>0,43</b></td><td><b>3,59</b></td><td class="hl">0,81</td></tr>
+            </tbody>
+          </table>
+          <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+
+          <p class="rel-lead rel-lead--sm">Na AUC geral, o padrão se repete: 63,11% no BKT, 71,79% no DKT e <b>74,31%</b> no Code-DKT.</p>
+        </div>
+        <aside class="notes">Começando pelo primeiro objetivo, a escolha do modelo. Na primeira tentativa, o Code-DKT tem a maior AUC nas cinco atividades, com média de 79,90 contra 77,14 do DKT, e o BKT fica bem atrás, perto de 60. Além de acertar mais, o Code-DKT é mais estável: o desvio padrão entre as dez execuções é mais de quatro vezes menor que o do DKT. Na AUC geral, sobre todas as tentativas, o padrão se repete. Como a única diferença entre o DKT e o Code-DKT é o código, isso indica que o código acrescenta informação. Por isso o Code-DKT é o modelo da ferramenta.</aside>
+      </section>
+
+      <!-- ============ SLIDE 25 · Comparação com Shi et al. (2022) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>comparação com shi <i>et al.</i><span class="caret blink"></span></p>
+
+          <p class="eda-title" style="margin-top: 0;">Tabela 3 &ndash; AUC geral do Code-DKT em comparação com Shi <i>et al.</i> (2022)</p>
+          <table class="eda-grid eda-grid--sm" style="font-size: 20px;">
+            <thead>
+              <tr><th></th><th>A1</th><th>A2</th><th>A3</th><th>A4</th><th>A5</th><th>Média</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="l">Shi <i>et al.</i> (2022) (%)</td><td>74,31</td><td>76,56</td><td>80,40</td><td>72,75</td><td>79,14</td><td><b>76,63</b></td></tr>
+              <tr><td class="l">Este trabalho (%)</td><td>71,42</td><td>73,53</td><td>78,21</td><td>72,17</td><td>76,24</td><td><b>74,31</b></td></tr>
+              <tr><td class="l">Diferença (p.p.)</td><td>&minus;2,89</td><td>&minus;3,03</td><td>&minus;2,19</td><td>&minus;0,58</td><td>&minus;2,90</td><td><b>&minus;2,32</b></td></tr>
+            </tbody>
+          </table>
+          <p class="eda-source">Fonte: elaborado pelos autores (2026), com os valores de Shi <i>et al.</i> (2022).</p>
+
+          <p class="eda-title" style="margin-top: 26px;">Tabela 4 &ndash; AUC do Code-DKT na atividade A1 em comparação com a literatura</p>
+          <table class="eda-grid eda-grid--sm" style="font-size: 20px;">
+            <thead>
+              <tr><th class="l">Métrica</th><th>Shi <i>et al.</i> (2022) (%)</th><th>Este trabalho (%)</th><th>Diferença (p.p.)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="l">AUC geral</td><td>74,31 &plusmn; 0,90</td><td>71,42 &plusmn; 0,72</td><td>&minus;2,89</td></tr>
+              <tr><td class="l">AUC de primeira tentativa</td><td>75,74 &plusmn; 0,69</td><td>75,42 &plusmn; 1,13</td><td class="hl">&minus;0,32</td></tr>
+            </tbody>
+          </table>
+          <p class="eda-source">Fonte: elaborado pelos autores (2026), com os valores de Shi <i>et al.</i> (2022).</p>
+
+          <p class="rel-lead rel-lead--sm">Na primeira tentativa, a diferença cai para <b>0,32 ponto</b>, com desvio padrão baixo como no artigo.</p>
+        </div>
+        <aside class="notes">O segundo passo foi conferir se o Code-DKT que implementamos se comporta como o do artigo. Na AUC geral, ficamos em média 2,32 pontos abaixo do Shi, com diferenças de 0,58 a 3,03 pontos. Mas o artigo só traz a AUC de primeira tentativa para a A1, e nela a diferença cai para 0,32 ponto, com desvio padrão baixo, como no artigo. Ou seja, a implementação reproduz o que caracteriza o Code-DKT, previsão melhor na primeira tentativa e pouca variação, com valores absolutos um pouco menores.</aside>
+      </section>
+
+      <!-- ============ SLIDE 26 · Conceitos extraídos na A1 ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related slide-bridge">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>conceitos extraídos na a1<span class="caret blink"></span></p>
+
+          <p class="eda-title" style="margin-top: 0; width: 100%;">Figura 9 &ndash; Resumo da extração na atividade A1</p>
+          <p class="bridge-seq bridge-seq--sm">
+            <span class="step"><b>10</b>problemas</span>
+            <span class="arr">&rarr;</span>
+            <span class="step"><b>50</b>soluções lidas</span>
+            <span class="arr">&rarr;</span>
+            <span class="step"><b>65</b>KCs gerados</span>
+            <span class="arr">&rarr;</span>
+            <span class="step"><b>26</b>nomes distintos</span>
+            <span class="arr">&rarr;</span>
+            <span class="step hl"><b>13</b>conceitos</span>
+            <span class="arr">&rarr;</span>
+            <span class="step"><b>46</b>associações</span>
+          </p>
+          <p class="eda-source" style="width: 100%;">Fonte: elaborado pelos autores (2026). Tempo da extração: 12 min 41 s.</p>
+
+          <p class="eda-title" style="margin-top: 22px; width: 70%;">Quadro 2 &ndash; Conceitos extraídos na atividade A1</p>
+          <table class="kc-quadro kc-quadro--sm" style="width: 70%;">
+            <thead><tr><th>Conceito</th><th>Nº de problemas</th></tr></thead>
+            <tbody>
+              <tr><td>Estruturas de instrução if-else</td><td class="c">10</td></tr>
+              <tr><td>Operadores lógicos e condicionais</td><td class="c">10</td></tr>
+              <tr><td>Comparações numéricas</td><td class="c">9</td></tr>
+              <tr><td>Operações aritméticas básicas</td><td class="c">5</td></tr>
+              <tr><td>Uso do tipo de dado boolean</td><td class="c">3</td></tr>
+              <tr><td>Inicialização e atribuição de variável</td><td class="c">2</td></tr>
+              <tr><td>Outros sete conceitos</td><td class="c">1 cada</td></tr>
+            </tbody>
+          </table>
+          <p class="eda-source" style="width: 70%;">Fonte: elaborado pelos autores (2026).</p>
+        </div>
+        <aside class="notes">Agora os conceitos. Avaliamos a extração na A1, cujos dez problemas tratam de condicionais. O LLM leu cinco soluções por problema e gerou 65 KCs, que tinham 26 nomes distintos e foram agrupados em 13 conceitos. É a mesma proporção do Duan, cerca de um conceito para cada dois nomes. Os dois conceitos que aparecem nos dez problemas são o if-else e os operadores lógicos, coerente com uma atividade de condicionais. Sete conceitos aparecem em um único problema, e vamos voltar a isso.</aside>
+      </section>
+
+      <!-- ============ SLIDE 27 · O problema love6 (humanos × nossos × Duan et al., 2026) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>o problema love6<span class="caret blink"></span></p>
+
+          <p class="eda-title" style="margin-top: 0; width: 100%;">Quadro 3 &ndash; Componentes de conhecimento do problema 233 (love6)</p>
+          <p class="statement">The number 6 is a truly great number. Given two int values, a and b, return true if either one is 6. Or if their sum or difference is 6. Note: the function Math.abs(num) computes the absolute value of a number.</p>
+          <div class="cols" style="grid-template-columns: 470px 1fr; gap: 22px; margin-top: 8px;">
+            <pre class="code-block" style="font-size: 18px;"><span class="kw">public boolean</span> love6(<span class="kw">int</span> a, <span class="kw">int</span> b) {
+  <span class="kw">if</span> (a == 6 || b == 6 ||
+      a + b == 6 ||
+      Math.abs(a - b) == 6)
+    <span class="kw">return true</span>;
+  <span class="kw">return false</span>;
+}</pre>
+            <table class="kc-quadro kc-quadro--sm" style="width: 100%; margin-top: 8px;">
+              <thead><tr><th>KCs escritos por humanos</th><th>Conceitos extraídos neste trabalho</th><th>KCs gerados por Duan <i>et al.</i> (2026)</th></tr></thead>
+              <tbody>
+                <tr><td>If/Else</td><td>Estruturas de instrução if-else</td><td>If and else if statement</td></tr>
+                <tr><td>Math (+ &minus; &lowast; /)</td><td>Operações aritméticas básicas</td><td>Basic arithmetic operations</td></tr>
+                <tr><td>LogicAndNotOr</td><td>Operadores lógicos e condicionais</td><td>Logical operators</td></tr>
+                <tr><td>LogicCompare</td><td>Comparações numéricas</td><td>Numerical comparisons</td></tr>
+                <tr><td class="c">&mdash;</td><td>Invocação de método*</td><td>Absolute value computation</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="eda-source" style="width: 100%;">Fonte: elaborado pelos autores (2026).</p>
+
+          <p class="rel-lead rel-lead--sm">No problema 1 (sortaSum), os quatro KCs de Duan <i>et al.</i> (2026) também têm correspondente.</p>
+          <p class="rel-lead rel-lead--sm">Das sete marcações humanas da base na A1, <b>seis</b> têm um conceito extraído correspondente. A exceção é a formatação de strings.</p>
+        </div>
+        <aside class="notes">Para comparar, usamos o mesmo exemplo que o Duan usa no artigo, o problema love6. Na primeira coluna estão os KCs marcados por humanos na base, na do meio os nossos e na última os do Duan. Quatro dos cinco conceitos do Duan têm correspondente direto entre os nossos. O quinto, o valor absoluto, aparece só de forma indireta, como invocação de método, cuja justificativa cita o Math.abs. No sortaSum, os quatro KCs do Duan também batem. E, contra as marcações humanas da base, seis de sete têm correspondente.</aside>
+      </section>
+
+      <!-- ============ SLIDE 28 · Trechos de código (adequados e questionáveis) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>trechos de código<span class="caret blink"></span></p>
+
+          <div class="cols" style="grid-template-columns: 0.75fr 1.25fr; gap: 26px;">
+            <div>
+              <p class="col-head" style="margin-top: 4px;">Problema 1 (sortaSum), solução 1</p>
+              <pre class="code-block" style="font-size: 17px;"><span class="kw">if</span> (<span class="hl">a + b &gt;= 10 &amp;&amp; a + b &lt;= 19</span>)
+    <span class="kw">return</span> 20;
+<span class="kw">else return</span> (a + b);</pre>
+              <p class="rel-lead rel-lead--sm" style="margin-top: 14px;">A mesma linha evidencia <b>estruturas de instrução if-else</b>, <b>operadores lógicos e condicionais</b> e <b>comparações numéricas</b>.</p>
+              <p class="rel-lead rel-lead--sm">Os <b>46</b> trechos apontados foram encontrados nas soluções.</p>
+            </div>
+            <div>
+              <p class="eda-title" style="width: 100%; margin-top: 4px;">Quadro 4 &ndash; Exemplos de associações questionáveis</p>
+              <table class="kc-quadro kc-quadro--sm" style="font-size: 18px; width: 100%;">
+                <thead><tr><th>Problema</th><th>Conceito</th><th>Por quê</th></tr></thead>
+                <tbody>
+                  <tr><td>236 (greenTicket)</td><td>Operações aritméticas básicas</td><td>só uma solução usa subtração, e o problema pede igualdades</td></tr>
+                  <tr><td>233 (love6)</td><td>Invocação de método</td><td>nome genérico para o valor absoluto</td></tr>
+                  <tr><td>234 (cigarParty)</td><td>Métodos básicos de string</td><td>conceitos de string que o problema não exige</td></tr>
+                  <tr><td>Todos, exceto o 5</td><td>Instrução de retorno</td><td>toda solução retorna, mas só o 5 recebeu o conceito</td></tr>
+                </tbody>
+              </table>
+              <p class="eda-source" style="width: 100%;">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Para cada associação entre problema e conceito, a ferramenta aponta o trecho de código que a justifica, e os 46 trechos foram encontrados nas soluções. No sortaSum, por exemplo, a mesma linha mostra a condicional, o operador lógico e as comparações. Mas a análise também achou associações questionáveis. No cigarParty, vieram conceitos de string que o problema não exige. E o retorno ficou associado só a um problema, apesar de toda solução retornar. É exatamente por isso que os conceitos ficam em rascunho até o professor aprovar.</aside>
+      </section>
+
+      <!-- ============ SLIDE 29 · Demonstração (pilha vertical com as telas de reserva) ============ -->
+      <section>
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="center-stage">
+              <p class="big"><b>Demonstração da ferramenta</b></p>
+              <p class="sub">Turma CSEDM CodeWorkout · atividade A1 (Assignment 439)</p>
+            </div>
+          </div>
+          <aside class="notes">Agora vamos mostrar a ferramenta com os dados da base. A importação e o treino já foram feitos, porque a extração leva cerca de 13 minutos e o treino um minuto e meio.
+            Roteiro de cliques: (1) tela da turma, ~10s; (2) Conceitos da A1, abrir a origem de "Operadores lógicos e condicionais" no sortaSum, ~30s; (3) Análise, aba Problemas, abrir o 13 caughtSpeeding, ~15s; (4) aba Conceitos, ~15s; (5) aba Alunos e o estudante 14339, ~20s.
+            Na aba Alunos: esses alunos completaram tudo e mesmo assim aparecem com domínio baixo, porque o modelo olha a sequência inteira, incluindo as tentativas erradas até acertar.
+            Se a ferramenta não abrir: seta para baixo, telas de reserva.</aside>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 10 &ndash; Resultado da importação da base CSEDM</p>
+              <img src="assets/telas/fig15-importacao.png" alt="Tela de resultado da importação com 413 estudantes, 50 problemas, 131.943 submissões e cinco atividades">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 11 &ndash; Tela da turma</p>
+              <img src="assets/telas/fig16-turma.png" alt="Tela da turma com a atividade A1 treinada e as atividades A2 a A5 aguardando a extração de conceitos">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 12 &ndash; Conceitos extraídos da atividade A1</p>
+              <img src="assets/telas/fig17-conceitos.png" alt="Q-matrix da atividade A1 com 13 conceitos nas linhas e 10 problemas nas colunas">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 13 &ndash; Origem de um conceito</p>
+              <img src="assets/telas/fig18-origem-conceito.png" alt="Origem do conceito operadores lógicos e condicionais no problema sortaSum, com o enunciado, a justificativa e o trecho destacado na solução">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 14 &ndash; Treinamento do modelo</p>
+              <img src="assets/telas/fig19-treinamento.png" alt="Tela do treinamento do Code-DKT concluído, com as três etapas">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 15 &ndash; Análise da atividade A1 por problema</p>
+              <img src="assets/telas/fig20-analise-problemas.png" alt="Aba de problemas da análise, com o problema caughtSpeeding expandido">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 16 &ndash; Análise da atividade A1 por conceito</p>
+              <img src="assets/telas/fig21-analise-conceitos.png" alt="Aba de conceitos da análise, com a taxa de acerto e o domínio médio de cada conceito">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 17 &ndash; Análise da atividade A1 por estudante</p>
+              <img src="assets/telas/fig22-analise-alunos.png" alt="Aba de alunos da análise, em ordem crescente de domínio médio">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-background-color="#FFFFFF">
+          <div class="deck-slide slide-related slide-backup">
+            <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+            <p class="deck-topic"><span class="ps1">&gt;</span>demonstração<span class="caret blink"></span></p>
+            <div class="abnt-fig" style="margin-top: 0;">
+              <p class="eda-title">Figura 18 &ndash; Detalhe de um estudante na atividade A1</p>
+              <img src="assets/telas/fig23-detalhe-estudante.png" alt="Detalhe do estudante 14339, com o domínio em cada conceito e o que ele realizou na atividade">
+              <p class="eda-source">Fonte: elaborado pelos autores (2026).</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ============ SLIDE 30 · Síntese dos resultados (funcionalidades atendidas) ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>síntese dos resultados<span class="caret blink"></span></p>
+
+          <p class="eda-title" style="margin-top: 0; width: 100%;">Quadro 5 &ndash; Funcionalidades propostas e atendimento pela ferramenta</p>
+          <table class="kc-quadro kc-quadro--sm" style="width: 100%;">
+            <thead><tr><th>Nº</th><th>Funcionalidade proposta</th><th>Onde aparece na ferramenta</th></tr></thead>
+            <tbody>
+              <tr><td class="c">1</td><td>Visualização dos conceitos que cada estudante domina ou em que tem dificuldade</td><td>Abas de conceitos e de estudantes</td></tr>
+              <tr><td class="c">2</td><td>Histórico detalhado de tentativas por exercício de cada estudante</td><td>Execuções, erros de compilação e tentativas por problema</td></tr>
+              <tr><td class="c">3</td><td>Predição de risco de dificuldade ou reprovação</td><td>Domínio estimado baixo por problema, conceito e estudante</td></tr>
+              <tr><td class="c">4</td><td>Comparação de progresso entre turmas ou semestres</td><td>Turmas registradas separadamente, com dados, conceitos e modelos preservados</td></tr>
+              <tr><td class="c">5</td><td>Sugestão de intervenção pedagógica personalizada</td><td>Conceitos de menor domínio da turma e de cada estudante</td></tr>
+            </tbody>
+          </table>
+          <p class="eda-source" style="width: 100%;">Fonte: elaborado pelos autores (2026).</p>
+
+          <p class="rel-lead rel-lead--sm">As funcionalidades 1 e 2 estão implementadas. A 3, a 4 e a 5 são atendidas como <b>apoio à análise</b>: a ferramenta reúne a informação, e a interpretação é do docente.</p>
+        </div>
+        <aside class="notes">Fechando os resultados, este quadro liga as cinco funcionalidades levantadas no questionário com os professores ao que a ferramenta entrega. A visualização por conceito e o histórico de tentativas estão implementados. As outras três, risco, comparação entre turmas e sugestão de intervenção, são atendidas como apoio: a ferramenta mostra os conceitos de menor domínio, e quem decide o que fazer é o professor.</aside>
+      </section>
+
+      <!-- =====================================================================
+           6 CONSIDERAÇÕES FINAIS
+           ===================================================================== -->
+
+      <!-- ============ SLIDE 31 · Considerações finais ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>considerações finais<span class="caret blink"></span></p>
+
+          <p class="rel-lead">Na base analisada, os resultados sustentam a hipótese.</p>
+          <p class="rel-lead">O código melhora a previsão: o Code-DKT obteve <b>79,90%</b> na primeira tentativa e <b>74,31%</b> na AUC geral, contra 77,14% e 71,79% do DKT, com menor variação.</p>
+          <p class="rel-lead">Os 13 conceitos da A1 correspondem aos KCs de Duan <i>et al.</i> (2026) e às marcações da base, e os 46 trechos de código foram encontrados nas soluções.</p>
+          <p class="rel-lead"><b>Contribuição:</b> reunir análise de código, rastreamento do conhecimento e componentes de conhecimento em um único fluxo, voltado ao docente.</p>
+        </div>
+        <aside class="notes">Voltando à pergunta do início: na base analisada, sim. O código melhorou a previsão e a estabilidade do modelo, e os conceitos extraídos permitiram mostrar esse resultado numa forma que o professor interpreta. A principal contribuição é a integração: em vez de usar o código, o modelo e os conceitos separadamente, a ferramenta junta tudo num fluxo só, e o código do aluno passa a contar a história de como ele aprendeu, não só se ele acertou.</aside>
+      </section>
+
+      <!-- ============ SLIDE 32 · Limitações ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>limitações<span class="caret blink"></span></p>
+
+          <p class="rel-lead rel-lead--sm">A ferramenta foi verificada apenas na base CSEDM, de uma universidade norte-americana, em Java.</p>
+          <p class="rel-lead rel-lead--sm">A extração foi analisada em detalhe só na A1, cujos problemas tratam de condicionais.</p>
+          <p class="rel-lead rel-lead--sm">A diferença de 2,32 pontos para Shi <i>et al.</i> (2022) não teve as causas investigadas, e os hiperparâmetros não são ajustados para cada turma.</p>
+          <p class="rel-lead rel-lead--sm">De 10,3% a 21,4% das execuções não viram AST e entram sem o código.</p>
+          <p class="rel-lead rel-lead--sm">O Claude Haiku 4.5 substituiu o GPT-4o sem avaliação de equivalência.</p>
+          <p class="rel-lead rel-lead--sm">A ferramenta ainda não foi avaliada por docentes em uso real.</p>
+        </div>
+        <aside class="notes">Os resultados têm limites claros. Testamos uma única base, americana e em Java, e analisamos os conceitos em detalhe em uma atividade. Não investigamos a diferença para o Shi, trocamos o modelo de linguagem sem comparar com o original e, principalmente, a ferramenta ainda não foi usada por professores numa turma real. Então não dá para afirmar que o comportamento se repete em turmas brasileiras.</aside>
+      </section>
+
+      <!-- ============ SLIDE 33 · Trabalhos futuros ============ -->
+      <section data-background-color="#FFFFFF">
+        <div class="deck-slide slide-related">
+          <svg class="wm" viewBox="0 0 136.7 139.78" aria-hidden="true"><use href="#sym"/></svg>
+          <p class="deck-topic"><span class="ps1">&gt;</span>trabalhos futuros<span class="caret blink"></span></p>
+
+          <p class="rel-lead rel-lead--sm">Aplicar a ferramenta a turmas brasileiras e avaliá-la com os docentes, após aprovação do Comitê de Ética em Pesquisa (CEP).</p>
+          <p class="rel-lead rel-lead--sm">Ampliar a análise dos conceitos às demais atividades, com avaliação humana por mais de um avaliador, e comparar modelos de linguagem.</p>
+          <p class="rel-lead rel-lead--sm">Relacionar conceitos entre atividades, para acompanhar um conhecimento ao longo da disciplina.</p>
+          <p class="rel-lead rel-lead--sm">Mostrar o código de cada tentativa e comparar turmas em uma tela própria.</p>
+          <p class="rel-lead rel-lead--sm">Predição de reprovação com as notas finais e recomendações de intervenção redigidas pela ferramenta.</p>
+        </div>
+        <aside class="notes">Daí vêm os próximos passos. O principal é levar a ferramenta para turmas brasileiras, com aprovação do comitê de ética, e avaliar com os próprios professores se a visão por conceito ajuda a planejar as aulas. Também queremos ampliar a análise para as outras atividades, acompanhar um mesmo conceito ao longo da disciplina e evoluir a ferramenta com previsão de reprovação e sugestões de intervenção.</aside>
+      </section>
+
+      <!-- ============ SLIDE 34 · Obrigado ============ -->
+      <section data-background-color="#2667FF">
+        <div class="deck-slide slide-cover-brand">
+          <img class="brand-logo" src="assets/logo-unifacens-white.svg" alt="UniFacens">
+          <p class="cover-tagline kicker">
+            <span class="ps1">&gt;</span>obrigado<span class="caret blink"></span>
+          </p>
+        </div>
+        <aside class="notes">Esperamos que o professor consiga identificar e tratar mais cedo as dificuldades da turma. Muito obrigado.</aside>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script>
+    Reveal.initialize({
+      width: 1280, height: 720, margin: 0,
+      center: false, hash: true,
+      controls: true, progress: true,
+      transition: 'fade', transitionSpeed: 'default', backgroundTransition: 'fade',
+      plugins: [RevealNotes]
+    });
+  </script>
+</body>
+</html>
